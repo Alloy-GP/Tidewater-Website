@@ -1,65 +1,103 @@
 ---
-// Two distinct service groups — the client was clear these are NOT one fee:
-//  • Leasing / Pre-Tenant Services = a SEPARATE, one-time cost
-//  • Management Services           = the monthly all-inclusive fee
-// Pricing is intentionally left as a "contact us" item (no figures on-page).
-const leasing = [
-  'Complete property walk-through to suggest items to address ahead of advertising &amp; to collect pertinent information on the property to better serve you and the tenant',
-  'Provide estimates from licensed and insured vendors for repairs &amp; renovations needed to prepare the home for leasing, Lead Certification or County/City License (if applicable)',
-  'Provide a market analysis of market rent value with comparable homes and amenities',
-  'Schedule Lead Inspection &amp; County/City Inspection for licensing (if applicable)',
-  'Complete and track Lead Certifications &amp; County or City Rental Licenses (if applicable)',
-  'Set up an active owner account with owner portal and owner reserve account',
-  'Apply for mailing address change for utility service bills (if applicable)',
-  'Take marketing photos, virtual tour video, and place a &ldquo;For Rent&rdquo; sign (if applicable)',
-  'Advertise the property on 30&ndash;35 listing sites including Zillow, HotPads, Apartments.com, Lovely, PadMapper and more',
-  'Ability to advertise through the MLS with our real estate brokerage, Tidewater Realty Group',
-  'Pre-screen client leads and schedule in-person and video showings',
-  'Process client applications &mdash; credit, criminal &amp; rental background, employment verification, and rental verification',
-  'Prepare the lease agreement and lease addendums in ordinance with local, state, and county laws and regulations',
-  'Provide the approved client a welcome letter with lease terms and utility service information',
-  'Complete a comprehensive multi-page move-in inspection report with date-stamped photos of the property',
-  'Collect and ensure compliance of lease terms &mdash; security deposit or Rhino account, renters insurance, and utility accounts',
-];
-
-const management = [
-  'Rent collection and tenant account management',
-  'Failure-to-pay-rent and eviction management',
-  'Tenant communication &mdash; notices, reminders, questions and concerns',
-  'Maintenance management &mdash; annual and emergency maintenance, plus tenant maintenance requests',
-  'Provide licensed and insured vendors for maintenance, or work with your selected vendor(s) or Home Warranty policy',
-  'Provide estimates for maintenance over the maintenance reserve limit',
-  '24-hour on-call maintenance line and maintenance portal through AppFolio',
-  'Property inspections &mdash; 3 months after a new move-in, then bi-annual inspections with photos',
-  'HOA and Condo Association compliance management',
-  'Utility service bill-back (if applicable)',
-  'Tracking and renewal of Lead Certifications &amp; City/County Rental Licenses',
-  'Landlord and tenant online portals &mdash; payments plus access to documents &amp; inspections',
-  'Bill pay &mdash; mortgage, insurance, taxes, front-foot assessments, HOA or Condo Association',
-  'Monthly owner distribution via ACH or check, with a monthly owner statement',
-  'Year-end 1099 and statement',
-  'Lease renewals &amp; addendums',
-  'Complete a comprehensive multi-page move-out inspection report with date-stamped photos of the property',
-  'Ensure compliance of lease terms including, but not limited to, professional property and carpet cleaning',
-  'Provide estimates for turnover repairs needed to prepare the home for leasing',
-];
-
-const groups = [
+// "Leasing vs. Management" — two-stage redesign (design handoff, high-fidelity).
+// All 35 items verbatim; regrouped into themed clusters with lead phrases bolded.
+// Leasing = separate one-time cost · Management = flat monthly fee. Pricing is a
+// contact item only. Fully static (no client JS). Keeps the #fee anchor.
+const stages = [
   {
-    kind: 'leasing',
-    eyebrow: 'Leasing / Pre-Tenant Services',
+    num: '1',
+    kicker: 'Leasing / Pre-Tenant Services',
     title: 'Getting your property rent-ready and leased',
-    badge: 'Separate one-time cost',
     lede: 'A one-time service to prepare, market, and lease your property &mdash; priced separately from monthly management.',
-    items: leasing,
+    badge: 'Separate one-time cost',
+    badgeClass: 'is-gold',
+    groups: [
+      {
+        label: 'Prepare the property',
+        items: [
+          '<strong>Complete property walk-through</strong> to suggest items to address ahead of advertising &amp; to collect pertinent information on the property to better serve you and the tenant',
+          '<strong>Provide estimates from licensed and insured vendors</strong> for repairs &amp; renovations needed to prepare the home for leasing, Lead Certification or County/City License (if applicable)',
+          '<strong>Provide a market analysis</strong> of market rent value with comparable homes and amenities',
+        ],
+      },
+      {
+        label: 'Licensing &amp; account setup',
+        items: [
+          '<strong>Schedule Lead Inspection &amp; County/City Inspection</strong> for licensing (if applicable)',
+          '<strong>Complete and track Lead Certifications</strong> &amp; County or City Rental Licenses (if applicable)',
+          '<strong>Set up an active owner account</strong> with owner portal and owner reserve account',
+          '<strong>Apply for mailing address change</strong> for utility service bills (if applicable)',
+        ],
+      },
+      {
+        label: 'Market &amp; show',
+        items: [
+          '<strong>Take marketing photos, virtual tour video,</strong> and place a &ldquo;For Rent&rdquo; sign (if applicable)',
+          '<strong>Advertise the property on 30&ndash;35 listing sites</strong> including Zillow, HotPads, Apartments.com, Lovely, PadMapper and more',
+          '<strong>Ability to advertise through the MLS</strong> with our real estate brokerage, Tidewater Realty Group',
+          '<strong>Pre-screen client leads</strong> and schedule in-person and video showings',
+        ],
+      },
+      {
+        label: 'Screen, lease &amp; move in',
+        items: [
+          '<strong>Process client applications</strong> &mdash; credit, criminal &amp; rental background, employment verification, and rental verification',
+          '<strong>Prepare the lease agreement and lease addendums</strong> in ordinance with local, state, and county laws and regulations',
+          '<strong>Provide the approved client a welcome letter</strong> with lease terms and utility service information',
+          '<strong>Complete a comprehensive multi-page move-in inspection report</strong> with date-stamped photos of the property',
+          '<strong>Collect and ensure compliance of lease terms</strong> &mdash; security deposit or Rhino account, renters insurance, and utility accounts',
+        ],
+      },
+    ],
   },
   {
-    kind: 'mgmt',
-    eyebrow: 'Management Services',
+    num: '2',
+    kicker: 'Management Services',
     title: 'Everything we handle once a tenant is in',
-    badge: 'Included in your monthly fee',
     lede: 'Your flat monthly management fee &mdash; no per-visit, per-inspection, or per-coordination line items.',
-    items: management,
+    badge: 'Included in your monthly fee',
+    badgeClass: 'is-teal',
+    groups: [
+      {
+        label: 'Rent, money &amp; reporting',
+        items: [
+          '<strong>Rent collection</strong> and tenant account management',
+          '<strong>Bill pay</strong> &mdash; mortgage, insurance, taxes, front-foot assessments, HOA or Condo Association',
+          '<strong>Monthly owner distribution via ACH or check,</strong> with a monthly owner statement',
+          '<strong>Year-end 1099</strong> and statement',
+          '<strong>Utility service bill-back</strong> (if applicable)',
+          '<strong>Landlord and tenant online portals</strong> &mdash; payments plus access to documents &amp; inspections',
+        ],
+      },
+      {
+        label: 'Tenants &amp; leases',
+        items: [
+          '<strong>Tenant communication</strong> &mdash; notices, reminders, questions and concerns',
+          '<strong>Lease renewals</strong> &amp; addendums',
+          '<strong>Failure-to-pay-rent and eviction management</strong>',
+          '<strong>Ensure compliance of lease terms</strong> including, but not limited to, professional property and carpet cleaning',
+        ],
+      },
+      {
+        label: 'Maintenance',
+        items: [
+          '<strong>Maintenance management</strong> &mdash; annual and emergency maintenance, plus tenant maintenance requests',
+          '<strong>Provide licensed and insured vendors for maintenance,</strong> or work with your selected vendor(s) or Home Warranty policy',
+          '<strong>Provide estimates for maintenance</strong> over the maintenance reserve limit',
+          '<strong>24-hour on-call maintenance line</strong> and maintenance portal through AppFolio',
+        ],
+      },
+      {
+        label: 'Inspections &amp; compliance',
+        items: [
+          '<strong>Property inspections</strong> &mdash; 3 months after a new move-in, then bi-annual inspections with photos',
+          '<strong>Complete a comprehensive multi-page move-out inspection report</strong> with date-stamped photos of the property',
+          '<strong>Provide estimates for turnover repairs</strong> needed to prepare the home for leasing',
+          '<strong>HOA and Condo Association compliance management</strong>',
+          '<strong>Tracking and renewal of Lead Certifications</strong> &amp; City/County Rental Licenses',
+        ],
+      },
+    ],
   },
 ];
 ---
@@ -71,125 +109,144 @@ const groups = [
       <p class="tw-section-lede">Leasing and tenant placement is a one-time service, billed separately from your flat monthly management fee. Here&rsquo;s exactly what each one covers &mdash; pricing is quick to walk through, just ask our rental team.</p>
     </div>
 
-    <div class="tw-rsvc-groups">
-      {groups.map((g) => (
-        <div class={`tw-rsvc-group tw-rsvc-${g.kind}`}>
-          <div class="tw-rsvc-group-head">
-            <div class="tw-rsvc-group-headings">
-              <div class="tw-rsvc-group-eyebrow">{g.eyebrow}</div>
-              <h3 class="tw-rsvc-group-title"><Fragment set:html={g.title} /></h3>
-            </div>
-            <span class="tw-rsvc-badge"><Fragment set:html={g.badge} /></span>
+    {stages.map((st, si) => (
+      <Fragment>
+        {si === 1 && (
+          <div class="tw-scope-divider" aria-hidden="true">
+            <span class="tw-scope-divider-pill">Tenant moves in &mdash; management begins <span class="tw-scope-divider-arrow">&darr;</span></span>
           </div>
-          <p class="tw-rsvc-group-lede"><Fragment set:html={g.lede} /></p>
-          <ul class="tw-rsvc-list">
-            {g.items.map((it) => (
-              <li>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                <span><Fragment set:html={it} /></span>
-              </li>
+        )}
+        <div class="tw-scope-stage">
+          <header class="tw-scope-stagehead">
+            <div class="tw-scope-num">{st.num}</div>
+            <div class="tw-scope-stagehead-text">
+              <div class="tw-scope-kicker" set:html={st.kicker}></div>
+              <h3 class="tw-scope-title">{st.title}</h3>
+              <p class="tw-scope-lede" set:html={st.lede}></p>
+            </div>
+            <div class={`tw-scope-badge ${st.badgeClass}`}>{st.badge}</div>
+          </header>
+          <div class="tw-scope-groups">
+            {st.groups.map((g) => (
+              <div class="tw-scope-card">
+                <div class="tw-scope-card-label" set:html={g.label}></div>
+                <ul class="tw-scope-list">
+                  {g.items.map((it) => (
+                    <li>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                      <span set:html={it}></span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
-      ))}
-    </div>
+      </Fragment>
+    ))}
 
     <p class="tw-tier-foot">Available as full management, leasing-only, or vacancy management. <a href="/request-a-proposal">Talk to our rental team about pricing &rarr;</a></p>
   </div>
 </section>
 
-<style>
-  .tw-rsvc-groups {
+<style is:global>
+  /* ============= Rental: Leasing vs. Management (RentalScope) ============= */
+  .tw-scope-stage { margin-top: 56px; }
+  .tw-scope-stage + .tw-scope-stage { margin-top: 0; }
+
+  /* Stage header */
+  .tw-scope-stagehead {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    grid-template-columns: auto 1fr auto;
+    gap: 20px 24px;
+    align-items: start;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--tw-border);
+    margin-bottom: 28px;
+  }
+  .tw-scope-num {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--tw-dark); color: var(--tw-cream);
+    font-family: var(--tw-font-heading); font-weight: 800; font-size: 22px;
+  }
+  .tw-scope-kicker {
+    font-family: var(--tw-font-heading); font-weight: 700; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.18em; color: var(--tw-teal);
+    margin-bottom: 6px;
+  }
+  .tw-scope-title {
+    font-family: var(--tw-font-heading); font-weight: 800; font-size: 28px;
+    line-height: 1.15; letter-spacing: -0.01em; color: var(--tw-dark); margin: 0 0 8px;
+  }
+  .tw-scope-lede {
+    font-family: var(--tw-font-body); font-size: 15px; line-height: 1.55;
+    color: var(--tw-fg-muted, #4a5054); margin: 0; max-width: 62ch;
+  }
+  .tw-scope-badge {
+    align-self: center;
+    font-family: var(--tw-font-heading); font-weight: 700; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 8px 16px; border-radius: 999px; white-space: nowrap;
+  }
+  .tw-scope-badge.is-gold { background: transparent; color: var(--tw-dark); border: 1.5px solid var(--tw-gold); }
+  .tw-scope-badge.is-teal { background: var(--tw-teal); color: var(--tw-cream); border: 1.5px solid var(--tw-teal); }
+
+  /* Group cards */
+  .tw-scope-groups {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
     align-items: start;
   }
-  .tw-rsvc-group {
+  .tw-scope-card {
     background: var(--tw-cream);
     border: 1px solid var(--tw-border);
-    border-radius: 16px;
-    padding: 28px 28px 30px;
-    border-top: 4px solid var(--tw-gold);
+    border-radius: 12px;
+    padding: 26px 26px 24px;
   }
-  .tw-rsvc-group.tw-rsvc-mgmt { border-top-color: var(--tw-teal); }
-  .tw-rsvc-group-head {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 14px;
-    margin-bottom: 6px;
+  .tw-scope-card-label {
+    font-family: var(--tw-font-heading); font-weight: 700; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.14em; color: var(--tw-dark);
+    padding-bottom: 12px; margin-bottom: 14px;
+    border-bottom: 1px solid var(--tw-divider, var(--tw-border));
   }
-  .tw-rsvc-group-eyebrow {
-    font-family: var(--tw-font-heading);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--tw-gold);
-    margin-bottom: 6px;
+  .tw-scope-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; }
+  .tw-scope-list li {
+    display: flex; gap: 10px;
+    font-family: var(--tw-font-body); font-size: 14px; line-height: 1.5;
+    color: var(--tw-fg-muted, #4a5054);
   }
-  .tw-rsvc-mgmt .tw-rsvc-group-eyebrow { color: var(--tw-teal); }
-  .tw-rsvc-group-title {
-    font-family: var(--tw-font-heading);
-    font-size: clamp(1.25rem, 2vw, 1.5rem);
-    font-weight: 700;
+  .tw-scope-list li strong { font-weight: 600; color: var(--tw-dark); }
+  .tw-scope-list li svg { width: 14px; height: 14px; color: var(--tw-teal); flex-shrink: 0; margin-top: 3px; }
+
+  /* Divider between stages */
+  .tw-scope-divider {
+    display: flex; align-items: center; gap: 16px;
+    margin: 44px 0;
+  }
+  .tw-scope-divider::before, .tw-scope-divider::after {
+    content: ''; flex: 1; height: 1px;
+    background: var(--tw-border);
+  }
+  .tw-scope-divider-pill {
+    font-family: var(--tw-font-heading); font-weight: 700; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.14em;
     color: var(--tw-dark);
-    line-height: 1.2;
-    margin: 0;
+    background: var(--tw-cream);
+    border: 1px solid var(--tw-border);
+    border-radius: 999px; padding: 9px 18px;
+    display: inline-flex; align-items: center; gap: 8px;
   }
-  .tw-rsvc-badge {
-    flex-shrink: 0;
-    font-family: var(--tw-font-heading);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-    color: #8a7a3d;
-    background: rgba(191, 172, 95, 0.16);
-    border: 1px solid rgba(191, 172, 95, 0.35);
-    border-radius: 999px;
-    padding: 6px 12px;
-    white-space: nowrap;
+  .tw-scope-divider-arrow { color: var(--tw-teal); }
+
+  @media (max-width: 1024px) {
+    .tw-scope-groups { grid-template-columns: 1fr; }
   }
-  .tw-rsvc-mgmt .tw-rsvc-badge {
-    color: var(--tw-teal-700, #1B4E59);
-    background: var(--tw-teal-50, #EAF3F5);
-    border-color: var(--tw-teal-100, #C7E0E5);
-  }
-  .tw-rsvc-group-lede {
-    font-family: var(--tw-font-body);
-    font-size: .95rem;
-    line-height: 1.55;
-    color: var(--tw-fg-muted);
-    margin: 0 0 20px;
-    max-width: 44ch;
-  }
-  .tw-rsvc-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 13px 22px;
-  }
-  .tw-rsvc-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-family: var(--tw-font-body);
-    font-size: .92rem;
-    line-height: 1.45;
-    color: var(--tw-dark);
-  }
-  .tw-rsvc-list li svg {
-    flex-shrink: 0;
-    width: 16px;
-    height: 16px;
-    margin-top: 3px;
-    color: var(--tw-gold);
-  }
-  .tw-rsvc-mgmt .tw-rsvc-list li svg { color: var(--tw-teal); }
-  @media (max-width: 900px) {
-    .tw-rsvc-groups { grid-template-columns: 1fr; }
+  @media (max-width: 720px) {
+    .tw-scope-stagehead { grid-template-columns: auto 1fr; }
+    .tw-scope-badge { grid-column: 2; justify-self: start; align-self: start; }
+    .tw-scope-num { width: 44px; height: 44px; font-size: 18px; }
+    .tw-scope-title { font-size: 23px; }
   }
 </style>
