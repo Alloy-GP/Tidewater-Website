@@ -49,6 +49,17 @@ const schemas = [
 
   <RentalPains />
   <RentalFee />
+
+  <!-- Lease negotiation services (SEO: "lease negotiation services") -->
+  <section class="tw-section" id="lease-negotiations">
+    <div class="tw-container tw-leaseneg" style="max-width:840px">
+      <div class="tw-eyebrow">Lease Negotiation Services</div>
+      <h2 class="tw-section-title" style="margin:10px 0 14px">Lease terms negotiated to <em>protect your investment.</em></h2>
+      <p class="tw-section-lede">Every Tidewater lease is prepared and negotiated in accordance with local, state, and county law &mdash; rent and term, renewal options, security deposit or Rhino coverage, maintenance responsibilities, and pet, occupancy, and use clauses. Our lease negotiation services are built to favor a stable, long-term tenancy and to hold up if a dispute ever reaches court.</p>
+      <p class="tw-leaseneg-cta"><a href="/request-a-proposal">Talk to our rental team about a lease review &rarr;</a></p>
+    </div>
+  </section>
+
   <RentalCounty client:visible />
 
   <!-- Where We Manage geo strip -->
@@ -58,6 +69,7 @@ const schemas = [
         <div style="font-family:var(--tw-font-heading);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tw-teal);margin-bottom:10px">Service Area</div>
         <h2 style="font-family:var(--tw-font-heading);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--tw-dark);margin:0 0 12px">Rental management across Maryland &amp; Delaware</h2>
         <p style="font-family:var(--tw-font-body);font-size:1rem;color:var(--tw-fg-muted);margin:0">We manage 400+ rental units across Maryland and coastal Delaware. Explore county-level coverage, local landlord laws, and licensing requirements for your area.</p>
+        <p class="tw-rental-counties">Popular markets: <a href="/rental-management/maryland/montgomery-county">property management in Montgomery County</a>, <a href="/rental-management/maryland/silver-spring">Silver Spring</a>, <a href="/rental-management/maryland/baltimore-county">Baltimore County</a>, <a href="/rental-management/maryland/howard-county">Howard County</a>, <a href="/rental-management/maryland/anne-arundel-county">Anne Arundel County</a>, <a href="/rental-management/maryland/prince-georges-county">Prince George&rsquo;s County</a>, and <a href="/rental-management/maryland/ocean-city">Ocean City</a>.</p>
       </div>
       <div class="tw-geo-counties">
         <a href="/rental-management/maryland" class="tw-geo-county-card featured">
@@ -117,3 +129,10 @@ const schemas = [
   <CTA variant="rental" />
   <Footer />
 </BaseLayout>
+
+<style>
+  .tw-rental-counties { font-family: var(--tw-font-body); font-size: .95rem; color: var(--tw-fg-muted); margin: 14px 0 0; line-height: 1.6; }
+  .tw-rental-counties a, .tw-leaseneg-cta a { color: var(--tw-teal); text-decoration: underline; text-underline-offset: 2px; }
+  .tw-rental-counties a:hover, .tw-leaseneg-cta a:hover { color: var(--tw-dark); }
+  .tw-leaseneg-cta { margin-top: 16px; font-family: var(--tw-font-heading); font-weight: 700; font-size: .95rem; }
+</style>

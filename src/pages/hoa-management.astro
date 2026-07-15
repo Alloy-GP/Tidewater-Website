@@ -19,7 +19,7 @@ import { serviceSchema, breadcrumbSchema } from '../lib/schema';
 import { SITE } from '../config/site';
 
 const pageUrl = `${SITE.url}/hoa-management`;
-const pageDesc = "Family-owned HOA, condo, and co-op management for Maryland, DC, Virginia, Pennsylvania, Delaware, and West Virginia since 1989. AAMC® accredited.";
+const pageDesc = "HOA management companies & community association management services for Maryland, DC, Virginia, Delaware, Pennsylvania, and West Virginia. Family-owned since 1989, AAMC® accredited.";
 
 const schemas = [
   serviceSchema({
@@ -35,7 +35,7 @@ const schemas = [
 ---
 <BaseLayout
   pageStylesheet="styles-blog.css"
-  title="Tidewater Companies — HOA Management for the Mid-Atlantic"
+  title="HOA &amp; Community Association Management Companies | Tidewater"
   description={pageDesc}
   pageSchema={schemas}
 >
@@ -44,6 +44,19 @@ const schemas = [
   <Breadcrumb variant="management" crumbs={[{ label: "Management", href: "/hoa-management" }, { label: "HOA Management" }]} />
   <Hero config={{ heroWidget: 'fitcheck' }} />
   <TrustBar />
+
+  <!-- Association-management head-term content (SEO: community association management / HOA management companies / HOA management services) -->
+  <section class="tw-section">
+    <div class="tw-container tw-assoc-intro" style="max-width:840px">
+      <div class="tw-eyebrow">Community Association Management</div>
+      <h2 class="tw-section-title" style="margin:10px 0 14px">One of the Mid-Atlantic&rsquo;s most trusted <em>HOA management companies.</em></h2>
+      <p class="tw-section-lede">Tidewater delivers full-service community association management for homeowners associations, condominiums, co-ops, townhome communities, and commercial associations. Our HOA management services cover board and governance support, financial management, covenant enforcement, maintenance coordination, and 24/7 resident response &mdash; under one flat, transparent fee.</p>
+      <p class="tw-assoc-links">
+        Explore our services: <a href="/condo-management">condo association management</a>, <a href="/hoa-management/commercial-association-management">commercial property &amp; association management</a>, <a href="/hoa-management/hoa-financial-management">HOA financial management</a>, <a href="/hoa-management/townhome-community-management">townhome &amp; planned communities</a>, and <a href="/hoa-management/maryland">HOA management in Maryland</a>.
+      </p>
+    </div>
+  </section>
+
   <Pains />
   <Tiers />
   <Mission />
@@ -105,3 +118,9 @@ const schemas = [
   <CTA />
   <Footer />
 </BaseLayout>
+
+<style>
+  .tw-assoc-links { font-family: var(--tw-font-body); font-size: 1rem; color: var(--tw-fg-muted); margin-top: 14px; }
+  .tw-assoc-links a { color: var(--tw-teal); text-decoration: underline; text-underline-offset: 2px; }
+  .tw-assoc-links a:hover { color: var(--tw-dark); }
+</style>
