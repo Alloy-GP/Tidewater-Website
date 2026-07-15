@@ -1,15 +1,15 @@
 ---
 // "Leasing vs. Management" — two-stage redesign (design handoff, high-fidelity).
 // All 35 items verbatim; regrouped into themed clusters with lead phrases bolded.
-// Leasing = separate one-time cost · Management = flat monthly fee. Pricing is a
+// Leasing = separate cost (charged per lease-up) · Management = flat monthly fee. Pricing is a
 // contact item only. Fully static (no client JS). Keeps the #fee anchor.
 const stages = [
   {
     num: '1',
     kicker: 'Leasing / Pre-Tenant Services',
     title: 'Getting your property rent-ready and leased',
-    lede: 'A one-time service to prepare, market, and lease your property &mdash; priced separately from monthly management.',
-    badge: 'Separate one-time cost',
+    lede: 'A leasing service to prepare, market, and lease your property &mdash; priced separately from monthly management, each time you place a new tenant.',
+    badge: 'Separate cost',
     badgeClass: 'is-gold',
     groups: [
       {
@@ -106,7 +106,7 @@ const stages = [
     <div class="tw-section-head">
       <div class="tw-eyebrow">Leasing vs. Management &mdash; What&rsquo;s Separate, What&rsquo;s Included</div>
       <h2 class="tw-section-title">Two stages, priced honestly. <em>Leasing up front, management monthly.</em></h2>
-      <p class="tw-section-lede">Leasing and tenant placement is a one-time service, billed separately from your flat monthly management fee. Here&rsquo;s exactly what each one covers &mdash; pricing is quick to walk through, just ask our rental team.</p>
+      <p class="tw-section-lede">Leasing and tenant placement is priced separately from your flat monthly management fee &mdash; a distinct cost each time the property is leased. Here&rsquo;s exactly what each one covers &mdash; pricing is quick to walk through, just ask our rental team.</p>
     </div>
 
     {stages.map((st, si) => (
