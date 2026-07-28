@@ -1,8 +1,23 @@
 // Shared blog post data — single source of truth.
 // Imported by BlogIndex.jsx and FromTheBlog.jsx.
 // When adding new posts, update this file only.
+// The /blog "Featured this week" spot is auto-assigned to the post with the
+// newest dateIso — no `featured` flag needed. Keep dateIso as 'YYYY-MM-DD'.
 
 export const ALL_POSTS = [
+  {
+    slug: 'hoa-board-responsibilities',
+    href: '/blog/hoa-board-responsibilities',
+    title: 'HOA board member responsibilities &amp; <em>fiduciary duty,</em> explained.',
+    dek: "Newly elected board members are handed legal accountability for a multi-million-dollar community with no manual. This guide explains HOA board responsibilities in plain terms: the fiduciary duties that attach to every seat, what each officer position involves, and where the board\'s job ends and delegation begins.",
+    category: { id: 'governance', label: 'Board Governance', tone: '' },
+    date: 'July 28, 2026', dateIso: '2026-07-28',
+    readTime: 7,
+    author: 'Marcia Goldstein',
+    tone: '',
+    coverImage: '/assets/hoa-board-responsibilities.jpg',
+    coverAlt: "HOA board member reviewing the association\'s governing-documents binder at her kitchen table",
+  },
   {
     slug: 'how-to-manage-a-rental-property',
     href: '/blog/how-to-manage-a-rental-property',
@@ -13,7 +28,6 @@ export const ALL_POSTS = [
     readTime: 9,
     author: 'Cody Bishop',
     tone: '',
-    featured: true,
     coverImage: '/assets/how-to-manage-a-rental-property.jpg',
     coverAlt: 'Landlord conducting a rental property inspection and documenting condition with a phone camera',
   },
