@@ -254,8 +254,11 @@ export default function BlogIndex({ perPage: initialPerPage = 6, showSearch = tr
     return list;
   }, [active, submittedQuery]);
 
+  // The newest post always takes the featured spot. dateIso is 'YYYY-MM-DD',
+  // so a lexicographic max gives the most recent post automatically — no need
+  // to hand-toggle a `featured` flag when a new post is added.
   const featuredPost = (active === 'all' && !submittedQuery && showFeatured)
-    ? ALL_POSTS.find(p => p.featured)
+    ? ALL_POSTS.reduce((newest, p) => (!newest || p.dateIso > newest.dateIso ? p : newest), null)
     : null;
 
   const gridPosts = featuredPost ? filtered.filter(p => p.slug !== featuredPost.slug) : filtered;

@@ -1,0 +1,381 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Topbar from '../../components/Topbar.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Footer from '../../components/Footer.astro';
+import { articleSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+import { SITE } from '../../config/site';
+
+const pageUrl = `${SITE.url}/blog/hoa-board-responsibilities`;
+const headline = 'HOA Board Member Responsibilities & Fiduciary Duty Explained';
+const description = 'A clear guide to HOA board roles and fiduciary duties — what the president, VP, secretary, and treasurer each do, and how to govern with less risk.';
+
+const post = {
+  title: 'HOA board member responsibilities &amp; <em>fiduciary duty,</em> explained.',
+  dek: "Newly elected board members are handed legal accountability for a multi-million-dollar community with no manual. This guide explains HOA board responsibilities in plain terms: the fiduciary duties that attach to every seat, what each officer position involves, and where the board\'s job ends and delegation begins.",
+  category: { label: 'Board Governance', tone: '' },
+  author: {
+    name: 'Marcia Goldstein',
+    creds: 'PCAM®',
+    initials: 'MG',
+    role: 'Senior Community Manager, Tidewater',
+    bio: 'Marcia is a senior community manager at Tidewater with 18 years of experience managing HOA and condo association boards across Maryland. PCAM-credentialed; former CAI Chesapeake Chapter committee member.',
+    email: 'marcia@tidewaterproperty.com',
+  },
+  date: 'July 28, 2026',
+  dateIso: '2026-07-28',
+  readTime: 7,
+};
+
+const toc = [
+  { id: 'what-boards-do',   label: 'What a board does' },
+  { id: 'fiduciary',        label: 'Fiduciary duties' },
+  { id: 'positions',        label: 'Board positions' },
+  { id: 'not-responsible',  label: "What it's not for" },
+  { id: 'varies',           label: 'What varies' },
+  { id: 'faq',              label: 'FAQ' },
+  { id: 'conclusion',       label: 'The short version' },
+];
+
+const related = [
+  {
+    tone: '', category: 'Board Governance',
+    title: 'What is a quorum? Definition, requirements, and why it matters for your board.',
+    dek: "A quorum is the minimum number of members who must be present for a meeting\'s decisions to be legally valid. How quorum works for board and annual meetings, and how proxy voting affects the count.",
+    date: 'May 14, 2026', readTime: 8, href: '/blog/what-is-quorum-and-why-is-it-important',
+    coverImage: '/assets/quorum-community-manager.jpg',
+    coverAlt: 'Tidewater community association manager walking through a planned neighborhood in Maryland, holding an iPad during a site inspection',
+  },
+  {
+    tone: '', category: 'HOA Management',
+    title: 'What is a community association manager? Roles, responsibilities, and what your board should expect.',
+    dek: 'A community association manager (CAM) is the professional hired by an HOA or condo board to handle day-to-day operations. This guide covers what a CAM does, how the role works with the board, and what credentials matter.',
+    date: 'May 15, 2026', readTime: 9, href: '/blog/what-is-a-community-association-manager',
+    coverImage: '/assets/what-is-a-community-association-manager.jpg',
+    coverAlt: 'Community association manager meeting with HOA board members',
+  },
+  {
+    tone: '', category: 'Solutions',
+    title: 'From self-managed to professional: what actually changes.',
+    dek: 'The board still decides; the admin moves to us. A clear-eyed framework for self-managed boards considering professional management.',
+    date: 'March 18, 2026', readTime: 6, href: '/solutions/self-managed-hoa-transition',
+    coverImage: '/assets/tidewater-self-managed-hoa-board-members-frustrated.jpg',
+    coverAlt: 'Self-managed HOA board members reviewing financial documents at a community meeting',
+  },
+];
+
+const pageSchema = [
+  articleSchema({
+    headline,
+    description,
+    url: pageUrl,
+    datePublished: '2026-07-28',
+    about: ['HOA board responsibilities', 'fiduciary duty', 'board of directors', 'HOA governance', 'board officers'],
+  }),
+  faqSchema([
+    {
+      q: 'Does an HOA president have more power than other board members?',
+      a: 'No. The president carries more visible responsibility but not more authority, and holds one vote like every other director. The president presides over meetings and often speaks for the board publicly, but decisions require a board vote. A president acting alone is exceeding their authority.',
+    },
+    {
+      q: 'What should HOA board members not do?',
+      a: 'Board members should not act unilaterally, vote where they have a personal financial interest, share confidential association information, retaliate against homeowners, or decide without adequate information. Each of those breaches a specific HOA fiduciary duty: authority, loyalty, or care.',
+    },
+    {
+      q: 'Can HOA board members make decisions without consulting the rest of the board?',
+      a: 'Generally no. Board authority is collective and is exercised by vote at a properly noticed meeting with a quorum present. Many governing documents allow a narrow exception for genuine emergencies, usually requiring ratification at the next meeting. Check your bylaws for what yours permits.',
+    },
+    {
+      q: 'What are the signs of a dysfunctional HOA board?',
+      a: 'Common signs include decisions made outside meetings, minutes that are missing or unusable, no reserve study or a knowingly underfunded reserve, undisclosed conflicts of interest, chronic turnover, and homeowner communication that has stopped. Most are process problems with process fixes, usually tracing back to HOA board responsibilities nobody explained.',
+    },
+  ]),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'Blog', url: SITE.url + '/blog' },
+    { name: headline, url: pageUrl },
+  ]),
+];
+---
+
+<BaseLayout
+  title="HOA Board Responsibilities & Fiduciary Duty | Tidewater"
+  description={description}
+  ogType="article"
+  pageSchema={pageSchema}
+  pageStylesheet="styles-blog.css"
+>
+  <Topbar variant="homeowner" />
+  <Header activeNav="blog" />
+  <Breadcrumb crumbs={[
+    { label: 'Blog', href: '/blog' },
+    { label: 'HOA Board Responsibilities' },
+  ]} />
+
+  <div class="tw-blog-progress" id="tw-blog-progress"></div>
+
+  <section class="tw-blog-hero">
+    <div class="tw-blog-hero-inner">
+      <span class={`tw-blog-category ${post.category.tone}`}>{post.category.label}</span>
+      <h1 class="tw-blog-title" set:html={post.title}></h1>
+      <p class="tw-blog-dek">{post.dek}</p>
+      <div class="tw-blog-meta">
+        <div class="tw-blog-meta-author">
+          <div class="tw-blog-meta-avatar">{post.author.initials}</div>
+          <div>
+            <div class="tw-blog-meta-name">{post.author.name}</div>
+            <div class="tw-blog-meta-role">{post.author.role}</div>
+          </div>
+        </div>
+        <div class="tw-blog-meta-divider"></div>
+        <div class="tw-blog-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> {post.date}</div>
+        <div class="tw-blog-meta-divider"></div>
+        <div class="tw-blog-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> {post.readTime} min read</div>
+        <div class="tw-blog-share">
+          <button type="button" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg></button>
+          <button type="button" data-share="x" title="Share on X" aria-label="Share on X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></button>
+          <button type="button" data-share="email" title="Share by email" aria-label="Share by email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></button>
+          <button type="button" data-share="copy" title="Copy link" aria-label="Copy link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tw-blog-cover">
+    <div class="tw-blog-cover-inner">
+      <img
+        src="/assets/hoa-board-responsibilities.jpg"
+        alt="HOA board member reviewing the association's governing-documents binder at her kitchen table"
+      />
+      <div class="tw-blog-cover-paper"></div>
+    </div>
+  </div>
+
+  <div class="tw-blog-body-wrap">
+    <div class="tw-blog-layout">
+      <aside class="tw-blog-toc">
+        <div class="tw-blog-toc-label">In this article</div>
+        <ul class="tw-blog-toc-list">
+          {toc.map(it => <li><a href={`#${it.id}`} set:html={it.label}></a></li>)}
+        </ul>
+      </aside>
+      <div>
+        <article class="tw-blog-article">
+
+          <p>
+            You were elected at the annual meeting, or you agreed to fill a vacancy because nobody else raised a hand. Either way, you are now legally accountable for a community asset worth millions of dollars, and no one handed you a manual. That gap is common, and it is fixable. HOA board responsibilities are narrower than most new directors fear, and nearly all of the day-to-day work can be delegated without giving up a vote. This guide covers the fiduciary duties attached to every seat, what each officer position involves, and where your job as a volunteer board member ends.
+          </p>
+
+          <h2 id="what-boards-do">What Does an HOA Board Actually Do?</h2>
+
+          <p>
+            An HOA board is the group of homeowners elected by the membership to govern the association. HOA board responsibilities fall into four categories: maintaining common property, managing association finances, applying the governing documents consistently, and making decisions in the community&rsquo;s collective interest.
+          </p>
+
+          <p>
+            A board also operates as three things at once: a government, a business with a budget and reserve funding obligations, and a community made up of the people its decisions affect. Most new-director confusion comes from those roles pulling against each other. <strong>The responsibilities of HOA board members are collective, which means your job is to run a sound process rather than to satisfy every request.</strong> Condominium boards carry the same obligations plus shared building elements, which is why <a href="/condo-management">condominium management</a> is its own discipline.
+          </p>
+
+          <h2 id="fiduciary">The Fiduciary Duties Every Board Member Owes</h2>
+
+          <p>
+            A fiduciary duty is a legal obligation to act in the association&rsquo;s best interest rather than your own. It attaches to every director on taking a seat and underpins every other item on the list of HOA board responsibilities. HOA board fiduciary duty has three parts:
+          </p>
+
+          <ul>
+            <li><strong>Duty of care.</strong> Attend meetings, read what you sign, review financials before approving them, and get expert input on subjects outside the board&rsquo;s competence.</li>
+            <li><strong>Duty of loyalty.</strong> Put the association ahead of personal interest. Disclose any conflict of interest and recuse yourself where you or a family member benefits.</li>
+            <li><strong>Duty to act within authority</strong> (sometimes called the duty of obedience)<strong>.</strong> Stay inside what the governing documents and law permit. A board cannot grant itself powers the bylaws never gave it.</li>
+          </ul>
+
+          <p>
+            The reassuring part is the business judgment rule. In most states, directors are shielded from liability for decisions that turn out badly, provided they acted in good faith, on reasonable information, and without self-interest. <strong>The standard is a sound process, not a perfect outcome.</strong> CAI&rsquo;s <a href="https://www.caionline.org/advocacy/public-policies/rights-and-responsibilities-for-better-communities/" target="_blank" rel="noopener">rights and responsibilities for better communities</a> lists the same board obligations: fiduciary duty, sound business judgment, and knowing the governing documents and applicable law. D&amp;O insurance exists because these duties carry personal exposure, so confirm what your policy covers.
+          </p>
+
+          <h2 id="positions">HOA Board Positions and What Each Officer Actually Does</h2>
+
+          <p>
+            Most associations have four HOA board positions: president, vice president, secretary, and treasurer. HOA board member duties are shared equally across every seat, and officer titles divide HOA board responsibilities into the assignments the bylaws define. No title carries extra voting power.
+          </p>
+
+          <h3>HOA Board President Responsibilities</h3>
+
+          <p>
+            The president presides over meetings, sets the agenda with the association manager, signs contracts the board has approved, and serves as the board&rsquo;s primary voice. <strong>The president runs the meeting but holds one vote, the same as every other director, and cannot commit the association alone.</strong>
+          </p>
+
+          <h3>Vice President Responsibilities</h3>
+
+          <p>
+            The vice president steps in when the president is unavailable and usually owns a defined area of oversight, often a committee or a capital project. <strong>This is the seat whose duties vary most between associations, so your bylaws are the only reliable answer.</strong>
+          </p>
+
+          <h3>HOA Secretary Duties</h3>
+
+          <p>
+            HOA secretary duties center on custody of the association&rsquo;s records: minutes, notices, membership records, and correspondence. It is the most underrated seat on the board. <strong>Accurate minutes are the primary evidence that the board followed a sound process, which is what the business judgment rule protects.</strong>
+          </p>
+
+          <h3>HOA Treasurer Duties</h3>
+
+          <p>
+            HOA treasurer duties cover oversight of association finances: building the budget with the manager, reviewing monthly statements, monitoring reserve funding against the reserve study, and reporting to the board in plain language. <strong>A treasurer does not need to be an accountant, and in a professionally managed association should not be doing the bookkeeping.</strong> The role is financial clarity and informed questioning &mdash; not data entry.
+          </p>
+
+          <h2 id="not-responsible">What the Board Is <em>Not</em> Responsible For</h2>
+
+          <p>
+            The board is responsible for governing the association, not for personally performing its day-to-day operations. That distinction is the part of HOA board responsibilities almost nobody explains to a new director, and it is where volunteer burnout begins.
+          </p>
+
+          <table>
+              <thead>
+                <tr>
+                  <th>Non-Delegable Board Duties</th>
+                  <th>Duties a Manager Can Handle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Voting on association business</td><td>Collecting assessments, tracking delinquencies</td></tr>
+                <tr><td>Adopting the annual budget</td><td>Bookkeeping and monthly reporting</td></tr>
+                <tr><td>Setting policy</td><td>Coordinating maintenance and repairs</td></tr>
+                <tr><td>Approving contracts and assessments</td><td>Processing architectural requests</td></tr>
+                <tr><td>Exercising fiduciary judgment</td><td>Notices and covenant enforcement tracking</td></tr>
+                <tr><td>Directing and evaluating the manager</td><td>Records administration, emergency response</td></tr>
+              </tbody>
+          </table>
+
+          <p>
+            No manager can vote for a board or exercise its judgment, and any arrangement suggesting otherwise is a warning sign. <strong>The common failure mode is a board trying to perform the second column itself: burnout follows, and burned-out boards make weaker decisions on the first column.</strong> Handing operations to <a href="/hoa-management">professional association management</a> does not surrender authority &mdash; it protects the board&rsquo;s capacity for the judgment only it can exercise. Boards weighing that handoff have a standard to measure against: CAI&rsquo;s AAMC&reg; accreditation, the industry&rsquo;s highest company-level credential, and PCAM-designated leadership. Tidewater holds both, has been family-owned since 1989, and manages more than 400 communities.
+          </p>
+
+          <h2 id="varies">Where HOA Board Responsibilities Vary: Your Documents and Your State</h2>
+
+          <p>
+            HOA board of directors responsibilities are set in layers. The fiduciary core of HOA board responsibilities is consistent everywhere; the procedural layer comes from your governing documents and your state statute. What commonly varies:
+          </p>
+
+          <ul>
+            <li>Meeting notice requirements and permitted formats</li>
+            <li>Homeowner rights to inspect association records</li>
+            <li>Board election and voting procedures, including proxies and quorum</li>
+            <li>Violation hearing procedures before a fine</li>
+            <li>Reserve study mandates and budget adoption, including member ratification</li>
+          </ul>
+
+          <p>
+            Read your declaration and CC&amp;Rs first, then your bylaws, then your state statute. <a href="https://law.justia.com/codes/maryland/real-property/title-11b/" target="_blank" rel="noopener">Maryland&rsquo;s Homeowners Association Act</a> is one example of a statute layering procedure onto that core, and it applies only in Maryland. <strong>Where the two appear to conflict, ask your association manager or attorney before the board acts.</strong> This is education, not legal advice.
+          </p>
+
+          <h2 id="faq">Frequently Asked Questions</h2>
+
+          <h3>Does an HOA president have more power than other board members?</h3>
+          <p>
+            No. The president carries more visible responsibility but not more authority, and holds one vote like every other director. The president presides over meetings and often speaks for the board publicly, but decisions require a board vote. A president acting alone is exceeding their authority.
+          </p>
+
+          <h3>What should HOA board members not do?</h3>
+          <p>
+            Board members should not act unilaterally, vote where they have a personal financial interest, share confidential association information, retaliate against homeowners, or decide without adequate information. Each of those breaches a specific HOA fiduciary duty: authority, loyalty, or care.
+          </p>
+
+          <h3>Can HOA board members make decisions without consulting the rest of the board?</h3>
+          <p>
+            Generally no. Board authority is collective and is exercised by vote at a properly noticed meeting with a quorum present. Many governing documents allow a narrow exception for genuine emergencies, usually requiring ratification at the next meeting. Check your bylaws for what yours permits.
+          </p>
+
+          <h3>What are the signs of a dysfunctional HOA board?</h3>
+          <p>
+            Common signs include decisions made outside meetings, minutes that are missing or unusable, no reserve study or a knowingly underfunded reserve, undisclosed conflicts of interest, chronic turnover, and homeowner communication that has stopped. Most are process problems with process fixes, usually tracing back to HOA board responsibilities nobody explained.
+          </p>
+
+          <h2 id="conclusion">The Short Version</h2>
+
+          <p>
+            Your obligation as a director is a sound, informed, good-faith process, not personal expertise in every subject and not the operational work by hand. HOA board responsibilities are demanding in judgment and light in labor, provided the labor sits with people who handle it daily.
+          </p>
+
+          <p>
+            To keep going, our <a href="/resources">board education resources</a> are a useful next stop, and CAI&rsquo;s <a href="https://www.caionline.org/advocacy/public-policies/board-member-education/" target="_blank" rel="noopener">board member education</a> guidance covers the same ground. If your board is weighing whether its current arrangement is serving the community, we are glad to talk it through.
+          </p>
+
+          <div class="tw-blog-cta">
+            <div class="tw-blog-cta-eyebrow">Keep control of decisions</div>
+            <h3>Keep control of decisions. Let the day-to-day run itself.</h3>
+            <p>Handing operations to professional management protects the board&rsquo;s capacity for the judgment only it can exercise &mdash; no surrender of authority, no transition fees, just a clear picture of what working with us would look like.</p>
+            <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-lg">Request a proposal for your association &rarr;</a>
+          </div>
+
+          <div class="tw-blog-tags">
+            <span class="tw-blog-tags-label">Tagged</span>
+            <a href="#" class="tw-blog-tag">Board responsibilities</a>
+            <a href="#" class="tw-blog-tag">Fiduciary duty</a>
+            <a href="#" class="tw-blog-tag">Board roles</a>
+            <a href="#" class="tw-blog-tag">Governance</a>
+          </div>
+        </article>
+
+        <div class="tw-blog-author-bio">
+          <div class="tw-blog-author-bio-avatar">{post.author.initials}</div>
+          <div>
+            <div class="tw-blog-author-bio-eyebrow">About the author</div>
+            <div class="tw-blog-author-bio-name">{post.author.name} <span>{post.author.creds}</span></div>
+            <div class="tw-blog-author-bio-role">{post.author.role}</div>
+            <p class="tw-blog-author-bio-blurb">{post.author.bio}</p>
+            <div class="tw-blog-author-bio-links">
+              <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg> LinkedIn</a>
+              <a href={`mailto:${post.author.email}`}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg> {post.author.email}</a>
+              <a href="/about/leadership">View bio &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="tw-blog-related">
+    <div class="tw-blog-related-inner">
+      <div class="tw-blog-related-head">
+        <div class="tw-blog-related-eyebrow">Continue Reading</div>
+        <h2>More on <em>HOA governance.</em></h2>
+      </div>
+      <div class="tw-blog-related-grid">
+        {related.map(p => (
+          <a href={p.href} class="tw-blog-related-card">
+            <div class={`tw-blog-related-card-img ${p.tone}`}>
+              {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || p.title} />}
+            </div>
+            <div class="tw-blog-related-card-body">
+              <div class={`tw-blog-related-card-cat ${p.tone}`}>{p.category}</div>
+              <h3>{p.title}</h3>
+              <p>{p.dek}</p>
+              <div class="tw-blog-related-card-meta">{p.date} &middot; {p.readTime} min read</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-blog-newsletter">
+    <div class="tw-blog-newsletter-inner">
+      <div class="tw-blog-newsletter-eyebrow">Tidewater Resources</div>
+      <h2>Get the <em>monthly board memo</em> in your inbox.</h2>
+      <p>One email a month. Practical board playbooks, Maryland HOA law updates, governance deep-dives. Written for working boards, not vendors. No fluff.</p>
+      <form class="tw-blog-newsletter-form">
+        <div class="tw-hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <input type="email" name="email" placeholder="board@yourcommunity.org" aria-label="Email address" required/>
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="tw-blog-newsletter-thanks" hidden style="font-family:var(--tw-font-heading);font-weight:700;font-size:15px;color:var(--tw-gold)">Thanks &mdash; first issue lands the first Tuesday of next month.</div>
+      <div class="tw-blog-newsletter-fine">Unsubscribe any time &middot; We never share your email &middot; 4,200+ board members subscribed</div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  import '../../scripts/blog-interactivity.js';
+</script>
