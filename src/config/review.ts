@@ -19,5 +19,5 @@ export interface ReviewItem {
 }
 
 export const REVIEW_ITEMS: ReviewItem[] = [
-  { label: 'Request a Proposal', path: '/request-a-proposal', review: true },
+  { label: 'HOA Board Responsibilities (blog post)', path: '/blog/hoa-board-responsibilities', review: true },
 ];
