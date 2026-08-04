@@ -19,7 +19,7 @@ export const EMAIL_CONFIG = {
   // Per-intent routing — the intake form sends `intent`; /api/lead routes here.
   // admin@alloygp.co is CC'd on every form. Each value can be one address or several.
   routes: {
-    proposal: ["gwindisch@tidewaterproperty.com", "bjordan@tidewaterproperty.com", "admin@alloygp.co"], // HOA/condo board
+    proposal: ["gwindisch@tidewaterproperty.com", "admin@alloygp.co"], // HOA/condo board (bjordan/Brook removed per client)
     rental:   ["cbishop@tidewaterproperty.com", "bjordan@tidewaterproperty.com", "admin@alloygp.co"],   // rental owners
     service:  ["logles@tidewaterproperty.com", "admin@alloygp.co"],                                     // resident requests
     general:  ["info@tidewaterproperty.com", "admin@alloygp.co"],                                       // catch-all (bjordan removed per client)
