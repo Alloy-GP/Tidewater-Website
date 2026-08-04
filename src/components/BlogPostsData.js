@@ -11,7 +11,7 @@ export const ALL_POSTS = [
     title: 'HOA board member responsibilities &amp; <em>fiduciary duty,</em> explained.',
     dek: "Newly elected board members are handed legal accountability for a multi-million-dollar community with no manual. This guide explains HOA board responsibilities in plain terms: the fiduciary duties that attach to every seat, what each officer position involves, and where the board\'s job ends and delegation begins.",
     category: { id: 'governance', label: 'Board Governance', tone: '' },
-    date: 'July 28, 2026', dateIso: '2026-07-28',
+    date: 'August 3, 2026', dateIso: '2026-08-03',
     readTime: 7,
     author: 'Marcia Goldstein',
     tone: '',
