@@ -19,5 +19,5 @@ export interface ReviewItem {
 }
 
 export const REVIEW_ITEMS: ReviewItem[] = [
-  { label: 'HOA Board Responsibilities (blog post)', path: '/blog/hoa-board-responsibilities', review: true },
+  { label: 'What Are HOA Fees? (blog post)', path: '/blog/hoa-fees', review: true },
 ];
