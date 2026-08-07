@@ -37,10 +37,11 @@ img { max-width: 100%; display: block; }
 
 /* ============= Header / topbar ============= */
 .tw-topbar { background: var(--tw-dark); color: var(--tw-cream); font-family: var(--tw-font-body); font-size: 13px; }
-.tw-topbar-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; height: 36px; display: flex; align-items: center; justify-content: space-between; }
-.tw-topbar-left { display: flex; gap: 22px; color: #cfcdc6; }
+.tw-topbar-inner { max-width: 1320px; margin: 0 auto; padding: 6px 32px; min-height: 36px; display: flex; align-items: center; justify-content: space-between; gap: 22px; flex-wrap: wrap; }
+.tw-topbar-left { display: flex; align-items: center; gap: 22px; min-width: 0; flex-wrap: wrap; color: #cfcdc6; }
 .tw-topbar-left strong { color: var(--tw-cream); font-weight: 600; }
-.tw-topbar-right { display: flex; gap: 22px; }
+.tw-topbar-right { display: flex; align-items: center; gap: 22px; min-width: 0; flex-wrap: wrap; }
+.tw-topbar-left > *, .tw-topbar-right > * { white-space: nowrap; }
 .tw-topbar-right a { color: #cfcdc6; text-decoration: none; font-weight: 500; transition: color .15s; }
 .tw-topbar-right a:hover { color: var(--tw-gold); }
 .tw-topbar-right .tw-topbar-em { color: var(--tw-gold); }
