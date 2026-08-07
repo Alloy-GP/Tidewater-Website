@@ -74,7 +74,12 @@ const schemas = [
         <figure class="tw-cty-map">
           <div class="tw-cty-map-frame">
             {mapsKey ? (
-              <div id="cty-map" style="position:absolute;inset:0;width:100%;height:100%"></div>
+              <>
+                <div id="cty-map" style="position:absolute;inset:0;width:100%;height:100%"></div>
+                {/* fallback shown by JS only if the Maps API fails to initialize */}
+                <iframe id="cty-map-fallback" hidden src={`https://www.google.com/maps?q=${encodeURIComponent(c.map.query)}&z=${c.map.zoom}&output=embed`}
+                  title={`Map of ${c.name}, ${c.state}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+              </>
             ) : (
               <iframe src={`https://www.google.com/maps?q=${encodeURIComponent(c.map.query)}&z=${c.map.zoom}&output=embed`}
                 title={`Map of ${c.name}, ${c.state}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
@@ -328,9 +333,19 @@ const schemas = [
         { featureType: 'transit', stylers: [{ visibility: 'off' }] },
         { featureType: 'administrative', elementType: 'geometry.stroke', stylers: [{ color: '#3a92a6' }] },
       ];
+      var ok = false;
+      function fail() {
+        if (ok) return;
+        var d = document.getElementById('cty-map'); var fb = document.getElementById('cty-map-fallback');
+        if (d) d.style.display = 'none';
+        if (fb) fb.hidden = false;
+      }
+      window.gm_authFailure = fail;               // bad/blocked API key
+      setTimeout(function () { if (!ok) fail(); }, 5000); // API never loaded
       function init() {
         var el = document.getElementById('cty-map');
-        if (!el || !window.google) return;
+        if (!el || !window.google) { fail(); return; }
+        ok = true;
         var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         var map = new google.maps.Map(el, {
           zoom: zoom, center: { lat: 39.29, lng: -76.6 }, styles: STYLE,
