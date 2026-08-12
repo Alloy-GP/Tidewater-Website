@@ -8,9 +8,15 @@ import type { APIRoute } from "astro";
 import { Resend } from "resend";
 import mailchimp from "@mailchimp/mailchimp_marketing";
 import { EMAIL_CONFIG } from "../../lib/email.config";
-import { sendWithAlert } from "../../lib/form-alert";
+import { sendWithAlert, notifySubmission, fieldsFromFormData } from "../../lib/form-alert";
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
+// Slack destination. FORM_SLACK_WEBHOOK is this client's own channel and takes
+// precedence for BOTH submissions and failures; FORM_ALERT_SLACK_URL is the
+// shared fallback for clients without a channel of their own.
+const SLACK_WEBHOOK =
+  import.meta.env.FORM_SLACK_WEBHOOK || import.meta.env.FORM_ALERT_SLACK_URL;
+
 
 mailchimp.setConfig({
   apiKey:  import.meta.env.MAILCHIMP_API_KEY,
@@ -39,29 +45,51 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Internal notification — alerts Slack + admin email if the send fails (then re-throws → 500)
-    await sendWithAlert(
-      {
-        client: "Tidewater",
-        formName: "Contact form",
-        slackWebhookUrl: import.meta.env.FORM_ALERT_SLACK_URL,
-        alertEmail: { apiKey: import.meta.env.RESEND_API_KEY, to: "admin@alloygp.co", from: EMAIL_CONFIG.from.notifications },
-      },
-      () => resend.emails.send({
-        from:    EMAIL_CONFIG.from.notifications,
-        replyTo: EMAIL_CONFIG.replyTo,
-        to:      EMAIL_CONFIG.routes.contact ?? EMAIL_CONFIG.notify,
-        subject: `New contact form submission from ${name}`,
-        html: `
-          <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
-          <p>${message.replace(/\n/g, "<br>")}</p>
-          <p><strong>Subscribe:</strong> ${subscribe ? "Yes" : "No"}</p>
-          ${source ? `<hr><p style="color:#888;font-size:13px"><strong>Source</strong><br>${source.replace(/\n/g, "<br>")}</p>` : ""}
-        `,
-      })
-    );
+    // The error is held rather than thrown so the Slack log below still runs;
+    // it is re-thrown straight after, so the form still gets its 500.
+    let notifyError: unknown = null;
+    try {
+      await sendWithAlert(
+        {
+          client: "Tidewater",
+          formName: "Contact form",
+          slackWebhookUrl: SLACK_WEBHOOK,
+          alertEmail: { apiKey: import.meta.env.RESEND_API_KEY, to: "admin@alloygp.co", from: EMAIL_CONFIG.from.notifications },
+        },
+        () => resend.emails.send({
+          from:    EMAIL_CONFIG.from.notifications,
+          replyTo: EMAIL_CONFIG.replyTo,
+          to:      EMAIL_CONFIG.routes.contact ?? EMAIL_CONFIG.notify,
+          subject: `New contact form submission from ${name}`,
+          html: `
+            <h2>New Contact Form Submission</h2>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Message:</strong></p>
+            <p>${message.replace(/\n/g, "<br>")}</p>
+            <p><strong>Subscribe:</strong> ${subscribe ? "Yes" : "No"}</p>
+            ${source ? `<hr><p style="color:#888;font-size:13px"><strong>Source</strong><br>${source.replace(/\n/g, "<br>")}</p>` : ""}
+          `,
+        })
+      );
+    } catch (err) {
+      notifyError = err;
+    }
+
+    // Log the submission to the client's Slack channel, whether or not the email
+    // went out. On the happy path it is the running record of what the site
+    // produced; when the send failed it is the *only* copy of what someone
+    // typed, so it posts either way and says which of the two it is.
+    await notifySubmission({
+      client: EMAIL_CONFIG.brand.name,
+      slackWebhookUrl: SLACK_WEBHOOK,
+      route: "Contact form",
+      formName: `Contact form → ${[EMAIL_CONFIG.routes.contact ?? EMAIL_CONFIG.notify].flat().join(", ")}`,
+      delivered: !notifyError,
+      fields: fieldsFromFormData(data),
+    });
+
+    if (notifyError) throw notifyError;
 
     // Confirmation to submitter
     const { error: confirmError } = await resend.emails.send({
