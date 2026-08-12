@@ -8,9 +8,15 @@ import type { APIRoute } from "astro";
 import { Resend } from "resend";
 import mailchimp from "@mailchimp/mailchimp_marketing";
 import { EMAIL_CONFIG } from "../../lib/email.config";
-import { sendWithAlert } from "../../lib/form-alert";
+import { sendWithAlert, notifySubmission, fieldsFromFormData } from "../../lib/form-alert";
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
+// Slack destination. FORM_SLACK_WEBHOOK is this client's own channel and takes
+// precedence for BOTH submissions and failures; FORM_ALERT_SLACK_URL is the
+// shared fallback for clients without a channel of their own.
+const SLACK_WEBHOOK =
+  import.meta.env.FORM_SLACK_WEBHOOK || import.meta.env.FORM_ALERT_SLACK_URL;
+
 
 mailchimp.setConfig({
   apiKey:  import.meta.env.MAILCHIMP_API_KEY,
@@ -55,14 +61,15 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
-    // Internal notification (admin is copied on every form) — alerts on failure.
+    // Internal notification — alerts on failure.
     // Wrapped so a failed notify can't break the subscriber's success response.
+    let notified = true;
     try {
       await sendWithAlert(
         {
           client: "Tidewater",
           formName: "Newsletter signup",
-          slackWebhookUrl: import.meta.env.FORM_ALERT_SLACK_URL,
+          slackWebhookUrl: SLACK_WEBHOOK,
           alertEmail: { apiKey: import.meta.env.RESEND_API_KEY, to: "admin@alloygp.co", from: EMAIL_CONFIG.from.notifications },
         },
         () => resend.emails.send({
@@ -74,8 +81,19 @@ export const POST: APIRoute = async ({ request }) => {
         })
       );
     } catch (notifyError) {
+      notified = false;
       console.error("Resend notify error:", notifyError);
     }
+
+    // Log the sign-up to the client's Slack channel.
+    await notifySubmission({
+      client: EMAIL_CONFIG.brand.name,
+      slackWebhookUrl: SLACK_WEBHOOK,
+      route: "Newsletter sign-up",
+      formName: `Newsletter form → ${[EMAIL_CONFIG.notify].flat().join(", ")}`,
+      delivered: notified,
+      fields: fieldsFromFormData(data),
+    });
 
     // Welcome email to subscriber
     const { error: welcomeError } = await resend.emails.send({
