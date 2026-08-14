@@ -17,7 +17,7 @@ export default function JobsList() {
             <div className="tw-jobs-portal-actions">
               <a
                 className="tw-btn tw-btn-primary tw-btn-lg tw-jobs-portal-cta"
-                href="https://tidewaterproperty.apscareerportal.com/jobs?locale=en-US"
+                href="https://phx.us-west.paycomonline.net/v4/ats/web.php/portal/08B21B7757F88146DC2C043544A8DCDD/career-page"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -26,7 +26,7 @@ export default function JobsList() {
                   <path d="M7 17 17 7"/><path d="M8 7h9v9"/>
                 </svg>
               </a>
-              <span className="tw-jobs-portal-host">Hosted on APS Career Portal &middot; opens in a new tab</span>
+              <span className="tw-jobs-portal-host">Hosted on Paycom Career Portal &middot; opens in a new tab</span>
             </div>
           </div>
 
