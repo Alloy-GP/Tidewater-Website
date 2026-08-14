@@ -1,3 +1,19 @@
+/**
+ * Alloy's copy of every form notification — a monitoring measure, and the
+ * reason a shared Alloy inbox used to receive every enquiry this site took.
+ *
+ * Empty as soon as the site has somewhere in Slack to log submissions, which is
+ * a better record anyway: it carries the whole submission, it doesn't put Alloy
+ * on a thread with the client's board, owner or vendor, and it can't be missed
+ * in a busy inbox. Until a webhook is set the copies continue, so monitoring is
+ * never dropped silently — there is no window where nobody is watching.
+ */
+const ALLOY_MONITORING: string[] = Boolean(
+  import.meta.env.FORM_SLACK_WEBHOOK || import.meta.env.FORM_ALERT_SLACK_URL
+)
+  ? []
+  : ["admin@alloygp.co"];
+
 export const EMAIL_CONFIG = {
   brand: {
     name: "Tidewater Companies",
@@ -11,20 +27,21 @@ export const EMAIL_CONFIG = {
   },
   // Replies to any of our emails route to a monitored inbox.
   replyTo: "info@tidewaterproperty.com",
-  // Default inbox — used by unknown intents (fallback). info@ + Alloy admin.
+  // Default inbox — used by unknown intents (fallback).
   notify: [
     "info@tidewaterproperty.com",
-    "admin@alloygp.co",
+    ...ALLOY_MONITORING,
   ],
   // Per-intent routing — the intake form sends `intent`; /api/lead routes here.
-  // admin@alloygp.co is CC'd on every form. Each value can be one address or several.
+  // Each value can be one address or several. ALLOY_MONITORING is empty once
+  // this site has a Slack channel — see its definition above.
   routes: {
-    proposal: ["gwindisch@tidewaterproperty.com", "admin@alloygp.co"], // HOA/condo board (bjordan/Brook removed per client)
-    rental:   ["cbishop@tidewaterproperty.com", "bjordan@tidewaterproperty.com", "admin@alloygp.co"],   // rental owners
-    service:  ["logles@tidewaterproperty.com", "admin@alloygp.co"],                                     // resident requests
-    general:  ["info@tidewaterproperty.com", "admin@alloygp.co"],                                       // catch-all (bjordan removed per client)
-    contact:  ["bjordan@tidewaterproperty.com", "info@tidewaterproperty.com", "admin@alloygp.co"],      // /api/contact
-    vendor:   ["vendorcompliance@tidewaterproperty.com", "admin@alloygp.co"],                            // vendor bids (per client)
+    proposal: ["gwindisch@tidewaterproperty.com", ...ALLOY_MONITORING], // HOA/condo board (bjordan/Brook removed per client)
+    rental:   ["cbishop@tidewaterproperty.com", "bjordan@tidewaterproperty.com", ...ALLOY_MONITORING],   // rental owners
+    service:  ["logles@tidewaterproperty.com", ...ALLOY_MONITORING],                                     // resident requests
+    general:  ["info@tidewaterproperty.com", ...ALLOY_MONITORING],                                       // catch-all (bjordan removed per client)
+    contact:  ["bjordan@tidewaterproperty.com", "info@tidewaterproperty.com", ...ALLOY_MONITORING],      // /api/contact
+    vendor:   ["vendorcompliance@tidewaterproperty.com", ...ALLOY_MONITORING],                            // vendor bids (per client)
   } as Record<string, string[]>,
   mailchimp: {
     enabled:     false, // OFF until MAILCHIMP_* keys are added to Vercel — flip to true then
