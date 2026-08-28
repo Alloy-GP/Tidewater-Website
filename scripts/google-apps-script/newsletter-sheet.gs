@@ -117,3 +117,33 @@ function json(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
+/**
+ * Diagnostic. Select "checkSetup" in the toolbar's function picker and hit Run,
+ * then read the Execution log. Prints whether TOKEN is readable and what
+ * property keys actually exist, which catches the usual causes of an
+ * "unauthorized" / "TOKEN not set" reply: the property never saved, a typo in
+ * the name, or a stray space in the value.
+ */
+function checkSetup() {
+  var props = PropertiesService.getScriptProperties();
+  var keys = props.getKeys();
+  Logger.log('Script property keys: ' + (keys.length ? keys.join(', ') : '(none)'));
+
+  var token = props.getProperty('TOKEN');
+  if (!token) {
+    Logger.log('TOKEN: NOT SET');
+  } else {
+    Logger.log('TOKEN: set, length ' + token.length +
+               ', first 6 "' + token.slice(0, 6) + '"' +
+               (token !== token.trim() ? ' — WARNING: has leading/trailing whitespace' : ''));
+  }
+
+  try {
+    var ss = getSpreadsheet();
+    Logger.log('Spreadsheet: "' + ss.getName() + '" (' + ss.getId() + ')');
+    Logger.log('Bound to a sheet: ' + (SpreadsheetApp.getActiveSpreadsheet() ? 'yes' : 'no, using SHEET_ID fallback'));
+  } catch (err) {
+    Logger.log('Spreadsheet: ERROR — ' + err);
+  }
+}
