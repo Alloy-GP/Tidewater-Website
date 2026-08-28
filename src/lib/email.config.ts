@@ -43,18 +43,11 @@ export const EMAIL_CONFIG = {
     contact:  ["bjordan@tidewaterproperty.com", "info@tidewaterproperty.com", ...ALLOY_MONITORING],      // /api/contact
     vendor:   ["vendorcompliance@tidewaterproperty.com", ...ALLOY_MONITORING],                            // vendor bids (per client)
   } as Record<string, string[]>,
-  // Applies to /api/lead ONLY — proposal-intake leads.
-  //
-  // Newsletter subscribers no longer go here: /api/subscribe and the contact
-  // form's opt-in both append to a Google Sheet instead (src/lib/sheets.ts,
-  // set up by scripts/google-apps-script/newsletter-sheet.gs). That path has no
-  // enabled flag — it is driven purely by whether SHEETS_WEBHOOK_URL and
-  // SHEETS_WEBHOOK_TOKEN are set, so there is no second switch to disagree
-  // with the env.
-  mailchimp: {
-    enabled:     false, // OFF until MAILCHIMP_* keys are added to Vercel — flip to true then
-    defaultTags: ["website-lead"],
-  },
+  // No mailing-list integration. Newsletter subscribers go to a Google Sheet
+  // (src/lib/sheets.ts, set up by
+  // scripts/google-apps-script/newsletter-sheet.gs). Proposal-intake leads are
+  // delivered by the routed email above plus the Slack log — they are not added
+  // to any list.
   // ───────────────────────────────────────────────────────────────────────────
   // PER-INTENT EMAIL CONTENT  (intake form → /api/lead)
   // Everything that should differ by form type is here. The client's spreadsheet

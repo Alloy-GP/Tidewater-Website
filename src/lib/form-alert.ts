@@ -68,7 +68,7 @@ interface SendAlertOptions {
  * Post a submission to the client's Slack channel.
  *
  * Pass `delivered: false` when whatever was supposed to receive the submission
- * didn't — Resend refused the send, Mailchimp rejected the add. The post still
+ * didn't — Resend refused the send, the sheet write failed. The post still
  * happens, and that is the point: it is then the only surviving copy of what
  * someone typed, so suppressing it would lose the enquiry entirely. The status
  * line says as much rather than implying an inbox has it.
