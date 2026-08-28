@@ -4,38 +4,166 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/privacypolicy", "destination": "/privacy", "permanent": true },
-    { "source": "/privacypolicy/", "destination": "/privacy", "permanent": true },
-    { "source": "/association-management", "destination": "/hoa-management", "permanent": true },
-    { "source": "/community-association-management", "destination": "/hoa-management", "permanent": true },
-    { "source": "/accredited-association-management", "destination": "/hoa-management", "permanent": true },
-    { "source": "/condominium-management", "destination": "/condo-management", "permanent": true },
-    { "source": "/rental-property-management", "destination": "/rental-management", "permanent": true },
-    { "source": "/realty", "destination": "/real-estate", "permanent": true },
-    { "source": "/switch-hoa-management-company", "destination": "/solutions/switching-hoa-management-company", "permanent": true },
-    { "source": "/self-managed-hoa-vs-management-company", "destination": "/solutions/self-managed-hoa-transition", "permanent": true },
-    { "source": "/about/quality-assurance", "destination": "/about", "permanent": true },
-    { "source": "/association-management/maryland", "destination": "/hoa-management/maryland", "permanent": true },
-    { "source": "/association-management/maryland/anne-arundel-county", "destination": "/hoa-management/maryland/anne-arundel-county", "permanent": true },
-    { "source": "/association-management/maryland/howard-county", "destination": "/hoa-management/maryland", "permanent": true },
-    { "source": "/association-management/maryland/silver-spring", "destination": "/hoa-management/maryland", "permanent": true },
-    { "source": "/association-management/maryland/worcester-county", "destination": "/hoa-management/maryland", "permanent": true },
-    { "source": "/maryland", "destination": "/hoa-management/maryland", "permanent": true },
-    { "source": "/maryland-hoa-law", "destination": "/hoa-management/maryland", "permanent": true },
-    { "source": "/maryland/anne-arundel-county", "destination": "/hoa-management/maryland/anne-arundel-county", "permanent": true },
-    { "source": "/maryland/howard-county", "destination": "/hoa-management/maryland", "permanent": true },
-    { "source": "/maryland/montgomery", "destination": "/hoa-management/maryland", "permanent": true },
-    { "source": "/maryland/silver-spring", "destination": "/hoa-management/maryland", "permanent": true },
-    { "source": "/maryland/worcester-county", "destination": "/hoa-management/maryland", "permanent": true },
-    { "source": "/service-area/howard-county-md", "destination": "/service-areas", "permanent": true },
-    { "source": "/hoa-board-responsibilities", "destination": "/resources", "permanent": true },
-    { "source": "/hoa-budget", "destination": "/resources", "permanent": true },
-    { "source": "/hoa-insurance", "destination": "/resources", "permanent": true },
-    { "source": "/hoa-reserve-study", "destination": "/resources", "permanent": true },
-    { "source": "/hoa-special-assessment", "destination": "/resources", "permanent": true },
-    { "source": "/resources/board-budget-guide", "destination": "/resources", "permanent": true },
-    { "source": "/resources/board-education", "destination": "/resources", "permanent": true },
-    { "source": "/blog/page/2", "destination": "/blog", "permanent": true },
+    {
+      "source": "/privacypolicy",
+      "destination": "/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/privacypolicy/",
+      "destination": "/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/association-management",
+      "destination": "/hoa-management",
+      "permanent": true
+    },
+    {
+      "source": "/community-association-management",
+      "destination": "/hoa-management",
+      "permanent": true
+    },
+    {
+      "source": "/accredited-association-management",
+      "destination": "/hoa-management",
+      "permanent": true
+    },
+    {
+      "source": "/condominium-management",
+      "destination": "/condo-management",
+      "permanent": true
+    },
+    {
+      "source": "/rental-property-management",
+      "destination": "/rental-management",
+      "permanent": true
+    },
+    {
+      "source": "/realty",
+      "destination": "/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/switch-hoa-management-company",
+      "destination": "/solutions/switching-hoa-management-company",
+      "permanent": true
+    },
+    {
+      "source": "/self-managed-hoa-vs-management-company",
+      "destination": "/solutions/self-managed-hoa-transition",
+      "permanent": true
+    },
+    {
+      "source": "/about/quality-assurance",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/association-management/maryland",
+      "destination": "/hoa-management/maryland",
+      "permanent": true
+    },
+    {
+      "source": "/association-management/maryland/anne-arundel-county",
+      "destination": "/hoa-management/maryland/anne-arundel-county",
+      "permanent": true
+    },
+    {
+      "source": "/association-management/maryland/howard-county",
+      "destination": "/hoa-management/maryland",
+      "permanent": true
+    },
+    {
+      "source": "/association-management/maryland/silver-spring",
+      "destination": "/hoa-management/maryland",
+      "permanent": true
+    },
+    {
+      "source": "/association-management/maryland/worcester-county",
+      "destination": "/hoa-management/maryland",
+      "permanent": true
+    },
+    {
+      "source": "/maryland",
+      "destination": "/hoa-management/maryland",
+      "permanent": true
+    },
+    {
+      "source": "/maryland-hoa-law",
+      "destination": "/hoa-management/maryland",
+      "permanent": true
+    },
+    {
+      "source": "/maryland/anne-arundel-county",
+      "destination": "/hoa-management/maryland/anne-arundel-county",
+      "permanent": true
+    },
+    {
+      "source": "/maryland/howard-county",
+      "destination": "/hoa-management/maryland",
+      "permanent": true
+    },
+    {
+      "source": "/maryland/montgomery",
+      "destination": "/hoa-management/maryland",
+      "permanent": true
+    },
+    {
+      "source": "/maryland/silver-spring",
+      "destination": "/hoa-management/maryland",
+      "permanent": true
+    },
+    {
+      "source": "/maryland/worcester-county",
+      "destination": "/hoa-management/maryland",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/howard-county-md",
+      "destination": "/service-areas",
+      "permanent": true
+    },
+    {
+      "source": "/hoa-board-responsibilities",
+      "destination": "/resources",
+      "permanent": true
+    },
+    {
+      "source": "/hoa-budget",
+      "destination": "/resources",
+      "permanent": true
+    },
+    {
+      "source": "/hoa-insurance",
+      "destination": "/resources",
+      "permanent": true
+    },
+    {
+      "source": "/hoa-reserve-study",
+      "destination": "/resources",
+      "permanent": true
+    },
+    {
+      "source": "/hoa-special-assessment",
+      "destination": "/resources",
+      "permanent": true
+    },
+    {
+      "source": "/resources/board-budget-guide",
+      "destination": "/resources",
+      "permanent": true
+    },
+    {
+      "source": "/resources/board-education",
+      "destination": "/resources",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/2",
+      "destination": "/blog",
+      "permanent": true
+    },
     {
       "source": "/blog/5-tips-for-effective-property-management",
       "destination": "/blog/how-to-manage-a-rental-property",
@@ -1909,6 +2037,176 @@
     {
       "source": "/gallery/:path*",
       "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/blog/what-is-special-meeting/feed",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/role-of-hoa-in-neighbor-disputes/feed",
+      "destination": "/hoa-management",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-do-i-market-rental-property-to-tenants/feed",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/category/real-estate/feed",
+      "destination": "/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/blog/category/hoa",
+      "destination": "/hoa-management",
+      "permanent": true
+    },
+    {
+      "source": "/blog/category/real-estate",
+      "destination": "/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/author/:path*",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/hoa-board-education",
+      "destination": "/resources",
+      "permanent": true
+    },
+    {
+      "source": "/hoa-budget-preparation",
+      "destination": "/hoa-management/hoa-financial-management",
+      "permanent": true
+    },
+    {
+      "source": "/investment-property-managers",
+      "destination": "/rental-management",
+      "permanent": true
+    },
+    {
+      "source": "/assistance-tax-returns",
+      "destination": "/hoa-management/hoa-financial-management",
+      "permanent": true
+    },
+    {
+      "source": "/tidewater-alliance-2013",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/tidewater-alliance-2015",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/maintenance/resources",
+      "destination": "/resources",
+      "permanent": true
+    },
+    {
+      "source": "/maintenance/vendors",
+      "destination": "/maintenance-services",
+      "permanent": true
+    },
+    {
+      "source": "/maintenance/communityassociations",
+      "destination": "/hoa-management",
+      "permanent": true
+    },
+    {
+      "source": "/maintenance/rentals",
+      "destination": "/rental-management",
+      "permanent": true
+    },
+    {
+      "source": "/maintenance/tidewateralliance",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/maintenance/tidewateralliance.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/maintenance/sales.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/rentals-montgomery-county-md",
+      "destination": "/rental-management/maryland/montgomery-county",
+      "permanent": true
+    },
+    {
+      "source": "/propertyservices-howard-county-md",
+      "destination": "/maintenance-services",
+      "permanent": true
+    },
+    {
+      "source": "/propertyservices-anne-arundel-county-md",
+      "destination": "/maintenance-services",
+      "permanent": true
+    },
+    {
+      "source": "/propertyservices-glen-burnie-md.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/propertyservices-baltimore-county-md.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sales-hampstead-md.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sales-glyndon-md.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sales-queenstown-md.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sales-bethesda-md.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sales-grasonville-md.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sales-aberdeen-md.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sales-carroll-county-md.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/communityassociations.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/(.*).php",
+      "destination": "/",
       "permanent": true
     }
   ],
