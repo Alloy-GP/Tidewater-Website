@@ -6,21 +6,22 @@ export const prerender = false;
 
 import type { APIRoute } from "astro";
 import { Resend } from "resend";
-import mailchimp from "@mailchimp/mailchimp_marketing";
 import { EMAIL_CONFIG } from "../../lib/email.config";
 import { sendWithAlert, notifySubmission, fieldsFromFormData } from "../../lib/form-alert";
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
-// Slack destination. FORM_SLACK_WEBHOOK is this client's own channel and takes
-// precedence for BOTH submissions and failures; FORM_ALERT_SLACK_URL is the
-// shared fallback for clients without a channel of their own.
+// Two Slack destinations, deliberately separate.
+//   FORM_SLACK_WEBHOOK    this client's own channel — every submission is
+//                         logged here, so the channel is a running record of
+//                         what the site produced.
+//   FORM_ALERT_SLACK_URL  the monitoring channel — only failures, so a broken
+//                         form is not buried in a feed of normal traffic.
+// Each falls back to the other, so a missing var loses the split but never
+// loses the message.
 const SLACK_WEBHOOK =
   import.meta.env.FORM_SLACK_WEBHOOK || import.meta.env.FORM_ALERT_SLACK_URL;
-
-mailchimp.setConfig({
-  apiKey:  import.meta.env.MAILCHIMP_API_KEY,
-  server:  import.meta.env.MAILCHIMP_SERVER_PREFIX,
-});
+const ALERT_WEBHOOK =
+  import.meta.env.FORM_ALERT_SLACK_URL || import.meta.env.FORM_SLACK_WEBHOOK;
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -80,6 +81,7 @@ export const POST: APIRoute = async ({ request }) => {
           client: "Tidewater",
           formName: `${intentCfg.label}${intent ? ` (${intent})` : ""}`,
           slackWebhookUrl: SLACK_WEBHOOK,
+          alertWebhookUrl: ALERT_WEBHOOK,
           alertEmail: { apiKey: import.meta.env.RESEND_API_KEY, to: "admin@alloygp.co", from: EMAIL_CONFIG.from.notifications },
         },
         () => resend.emails.send({
@@ -126,24 +128,6 @@ export const POST: APIRoute = async ({ request }) => {
       html:    intentCfg.confirmBody(firstName, EMAIL_CONFIG.brand.url),
     });
     if (confirmError) console.error("Resend confirm error:", confirmError);
-
-    // Mailchimp — always adds leads to the list
-    if (EMAIL_CONFIG.mailchimp.enabled) {
-      try {
-        await mailchimp.lists.addListMember(import.meta.env.MAILCHIMP_AUDIENCE_ID, {
-          email_address: email,
-          status:        "subscribed",
-          merge_fields: {
-            FNAME:   name.split(" ")[0],
-            LNAME:   name.split(" ").slice(1).join(" "),
-            COMPANY: company,
-          },
-          tags: EMAIL_CONFIG.mailchimp.defaultTags,
-        });
-      } catch (err: any) {
-        console.error("Mailchimp lead error:", err?.response?.body ?? err);
-      }
-    }
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (err) {
