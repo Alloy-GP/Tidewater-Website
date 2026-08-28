@@ -9,9 +9,15 @@
  * ── SETUP (once, ~5 minutes) ────────────────────────────────────────────────
  *  1. Open the Google Sheet that should hold subscribers.
  *  2. Extensions → Apps Script. Delete the placeholder and paste this file.
+ *     (Going in this way binds the script to the sheet. If you instead made a
+ *     standalone project at script.google.com, that is fine too — just also set
+ *     a SHEET_ID script property in step 3; see getSheet() below.)
  *  3. Project Settings → Script properties → Add script property:
  *       TOKEN = <a long random string>
  *     Generate one with:  openssl rand -hex 32
+ *     Standalone projects also need:
+ *       SHEET_ID = the spreadsheet id from its URL, the part between
+ *                  /d/ and /edit
  *  4. Deploy → New deployment → type "Web app":
  *       Execute as:        Me
  *       Who has access:    Anyone
@@ -69,8 +75,26 @@ function doGet() {
   return json({ ok: true, message: 'Board Brief subscriber endpoint. POST only.' });
 }
 
+/**
+ * The target spreadsheet. Prefers the bound one (script created via the sheet's
+ * Extensions → Apps Script), and falls back to a SHEET_ID script property so a
+ * standalone project works without being recreated.
+ */
+function getSpreadsheet() {
+  var bound = SpreadsheetApp.getActiveSpreadsheet();
+  if (bound) return bound;
+  var id = PropertiesService.getScriptProperties().getProperty('SHEET_ID');
+  if (!id) {
+    throw new Error(
+      'This script is not bound to a spreadsheet. Either create it from the ' +
+      'sheet (Extensions -> Apps Script) or set a SHEET_ID script property.'
+    );
+  }
+  return SpreadsheetApp.openById(id);
+}
+
 function getSheet() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = getSpreadsheet();
   var sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
