@@ -1,0 +1,35 @@
+---
+// County pillar pages under the existing /hoa-management/maryland/ structure.
+// Data-driven from src/data/counties.ts (one entry per slug). Existing
+// hand-built pages (anne-arundel-county.astro, index.astro) take precedence —
+// only slugs present in COUNTIES are generated here, so no route collision.
+// Indexable. Every number and name in counties.ts is sourced from
+// tidewater-master-brief-v2.2; see the provenance header in that file for what
+// was removed as unverifiable and what is deliberately absent.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import CountyPage from '../../../components/CountyPage.astro';
+import { COUNTIES } from '../../../data/counties';
+
+export function getStaticPaths() {
+  return Object.values(COUNTIES).map((county) => ({
+    params: { county: county.slug },
+    props: { county },
+  }));
+}
+
+const { county } = Astro.props;
+---
+<BaseLayout
+  title={county.seo.title}
+  description={county.seo.description}
+  ogType="website"
+  pageStylesheet={["styles-geo.css", "styles-county-template.css"]}
+>
+  <Topbar variant="default" />
+  <Header activeNav="mgmt" logoSrc="/assets/Tidewater-Management-Logo.svg" logoAlt="Tidewater Management" />
+  <CountyPage county={county} />
+  <Footer />
+</BaseLayout>
