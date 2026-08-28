@@ -2208,6 +2208,121 @@
       "source": "/(.*).php",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/rental-services",
+      "destination": "/rental-management",
+      "permanent": true
+    },
+    {
+      "source": "/property-services",
+      "destination": "/maintenance-services",
+      "permanent": true
+    },
+    {
+      "source": "/hoa-services",
+      "destination": "/hoa-management",
+      "permanent": true
+    },
+    {
+      "source": "/association-services",
+      "destination": "/hoa-management",
+      "permanent": true
+    },
+    {
+      "source": "/management-services",
+      "destination": "/hoa-management",
+      "permanent": true
+    },
+    {
+      "source": "/hoa",
+      "destination": "/hoa-management",
+      "permanent": true
+    },
+    {
+      "source": "/condo",
+      "destination": "/condo-management",
+      "permanent": true
+    },
+    {
+      "source": "/commercial",
+      "destination": "/hoa-management/commercial-association-management",
+      "permanent": true
+    },
+    {
+      "source": "/tidewater-realty",
+      "destination": "/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/request-a-proposal",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/team",
+      "destination": "/about/leadership",
+      "permanent": true
+    },
+    {
+      "source": "/our-team",
+      "destination": "/about/leadership",
+      "permanent": true
+    },
+    {
+      "source": "/leadership",
+      "destination": "/about/leadership",
+      "permanent": true
+    },
+    {
+      "source": "/news",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/press",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/reviews",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/locations",
+      "destination": "/service-areas",
+      "permanent": true
+    },
+    {
+      "source": "/areas-we-serve",
+      "destination": "/service-areas",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/(.*)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-includes/(.*)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-admin/(.*)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-json/(.*)",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "headers": [
