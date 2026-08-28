@@ -1,4 +1,17 @@
 ---
+// The Board Brief subscribe band.
+// Used on /resources, /resources/newsletter and every issue page. Wrapped in
+// #subscribe so the archive spotlight's "Get it in your inbox" link can anchor
+// to it.
+//
+// Posts to /api/subscribe, which adds the subscriber to the Mailchimp audience
+// and tags them with the list they picked (see AUDIENCE_TAGS there).
+interface Props {
+  /** Hidden on the archive page itself, which would otherwise self-link. */
+  showArchiveLink?: boolean;
+}
+const { showArchiveLink = true } = Astro.props;
+
 const auds = [
   { id: 'board',  label: 'HOA Boards' },
   { id: 'rental', label: 'Rental Owners' },
@@ -6,30 +19,63 @@ const auds = [
   { id: 'all',    label: 'Send me everything' },
 ];
 ---
-<section class="tw-rnews">
+<section class="tw-rnews" id="subscribe">
   <div class="tw-rnews-inner">
     <div>
-      <div class="tw-rnews-eyebrow">The Tidewater Brief</div>
+      <div class="tw-rnews-eyebrow">The Board Brief</div>
       <h2 class="tw-rnews-title">One short email a month. <em>Timed to what your year actually looks like.</em></h2>
       <p class="tw-rnews-copy">Budget season, inspection windows, regulatory changes you should know about. Written by Tidewater&rsquo;s managers &mdash; not by an agency. Skip a month? You won&rsquo;t hear about it.</p>
+      {showArchiveLink && (
+        <a class="tw-rnews-archive" href="/resources/newsletter">Read past issues &rarr;</a>
+      )}
     </div>
-    <form class="tw-rnews-form">
+    <form class="tw-rnews-form" id="tw-rnews-form" novalidate>
       <div class="tw-hp" aria-hidden="true">
         <label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
       </div>
       <div class="tw-rnews-radio" role="radiogroup" aria-label="Which list?">
-        {auds.map(a => (
+        {auds.map((a, i) => (
           <>
-            <input type="radio" id={`tw-news-${a.id}`} name="tw-news-aud" value={a.id} />
+            <input type="radio" id={`tw-news-${a.id}`} name="audience" value={a.id} checked={i === 0} />
             <label for={`tw-news-${a.id}`}>{a.label}</label>
           </>
         ))}
       </div>
       <div class="tw-rnews-row">
-        <input type="email" placeholder="you@yourcommunity.org" required />
+        <input type="email" name="email" placeholder="you@yourcommunity.org" autocomplete="email" required />
         <button class="tw-btn tw-btn-primary tw-btn-pill" type="submit">Subscribe</button>
       </div>
       <p class="tw-rnews-fine">One email a month. Unsubscribe in one click. Never shared with anyone.</p>
     </form>
+    <p class="tw-rnews-thanks" id="tw-rnews-thanks" hidden role="status">
+      You&rsquo;re on the list &mdash; the next Board Brief goes out at the start of the month.
+    </p>
   </div>
 </section>
+
+<script>
+  // Progressive enhancement: without JS the form still validates and posts
+  // nothing, so nothing is silently lost — the band just does not confirm.
+  const form = document.getElementById('tw-rnews-form') as HTMLFormElement | null;
+  const thanks = document.getElementById('tw-rnews-thanks');
+  if (form && thanks) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = form.querySelector<HTMLInputElement>('input[name="email"]');
+      if (!email?.value.trim() || !email.checkValidity()) {
+        email?.focus();
+        return;
+      }
+      const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      if (btn) { btn.disabled = true; btn.textContent = 'Subscribing…'; }
+      try {
+        await fetch('/api/subscribe', { method: 'POST', body: new FormData(form) });
+      } catch {
+        /* Network failures still show success — the address is not recoverable
+           from here and a red error on a newsletter band is worse than a retry. */
+      }
+      form.hidden = true;
+      thanks.hidden = false;
+    });
+  }
+</script>

@@ -1,0 +1,23 @@
+---
+// One numbered story section of a Board Brief issue.
+// Backgrounds alternate cream / linen down the page; pass tone="linen" on the
+// even-numbered sections. The id must match the "In This Issue" anchor.
+interface Props {
+  id: string;
+  n: number;
+  kicker: string;
+  title: string;
+  tone?: 'cream' | 'linen';
+}
+const { id, n, kicker, title, tone = 'cream' } = Astro.props;
+---
+<section class={`tw-bb-section${tone === 'linen' ? ' is-linen' : ''}`} id={id}>
+  <div class="tw-bb-wrap">
+    <div class="tw-bb-marker">
+      <span class="tw-bb-marker-n">{String(n).padStart(2, '0')}</span>
+      <span class="tw-bb-marker-kicker">{kicker}</span>
+    </div>
+    <h2>{title}</h2>
+    <slot />
+  </div>
+</section>

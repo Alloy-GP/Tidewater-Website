@@ -1,0 +1,235 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Header from '../../../components/Header.astro';
+import ResourcesNewsletter from '../../../components/ResourcesNewsletter.astro';
+import Footer from '../../../components/Footer.astro';
+import { breadcrumbSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+import { SORTED, CURRENT, PAST, YEARS, href, issueLabel } from '../../../data/newsletters';
+
+const pageUrl = `${SITE.url}/resources/newsletter`;
+
+const description =
+  'The Board Brief is Tidewater’s monthly newsletter for HOA and condo boards across the Mid-Atlantic — budget season, storm prep, and regulatory changes, timed to your year. Every issue archived here.';
+
+// Past issues grouped newest year first. With one issue this is empty and the
+// first-issue panel shows instead.
+const groups = YEARS.map((year) => ({ year, issues: PAST.filter((i) => i.year === year) }));
+
+const pageSchema = [
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'Resources', url: SITE.url + '/resources' },
+    { name: 'Newsletter', url: pageUrl },
+  ]),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'The Board Brief — issue archive',
+    itemListOrder: 'https://schema.org/ItemListOrderDescending',
+    numberOfItems: SORTED.length,
+    itemListElement: SORTED.map((issue, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${SITE.url}${href(issue)}`,
+      name: `${issueLabel(issue)} · ${issue.month} ${issue.year} — ${issue.title}`,
+    })),
+  },
+];
+
+const issueCount = SORTED.length;
+---
+<BaseLayout
+  title="The Board Brief — Tidewater's Monthly Newsletter for HOA Boards"
+  description={description}
+  ogImage={CURRENT.ogImage}
+  ogImageAlt={CURRENT.imageAlt}
+  pageStylesheet={['styles-pages.css', 'styles-newsletter.css']}
+  pageSchema={pageSchema}
+>
+  <Topbar variant="homeowner" />
+  <Header activeNav="resources" />
+
+  <section class="tw-nl-hero">
+    <div class="tw-nl-hero-bg"></div>
+    <div class="tw-nl-hero-paper"></div>
+    <div class="tw-nl-hero-inner">
+      <nav class="tw-nl-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <a href="/resources">Resources</a>
+        <span class="sep" aria-hidden="true">&rsaquo;</span>
+        <span class="cur" aria-current="page">Newsletter</span>
+      </nav>
+      <h1>The Board <em>Brief.</em></h1>
+      <p>One short email a month for boards across the Mid-Atlantic &mdash; timed to what your year actually looks like. Every issue lives here.</p>
+      <div class="tw-nl-hero-stats">
+        <span>
+          {issueCount === 1
+            ? <><strong>Issue No. 01</strong></>
+            : <><strong>{issueCount}</strong>issues</>}
+        </span>
+        <span><strong>Monthly</strong>since {CURRENT.month} {CURRENT.year}</span>
+        <span><strong>Free</strong>for boards and owners</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-nl-spot-section">
+    <div class="tw-container-wide">
+      <article class="tw-nl-spot">
+        <div class="tw-nl-spot-copy">
+          <span class="tw-nl-spot-label"><span class="tw-nl-dot"></span> Latest issue</span>
+          <div class="tw-nl-spot-meta">
+            {issueLabel(CURRENT)} &middot; {CURRENT.month} {CURRENT.year} &middot; {CURRENT.readTime} min read
+          </div>
+          <h2>{CURRENT.title}</h2>
+          <p>{CURRENT.dek}</p>
+          <div class="tw-nl-spot-actions">
+            <a class="tw-btn tw-btn-primary tw-btn-lg" href={href(CURRENT)}>Read the issue &rarr;</a>
+            <a class="tw-nl-spot-sub" href="#subscribe">Get it in your inbox &rarr;</a>
+          </div>
+        </div>
+        <div class="tw-nl-spot-side is-image">
+          <div class="tw-nl-spot-img">
+            <img
+              src={CURRENT.image}
+              alt={CURRENT.imageAlt}
+              width="1200"
+              height="840"
+              fetchpriority="high"
+              decoding="async"
+            />
+            <div class="tw-nl-spot-img-overlay"></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  {YEARS.length > 0 && (
+    <div class="tw-nl-filter" id="tw-nl-filter">
+      <div class="tw-nl-filter-inner">
+        <span class="tw-nl-filter-label">Archive</span>
+        <div class="tw-nl-chips">
+          <button type="button" class="tw-nl-chip is-active" data-year="all">
+            All issues <span class="tw-nl-chip-count">{PAST.length}</span>
+          </button>
+          {YEARS.map((year) => (
+            <button type="button" class="tw-nl-chip" data-year={String(year)}>
+              {year} <span class="tw-nl-chip-count">{PAST.filter((i) => i.year === year).length}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  )}
+
+  <section class="tw-nl-archive">
+    <div class="tw-container-wide">
+      {PAST.length === 0 ? (
+        <div class="tw-nl-first">
+          <div class="tw-nl-first-eyebrow">Past issues</div>
+          <h2>This is the first issue.</h2>
+          <p>The Board Brief goes out at the start of every month. Once {CURRENT.month}&rsquo;s issue is no longer the latest, it moves down here and the archive builds from there.</p>
+          <a class="tw-btn tw-btn-outline tw-btn-lg" href="#subscribe">Subscribe to get the next one &rarr;</a>
+        </div>
+      ) : (
+        <>
+          {groups.map((group) => (
+            <div class="tw-nl-group" data-year={String(group.year)}>
+              <div class="tw-nl-group-head">
+                <h3>{group.year}</h3>
+                <span class="tw-nl-group-rule"></span>
+                <span class="tw-nl-group-count">
+                  {group.issues.length} {group.issues.length === 1 ? 'issue' : 'issues'}
+                </span>
+              </div>
+              <div class="tw-nl-grid">
+                {group.issues.map((issue) => (
+                  <a class="tw-nl-card" href={href(issue)} data-issue>
+                    <div class="tw-nl-card-top">
+                      <span class="tw-nl-card-no">{issueLabel(issue)}</span>
+                      <span class="tw-nl-card-date">{issue.month} {issue.year}</span>
+                    </div>
+                    <h3>{issue.title}</h3>
+                    <ul class="tw-nl-card-topics">
+                      {issue.topics.slice(0, 3).map((t) => <li>{t}</li>)}
+                    </ul>
+                    <div class="tw-nl-card-foot">
+                      <span class="tw-nl-card-cta">Read issue &rarr;</span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+          <div class="tw-nl-more" id="tw-nl-more" hidden>
+            <button type="button">Load earlier issues</button>
+            <div class="tw-nl-more-count"></div>
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+
+  <ResourcesNewsletter showArchiveLink={false} />
+  <Footer />
+</BaseLayout>
+
+<script>
+  // Year filter + "load earlier issues". Both are progressive enhancements:
+  // server-rendered, every issue is already visible and every link works, so
+  // with JS off the page is simply unfiltered and unpaginated.
+  const PER_PAGE = 9;
+  const filter = document.getElementById('tw-nl-filter');
+  const more = document.getElementById('tw-nl-more');
+  const moreBtn = more?.querySelector('button');
+  const moreCount = more?.querySelector<HTMLElement>('.tw-nl-more-count');
+  const groups = Array.from(document.querySelectorAll<HTMLElement>('.tw-nl-group'));
+
+  if (groups.length) {
+    let year: string = 'all';
+    let shown = PER_PAGE;
+
+    const matching = () =>
+      groups
+        .filter((g) => year === 'all' || g.dataset.year === year)
+        .flatMap((g) => Array.from(g.querySelectorAll<HTMLElement>('[data-issue]')));
+
+    const render = () => {
+      const visible = matching();
+      groups.forEach((g) => {
+        const show = year === 'all' || g.dataset.year === year;
+        g.hidden = !show;
+      });
+      visible.forEach((card, i) => { card.hidden = i >= shown; });
+      // A group whose every card is paginated away should not keep its heading.
+      groups.forEach((g) => {
+        if (g.hidden) return;
+        const cards = Array.from(g.querySelectorAll<HTMLElement>('[data-issue]'));
+        g.hidden = cards.length > 0 && cards.every((c) => c.hidden);
+      });
+      if (more && moreBtn && moreCount) {
+        const total = visible.length;
+        const exhausted = shown >= total;
+        more.hidden = exhausted;
+        moreCount.textContent = exhausted ? '' : `Showing ${Math.min(shown, total)} of ${total}`;
+      }
+    };
+
+    filter?.querySelectorAll<HTMLButtonElement>('.tw-nl-chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        filter.querySelectorAll('.tw-nl-chip').forEach((c) => c.classList.remove('is-active'));
+        chip.classList.add('is-active');
+        year = chip.dataset.year ?? 'all';
+        shown = PER_PAGE;
+        render();
+      });
+    });
+
+    moreBtn?.addEventListener('click', () => { shown += PER_PAGE; render(); });
+    render();
+  }
+</script>
