@@ -9,15 +9,13 @@
  * ── SETUP (once, ~5 minutes) ────────────────────────────────────────────────
  *  1. Open the Google Sheet that should hold subscribers.
  *  2. Extensions → Apps Script. Delete the placeholder and paste this file.
- *     (Going in this way binds the script to the sheet. If you instead made a
- *     standalone project at script.google.com, that is fine too — just also set
- *     a SHEET_ID script property in step 3; see getSheet() below.)
+ *     (Going in this way binds the script to the sheet. A standalone project at
+ *     script.google.com works too — it falls back to SHEET_ID_FALLBACK below.)
  *  3. Project Settings → Script properties → Add script property:
  *       TOKEN = <a long random string>
  *     Generate one with:  openssl rand -hex 32
- *     Standalone projects also need:
- *       SHEET_ID = the spreadsheet id from its URL, the part between
- *                  /d/ and /edit
+ *     That is the only property needed. Point the script at a different
+ *     spreadsheet by adding SHEET_ID, which overrides SHEET_ID_FALLBACK.
  *  4. Deploy → New deployment → type "Web app":
  *       Execute as:        Me
  *       Who has access:    Anyone
@@ -35,6 +33,9 @@
  */
 
 var SHEET_NAME = 'Subscribers';
+// "Tidewater - Newsletter Forms". Only used when the script is not bound to a
+// spreadsheet; a bound script ignores this and writes to its own sheet.
+var SHEET_ID_FALLBACK = '1Iqs5PZX06NnnHCdnNdSFSfvG9W3QPs9ZIwxYeKe_dYs';
 var HEADERS = ['Timestamp', 'Email', 'First name', 'List', 'Source page'];
 
 function doPost(e) {
@@ -83,13 +84,8 @@ function doGet() {
 function getSpreadsheet() {
   var bound = SpreadsheetApp.getActiveSpreadsheet();
   if (bound) return bound;
-  var id = PropertiesService.getScriptProperties().getProperty('SHEET_ID');
-  if (!id) {
-    throw new Error(
-      'This script is not bound to a spreadsheet. Either create it from the ' +
-      'sheet (Extensions -> Apps Script) or set a SHEET_ID script property.'
-    );
-  }
+  var id = PropertiesService.getScriptProperties().getProperty('SHEET_ID')
+    || SHEET_ID_FALLBACK;
   return SpreadsheetApp.openById(id);
 }
 
