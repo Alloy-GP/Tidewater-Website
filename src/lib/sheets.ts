@@ -44,7 +44,7 @@ function env(name: string): string | undefined {
  * reads the same as the form. Keys must match the values rendered by
  * ResourcesNewsletter.astro; anything unrecognised passes through as-is.
  */
-const AUDIENCE_LABELS: Record<string, string> = {
+export const AUDIENCE_LABELS: Record<string, string> = {
   board:  'HOA Boards',
   rental: 'Rental Owners',
   home:   'Homeowners',
