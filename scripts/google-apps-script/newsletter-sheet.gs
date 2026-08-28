@@ -36,7 +36,7 @@ var SHEET_NAME = 'Subscribers';
 // "Tidewater - Newsletter Forms". Only used when the script is not bound to a
 // spreadsheet; a bound script ignores this and writes to its own sheet.
 var SHEET_ID_FALLBACK = '1Iqs5PZX06NnnHCdnNdSFSfvG9W3QPs9ZIwxYeKe_dYs';
-var HEADERS = ['Timestamp', 'Email', 'First name', 'List', 'Source page'];
+var HEADERS = ['Timestamp', 'Email', 'First name', 'Type', 'Source page'];
 
 function doPost(e) {
   try {
@@ -94,11 +94,24 @@ function getSheet() {
   var sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
-    sheet.appendRow(HEADERS);
-    sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
-    sheet.setFrozenRows(1);
+    writeHeaders(sheet);
+    return sheet;
+  }
+  // Bring an existing tab's header row up to date if HEADERS has since changed,
+  // so renaming a column here does not need a manual edit in the sheet.
+  var current = sheet.getRange(1, 1, 1, HEADERS.length).getValues()[0];
+  for (var i = 0; i < HEADERS.length; i++) {
+    if (String(current[i]).trim() !== HEADERS[i]) {
+      writeHeaders(sheet);
+      break;
+    }
   }
   return sheet;
+}
+
+function writeHeaders(sheet) {
+  sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold');
+  sheet.setFrozenRows(1);
 }
 
 /** 1-indexed sheet row for this email, or 0. Case-insensitive. */

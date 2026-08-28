@@ -39,12 +39,16 @@ function env(name: string): string | undefined {
   return (import.meta.env as Record<string, string | undefined>)[name] ?? process.env[name];
 }
 
-/** Human-readable label per radio value; anything unrecognised passes through. */
+/**
+ * Radio value -> the exact button text the subscriber clicked, so the sheet
+ * reads the same as the form. Keys must match the values rendered by
+ * ResourcesNewsletter.astro; anything unrecognised passes through as-is.
+ */
 const AUDIENCE_LABELS: Record<string, string> = {
   board:  'HOA Boards',
   rental: 'Rental Owners',
   home:   'Homeowners',
-  all:    'All Updates',
+  all:    'Send me everything',
 };
 
 export async function appendSubscriber(row: SubscriberRow): Promise<AppendResult> {
