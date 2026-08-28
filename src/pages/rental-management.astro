@@ -20,7 +20,7 @@ import { serviceSchema, breadcrumbSchema } from '../lib/schema';
 import { SITE } from '../config/site';
 
 const pageUrl = `${SITE.url}/rental-management`;
-const pageDesc = "Full-service rental property management across Maryland and Delaware — one flat monthly management fee, no hidden charges. Built for deployed and out-of-state owners since 1989.";
+const pageDesc = "Full-service rental property management across Maryland and coastal Delaware. Licensing, inspections, leasing and maintenance handled. Family-owned since 1989.";
 
 const schemas = [
   serviceSchema({ name: 'Rental Property Management', description: pageDesc, url: pageUrl, areaServed: ['Maryland', 'Delaware'] }),
@@ -68,7 +68,7 @@ const schemas = [
       <div style="max-width:640px;margin-bottom:36px">
         <div style="font-family:var(--tw-font-heading);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tw-teal);margin-bottom:10px">Service Area</div>
         <h2 style="font-family:var(--tw-font-heading);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--tw-dark);margin:0 0 12px">Rental management across Maryland &amp; Delaware</h2>
-        <p style="font-family:var(--tw-font-body);font-size:1rem;color:var(--tw-fg-muted);margin:0">We manage 400+ rental units across Maryland and coastal Delaware. Explore county-level coverage, local landlord laws, and licensing requirements for your area.</p>
+        <p style="font-family:var(--tw-font-body);font-size:1rem;color:var(--tw-fg-muted);margin:0">We manage rental property across <a href="/rental-management/maryland">Maryland</a> and <a href="/rental-management/delaware">coastal Delaware</a>. Explore county-level coverage, local landlord laws, and licensing requirements for your area.</p>
         <p class="tw-rental-counties">Popular markets: <a href="/rental-management/maryland/montgomery-county">property management in Montgomery County</a>, <a href="/rental-management/maryland/silver-spring">Silver Spring</a>, <a href="/rental-management/maryland/baltimore-county">Baltimore County</a>, <a href="/rental-management/maryland/howard-county">Howard County</a>, <a href="/rental-management/maryland/anne-arundel-county">Anne Arundel County</a>, <a href="/rental-management/maryland/prince-georges-county">Prince George&rsquo;s County</a>, and <a href="/rental-management/maryland/ocean-city">Ocean City</a>.</p>
       </div>
       <div class="tw-geo-counties">

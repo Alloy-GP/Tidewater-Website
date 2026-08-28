@@ -1,0 +1,91 @@
+---
+// Static category hubs for the blog. The index page filters client-side via
+// ?category=, which robots.txt blocks (Disallow: /*?*) — so before this the
+// taxonomy was entirely uncrawlable and /blog/category/* returned 404.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Header from '../../../components/Header.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import Footer from '../../../components/Footer.astro';
+import ResourcesNewsletter from '../../../components/ResourcesNewsletter.astro';
+import { ALL_POSTS } from '../../../components/BlogPostsData.js';
+import { breadcrumbSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+
+export function getStaticPaths() {
+  const seen = new Map();
+  for (const p of ALL_POSTS) {
+    if (p.category?.id && !seen.has(p.category.id)) seen.set(p.category.id, p.category.label);
+  }
+  return [...seen].map(([id, label]) => ({
+    params: { category: id },
+    props: { id, label, posts: ALL_POSTS.filter((p) => p.category?.id === id) },
+  }));
+}
+
+const { id, label, posts } = Astro.props;
+const sorted = [...posts].sort((a, b) => (b.dateIso || '').localeCompare(a.dateIso || ''));
+const url = `${SITE.url}/blog/category/${id}`;
+const description = `${label} articles from Tidewater — practical guidance for HOA and condo boards across the Mid-Atlantic. ${sorted.length} ${sorted.length === 1 ? 'article' : 'articles'}.`;
+
+const pageSchema = [
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'Blog', url: SITE.url + '/blog' },
+    { name: label, url },
+  ]),
+  {
+    '@context': 'https://schema.org', '@type': 'ItemList',
+    name: `${label} — Tidewater blog`,
+    numberOfItems: sorted.length,
+    itemListElement: sorted.map((p, i) => ({
+      '@type': 'ListItem', position: i + 1,
+      url: `${SITE.url}${p.href}`,
+      name: String(p.title).replace(/<[^>]+>/g, ''),
+    })),
+  },
+];
+---
+<BaseLayout
+  title={`${label} — HOA Board Articles | Tidewater`}
+  description={description}
+  pageStylesheet={['styles-blog-index.css', 'styles-pages.css']}
+  pageSchema={pageSchema}
+>
+  <Topbar variant="homeowner" />
+  <Header activeNav="blog" />
+  <Breadcrumb crumbs={[{ label: 'Blog', href: '/blog' }, { label }]} />
+
+  <section class="tw-bi-hero">
+    <div class="tw-bi-hero-inner">
+      <div class="tw-bi-hero-eyebrow">Category</div>
+      <h1 class="tw-bi-hero-title">{label}.</h1>
+      <p class="tw-bi-hero-dek">{description}</p>
+      <div class="tw-bi-hero-stats"><span><strong>{sorted.length}</strong> {sorted.length === 1 ? 'article' : 'articles'}</span></div>
+    </div>
+  </section>
+
+  <section class="tw-bi-grid-wrap">
+    <div class="tw-bi-grid">
+      {sorted.map((p) => (
+        <a class="tw-bi-card" href={p.href}>
+          {p.coverImage && (
+            <div class="tw-bi-card-img">
+              <img src={p.coverImage} alt={p.coverAlt || ''} width="1400" height="763" loading="lazy" decoding="async" />
+            </div>
+          )}
+          <div class="tw-bi-card-body">
+            <div class="tw-bi-card-cat">{p.category.label}</div>
+            <h2 class="tw-bi-card-title" set:html={p.title}></h2>
+            <p class="tw-bi-card-dek">{p.dek}</p>
+            <div class="tw-bi-card-meta">{p.date} &middot; {p.readTime} min read</div>
+          </div>
+        </a>
+      ))}
+    </div>
+    <p style="text-align:center;margin-top:32px"><a href="/blog" class="tw-btn tw-btn-outline">&larr; All articles</a></p>
+  </section>
+
+  <ResourcesNewsletter />
+  <Footer />
+</BaseLayout>

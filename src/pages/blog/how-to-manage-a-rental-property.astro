@@ -132,7 +132,7 @@ const schemas = [
 
   <div class="tw-blog-cover">
     <div class="tw-blog-cover-inner">
-      <img src={post.coverImage} alt={post.coverAlt} />
+      <img src={post.coverImage} alt={post.coverAlt}  loading="lazy" decoding="async" />
       <div class="tw-blog-cover-paper"></div>
     </div>
     <p class="tw-blog-cover-caption">{post.coverCaption}</p>
@@ -363,11 +363,11 @@ const schemas = [
 
           <div class="tw-blog-tags">
             <span class="tw-blog-tags-label">Tagged</span>
-            <a href="#" class="tw-blog-tag">Rental property management</a>
-            <a href="#" class="tw-blog-tag">Landlord tips</a>
-            <a href="#" class="tw-blog-tag">Tenant screening</a>
-            <a href="#" class="tw-blog-tag">Property inspections</a>
-            <a href="#" class="tw-blog-tag">Maryland landlord</a>
+            <span class="tw-blog-tag">Rental property management</span>
+            <span class="tw-blog-tag">Landlord tips</span>
+            <span class="tw-blog-tag">Tenant screening</span>
+            <span class="tw-blog-tag">Property inspections</span>
+            <span class="tw-blog-tag">Maryland landlord</span>
           </div>
         </article>
 
@@ -395,7 +395,7 @@ const schemas = [
         {related.map(p => (
           <a href={p.href} class="tw-blog-related-card">
             <div class={`tw-blog-related-card-img ${p.tone}`}>
-              {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || p.title} />}
+              {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || p.title}  loading="lazy" decoding="async" />}
             </div>
             <div class="tw-blog-related-card-body">
               <div class={`tw-blog-related-card-cat ${p.tone}`}>{p.category}</div>

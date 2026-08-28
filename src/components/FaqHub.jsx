@@ -49,7 +49,7 @@ const FAQ_CATEGORIES = [
     qs: [
       {
         q: 'How long has Tidewater been around?',
-        a: 'Family-owned since <strong>1989</strong>. We manage 400+ communities across the Mid-Atlantic (Maryland, DC, Virginia, Pennsylvania, Delaware, West Virginia). Offices in Owings Mills (HQ) and the Eastern Shore.',
+        a: 'Family-owned since <strong>1989</strong>. We manage 450+ communities across the Mid-Atlantic (Maryland, DC, Virginia, Pennsylvania, Delaware, West Virginia). Four offices: Owings Mills (HQ), Columbia Pike, Ocean City, and Delaware.',
       },
       {
         q: 'Do we get a dedicated manager?',
@@ -269,11 +269,11 @@ function FaqHero({ query, onQuery, onSearch }) {
           <span className="tw-faq-popular-label">Popular</span>
           {popular.map((p, i) => (
             <span key={i}>
-              <a
+              <button
+                type="button"
                 className="tw-faq-popular-link"
-                href="#"
-                onClick={(e) => { e.preventDefault(); onQuery(p); onSearch(); }}
-              >{p}</a>
+                onClick={() => { onQuery(p); onSearch(); }}
+              >{p}</button>
               {i < popular.length - 1 && <span style={{color:'var(--tw-border-strong)'}}>·</span>}
             </span>
           ))}

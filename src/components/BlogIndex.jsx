@@ -71,7 +71,7 @@ function BlogIndexFeatured({ post }) {
 
         <a href={post.href} className="tw-bi-featured">
           <div className={`tw-bi-featured-img ${post.tone}`}>
-            {post.coverImage && <img src={post.coverImage} alt={post.coverAlt || post.title.replace(/<[^>]+>/g, '')} />}
+            {post.coverImage && <img src={post.coverImage} alt={post.coverAlt || post.title.replace(/<[^ loading="lazy" decoding="async">]+>/g, '')} />}
           </div>
           <div className="tw-bi-featured-body">
             <span className={`tw-bi-featured-cat ${post.tone}`}>{post.category.label}</span>
@@ -121,7 +121,7 @@ function BlogIndexCard({ post }) {
   return (
     <a href={post.href} className="tw-bi-card">
       <div className={`tw-bi-card-img ${post.tone}`}>
-        {post.coverImage && <img src={post.coverImage} alt={post.coverAlt || post.title.replace(/<[^>]+>/g, '')} />}
+        {post.coverImage && <img src={post.coverImage} alt={post.coverAlt || post.title.replace(/<[^ loading="lazy" decoding="async">]+>/g, '')} />}
       </div>
       <div className="tw-bi-card-body">
         <span className={`tw-bi-card-cat ${post.tone}`}>{post.category.label}</span>
