@@ -6,9 +6,9 @@ export const prerender = false;
 
 import type { APIRoute } from "astro";
 import { Resend } from "resend";
-import mailchimp from "@mailchimp/mailchimp_marketing";
 import { EMAIL_CONFIG } from "../../lib/email.config";
 import { sendWithAlert, notifySubmission, fieldsFromFormData } from "../../lib/form-alert";
+import { appendSubscriber } from "../../lib/sheets";
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 // Slack destination. FORM_SLACK_WEBHOOK is this client's own channel and takes
@@ -17,11 +17,6 @@ const resend = new Resend(import.meta.env.RESEND_API_KEY);
 const SLACK_WEBHOOK =
   import.meta.env.FORM_SLACK_WEBHOOK || import.meta.env.FORM_ALERT_SLACK_URL;
 
-
-mailchimp.setConfig({
-  apiKey:  import.meta.env.MAILCHIMP_API_KEY,
-  server:  import.meta.env.MAILCHIMP_SERVER_PREFIX,
-});
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -101,16 +96,16 @@ export const POST: APIRoute = async ({ request }) => {
     });
     if (confirmError) console.error("Resend confirm error:", confirmError);
 
-    // Optional Mailchimp list sync
-    if (subscribe && EMAIL_CONFIG.mailchimp.enabled) {
-      try {
-        await mailchimp.lists.addListMember(import.meta.env.MAILCHIMP_AUDIENCE_ID, {
-          email_address: email,
-          status:        "subscribed",
-          merge_fields:  { FNAME: name.split(" ")[0] },
-        });
-      } catch (err: any) {
-        console.error("Mailchimp opt-in error:", err?.response?.body ?? err);
+    // Optional newsletter opt-in — same Google Sheet as /api/subscribe, so a
+    // contact who ticks the box lands in one subscriber list rather than two.
+    if (subscribe) {
+      const sheet = await appendSubscriber({
+        email,
+        firstName: name.split(" ")[0],
+        source: "/contact (opt-in)",
+      });
+      if (!sheet.ok && !sheet.skipped) {
+        console.error("Sheets opt-in error:", sheet.error);
       }
     }
 

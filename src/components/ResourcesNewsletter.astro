@@ -4,8 +4,8 @@
 // #subscribe so the archive spotlight's "Get it in your inbox" link can anchor
 // to it.
 //
-// Posts to /api/subscribe, which adds the subscriber to the Mailchimp audience
-// and tags them with the list they picked (see AUDIENCE_TAGS there).
+// Posts to /api/subscribe, which appends the subscriber to the Google Sheet
+// (see src/lib/sheets.ts). The list they pick lands in the sheet's List column.
 interface Props {
   /** Hidden on the archive page itself, which would otherwise self-link. */
   showArchiveLink?: boolean;
@@ -30,6 +30,7 @@ const auds = [
       )}
     </div>
     <form class="tw-rnews-form" id="tw-rnews-form" novalidate>
+      <input type="hidden" name="source" value={Astro.url.pathname} />
       <div class="tw-hp" aria-hidden="true">
         <label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
       </div>
