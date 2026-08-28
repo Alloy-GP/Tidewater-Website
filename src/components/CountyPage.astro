@@ -1,0 +1,373 @@
+---
+// County landing page — renders one County object (see src/data/counties.ts).
+// Ported from the county-template handoff. Static, no framework deps.
+// Reuses .tw-geo-* (styles-geo.css) + .tw-cty-* (styles-county-template.css).
+import FaqAccordion from './FaqAccordion.astro';
+import type { County } from '../data/counties';
+
+interface Props { county: County; }
+const { county: c } = Astro.props;
+
+const svc = c.servicePath;                 // 'hoa-management'
+const st  = c.state.toLowerCase();         // 'maryland'
+const base = 'https://tidewaterproperty.com';
+const countyUrl   = `/${svc}/${st}/${c.slug}`;
+const servicePill = `/${svc}`;
+const stateHub    = `/${svc}/${st}`;
+const contact     = '/request-a-proposal';
+const cityHref    = (slug: string) => `/${svc}/${st}/${c.slug}/${slug}`;
+const nearbyHref  = (slug: string) => `/${svc}/${st}/${slug}`;
+const layout = c.layout ?? 'editorial';
+
+const mapsKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
+
+// ── JSON-LD: Service (LocalBusiness provider, nested) + Breadcrumb + FAQPage ──
+const strip = (s: string) => String(s).replace(/<[^>]+>/g, '');
+const provider = {
+  '@type': 'LocalBusiness', name: 'Tidewater Property Management', telephone: '+1-443-548-0191', url: base + '/',
+  address: { '@type': 'PostalAddress', streetAddress: '3600 Crondall Lane, Suite 100', addressLocality: 'Owings Mills', addressRegion: 'MD', postalCode: '21117', addressCountry: 'US' },
+};
+const schemas = [
+  { '@context': 'https://schema.org', '@type': 'Service', serviceType: c.service, provider,
+    areaServed: { '@type': 'AdministrativeArea', name: `${c.name}, ${c.state}` }, description: c.seo.description, url: c.seo.canonical },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${base}/` },
+    { '@type': 'ListItem', position: 2, name: c.service, item: `${base}${servicePill}` },
+    { '@type': 'ListItem', position: 3, name: c.state, item: `${base}${stateHub}` },
+    { '@type': 'ListItem', position: 4, name: c.name, item: c.seo.canonical },
+  ]},
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: c.faq.map((f) => ({
+    '@type': 'Question', name: strip(f.q), acceptedAnswer: { '@type': 'Answer', text: strip(f.a) } })) },
+];
+---
+<!-- 1. Hero -->
+<section class="tw-geo-hero">
+  <div class="tw-geo-hero-bg"></div>
+  <div class="tw-geo-hero-paper"></div>
+  <div class="tw-geo-hero-grid">
+    <div class="tw-geo-hero-copy">
+      <nav class="tw-geo-hero-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep">›</span>
+        <a href={servicePill}>{c.service}</a><span class="sep">›</span>
+        <a href={stateHub}>{c.state}</a><span class="sep">›</span>
+        <span class="cur">{c.name}</span>
+      </nav>
+      <h1 class="tw-geo-hero-title">{c.hero.h1Lead} <em>{c.hero.h1Accent}</em></h1>
+      <p class="tw-geo-hero-lede">{c.hero.lede}</p>
+      <div class="tw-geo-hero-actions">
+        <a href={contact} class="tw-btn tw-btn-primary tw-btn-lg">Request a proposal →</a>
+        <a href="#cities" class="tw-btn tw-btn-ghost">Find your city →</a>
+      </div>
+      <div class="tw-geo-hero-stats">
+        {c.hero.stats.map((s) => (
+          <div>
+            <div class={`tw-geo-hero-stat-num${s.gold ? ' gold' : ''}`} set:html={s.num}></div>
+            <div class="tw-geo-hero-stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+    <aside class="tw-geo-hero-side">
+      <div class="tw-geo-hero-side-eyebrow">In {c.shortName}</div>
+      <h3>Where we manage</h3>
+      {c.map ? (
+        <figure class="tw-cty-map">
+          <div class="tw-cty-map-frame">
+            {mapsKey ? (
+              <>
+                <div id="cty-map" style="position:absolute;inset:0;width:100%;height:100%"></div>
+                {/* fallback shown by JS only if the Maps API fails to initialize */}
+                <iframe id="cty-map-fallback" hidden src={`https://www.google.com/maps?q=${encodeURIComponent(c.map.query)}&z=${c.map.zoom}&output=embed`}
+                  title={`Map of ${c.name}, ${c.state}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+              </>
+            ) : (
+              <iframe src={`https://www.google.com/maps?q=${encodeURIComponent(c.map.query)}&z=${c.map.zoom}&output=embed`}
+                title={`Map of ${c.name}, ${c.state}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+            )}
+          </div>
+          <figcaption>
+            <span class="pin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            {c.map.caption}
+          </figcaption>
+        </figure>
+      ) : (
+        <ul class="tw-cty-sidelist">
+          {c.cities.list.map((ct) => (
+            <li>
+              {ct.hasPage ? <a href={cityHref(ct.slug)}>{ct.name}</a> : <span>{ct.name}</span>}
+              <span class="ct">{ct.focus}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </aside>
+  </div>
+</section>
+
+{/* Intro + Cities order swaps by layout */}
+{(layout === 'directory'
+  ? ['cities', 'intro']
+  : ['intro', 'cities']
+).map((block) => (
+  block === 'cities' ? (
+    <section id="cities" class="tw-geo-section linen">
+      <div class="tw-container-wide">
+        <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+          <div class="tw-eyebrow">{c.cities.eyebrow}</div>
+          <h2 class="tw-section-title" set:html={c.cities.title}></h2>
+          <p class="tw-section-lede">{c.cities.lede}</p>
+        </div>
+        <div class="tw-cty-cities">
+          {c.cities.list.map((ct) => {
+            const Tag = ct.hasPage ? 'a' : 'div';
+            return (
+              <Tag class={`tw-cty-city${ct.hasPage ? '' : ' is-static'}`} {...(ct.hasPage ? { href: cityHref(ct.slug) } : {})}>
+                {ct.tag && <span class="tw-cty-city-tag">{ct.tag}</span>}
+                <div class="tw-cty-city-name">{ct.name}</div>
+                <div class="tw-cty-city-focus">{ct.focus}</div>
+                <p class="tw-cty-city-note">{ct.note}</p>
+                <div class="tw-cty-city-cta">
+                  {ct.hasPage ? <>{c.service} in {ct.name} <span class="arw">→</span></> : <span class="muted">Coverage area</span>}
+                </div>
+              </Tag>
+            );
+          })}
+        </div>
+        <p class="tw-cty-cities-foot">Don’t see your town? We cover all of {c.name}. <a href={contact}>Ask about your community →</a></p>
+      </div>
+    </section>
+  ) : (c.intro && (
+    <section class="tw-geo-section cream">
+      <div class="tw-container-wide">
+        <div class="tw-cty-intro">
+          <div class="tw-cty-intro-body">
+            <div class="tw-eyebrow">{c.intro.eyebrow}</div>
+            <h2 class="tw-section-title" set:html={c.intro.title}></h2>
+            {c.intro.body.map((p) => <p class="tw-cty-prose" set:html={p}></p>)}
+          </div>
+          {c.intro.atAGlance && (
+            <aside class="tw-cty-glance">
+              <div class="tw-cty-glance-label">{c.shortName} at a glance</div>
+              <dl>
+                {c.intro.atAGlance.map((g) => (
+                  <div class="tw-cty-glance-row"><dt>{g.label}</dt><dd>{g.value}</dd></div>
+                ))}
+              </dl>
+              <a href={contact} class="tw-btn tw-btn-primary tw-btn-block">Get a {c.shortName} proposal →</a>
+            </aside>
+          )}
+        </div>
+      </div>
+    </section>
+  ))
+))}
+
+{/* 4. Local knowledge */}
+{c.local && (
+  <section class="tw-geo-section cream">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">{c.local.eyebrow}</div>
+        <h2 class="tw-section-title" set:html={c.local.title}></h2>
+        <p class="tw-section-lede">{c.local.lede}</p>
+      </div>
+      <div class="tw-geo-law-grid">
+        {c.local.cards.map((k) => (
+          <div class={`tw-geo-law-card ${k.tone}`}>
+            <div class="tw-geo-law-meta">{k.meta}</div>
+            <h3>{k.title}</h3>
+            <p set:html={k.body}></p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+{/* 5. Services */}
+{c.services && (
+  <section class="tw-geo-section mist">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">{c.services.eyebrow}</div>
+        <h2 class="tw-section-title" set:html={c.services.title}></h2>
+        <p class="tw-section-lede">{c.services.lede}</p>
+      </div>
+      <div class="tw-geo-law-grid">
+        {c.services.cards.map((k) => (
+          <a href={k.href} class={`tw-geo-law-card ${k.tone}`} style="text-decoration:none">
+            <h3>{k.title}</h3>
+            <p>{k.body}</p>
+            <div class="tw-geo-law-foot">{k.cta} →</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+{/* 6. Local manager */}
+{c.manager && (
+  <section class="tw-geo-section cream" style="padding:64px 0">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">Your Local Manager</div>
+        <h2 class="tw-section-title" style="margin:10px 0 14px">A {c.shortName} manager, <em>not a rotating pool.</em></h2>
+        <p class="tw-section-lede">Same person at every board meeting. Same person at the vendor walk-through. Same person residents email.</p>
+      </div>
+      <div class="tw-geo-manager">
+        <div class="tw-geo-manager-avatar">{c.manager.initials}</div>
+        <div>
+          <div class="tw-geo-manager-eyebrow">{c.manager.eyebrow}</div>
+          <div class="tw-geo-manager-name">{c.manager.name} <span>{c.manager.creds}</span></div>
+          <p class="tw-geo-manager-role" set:html={c.manager.bio}></p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:200px">
+          <a href={contact} class="tw-btn tw-btn-primary tw-btn-block">Email {c.manager.name.split(' ')[0]} →</a>
+          <a href={c.manager.phoneHref} class="tw-btn tw-btn-outline tw-btn-block">{c.manager.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+{/* 7. Local resources */}
+{c.resources && (
+  <section id="resources" class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:780px;margin:0 auto">
+        <div class="tw-eyebrow">{c.resources.eyebrow}</div>
+        <h2 class="tw-section-title" set:html={c.resources.title}></h2>
+        <p class="tw-section-lede">{c.resources.lede}</p>
+      </div>
+      <div class="tw-cty-res">
+        {c.resources.groups.map((g) => (
+          <div class="tw-cty-res-group">
+            <h3 class="tw-cty-res-label">{g.label}</h3>
+            <ul class="tw-cty-res-list">
+              {g.items.map((it) => (
+                <li>
+                  <a href={it.href} class="tw-cty-res-name" target="_blank" rel="noopener">
+                    {it.name}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+                  </a>
+                  <div class="tw-cty-res-org">{it.org}</div>
+                  <p class="tw-cty-res-use">{it.use}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      {c.resources.cityNotes && (
+        <div class="tw-cty-res-notes">
+          <h3 class="tw-cty-res-notes-head">Town-by-town: what changes where</h3>
+          <div class="tw-cty-res-notes-grid">
+            {c.resources.cityNotes.map((n) => (
+              <div class="tw-cty-res-note">
+                <div class="tw-cty-res-note-city">{n.city}</div>
+                <p set:html={n.note}></p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+)}
+
+{/* 8. FAQ (reuses solutions accordion) */}
+<section class="tw-section tw-sol-faq-section">
+  <div class="tw-container-wide">
+    <div class="tw-sol-faq-grid">
+      <div class="tw-sol-faq-head">
+        <div class="tw-eyebrow">{c.shortName} FAQs</div>
+        <h2>The county-specific <em>questions</em> we get.</h2>
+        <p>For all-purpose questions see our <a href="/faq" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">main FAQ hub</a>.</p>
+        <a href={contact} class="tw-btn tw-btn-primary">Ask your own question →</a>
+      </div>
+      <FaqAccordion items={c.faq.map((f) => ({ q: f.q, a: f.a }))} defaultOpen={0} />
+    </div>
+  </div>
+</section>
+
+{/* 9. Nearby counties */}
+{c.nearby && c.nearby.length > 0 && (
+  <section class="tw-geo-section mist" style="padding:64px 0">
+    <div class="tw-container-wide">
+      <div class="tw-cty-nearby-head">
+        <div>
+          <div class="tw-eyebrow">Nearby Counties</div>
+          <h2 class="tw-section-title" style="margin:10px 0 0;font-size:28px">We manage across the Mid-Atlantic.</h2>
+        </div>
+        <a href={stateHub} class="tw-btn tw-btn-outline">All {c.state} counties →</a>
+      </div>
+      <div class="tw-cty-nearby">
+        {c.nearby.map((n) => (
+          <a href={nearbyHref(n.slug)} class="tw-cty-nearby-card">
+            <div class="tw-cty-nearby-name">{n.name}</div>
+            <div class="tw-cty-nearby-note">{n.note}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+{schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+
+{/* Maps JavaScript API — brand-styled map, only when a key is configured.
+   Without the key, the hero renders the tinted iframe fallback above. */}
+{mapsKey && c.map && (
+  <script is:inline define:vars={{ key: mapsKey, query: c.map.query, zoom: c.map.zoom }}>
+    (function () {
+      var STYLE = [
+        { elementType: 'geometry', stylers: [{ color: '#eef0ea' }] },
+        { elementType: 'labels.text.fill', stylers: [{ color: '#5c5751' }] },
+        { elementType: 'labels.text.stroke', stylers: [{ color: '#fefcf8' }] },
+        { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#cfe3e6' }] },
+        { featureType: 'landscape', elementType: 'geometry', stylers: [{ color: '#f1eee9' }] },
+        { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#e2ddd4' }] },
+        { featureType: 'road', elementType: 'labels', stylers: [{ visibility: 'simplified' }] },
+        { featureType: 'poi', stylers: [{ visibility: 'off' }] },
+        { featureType: 'transit', stylers: [{ visibility: 'off' }] },
+        { featureType: 'administrative', elementType: 'geometry.stroke', stylers: [{ color: '#3a92a6' }] },
+      ];
+      var ok = false;
+      function fail() {
+        if (ok) return;
+        var d = document.getElementById('cty-map'); var fb = document.getElementById('cty-map-fallback');
+        if (d) d.style.display = 'none';
+        if (fb) fb.hidden = false;
+      }
+      window.gm_authFailure = fail;               // bad/blocked API key
+      setTimeout(function () { if (!ok) fail(); }, 5000); // API never loaded
+      function init() {
+        var el = document.getElementById('cty-map');
+        if (!el || !window.google) { fail(); return; }
+        ok = true;
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var map = new google.maps.Map(el, {
+          zoom: zoom, center: { lat: 39.29, lng: -76.6 }, styles: STYLE,
+          disableDefaultUI: true, zoomControl: true, gestureHandling: 'cooperative',
+        });
+        // Center on the county, drop a gold county marker. City markers per
+        // cities.list can be added once each city has lat/lng in the data.
+        new google.maps.Geocoder().geocode({ address: query }, function (res, status) {
+          if (status === 'OK' && res[0]) {
+            map.setCenter(res[0].geometry.location);
+            if (res[0].geometry.viewport) map.fitBounds(res[0].geometry.viewport);
+            new google.maps.Marker({ position: res[0].geometry.location, map: map, title: query,
+              icon: { path: google.maps.SymbolPath.CIRCLE, scale: 7, fillColor: '#BFAC5F', fillOpacity: 1, strokeColor: '#fefcf8', strokeWeight: 2 } });
+          }
+        });
+      }
+      window.__ctyMapInit = init;
+      if (!document.getElementById('gmaps-js')) {
+        var s = document.createElement('script'); s.id = 'gmaps-js'; s.async = true;
+        s.src = 'https://maps.googleapis.com/maps/api/js?key=' + key + '&callback=__ctyMapInit&loading=async';
+        document.head.appendChild(s);
+      } else if (window.google) { init(); }
+    })();
+  </script>
+)}
