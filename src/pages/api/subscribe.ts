@@ -3,12 +3,16 @@ export const prerender = false;
 // src/pages/api/subscribe.ts
 // Newsletter subscribe handler.
 // Fields expected: email, firstName (optional), audience (optional).
+//
+// Subscribers are written to a Google Sheet via src/lib/sheets.ts, not to
+// Mailchimp. See scripts/google-apps-script/newsletter-sheet.gs for the sheet
+// side and the env vars it needs.
 
 import type { APIRoute } from "astro";
 import { Resend } from "resend";
-import mailchimp from "@mailchimp/mailchimp_marketing";
 import { EMAIL_CONFIG } from "../../lib/email.config";
 import { sendWithAlert, notifySubmission, fieldsFromFormData } from "../../lib/form-alert";
+import { appendSubscriber } from "../../lib/sheets";
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 // Slack destination. FORM_SLACK_WEBHOOK is this client's own channel and takes
@@ -17,20 +21,16 @@ const resend = new Resend(import.meta.env.RESEND_API_KEY);
 const SLACK_WEBHOOK =
   import.meta.env.FORM_SLACK_WEBHOOK || import.meta.env.FORM_ALERT_SLACK_URL;
 
-
-mailchimp.setConfig({
-  apiKey:  import.meta.env.MAILCHIMP_API_KEY,
-  server:  import.meta.env.MAILCHIMP_SERVER_PREFIX,
-});
-
-// Radio value -> Mailchimp tag. Keys must match the values rendered by
-// ResourcesNewsletter.astro; an unrecognised value simply adds no tag.
-const AUDIENCE_TAGS: Record<string, string> = {
-  board:  "HOA Boards",
-  rental: "Rental Owners",
-  home:   "Homeowners",
-  all:    "All Updates",
-};
+/** Path portion of the Referer header, or "" if absent/unparseable. */
+function refererPath(request: Request): string {
+  const ref = request.headers.get("referer");
+  if (!ref) return "";
+  try {
+    return new URL(ref).pathname;
+  } catch {
+    return "";
+  }
+}
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -43,9 +43,12 @@ export const POST: APIRoute = async ({ request }) => {
     const email     = data.get("email")?.toString().trim()     ?? "";
     const firstName = data.get("firstName")?.toString().trim() ?? "";
     // Which list the subscriber picked, from the newsletter band's radio group.
-    // Passed to Mailchimp as a tag so segments can be built without needing
-    // interest-group IDs wired into the codebase.
+    // Written to the sheet's "List" column; sheets.ts maps it to a label.
     const audience  = data.get("audience")?.toString().trim()  ?? "";
+    // Which page the form was on — the band appears on several. The form posts
+    // it explicitly; Referer is the fallback. NOT url.pathname, which on an API
+    // route is always /api/subscribe.
+    const source    = data.get("source")?.toString().trim() || refererPath(request);
 
     if (!email) {
       return new Response(
@@ -54,25 +57,16 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Mailchimp list add (handles "already subscribed" gracefully)
-    if (EMAIL_CONFIG.mailchimp.enabled) {
-      try {
-        await mailchimp.lists.addListMember(import.meta.env.MAILCHIMP_AUDIENCE_ID, {
-          email_address: email,
-          status:        "subscribed",
-          merge_fields:  { FNAME: firstName },
-          ...(AUDIENCE_TAGS[audience] ? { tags: [AUDIENCE_TAGS[audience]] } : {}),
-        });
-      } catch (err: any) {
-        const alreadyExists = err?.response?.body?.title === "Member Exists";
-        if (!alreadyExists) {
-          console.error("Mailchimp subscribe error:", err?.response?.body ?? err);
-          return new Response(
-            JSON.stringify({ error: "Could not subscribe. Please try again." }),
-            { status: 500 }
-          );
-        }
-      }
+    // Google Sheet append. Resubscribing updates the existing row rather than
+    // duplicating it — the dedupe lives in the Apps Script.
+    //
+    // A failure here does NOT fail the request: the address is still captured by
+    // the Slack log and the internal notification email below, so the lead is
+    // recoverable. It is surfaced as `delivered: false` on the Slack post
+    // instead, which is what makes it visible.
+    const sheet = await appendSubscriber({ email, firstName, audience, source });
+    if (!sheet.ok && !sheet.skipped) {
+      console.error("Sheets subscribe error:", sheet.error);
     }
 
     // Internal notification — alerts on failure.
@@ -105,8 +99,11 @@ export const POST: APIRoute = async ({ request }) => {
       slackWebhookUrl: SLACK_WEBHOOK,
       route: "Newsletter sign-up",
       formName: `Newsletter form → ${[EMAIL_CONFIG.notify].flat().join(", ")}`,
-      delivered: notified,
-      fields: fieldsFromFormData(data),
+      delivered: notified && sheet.ok,
+      fields: [
+        ...fieldsFromFormData(data),
+        ["Sheet", sheet.ok ? "row written" : sheet.skipped ? "not configured" : `FAILED — ${sheet.error}`],
+      ],
     });
 
     // Welcome email to subscriber
