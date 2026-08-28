@@ -22,13 +22,13 @@ const {
     { num: '1989', label: 'Founded by Stanley Greenberg' },
     { num: '2', label: 'Generations family-owned' },
     { num: '~75', label: 'In-house team — all under one roof' },
-    { num: '400+', label: 'Communities · 40,000+ homes' },
+    { num: '450+', label: 'Communities managed' },
   ],
 } = Astro.props;
 ---
 <section class="tw-about-hero">
   <div class="tw-about-hero-bg">
-    <img src={image} alt={imageAlt} />
+    <img src={image} alt={imageAlt}  loading="lazy" decoding="async" />
   </div>
   <div class="tw-hero-paper" aria-hidden="true"></div>
 

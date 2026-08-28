@@ -24,14 +24,6 @@ function RentalDelawareHero() {
           </div>
           <div className="tw-geo-hero-stats">
             <div>
-              <div className="tw-geo-hero-stat-num">40+</div>
-              <div className="tw-geo-hero-stat-label">Delaware rentals managed [confirm]</div>
-            </div>
-            <div>
-              <div className="tw-geo-hero-stat-num gold">8.5%</div>
-              <div className="tw-geo-hero-stat-label">Flat monthly fee [confirm DE structure]</div>
-            </div>
-            <div>
               <div className="tw-geo-hero-stat-num">No sales tax</div>
               <div className="tw-geo-hero-stat-label">Delaware advantage on maintenance &amp; capital improvements</div>
             </div>
@@ -91,7 +83,7 @@ function RentalDelawareWhy() {
     {
       tone: 'gold', meta: 'Market rhythm',
       title: 'Seasonal demand curve',
-      body: 'Coastal Delaware rentals don&rsquo;t lease on a Mid-Atlantic timeline. Summer-season demand from Memorial Day to Labor Day drives weekly &amp; monthly leases. Year-round long-term leases run a different cadence. [PLACEHOLDER &mdash; confirm Tidewater&rsquo;s scope: long-term, seasonal, or both.]',
+      body: 'Coastal Delaware rentals don&rsquo;t lease on a Mid-Atlantic timeline. Summer-season demand from Memorial Day to Labor Day drives weekly &amp; monthly leases. Year-round long-term leases run a different cadence.',
       foot: 'Different operating model than mainland MD',
     },
     {
@@ -137,28 +129,28 @@ function RentalDelawareCities() {
     {
       slug: 'rehoboth', name: 'Rehoboth Beach',
       meta: 'Adjacent market',
-      body: 'Boardwalk and downtown Rehoboth rentals. Heavy summer-season demand; some year-round long-term in surrounding neighborhoods. [PLACEHOLDER &mdash; confirm Tidewater scope in Rehoboth.]',
+      body: 'Boardwalk and downtown Rehoboth rentals. Heavy summer-season demand; some year-round long-term in surrounding neighborhoods.',
       cities: ['Downtown Rehoboth', 'North Shores', 'Pines'],
       href: '#',
     },
     {
       slug: 'bethany', name: 'Bethany Beach',
       meta: 'Coastal community',
-      body: 'Family-oriented coastal community south of Rehoboth. Single-family, condo, and townhome inventory. [PLACEHOLDER &mdash; confirm Tidewater scope in Bethany.]',
+      body: 'Family-oriented coastal community south of Rehoboth. Single-family, condo, and townhome inventory.',
       cities: ['Bethany Beach', 'South Bethany', 'Sea Colony'],
       href: '#',
     },
     {
       slug: 'fenwick', name: 'Fenwick Island',
       meta: 'Coastal community',
-      body: "Delaware\'s southernmost beach community, adjoining Ocean City, MD. Mixed inventory. [PLACEHOLDER &mdash; confirm Tidewater scope in Fenwick.]",
+      body: "Delaware\'s southernmost beach community, adjoining Ocean City, MD. Mixed inventory.",
       cities: ['Fenwick Island', 'Selbyville'],
       href: '#',
     },
     {
       slug: 'inland', name: 'Sussex Inland',
       meta: 'Year-round market',
-      body: 'Milton, Millsboro, Long Neck, Frankford, Dagsboro. Year-round single-family rental market for the workforce supporting the coastal economy. [PLACEHOLDER &mdash; confirm scope.]',
+      body: 'Milton, Millsboro, Long Neck, Frankford, Dagsboro. Year-round single-family rental market for the workforce supporting the coastal economy.',
       cities: ['Milton', 'Millsboro', 'Long Neck', 'Frankford'],
       href: '#',
     },
@@ -213,7 +205,7 @@ function RentalDelawareAudiences() {
     },
     {
       tone: 'clay', eyebrow: 'Audience 04', title: 'Accidental coastal landlords',
-      body: "You inherited Mom\'s Lewes condo. You bought during the 2020s and the math changed. We do a free rent-vs-sell analysis and lay out the math both ways. [PLACEHOLDER — confirm cross-referral to Tidewater Realty for sell-side.]",
+      body: "You inherited Mom\'s Lewes condo. You bought during the 2020s and the math changed. We do a free rent-vs-sell analysis and lay out the math both ways.",
       pills: ['Rent-vs-sell analysis', 'Compliance handled', 'Lease drafting', 'Realty referral available'],
     },
   ];

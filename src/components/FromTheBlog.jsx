@@ -48,7 +48,7 @@ export default function FromTheBlog({ categories, eyebrow, titleHtml, limit = 3,
           {picked.map((p, i) => (
             <a key={i} href={p.href} className="tw-blog-related-card">
               <div className={`tw-blog-related-card-img ${p.tone || ''}`}>
-                {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || ''} />}
+                {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || ''}  loading="lazy" decoding="async" />}
               </div>
               <div className="tw-blog-related-card-body">
                 <span className={`tw-blog-related-card-cat ${p.tone || ''}`}>

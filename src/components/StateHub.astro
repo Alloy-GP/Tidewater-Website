@@ -1,0 +1,133 @@
+---
+// State-level HOA hub. Renders one StateHub object (see src/data/states.ts).
+// Reuses the .tw-geo-* styles the county and rental geo pages already use, so
+// this introduces no new CSS.
+import FaqAccordion from './FaqAccordion.astro';
+import { TRUST_STATS, type StateHub } from '../data/states';
+import { SITE } from '../config/site';
+
+interface Props { state: StateHub; }
+const { state: st } = Astro.props;
+
+const url = `${SITE.url}/hoa-management/${st.slug}`;
+const strip = (s: string) => String(s).replace(/<[^>]+>/g, '');
+
+const provider = {
+  '@type': 'LocalBusiness',
+  name: SITE.name,
+  telephone: SITE.org.telephone,
+  url: SITE.url + '/',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '3600 Crondall Lane, Suite 100',
+    addressLocality: SITE.org.addressLocality,
+    addressRegion: SITE.org.addressRegion,
+    postalCode: '21117',
+    addressCountry: 'US',
+  },
+};
+
+const pageSchema = [
+  {
+    '@context': 'https://schema.org', '@type': 'Service',
+    serviceType: 'HOA and Condominium Association Management',
+    provider,
+    areaServed: { '@type': 'AdministrativeArea', name: st.name },
+    description: st.seo.description,
+    url,
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'HOA Management', item: `${SITE.url}/hoa-management` },
+      { '@type': 'ListItem', position: 3, name: st.name, item: url },
+    ],
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'FAQPage',
+    mainEntity: st.faq.map((f) => ({
+      '@type': 'Question', name: strip(f.q),
+      acceptedAnswer: { '@type': 'Answer', text: strip(f.a) },
+    })),
+  },
+];
+export { pageSchema };
+---
+<section class="tw-geo-hero">
+  <div class="tw-geo-hero-bg"></div>
+  <div class="tw-geo-hero-paper"></div>
+  <div class="tw-geo-hero-grid">
+   <div class="tw-geo-hero-copy">
+    <nav class="tw-geo-hero-crumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span class="sep" aria-hidden="true">&rsaquo;</span>
+      <a href="/hoa-management">HOA Management</a><span class="sep" aria-hidden="true">&rsaquo;</span>
+      <span class="cur" aria-current="page">{st.name}</span>
+    </nav>
+    <h1 class="tw-geo-hero-title">{st.h1Lead} <em>{st.h1Accent}</em></h1>
+    <p class="tw-geo-hero-lede">{st.lede}</p>
+    <div class="tw-geo-hero-actions">
+      <a class="tw-btn tw-btn-primary tw-btn-lg" href="/request-a-proposal">Request a proposal &rarr;</a>
+      <a class="tw-btn tw-btn-ghost" href="/hoa-management">All HOA services</a>
+    </div>
+    <div class="tw-geo-hero-stats">
+      {TRUST_STATS.map((s) => (
+        <div>
+          <div class={`tw-geo-hero-stat-num${s.gold ? ' gold' : ''}`}>{s.num}</div>
+          <div class="tw-geo-hero-stat-label">{s.label}</div>
+        </div>
+      ))}
+    </div>
+   </div>
+  </div>
+</section>
+
+<section class="tw-geo-section cream" style="padding:64px 0">
+  <div class="tw-container-wide">
+    <div class="tw-eyebrow">Local Context</div>
+    <h2 class="tw-section-title">{st.intro.title}</h2>
+    {st.intro.body.map((p) => <p class="tw-section-lede" style="margin-bottom:14px" set:html={p}></p>)}
+  </div>
+</section>
+
+<section class="tw-geo-section linen" style="padding:64px 0">
+  <div class="tw-container-wide">
+    <div class="tw-eyebrow">Where We Work</div>
+    <h2 class="tw-section-title">{st.name} coverage.</h2>
+    <div class="tw-geo-neighbors">
+      {st.regions.map((r) => (
+        <div class="tw-geo-neighbor">
+          <div class="tw-geo-neighbor-name">{r.name}</div>
+          <div class="tw-geo-neighbor-meta">{r.note}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+{st.manager && (
+  <section class="tw-geo-section cream" style="padding:64px 0">
+    <div class="tw-container-wide">
+      <div class="tw-geo-manager">
+        <div class="tw-geo-manager-avatar">{st.manager.initials}</div>
+        <div>
+          <div class="tw-geo-manager-eyebrow">{st.manager.role}</div>
+          <div class="tw-geo-manager-name">{st.manager.name} <span>{st.manager.creds}</span></div>
+          <p class="tw-geo-manager-role" set:html={st.manager.bio}></p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:200px">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-block">Request a proposal &rarr;</a>
+          <a href="tel:+14435480191" class="tw-btn tw-btn-outline tw-btn-block">(443) 548-0191</a>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+<section class="tw-geo-section linen" style="padding:64px 0">
+  <div class="tw-container-wide">
+    <div class="tw-eyebrow">Questions</div>
+    <h2 class="tw-section-title">{st.name} boards ask us this.</h2>
+    <FaqAccordion items={st.faq} />
+  </div>
+</section>

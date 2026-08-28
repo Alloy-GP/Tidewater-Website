@@ -3,7 +3,7 @@ import { useState } from 'react';
 // All board reviews are sourced from real named board members / officers.
 // Do NOT add fabricated reviews — use <!-- PLACEHOLDER --> tags for any unconfirmed content.
 
-const ALL_REVIEWS = [
+export const ALL_REVIEWS = [
   {
     tag: 'HOA', tone: '',
     quote: 'I must say as a small Community, we have experienced great and timely service from Tidewater. We\'ve worked with Mr. Christopher Ziesat who has always quickly responded to our concerns even if it was for guidance. As President of our HOA, I\'m very pleased with being able to call upon Christopher Ziesat who will always respond in a professional and timely manner.',
