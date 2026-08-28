@@ -2,8 +2,7 @@
  * Alloy's copy of every form notification — a monitoring measure, and the
  * reason a shared Alloy inbox used to receive every enquiry this site took.
  *
- * Empty as soon as the site has somewhere in Slack to log submissions (see
- * FORM_SLACK_WEBHOOK, the client's own channel), which is
+ * Empty as soon as the site has somewhere in Slack to log submissions, which is
  * a better record anyway: it carries the whole submission, it doesn't put Alloy
  * on a thread with the client's board, owner or vendor, and it can't be missed
  * in a busy inbox. Until a webhook is set the copies continue, so monitoring is

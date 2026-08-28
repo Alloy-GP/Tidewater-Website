@@ -10,18 +10,11 @@ import { EMAIL_CONFIG } from "../../lib/email.config";
 import { sendWithAlert, notifySubmission, fieldsFromFormData } from "../../lib/form-alert";
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
-// Two Slack destinations, deliberately separate.
-//   FORM_SLACK_WEBHOOK    this client's own channel — every submission is
-//                         logged here, so the channel is a running record of
-//                         what the site produced.
-//   FORM_ALERT_SLACK_URL  the monitoring channel — only failures, so a broken
-//                         form is not buried in a feed of normal traffic.
-// Each falls back to the other, so a missing var loses the split but never
-// loses the message.
+// Slack destination. FORM_SLACK_WEBHOOK is this client's own channel and takes
+// precedence for BOTH submissions and failures; FORM_ALERT_SLACK_URL is the
+// shared fallback for clients without a channel of their own.
 const SLACK_WEBHOOK =
   import.meta.env.FORM_SLACK_WEBHOOK || import.meta.env.FORM_ALERT_SLACK_URL;
-const ALERT_WEBHOOK =
-  import.meta.env.FORM_ALERT_SLACK_URL || import.meta.env.FORM_SLACK_WEBHOOK;
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -81,7 +74,6 @@ export const POST: APIRoute = async ({ request }) => {
           client: "Tidewater",
           formName: `${intentCfg.label}${intent ? ` (${intent})` : ""}`,
           slackWebhookUrl: SLACK_WEBHOOK,
-          alertWebhookUrl: ALERT_WEBHOOK,
           alertEmail: { apiKey: import.meta.env.RESEND_API_KEY, to: "admin@alloygp.co", from: EMAIL_CONFIG.from.notifications },
         },
         () => resend.emails.send({
