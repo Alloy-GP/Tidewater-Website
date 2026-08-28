@@ -34,10 +34,12 @@
 // defaults in slackUrl() remain as a fallback for other runtimes.
 
 /**
- * The one place a Slack destination is resolved. Every path through this file
- * uses it, so there is no configuration where one channel sees a webhook and
- * another doesn't — the failure alert, the submission log, and the
- * email-fallback gate all agree by construction.
+ * Where SUBMISSIONS are logged — the client's own channel. This is the running
+ * record of what the site produced, so it belongs with the client, not in a
+ * monitoring channel.
+ *
+ * Falls back to the alert URL so a missing FORM_SLACK_WEBHOOK loses the channel
+ * split but never loses the submission itself.
  */
 function slackUrl(opts: SendAlertOptions): string | undefined {
   return (
@@ -47,11 +49,30 @@ function slackUrl(opts: SendAlertOptions): string | undefined {
   );
 }
 
+/**
+ * Where FAILURE ALERTS go — the monitoring channel, kept separate from the
+ * submission log so a broken form is not buried in a feed of normal traffic.
+ *
+ * Falls back to the submission channel, because an alert nobody sees is worse
+ * than an alert in the wrong channel.
+ */
+function alertSlackUrl(opts: SendAlertOptions): string | undefined {
+  return (
+    opts.alertWebhookUrl ??
+    process.env.FORM_ALERT_SLACK_URL ??
+    slackUrl(opts)
+  );
+}
+
 interface SendAlertOptions {
   client: string;           // e.g. "Acme Co" — shows in the alert
   formName?: string;        // e.g. "Contact form" — optional context
-  // Defaults to FORM_SLACK_WEBHOOK, then FORM_ALERT_SLACK_URL — see slackUrl().
+  // Submission log destination. Defaults to FORM_SLACK_WEBHOOK, then
+  // FORM_ALERT_SLACK_URL — see slackUrl().
   slackWebhookUrl?: string;
+  // Failure-alert destination, kept separate from the submission log. Defaults
+  // to FORM_ALERT_SLACK_URL, then the submission channel — see alertSlackUrl().
+  alertWebhookUrl?: string;
   // Last-resort failure alert, used ONLY when no Slack webhook is configured —
   // with one, the channel gets the alert and this inbox is never emailed. Sent
   // via Resend's REST API directly (no SDK). Note: a TOTAL Resend outage/auth
@@ -175,7 +196,7 @@ async function postFailureToSlack(
   errorMessage: string,
   detail?: string
 ): Promise<void> {
-  const url = slackUrl(opts);
+  const url = alertSlackUrl(opts);
   if (!url) {
     // Not fatal: alertFailure() sends the email fallback in exactly this case.
     console.error('No Slack webhook configured — cannot post form failure alert');
@@ -275,7 +296,7 @@ async function alertFailure(
   errorMessage: string,
   detail?: string
 ): Promise<void> {
-  const slackConfigured = Boolean(slackUrl(opts));
+  const slackConfigured = Boolean(alertSlackUrl(opts));
 
   await Promise.all([
     postFailureToSlack(opts, errorMessage, detail),
