@@ -12,7 +12,7 @@ import type { APIRoute } from "astro";
 import { Resend } from "resend";
 import { EMAIL_CONFIG } from "../../lib/email.config";
 import { sendWithAlert, notifySubmission, fieldsFromFormData } from "../../lib/form-alert";
-import { appendSubscriber } from "../../lib/sheets";
+import { appendSubscriber, AUDIENCE_LABELS } from "../../lib/sheets";
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 // Slack destination. FORM_SLACK_WEBHOOK is this client's own channel and takes
@@ -49,6 +49,7 @@ export const POST: APIRoute = async ({ request }) => {
     // it explicitly; Referer is the fallback. NOT url.pathname, which on an API
     // route is always /api/subscribe.
     const source    = data.get("source")?.toString().trim() || refererPath(request);
+    const audienceLabel = audience ? (AUDIENCE_LABELS[audience] ?? audience) : "";
 
     if (!email) {
       return new Response(
@@ -85,7 +86,7 @@ export const POST: APIRoute = async ({ request }) => {
           replyTo: EMAIL_CONFIG.replyTo,
           to:      EMAIL_CONFIG.notify,
           subject: `New newsletter signup: ${email}`,
-          html:    `<h2>New Newsletter Signup</h2><p><strong>Email:</strong> ${email}</p>${firstName ? `<p><strong>Name:</strong> ${firstName}</p>` : ""}${AUDIENCE_TAGS[audience] ? `<p><strong>List:</strong> ${AUDIENCE_TAGS[audience]}</p>` : ""}`,
+          html:    `<h2>New Newsletter Signup</h2><p><strong>Email:</strong> ${email}</p>${firstName ? `<p><strong>Name:</strong> ${firstName}</p>` : ""}${audienceLabel ? `<p><strong>Type:</strong> ${audienceLabel}</p>` : ""}`,
         })
       );
     } catch (notifyError) {
