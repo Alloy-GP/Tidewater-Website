@@ -2131,12 +2131,12 @@
     },
     {
       "source": "/maintenance/tidewateralliance.php",
-      "destination": "/about",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/maintenance/sales.php",
-      "destination": "/real-estate",
+      "destination": "/",
       "permanent": true
     },
     {
@@ -2156,52 +2156,57 @@
     },
     {
       "source": "/propertyservices-glen-burnie-md.php",
-      "destination": "/maintenance-services",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/propertyservices-baltimore-county-md.php",
-      "destination": "/maintenance-services",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/sales-hampstead-md.php",
-      "destination": "/real-estate",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/sales-glyndon-md.php",
-      "destination": "/real-estate",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/sales-queenstown-md.php",
-      "destination": "/real-estate",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/sales-bethesda-md.php",
-      "destination": "/real-estate",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/sales-grasonville-md.php",
-      "destination": "/real-estate",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/sales-aberdeen-md.php",
-      "destination": "/real-estate",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/sales-carroll-county-md.php",
-      "destination": "/real-estate",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/communityassociations.php",
-      "destination": "/hoa-management",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/(.*).php",
+      "destination": "/",
       "permanent": true
     }
   ],
