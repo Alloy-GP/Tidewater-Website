@@ -16,6 +16,7 @@ const ALL_CATEGORIES = [
   { id: 'hoa-mgmt',  label: 'HOA Management' },
   { id: 'rental',    label: 'Rental Management' },
   { id: 'governance',label: 'Board Governance' },
+  { id: 'finances',  label: 'HOA Finances' },
   { id: 'solutions', label: 'Solutions' },
 ];
 
@@ -46,8 +47,8 @@ function BlogIndexHero({ showSearch, query, onQuery, onSubmit }) {
         )}
 
         <div className="tw-bi-hero-stats">
-          <span><strong>5</strong> posts &amp; growing</span>
-          <span><strong>4</strong> categories</span>
+          <span><strong>7</strong> posts &amp; growing</span>
+          <span><strong>5</strong> categories</span>
           <span><strong>4,200+</strong> board members subscribed</span>
         </div>
       </div>

@@ -1,0 +1,408 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Topbar from '../../components/Topbar.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Footer from '../../components/Footer.astro';
+import { articleSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+import { SITE } from '../../config/site';
+
+const pageUrl = `${SITE.url}/blog/hoa-fees`;
+const headline = 'What Are HOA Fees? What They Cover, Why They Change, and What Happens If You Don\'t Pay';
+const description = 'HOA fees explained: what they cover, how they differ from special assessments, why they rise, and how boards actually set the amount.';
+
+const post = {
+  title: 'What are <em>HOA fees?</em> What they cover, why they change, and what happens if you don&rsquo;t pay.',
+  dek: 'An HOA fee covers insurance, upkeep, and the reserves that pay for future repairs — but who decides the amount, and why does it keep going up? A plain-English guide to what HOA fees fund and how boards set them.',
+  category: { label: 'HOA Finances', tone: '' },
+  author: {
+    name: 'Joe Jordan',
+    creds: 'CMCA · AMS · PCAM',
+    initials: 'JJ',
+    role: 'Director of Quality Assurance, Tidewater',
+    bio: "Joe is Tidewater's Director of Quality Assurance, leading the QA and Compliance team. A former CAI Chesapeake Chapter President (2012), his background includes Senior Project Manager experience at a leading engineering firm — a structural mind for a structural function. CMCA, AMS, and PCAM credentialed.",
+    email: 'jjordan@tidewaterproperty.com',
+  },
+  date: 'August 4, 2026',
+  dateIso: '2026-08-04',
+  readTime: 8,
+};
+
+const toc = [
+  { id: 'what-are-fees',  label: 'What HOA fees are' },
+  { id: 'what-they-cover', label: 'What they cover' },
+  { id: 'how-much',       label: 'How much they are' },
+  { id: 'how-set',        label: 'How boards set the fee' },
+  { id: 'why-increase',   label: 'Why fees increase' },
+  { id: 'unpaid',         label: "If you don't pay" },
+  { id: 'faq',            label: 'FAQ' },
+  { id: 'conclusion',     label: 'The short version' },
+];
+
+const related = [
+  {
+    tone: '', category: 'Board Governance',
+    title: 'HOA board member responsibilities & fiduciary duty, explained.',
+    dek: 'The fiduciary duties that attach to every seat, what each officer position involves, and where the board\'s job ends and delegation begins.',
+    date: 'August 3, 2026', readTime: 7, href: '/blog/hoa-board-responsibilities',
+    coverImage: '/assets/hoa-board-responsibilities.jpg',
+    coverAlt: "HOA board member reviewing the association's governing-documents binder at her kitchen table",
+  },
+  {
+    tone: '', category: 'HOA Management',
+    title: 'What is a community association manager? Roles, responsibilities, and what your board should expect.',
+    dek: 'A community association manager (CAM) is the professional hired by an HOA or condo board to handle day-to-day operations. What a CAM does, how the role works with the board, and what credentials matter.',
+    date: 'May 15, 2026', readTime: 9, href: '/blog/what-is-a-community-association-manager',
+    coverImage: '/assets/what-is-a-community-association-manager.jpg',
+    coverAlt: 'Community association manager meeting with HOA board members',
+  },
+  {
+    tone: '', category: 'Board Governance',
+    title: 'What is a quorum? Definition, requirements, and why it matters for your board.',
+    dek: "A quorum is the minimum number of members who must be present for a meeting's decisions to be legally valid. How quorum works for board and annual meetings, and how proxy voting affects the count.",
+    date: 'May 14, 2026', readTime: 8, href: '/blog/what-is-quorum-and-why-is-it-important',
+    coverImage: '/assets/quorum-community-manager.jpg',
+    coverAlt: 'Tidewater community association manager walking through a planned neighborhood in Maryland, holding an iPad during a site inspection',
+  },
+];
+
+const pageSchema = [
+  articleSchema({
+    headline,
+    description,
+    url: pageUrl,
+    datePublished: '2026-08-04',
+    image: `${SITE.url}/assets/hoa-fees.jpg`,
+    about: ['HOA fees', 'HOA dues', 'special assessment', 'reserve fund', 'HOA budget', 'condo fees'],
+  }),
+  faqSchema([
+    {
+      q: "What's the difference between HOA fees and HOA dues?",
+      a: "There isn't one. Fees, dues, and assessments are three names for the same recurring payment, and which term you see depends on your governing documents. What people sometimes mistake for a fee increase is actually a special assessment, a separate one-time charge for a cost the budget and reserves couldn't cover.",
+    },
+    {
+      q: 'Do all condos have HOA fees?',
+      a: "Virtually all of them do. Condominiums share physical structures such as roofs, elevators, and building exteriors, which have to be funded jointly in a way most single-family HOAs don't require. That broader maintenance responsibility is also why condo fees tend to run higher.",
+    },
+    {
+      q: 'Can HOA fees increase, and how often?',
+      a: "Yes, and most boards review the amount annually during budget season. Governing documents sometimes cap how much a board can raise assessments in a single year without a membership vote, so that's worth checking. Increases usually track rising operating costs, insurance renewals, and reserve funding needs.",
+    },
+    {
+      q: 'Are HOA fees tax deductible?',
+      a: 'Generally no, not for a primary residence. HOA fees may be partially deductible as an expense if the home is a rental property. This is general information rather than tax advice, so confirm your own situation with a tax professional. IRS Publication 530, Tax Information for Homeowners, covers the details.',
+    },
+  ]),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'Blog', url: SITE.url + '/blog' },
+    { name: headline, url: pageUrl },
+  ]),
+];
+---
+
+<BaseLayout
+  title="What Are HOA Fees? A Homeowner's Guide | Tidewater"
+  description={description}
+  ogType="article"
+  pageSchema={pageSchema}
+  pageStylesheet="styles-blog.css"
+>
+  <Topbar variant="homeowner" />
+  <Header activeNav="blog" />
+  <Breadcrumb crumbs={[
+    { label: 'Blog', href: '/blog' },
+    { label: 'What Are HOA Fees?' },
+  ]} />
+
+  <div class="tw-blog-progress" id="tw-blog-progress"></div>
+
+  <section class="tw-blog-hero">
+    <div class="tw-blog-hero-inner">
+      <span class={`tw-blog-category ${post.category.tone}`}>{post.category.label}</span>
+      <h1 class="tw-blog-title" set:html={post.title}></h1>
+      <p class="tw-blog-dek">{post.dek}</p>
+      <div class="tw-blog-meta">
+        <div class="tw-blog-meta-author">
+          <div class="tw-blog-meta-avatar">{post.author.initials}</div>
+          <div>
+            <div class="tw-blog-meta-name">{post.author.name}</div>
+            <div class="tw-blog-meta-role">{post.author.role}</div>
+          </div>
+        </div>
+        <div class="tw-blog-meta-divider"></div>
+        <div class="tw-blog-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> {post.date}</div>
+        <div class="tw-blog-meta-divider"></div>
+        <div class="tw-blog-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> {post.readTime} min read</div>
+        <div class="tw-blog-share">
+          <button type="button" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg></button>
+          <button type="button" data-share="x" title="Share on X" aria-label="Share on X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></button>
+          <button type="button" data-share="email" title="Share by email" aria-label="Share by email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></button>
+          <button type="button" data-share="copy" title="Copy link" aria-label="Copy link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tw-blog-cover">
+    <div class="tw-blog-cover-inner">
+      <img
+        src="/assets/hoa-fees.jpg"
+        alt="Well-maintained townhome community common area managed under an HOA budget"
+      />
+      <div class="tw-blog-cover-paper"></div>
+    </div>
+  </div>
+
+  <div class="tw-blog-body-wrap">
+    <div class="tw-blog-layout">
+      <aside class="tw-blog-toc">
+        <div class="tw-blog-toc-label">In this article</div>
+        <ul class="tw-blog-toc-list">
+          {toc.map(it => <li><a href={`#${it.id}`} set:html={it.label}></a></li>)}
+        </ul>
+      </aside>
+      <div>
+        <article class="tw-blog-article">
+
+          <p>
+            Every home in a homeowners association or condominium comes with a recurring bill attached. Depending on the governing documents, it might be called a fee, dues, or an assessment. But what are HOA fees really paying for, and who decides the amount?
+          </p>
+
+          <p>
+            At the simplest level, the fee covers the shared cost of the place you live: landscaping and snow removal, insurance on common buildings, the reserve fund that will pay for the next roof, and the day-to-day work of managing all of it. This guide covers what that money buys, why the amount tends to climb, and what happens when it goes unpaid &mdash; plus the part most explanations skip: how a board actually arrives at the number, and why some communities see steady fees while others get hit with sudden jumps.
+          </p>
+
+          <h2 id="what-are-fees">What Are HOA Fees, Exactly?</h2>
+
+          <p>
+            <strong>An HOA fee is a recurring charge every owner in a homeowners association or condominium pays to fund the community&rsquo;s shared costs: operations, insurance, amenities, and long-term repairs.</strong>
+          </p>
+
+          <p>
+            It&rsquo;s usually billed monthly, though some associations bill quarterly. Paying it isn&rsquo;t optional. The obligation runs with the property, so it transfers to whoever owns the home next, and it continues whether or not an owner ever uses the pool, walks the trails, or agrees with how the board is spending the money.
+          </p>
+
+          <p>
+            One thing that trips people up: the same charge goes by several names. Your statement might say &ldquo;HOA fee,&rdquo; your neighbor might call it &ldquo;dues,&rdquo; and your governing documents might formally call it an &ldquo;assessment.&rdquo; All three mean the same payment. The word that changes the meaning is the one sometimes attached to it: <em>special</em>.
+          </p>
+
+          <h3>HOA Fees vs. Dues vs. Special Assessments</h3>
+
+          <p>
+            Fees, dues, and assessments are three names for the routine payment that funds the annual budget. A special assessment is a different thing entirely: a one-time charge the board levies when a cost lands that the budget and reserves can&rsquo;t absorb, such as a roof replacement, a failed retaining wall, or storm damage beyond what insurance covers.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Charge</th>
+                <th>Frequency</th>
+                <th>What It Funds</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>HOA fee / dues / assessment</td><td>Recurring (usually monthly)</td><td>The annual budget: maintenance, insurance, management, reserve contributions</td></tr>
+              <tr><td>Special assessment</td><td>One-time, as needed</td><td>Costs the budget and reserves can&rsquo;t cover: major repairs, capital projects, uninsured losses</td></tr>
+            </tbody>
+          </table>
+
+          <p>
+            Special assessments typically carry their own notice requirements and, depending on the governing documents, a membership vote. Sometimes they&rsquo;re unavoidable, the result of a true emergency or a loss insurance didn&rsquo;t fully cover. Often, though, they&rsquo;re a sign that reserve planning hasn&rsquo;t kept pace with aging infrastructure &mdash; and heading off the avoidable ones is a large part of what <a href="/hoa-management">professional association management</a> is for.
+          </p>
+
+          <h2 id="what-they-cover">What Do HOA Fees Cover?</h2>
+
+          <p>
+            <strong>Most of an HOA fee goes to four things: maintaining the common areas, insuring them, funding reserves for future repairs, and paying for professional management.</strong>
+          </p>
+
+          <p>
+            Common-area maintenance is usually the largest line: landscaping, snow removal, trash service, and upkeep on whatever the association owns, whether that&rsquo;s private roads, a pool, an elevator, or the roof over your unit. Insurance covers those shared structures under the association&rsquo;s master policy, separate from the policy a homeowner carries on their interior.
+          </p>
+
+          <p>
+            Reserve contributions are the part owners notice least and benefit from most. Each month, a slice of the fee goes into a fund earmarked for the large, predictable, expensive things: repaving, roof replacement, pool resurfacing. A community that funds its reserves properly pays for the new roof out of savings. A community that doesn&rsquo;t pays for it with a special assessment.
+          </p>
+
+          <p>
+            The last piece is management: accounting, vendor coordination, maintenance response, compliance tracking, and the administrative work of running what is, functionally, a small nonprofit corporation. At Tidewater, that includes a preventive maintenance calendar built around each community&rsquo;s common areas and amenities, so routine upkeep happens on schedule rather than after something fails, and in-house, GAAP-compliant accounting instead of outsourced bookkeeping.
+          </p>
+
+          <h2 id="how-much">How Much Are HOA Fees?</h2>
+
+          <p>
+            <strong>There&rsquo;s no standard HOA fee. The amount comes out of each community&rsquo;s own annual budget, which is why two neighborhoods a mile apart can differ by hundreds of dollars a month.</strong>
+          </p>
+
+          <p>
+            Nationally, monthly fees commonly land in the low hundreds of dollars, but that range tells you little about any specific community. Four things drive the actual number:
+          </p>
+
+          <ul>
+            <li><strong>Amenities.</strong> Pools, clubhouses, fitness centers, gated entries, and elevators all carry ongoing operating and repair costs.</li>
+            <li><strong>What the association owns.</strong> A condominium maintains roofs, exteriors, and shared building systems; a single-family HOA might maintain an entrance sign and some landscaping. That difference alone explains most of the gap between condo fees and HOA fees.</li>
+            <li><strong>Age and condition.</strong> Older infrastructure needs more frequent work and larger reserves behind it.</li>
+            <li><strong>Reserve funding level.</strong> A community catching up on years of underfunding carries a higher fee than one that funded reserves steadily all along.</li>
+          </ul>
+
+          <p>
+            That last factor is why comparing two communities on fee alone is misleading. Why are HOA fees so high in one neighborhood and noticeably lower in the next? Sometimes the lower fee reflects a leaner operation. Just as often, it reflects a community deferring costs it will have to pay later, at a higher price.
+          </p>
+
+          <h2 id="how-set">How Boards Set the Fee</h2>
+
+          <p>
+            <strong>HOA fees aren&rsquo;t set arbitrarily. They&rsquo;re the output of an annual budget the board reviews and approves, built on real operating costs and a reserve study.</strong>
+          </p>
+
+          <p>
+            The process looks broadly similar across most associations. Management prepares a draft budget from the prior year&rsquo;s actual spending, current vendor contracts, upcoming insurance renewals, and the reserve study&rsquo;s schedule of capital projects. The board reviews it, questions it, adjusts it, and approves it, typically in the fall. The assessment for the coming year is that approved budget divided among the homes according to the allocation formula in the governing documents.
+          </p>
+
+          <p>
+            Two things determine whether it goes well: the quality of the information underneath it, since a budget built on guesswork produces a number that&rsquo;s wrong in one direction or the other, and whether the board is willing to fund reserves honestly, even when that means a larger increase than owners want to hear about. The board keeps full authority over both calls. An association manager&rsquo;s job is to hand them accurate numbers and enough lead time to decide deliberately rather than under pressure.
+          </p>
+
+          <h2 id="why-increase">Why Do HOA Fees Increase Over Time?</h2>
+
+          <p>
+            <strong>HOA fees can go up, and usually do, driven by inflation in vendor and insurance costs, aging infrastructure, and, most preventably, reserves that were underfunded for years.</strong>
+          </p>
+
+          <p>
+            The first two sit largely outside a board&rsquo;s control. Landscaping contracts, utility rates, and especially property insurance premiums have climbed across the Mid-Atlantic, and an association has to absorb that somewhere. Buildings also age on their own schedule regardless of what the budget would prefer.
+          </p>
+
+          <p>
+            The third is different, because it&rsquo;s a choice. A board under pressure to hold assessments flat can defer reserve contributions, and that works until it doesn&rsquo;t. The bill arrives eventually as a steep increase, a special assessment, or both at once. Several states, Maryland among them, have since moved to require associations to fund reserves at the level their reserve study recommends. Tidewater was pushing its communities to fund at that level long before the requirement existed, for exactly this reason: skipping the contribution doesn&rsquo;t make the roof cheaper. It moves the cost, and usually enlarges it.
+          </p>
+
+          <p>
+            For boards heading into budget season, disciplined budgeting and a current reserve study are the two levers that keep fees predictable. The <a href="https://www.caionline.org/" target="_blank" rel="noopener">Community Associations Institute</a>, which accredits Tidewater as an AAMC&reg;, also publishes reserve-planning resources written for volunteer boards.
+          </p>
+
+          <h2 id="unpaid">What Happens If You Don&rsquo;t Pay Your HOA Fees?</h2>
+
+          <p>
+            <strong>Unpaid assessments escalate in stages: late fees and interest first, then a lien against the property, and eventually attorney involvement or formal collection action.</strong>
+          </p>
+
+          <p>
+            The timeline depends on state law and on the association&rsquo;s governing documents. Tidewater manages communities across Maryland, D.C., Virginia, Pennsylvania, Delaware, and West Virginia, and notice requirements and lien procedures differ meaningfully among them, so the governing documents are the right place to start.
+          </p>
+
+          <p>
+            Pursuing a delinquent assessment isn&rsquo;t punitive. The budget funds a fixed set of obligations, so when some owners don&rsquo;t pay, the shortfall lands on everyone else, either as a higher assessment next year or as maintenance that quietly gets deferred. A board that lets delinquencies drift is effectively charging its paying members for the ones who aren&rsquo;t.
+          </p>
+
+          <p>
+            Tidewater manages the full delinquency process, from customized collection plans to attorney coordination, so boards never have to chase their own residents. And for any homeowner who has fallen behind: most associations have far more flexibility to arrange a payment plan before a lien is filed than after.
+          </p>
+
+          <h2 id="faq">Frequently Asked Questions</h2>
+
+          <h3>What&rsquo;s the difference between HOA fees and HOA dues?</h3>
+          <p>
+            There isn&rsquo;t one. Fees, dues, and assessments are three names for the same recurring payment, and which term you see depends on your governing documents. What people sometimes mistake for a fee increase is actually a special assessment, a separate one-time charge for a cost the budget and reserves couldn&rsquo;t cover.
+          </p>
+
+          <h3>Do all condos have HOA fees?</h3>
+          <p>
+            Virtually all of them do. Condominiums share physical structures such as roofs, elevators, and building exteriors, which have to be funded jointly in a way most single-family HOAs don&rsquo;t require. That broader maintenance responsibility is also why condo fees tend to run higher.
+          </p>
+
+          <h3>Can HOA fees increase, and how often?</h3>
+          <p>
+            Yes, and most boards review the amount annually during budget season. Governing documents sometimes cap how much a board can raise assessments in a single year without a membership vote, so that&rsquo;s worth checking. Increases usually track rising operating costs, insurance renewals, and reserve funding needs.
+          </p>
+
+          <h3>Are HOA fees tax deductible?</h3>
+          <p>
+            Generally no, not for a primary residence. HOA fees may be partially deductible as an expense if the home is a rental property. This is general information rather than tax advice, so confirm your own situation with a tax professional. <a href="https://www.irs.gov/publications/p530" target="_blank" rel="noopener">IRS Publication 530, Tax Information for Homeowners</a>, covers the details.
+          </p>
+
+          <h2 id="conclusion">The Short Version</h2>
+
+          <p>
+            An HOA fee is the shared cost of insurance, upkeep, and future repairs on the place you live, set by a budget the board approves each year. Where that number stays predictable, it&rsquo;s usually because the community plans for what&rsquo;s coming instead of reacting to it: reserves funded on schedule, maintenance handled before it becomes a repair, and financials a board can actually read.
+          </p>
+
+          <p>
+            Homeowners who want more plain-English explainers like this one can browse our <a href="/resources">board education resources</a>. And if you&rsquo;re on a board that isn&rsquo;t confident its assessments and reserves are on solid footing, we&rsquo;re glad to talk it through.
+          </p>
+
+          <div class="tw-blog-cta">
+            <div class="tw-blog-cta-eyebrow">Assessments &amp; reserves</div>
+            <h3>Not sure your fees and reserves are on solid footing?</h3>
+            <p>Request a proposal and see how Tidewater approaches budgeting and reserve planning &mdash; accurate numbers, honest reserve funding, and financials a board can actually read.</p>
+            <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-lg">Request a proposal for your association &rarr;</a>
+          </div>
+
+          <div class="tw-blog-tags">
+            <span class="tw-blog-tags-label">Tagged</span>
+            <a href="#" class="tw-blog-tag">HOA fees</a>
+            <a href="#" class="tw-blog-tag">HOA dues</a>
+            <a href="#" class="tw-blog-tag">HOA budgeting</a>
+            <a href="#" class="tw-blog-tag">Homeowner resources</a>
+          </div>
+        </article>
+
+        <div class="tw-blog-author-bio">
+          <div class="tw-blog-author-bio-avatar">{post.author.initials}</div>
+          <div>
+            <div class="tw-blog-author-bio-eyebrow">About the author</div>
+            <div class="tw-blog-author-bio-name">{post.author.name} <span>{post.author.creds}</span></div>
+            <div class="tw-blog-author-bio-role">{post.author.role}</div>
+            <p class="tw-blog-author-bio-blurb">{post.author.bio}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="tw-blog-related">
+    <div class="tw-blog-related-inner">
+      <div class="tw-blog-related-head">
+        <div class="tw-blog-related-eyebrow">Continue Reading</div>
+        <h2>More on <em>HOA finances.</em></h2>
+      </div>
+      <div class="tw-blog-related-grid">
+        {related.map(p => (
+          <a href={p.href} class="tw-blog-related-card">
+            <div class={`tw-blog-related-card-img ${p.tone}`}>
+              {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || p.title} />}
+            </div>
+            <div class="tw-blog-related-card-body">
+              <div class={`tw-blog-related-card-cat ${p.tone}`}>{p.category}</div>
+              <h3>{p.title}</h3>
+              <p>{p.dek}</p>
+              <div class="tw-blog-related-card-meta">{p.date} &middot; {p.readTime} min read</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-blog-newsletter">
+    <div class="tw-blog-newsletter-inner">
+      <div class="tw-blog-newsletter-eyebrow">Tidewater Resources</div>
+      <h2>Get the <em>monthly board memo</em> in your inbox.</h2>
+      <p>One email a month. Practical board playbooks, Maryland HOA law updates, governance deep-dives. Written for working boards, not vendors. No fluff.</p>
+      <form class="tw-blog-newsletter-form">
+        <div class="tw-hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <input type="email" name="email" placeholder="board@yourcommunity.org" aria-label="Email address" required/>
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="tw-blog-newsletter-thanks" hidden style="font-family:var(--tw-font-heading);font-weight:700;font-size:15px;color:var(--tw-gold)">Thanks &mdash; first issue lands the first Tuesday of next month.</div>
+      <div class="tw-blog-newsletter-fine">Unsubscribe any time &middot; We never share your email &middot; 4,200+ board members subscribed</div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  import '../../scripts/blog-interactivity.js';
+</script>

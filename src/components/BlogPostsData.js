@@ -6,6 +6,19 @@
 
 export const ALL_POSTS = [
   {
+    slug: 'hoa-fees',
+    href: '/blog/hoa-fees',
+    title: 'What are <em>HOA fees?</em> What they cover, why they change, and what happens if you don&rsquo;t pay.',
+    dek: 'An HOA fee covers insurance, upkeep, and the reserves that pay for future repairs — but who decides the amount, and why does it keep going up? A plain-English guide to what HOA fees fund and how boards set them.',
+    category: { id: 'finances', label: 'HOA Finances', tone: '' },
+    date: 'August 4, 2026', dateIso: '2026-08-04',
+    readTime: 8,
+    author: 'Joe Jordan',
+    tone: '',
+    coverImage: '/assets/hoa-fees.jpg',
+    coverAlt: 'Well-maintained townhome community common area managed under an HOA budget',
+  },
+  {
     slug: 'hoa-board-responsibilities',
     href: '/blog/hoa-board-responsibilities',
     title: 'HOA board member responsibilities &amp; <em>fiduciary duty,</em> explained.',
