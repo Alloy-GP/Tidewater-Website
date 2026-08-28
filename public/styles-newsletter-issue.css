@@ -72,14 +72,6 @@
 .tw-bb-checklist li::before { content: counter(bb); font-family: var(--tw-font-heading); font-weight: 700; font-size: 13px; color: var(--tw-teal-600); }
 .tw-bb-checklist strong { color: var(--tw-dark); }
 
-/* ===== Team spotlight ===== */
-.tw-bb-spotlight { background: var(--tw-mist); padding: 44px 0 48px; }
-.tw-bb-spot-eyebrow { text-align: center; font-family: var(--tw-font-heading); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .2em; color: var(--tw-teal-600); margin-bottom: 18px; }
-.tw-bb-spot-card { background: var(--tw-cream); border: 1px solid #D5E2E4; border-radius: 8px; padding: 30px 30px 28px; box-shadow: var(--tw-shadow-sm); }
-.tw-bb-spot-card h3 { font-family: var(--tw-font-heading); font-weight: 800; font-size: 22px; line-height: 1.25; color: var(--tw-dark); margin: 0; }
-.tw-bb-spot-role { font-family: var(--tw-font-heading); font-weight: 700; font-size: 12.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--tw-teal-600); margin-top: 6px; }
-.tw-bb-spot-rule { display: block; width: 40px; height: 3px; background: var(--tw-gold); margin: 14px 0 16px; }
-.tw-bb-spot-card p { font-family: var(--tw-font-body); font-size: 15.5px; line-height: 1.62; color: var(--tw-warm-700); margin: 0; text-wrap: pretty; }
 
 /* ===== Closing CTA ===== */
 .tw-bb-cta { background: var(--tw-cream); border-top: 5px solid var(--tw-teal-600); padding: 52px 0 60px; text-align: center; }
