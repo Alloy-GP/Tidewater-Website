@@ -1847,3 +1847,8 @@
   .tw-mserv-row { padding: 14px 16px; }
   .tw-mserv-foot { padding: 14px 16px; }
 }
+
+/* Board Brief subscribe band — success state (replaces the form in place). */
+.tw-rnews-thanks { font-family: var(--tw-font-heading); font-weight: 700; font-size: 16px; line-height: 1.5; color: var(--tw-cream); margin: 0; align-self: center; }
+.tw-rnews-archive { display: inline-block; margin-top: 16px; font-family: var(--tw-font-heading); font-weight: 700; font-size: 13.5px; color: var(--tw-cream); text-decoration: none; border-bottom: 1px solid rgba(254,252,248,.35); padding-bottom: 2px; transition: all .15s var(--tw-ease-out); }
+.tw-rnews-archive:hover { color: var(--tw-gold); border-bottom-color: var(--tw-gold); }

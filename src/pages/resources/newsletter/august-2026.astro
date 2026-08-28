@@ -1,0 +1,190 @@
+---
+// The Board Brief — Issue No. 01, August 2026.
+// Content is the web version of the August 2026 Mailchimp email and must stay
+// 1:1 with it. The "In This Issue" lines are generated from the issue's
+// `topics` in src/data/newsletters.ts, so they cannot drift from the index —
+// but they must be kept identical to the section headlines by hand.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Header from '../../../components/Header.astro';
+import IssueSection from '../../../components/newsletter/IssueSection.astro';
+import ResourcesNewsletter from '../../../components/ResourcesNewsletter.astro';
+import Footer from '../../../components/Footer.astro';
+import { articleSchema, breadcrumbSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+import { ISSUES, issueLabel } from '../../../data/newsletters';
+
+const issue = ISSUES.find((i) => i.slug === 'august-2026')!;
+const pageUrl = `${SITE.url}/resources/newsletter/${issue.slug}`;
+
+const headline = 'August is where next year gets decided.';
+const description =
+  'The Board Brief, August 2026: CAI Chesapeake Symposium registration, why boards should join CAI, the August-to-December pace for 2027 budgets and service contracts, storm-season prep, and pool close-out.';
+
+const EXPO_URL = 'https://caimdches.glueup.com/event/2026-annual-symposium-expo-attendee-registration-186547/';
+const CHAPTER_URL = 'https://www.caionline.org/find-a-chapter/';
+const CAI_MAILTO = 'mailto:advantage@tidewaterproperty.com?subject=CAI%20Membership';
+
+const pageSchema = [
+  articleSchema({
+    headline,
+    description,
+    url: pageUrl,
+    datePublished: issue.dateIso,
+    image: `${SITE.url}${issue.ogImage}`,
+    about: ['HOA budgets', 'reserve funding', 'storm preparedness', 'service contracts', 'CAI'],
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'Resources', url: SITE.url + '/resources' },
+    { name: 'The Board Brief', url: SITE.url + '/resources/newsletter' },
+    { name: `${issue.month} ${issue.year}`, url: pageUrl },
+  ]),
+];
+---
+<BaseLayout
+  title="The Board Brief — August 2026: 2027 Budgets, Storm Season, CAI Expo | Tidewater"
+  description={description}
+  ogType="article"
+  ogImage={issue.ogImage}
+  ogImageAlt={issue.imageAlt}
+  bodyClass="tw-bb"
+  pageStylesheet={['styles-pages.css', 'styles-newsletter-issue.css']}
+  pageSchema={pageSchema}
+>
+  <Topbar variant="homeowner" />
+  <Header activeNav="resources" />
+
+  <article>
+    <section class="tw-bb-hero">
+      <div class="tw-bb-hero-bg"></div>
+      <div class="tw-bb-hero-paper"></div>
+      <div class="tw-bb-hero-inner">
+        <nav class="tw-bb-crumb" aria-label="Breadcrumb">
+          <a href="/resources">Resources</a>
+          <span class="sep" aria-hidden="true">&rsaquo;</span>
+          <a href="/resources/newsletter">The Board Brief</a>
+          <span class="sep" aria-hidden="true">&rsaquo;</span>
+          <span class="cur" aria-current="page">{issue.month} {issue.year}</span>
+        </nav>
+        <div class="tw-bb-issuebar">
+          <span>The Board Brief</span>
+          <span>{issueLabel(issue)} &middot; {issue.month} {issue.year}</span>
+        </div>
+        <h1>{headline}</h1>
+        <span class="tw-bb-rule"></span>
+        <p>Budget season, contract renewals, and the worst of storm season all land inside the same eight weeks &mdash; and the boards that get ahead of them in August aren&rsquo;t the ones scrambling in November. Here&rsquo;s what belongs on your agenda this month.</p>
+      </div>
+    </section>
+
+    <nav class="tw-bb-index" aria-label="In this issue">
+      <div class="tw-bb-wrap">
+        <div class="tw-bb-index-head">In This Issue</div>
+        <ol>
+          {issue.topics.map((topic, i) => (
+            <li>
+              <a href={`#s${i + 1}`}>
+                <span class="n">{String(i + 1).padStart(2, '0')}</span>
+                <span>{topic}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </nav>
+
+    <IssueSection id="s1" n={1} kicker="What's Happening" title="Registration is open for the CAI Chesapeake Annual Symposium & Expo">
+      <p>One day, and it covers more ground than most boards get all year &mdash; governance sessions, legislative updates, and an expo floor with 100+ of the resource partners your community actually hires. If you seated a new director this year, this is the fastest way to bring them up to speed.</p>
+      <dl class="tw-bb-detail">
+        <div><dt>Date</dt><dd>Monday, October 5, 2026 &middot; 8:00 AM &ndash; 4:30 PM</dd></div>
+        <div><dt>Where</dt><dd>Maryland LIVE! Casino &middot; Hanover, MD</dd></div>
+        <div><dt>Cost</dt><dd>$50 board member ticket &middot; breakfast &amp; lunch included</dd></div>
+      </dl>
+      <a class="tw-btn tw-btn-primary tw-btn-lg" href={EXPO_URL} target="_blank" rel="noopener">Register for the Expo</a>
+    </IssueSection>
+
+    <IssueSection id="s2" n={2} kicker="Board Development" title="Your board seat comes with a resource — use it" tone="linen">
+      <p>Community Associations Institute membership gives volunteer leaders governance guidance, model policies, and education built specifically for boards &mdash; not borrowed from corporate management. Two Tidewater leaders have served as Chesapeake Chapter President, so we&rsquo;ll say it plainly: the boards we see engaging with CAI make faster, cleaner decisions.</p>
+      <p>Want in? Email us and we&rsquo;ll walk your board through joining &mdash; which chapter you belong to, what membership includes, and how to expense it.</p>
+      <div class="tw-bb-actions">
+        <a class="tw-btn tw-btn-primary tw-btn-lg" href={CAI_MAILTO}>Join CAI</a>
+        <a class="tw-btn tw-btn-outline tw-btn-lg" href={CHAPTER_URL} target="_blank" rel="noopener">Find Your Chapter</a>
+      </div>
+    </IssueSection>
+
+    <IssueSection id="s3" n={3} kicker="On The Agenda" title="2027 budgets start now — not in October">
+      <p>For associations on a January fiscal year, a budget adopted under deadline is one nobody had time to question. Working backward from adoption, here&rsquo;s the pace that keeps the conversation unhurried.</p>
+      <div class="tw-bb-timeline">
+        <div>
+          <span class="when">August</span>
+          <p>Pull year-to-date actuals and flag every line running over. Surprises found now are adjustments; found in November they&rsquo;re special assessments.</p>
+        </div>
+        <div>
+          <span class="when">September</span>
+          <p>Revisit the reserve study and confirm the funding plan still matches the component schedule &mdash; requirements vary by state, so ask your manager what yours expects. Then review the draft with your community manager, and bring the questions owners will ask; they&rsquo;re the same ones every year.</p>
+        </div>
+        <div>
+          <span class="when">Oct&ndash;Nov</span>
+          <p>Hold the budget adoption meeting and adopt the 2027 budget.</p>
+        </div>
+        <div>
+          <span class="when">December</span>
+          <p>Send the budget notice to owners inside your governing-document window.</p>
+        </div>
+      </div>
+      <div class="tw-bb-callout">
+        <div class="tw-bb-callout-label">Don&rsquo;t Forget</div>
+        <p><strong>2027 service contracts follow the same clock.</strong> Landscaping, snow, trash, pool, and janitorial all need renewing or re-bidding before the budget is finalized &mdash; a contract you haven&rsquo;t priced is a budget number you&rsquo;re guessing at. Ask your manager which agreements auto-renew and when notice is due.</p>
+      </div>
+    </IssueSection>
+
+    <IssueSection id="s4" n={4} kicker="Storm Season" title="Storm season peaks August through October" tone="linen">
+      <p>The Mid-Atlantic rarely takes a direct hit &mdash; it takes the rain, the wind, and the trees. Five things worth confirming before the first named storm turns north.</p>
+      <ol class="tw-bb-checklist">
+        <li><span><strong>Tree canopy.</strong> Address deadwood and limbs over roofs, walkways, and parked cars now &mdash; arborists book solid the week after a storm.</span></li>
+        <li><span><strong>Drainage.</strong> Clear gutters, downspouts, storm drains, and inlets. A lot of what gets reported as flooding turns out to be a blocked inlet.</span></li>
+        <li><span><strong>Insurance review.</strong> Confirm your wind/hail deductible and the master-policy line between association and unit owner. Our QA team schedules these reviews with independent brokers at no cost.</span></li>
+        <li><span><strong>Loose objects.</strong> Pool furniture, grills, signage, construction materials, trash enclosures &mdash; write the pre-storm securing plan once and reuse it.</span></li>
+        <li><span><strong>Emergency contacts.</strong> Confirm the board&rsquo;s after-hours chain and remind owners of the 24/7 line. Our callback standard is 20 minutes &mdash; that only works if people know the number.</span></li>
+      </ol>
+    </IssueSection>
+
+    <IssueSection id="s5" n={5} kicker="Seasonal Close-Out" title="Close the pool properly. Book fall landscaping early.">
+      <p>Walk the pool with your operator <em>before</em> the last day &mdash; while the equipment is still running and the contractor is still on site. Photograph the deck, furniture, gates, and pump room, and log every repair for the winter scope; a punch list written in September is a fraction of the cost of one discovered in April.</p>
+      <p>Same logic outdoors: aeration, overseeding, fall fertilization, and leaf removal fill up fast, and the crews left in October are the ones nobody rebooked. Lock your scope now &mdash; and roll the pricing straight into the 2027 budget while you&rsquo;re at it.</p>
+    </IssueSection>
+
+    <section class="tw-bb-spotlight">
+      <div class="tw-bb-wrap">
+        <div class="tw-bb-spot-eyebrow">Meet The Team</div>
+        <div class="tw-bb-spot-card">
+          <h3>Joe Jordan, CMCA, AMS, PCAM</h3>
+          <div class="tw-bb-spot-role">Director of Quality Assurance</div>
+          <span class="tw-bb-spot-rule"></span>
+          <p>Joe leads the department most management companies don&rsquo;t have one of. Before Tidewater he was a senior project manager at a leading engineering firm &mdash; which is why our safety inspections, vendor compliance program, and insurance database read like engineering documents rather than checklists. He also served as CAI Chesapeake Chapter President in 2012, and if your reserve study has ever come back with real answers, this is why.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tw-bb-cta">
+      <div class="tw-bb-wrap">
+        <div class="tw-bb-cta-eyebrow">Since 1989</div>
+        <h2>More than management.<br />Your trusted community resource.</h2>
+        <p>Family-owned, AAMC&reg;-accredited, and managing 400+ communities across the Mid-Atlantic &mdash; with portfolios sized so your manager knows your community, not just your account number.</p>
+        <div class="tw-bb-proof">
+          <div><span class="v">400+</span><span class="l">Communities</span></div>
+          <div><span class="v">AAMC&reg;</span><span class="l">CAI Accredited</span></div>
+          <div><span class="v">20 min</span><span class="l">Emergency callback</span></div>
+        </div>
+        <div class="tw-bb-cta-actions">
+          <a class="tw-btn tw-btn-primary tw-btn-lg" href="/request-a-proposal">Talk With Tidewater</a>
+          <a class="tw-bb-cta-link" href="/resources/newsletter">&larr; All issues</a>
+        </div>
+        <p class="tw-bb-cta-fine">Already with us? Reach your community manager any time through the <a href="https://tidewater.cincwebaxis.com" target="_blank" rel="noopener">Tidewater PM portal</a>.</p>
+      </div>
+    </section>
+  </article>
+
+  <ResourcesNewsletter />
+  <Footer />
+</BaseLayout>

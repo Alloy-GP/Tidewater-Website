@@ -2,7 +2,7 @@ export const prerender = false;
 
 // src/pages/api/subscribe.ts
 // Newsletter subscribe handler.
-// Fields expected: email, firstName (optional).
+// Fields expected: email, firstName (optional), audience (optional).
 
 import type { APIRoute } from "astro";
 import { Resend } from "resend";
@@ -23,6 +23,15 @@ mailchimp.setConfig({
   server:  import.meta.env.MAILCHIMP_SERVER_PREFIX,
 });
 
+// Radio value -> Mailchimp tag. Keys must match the values rendered by
+// ResourcesNewsletter.astro; an unrecognised value simply adds no tag.
+const AUDIENCE_TAGS: Record<string, string> = {
+  board:  "HOA Boards",
+  rental: "Rental Owners",
+  home:   "Homeowners",
+  all:    "All Updates",
+};
+
 export const POST: APIRoute = async ({ request }) => {
   try {
     const data      = await request.formData();
@@ -33,6 +42,10 @@ export const POST: APIRoute = async ({ request }) => {
     }
     const email     = data.get("email")?.toString().trim()     ?? "";
     const firstName = data.get("firstName")?.toString().trim() ?? "";
+    // Which list the subscriber picked, from the newsletter band's radio group.
+    // Passed to Mailchimp as a tag so segments can be built without needing
+    // interest-group IDs wired into the codebase.
+    const audience  = data.get("audience")?.toString().trim()  ?? "";
 
     if (!email) {
       return new Response(
@@ -48,6 +61,7 @@ export const POST: APIRoute = async ({ request }) => {
           email_address: email,
           status:        "subscribed",
           merge_fields:  { FNAME: firstName },
+          ...(AUDIENCE_TAGS[audience] ? { tags: [AUDIENCE_TAGS[audience]] } : {}),
         });
       } catch (err: any) {
         const alreadyExists = err?.response?.body?.title === "Member Exists";
@@ -77,7 +91,7 @@ export const POST: APIRoute = async ({ request }) => {
           replyTo: EMAIL_CONFIG.replyTo,
           to:      EMAIL_CONFIG.notify,
           subject: `New newsletter signup: ${email}`,
-          html:    `<h2>New Newsletter Signup</h2><p><strong>Email:</strong> ${email}</p>${firstName ? `<p><strong>Name:</strong> ${firstName}</p>` : ""}`,
+          html:    `<h2>New Newsletter Signup</h2><p><strong>Email:</strong> ${email}</p>${firstName ? `<p><strong>Name:</strong> ${firstName}</p>` : ""}${AUDIENCE_TAGS[audience] ? `<p><strong>List:</strong> ${AUDIENCE_TAGS[audience]}</p>` : ""}`,
         })
       );
     } catch (notifyError) {
