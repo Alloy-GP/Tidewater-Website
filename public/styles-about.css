@@ -285,12 +285,10 @@
 .tw-jobs-portal-teams li { font-family: var(--tw-font-body); font-size: 15px; line-height: 1.4; color: rgba(254,252,248,0.92); display: flex; align-items: center; gap: 12px; }
 .tw-jobs-portal-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--tw-teal); flex-shrink: 0; }
 
-.tw-jobs-foot { margin-top: 36px; padding: 28px 32px; background: var(--tw-cream); border: 1px dashed var(--tw-border-strong); border-radius: 10px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
-.tw-jobs-foot p { margin: 0; font-family: var(--tw-font-body); font-size: 15px; color: var(--tw-fg); }
 
 /* responsive */
 @media (max-width: 1080px) {
-  .tw-about-hero-grid, .tw-origin-grid, .tw-leadintro-grid, .tw-careers-hero-grid, .tw-benefits, .tw-jobs-foot { grid-template-columns: 1fr; gap: 40px; }
+  .tw-about-hero-grid, .tw-origin-grid, .tw-leadintro-grid, .tw-careers-hero-grid, .tw-benefits { grid-template-columns: 1fr; gap: 40px; }
   .tw-jobs-portal { grid-template-columns: 1fr; }
   .tw-jobs-portal-main { padding: 36px 28px; }
   .tw-jobs-portal-side { padding: 32px 28px; }
@@ -326,7 +324,6 @@
   .tw-creds-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
 
   /* Jobs foot — stack on mobile */
-  .tw-jobs-foot { grid-template-columns: 1fr; gap: 16px; }
 
   /* Manifesto/about section padding */
   .tw-manifesto-inner { padding: 0 20px; }
