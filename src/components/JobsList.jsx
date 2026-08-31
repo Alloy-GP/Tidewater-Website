@@ -43,11 +43,6 @@ export default function JobsList() {
           </aside>
         </div>
 
-        <div className="tw-jobs-foot">
-          <p>Nothing on the portal that fits? We&rsquo;re always interested in hearing from experienced HOA managers, accountants, and trades professionals across the Mid-Atlantic.</p>
-          <a href="mailto:careers@tidewaterproperty.com" className="tw-btn tw-btn-outline">Send us your r&eacute;sum&eacute;</a>
-        </div>
-
       </div>
     </section>
   );
