@@ -42,17 +42,22 @@ const schemas = [
   <Topbar variant="default" />
   <Header activeNav="hoa" logoSrc="/assets/Tidewater-Management-Logo.svg" logoAlt="Tidewater Management" />
   <Breadcrumb variant="management" crumbs={[{ label: "Management", href: "/hoa-management" }, { label: "HOA Management" }]} />
-  <Hero config={{ heroWidget: 'fitcheck' }} />
+  <Hero config={{
+    heroWidget: 'fitcheck',
+    eyebrow: 'HOA Property Management for Boards',
+    titleHtml: 'Hands-on HOA property management. <em>Personalized insight.</em>',
+    lede: 'HOA property management for single-family, townhome, and master-planned communities — we know your community, understand your board\'s priorities, and stay connected down to the details. Family-owned in the Mid-Atlantic since 1989.',
+  }} />
   <TrustBar />
 
   <!-- Association-management head-term content (SEO: community association management / HOA management companies / HOA management services) -->
   <section class="tw-section">
     <div class="tw-container tw-assoc-intro" style="max-width:840px">
       <div class="tw-eyebrow">Community Association Management</div>
-      <h2 class="tw-section-title" style="margin:10px 0 14px">One of the Mid-Atlantic&rsquo;s most trusted <em>HOA management companies.</em></h2>
+      <h2 class="tw-section-title" style="margin:10px 0 14px">Community association management from one of the Mid-Atlantic&rsquo;s most trusted <em>HOA management companies.</em></h2>
       <p class="tw-section-lede">Tidewater delivers full-service community association management for homeowners associations, condominiums, co-ops, townhome communities, and commercial associations. Our HOA management services cover board and governance support, financial management, covenant enforcement, maintenance coordination, and 24/7 resident response &mdash; under one flat, transparent fee.</p>
       <p class="tw-assoc-links">
-        Explore our services: <a href="/condo-management">condo association management</a>, <a href="/hoa-management/commercial-association-management">commercial property &amp; association management</a>, <a href="/hoa-management/hoa-financial-management">HOA financial management</a>, <a href="/hoa-management/townhome-community-management">townhome &amp; planned communities</a>, and <a href="/hoa-management/maryland">HOA management in Maryland</a>.
+        Explore our services: <a href="/condo-management">condo association management</a>, <a href="/hoa-management/commercial-association-management">commercial property &amp; association management</a>, <a href="/hoa-management/hoa-financial-management">HOA financial management</a>, <a href="/hoa-management/townhome-community-management">townhome &amp; planned communities</a>, <a href="/hoa-management/covenant-enforcement">covenant enforcement</a>, in-house <a href="/maintenance-services">property maintenance</a>, and <a href="/hoa-management/maryland">HOA management in Maryland</a>.
       </p>
     </div>
   </section>
@@ -71,6 +76,7 @@ const schemas = [
         <div style="font-family:var(--tw-font-heading);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tw-teal);margin-bottom:10px">Service Area</div>
         <h2 style="font-family:var(--tw-font-heading);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--tw-dark);margin:0 0 12px">HOA management across the Mid-Atlantic</h2>
         <p style="font-family:var(--tw-font-body);font-size:1rem;color:var(--tw-fg-muted);margin:0">We serve 400+ communities in Maryland, DC, Virginia, Delaware, Pennsylvania, and West Virginia. Explore county-level coverage, local regulations, and community profiles for your state.</p>
+        <p class="tw-assoc-links">Maryland county pages: <a href="/hoa-management/maryland/anne-arundel-county">Anne Arundel County</a>, <a href="/hoa-management/maryland/baltimore-county">Baltimore County</a>, <a href="/hoa-management/maryland/howard-county">Howard County</a>, <a href="/hoa-management/maryland/montgomery-county">Montgomery County</a>, <a href="/hoa-management/maryland/carroll-county">Carroll County</a>, and <a href="/hoa-management/maryland/frederick-county">Frederick County</a>.</p>
       </div>
       <div class="tw-geo-counties">
         <a href="/hoa-management/maryland" class="tw-geo-county-card featured">
@@ -80,7 +86,7 @@ const schemas = [
               <div class="tw-geo-county-name">Maryland</div>
               <div class="tw-geo-county-meta">Our largest service state · 20 counties</div>
             </div>
-            <div class="tw-geo-county-body">Baltimore City &amp; County, Anne Arundel, Howard, Montgomery, Prince George\'s, Carroll, Harford, Frederick, and more.</div>
+            <div class="tw-geo-county-body">Baltimore City &amp; County, Anne Arundel, Howard, Montgomery, Prince George&rsquo;s, Carroll, Harford, Frederick, and more.</div>
             <div class="tw-geo-county-cta">
               Explore Maryland coverage
               <svg class="tw-geo-county-cta-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-left:4px"><path d="M3 8h10M9 4l4 4-4 4"/></svg>

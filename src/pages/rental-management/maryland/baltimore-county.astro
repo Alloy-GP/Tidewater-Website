@@ -6,7 +6,7 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import Footer from '../../../components/Footer.astro';
 import CTA from '../../../components/CTA.astro';
 import RentalGeo, { GEO_DATA_BALTIMORE_COUNTY as geo } from '../../../components/RentalGeo.jsx';
-import { breadcrumbSchema, serviceSchema } from '../../../lib/schema';
+import { breadcrumbSchema, serviceSchema, faqSchema, localBusinessSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
 
 const pageUrl = `${SITE.url}/rental-management/maryland/baltimore-county`;
@@ -24,12 +24,19 @@ const schemas = [
     { name: 'Maryland', url: SITE.url + '/rental-management/maryland' },
     { name: 'Baltimore County', url: pageUrl },
   ]),
+  faqSchema(geo.faqs),
+  localBusinessSchema({
+    office: 'hq',
+    url: pageUrl,
+    areaServed: { name: 'Baltimore County', type: 'AdministrativeArea', containedIn: 'Maryland' },
+    description: geo.schemaDesc,
+  }),
 ];
 ---
 
 <BaseLayout
-  title="Baltimore County Rental Management | Tidewater"
-  description="Rental property management in Baltimore County, MD — Towson, Owings Mills, Cockeysville, Pikesville, Timonium. HQ county. Flat 8.5% fee."
+  title="Baltimore County Property Management | Flat 8.5% Fee | Tidewater"
+  description="Baltimore County property management from Tidewater's Owings Mills headquarters — Towson, Owings Mills, Pikesville, Cockeysville, Catonsville. Flat 8.5% fee, no tenant-placement upcharge, county rental license handled."
   ogType="website"
   pageSchema={schemas}
   pageStylesheet="styles-geo.css"

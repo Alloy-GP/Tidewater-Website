@@ -6,7 +6,7 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import Footer from '../../../components/Footer.astro';
 import CTA from '../../../components/CTA.astro';
 import RentalMaryland from '../../../components/RentalMaryland.jsx';
-import { breadcrumbSchema, serviceSchema } from '../../../lib/schema';
+import { breadcrumbSchema, serviceSchema, localBusinessSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
 
 const pageUrl = `${SITE.url}/rental-management/maryland`;
@@ -23,6 +23,12 @@ const schemas = [
     { name: 'Rental Management', url: SITE.url + '/rental-management' },
     { name: 'Maryland', url: pageUrl },
   ]),
+  localBusinessSchema({
+    office: 'hq',
+    url: pageUrl,
+    areaServed: { name: 'Maryland', type: 'State' },
+    description: 'Maryland rental property management for single-family and small-multifamily owners — flat 8.5% fee, AppFolio-backed, from Tidewater’s Owings Mills headquarters.',
+  }),
 ];
 ---
 

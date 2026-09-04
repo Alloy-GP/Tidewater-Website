@@ -5,10 +5,10 @@ import Topbar from '../components/Topbar.astro';
 import Footer from '../components/Footer.astro';
 import CTA from '../components/CTA.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
-import { serviceSchema, breadcrumbSchema } from '../lib/schema';
+import { serviceSchema, breadcrumbSchema, localBusinessSchema } from '../lib/schema';
 import { SITE } from '../config/site';
 
-const pageUrl = `${SITE.url}/service-areas/`;
+const pageUrl = `${SITE.url}/service-areas`;
 const pageDesc = "HOA and condo management across Maryland, DC, Virginia, Delaware, Pennsylvania, and West Virginia. AAMC-accredited regional managers. Family-owned since 1989.";
 
 const schemas = [
@@ -22,6 +22,27 @@ const schemas = [
     { name: 'Home', url: SITE.url + '/' },
     { name: 'Service Areas', url: pageUrl },
   ]),
+  localBusinessSchema({
+    office: 'hq',
+    url: pageUrl,
+    areaServed: [
+      { name: 'Maryland', type: 'State' }, { name: 'Washington, DC', type: 'City' }, { name: 'Virginia', type: 'State' },
+      { name: 'Delaware', type: 'State' }, { name: 'Pennsylvania', type: 'State' }, { name: 'West Virginia', type: 'State' },
+    ],
+    description: pageDesc,
+  }),
+  localBusinessSchema({
+    office: 'oceanCity',
+    url: pageUrl,
+    areaServed: [{ name: 'Ocean City', type: 'City', containedIn: 'Maryland' }, { name: 'Worcester County', type: 'AdministrativeArea', containedIn: 'Maryland' }],
+    description: 'Tidewater’s Ocean City office — rental management and association services on the barrier island, West Ocean City, Ocean Pines and Berlin.',
+  }),
+  localBusinessSchema({
+    office: 'delaware',
+    url: pageUrl,
+    areaServed: [{ name: 'Sussex County', type: 'AdministrativeArea', containedIn: 'Delaware' }],
+    description: 'Tidewater’s Delaware office in the Lewes–Rehoboth corridor — coastal Sussex County rental management.',
+  }),
 ];
 
 const states = [

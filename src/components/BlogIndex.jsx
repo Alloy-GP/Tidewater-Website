@@ -1,6 +1,7 @@
 // Blog Landing — /blog
 // Featured post + categorized grid + search + sticky filter chips + pagination
 
+import Pic from './Pic.jsx';
 import { useState, useMemo } from 'react';
 import { ALL_POSTS as _ALL_POSTS } from './BlogPostsData.js';
 
@@ -71,7 +72,7 @@ function BlogIndexFeatured({ post }) {
 
         <a href={post.href} className="tw-bi-featured">
           <div className={`tw-bi-featured-img ${post.tone}`}>
-            {post.coverImage && <img src={post.coverImage} alt={post.coverAlt || post.title.replace(/<[^>]+>/g, '')} />}
+            {post.coverImage && <Pic src={post.coverImage} alt={post.coverAlt || post.title.replace(/<[^>]+>/g, '')} width={post.coverWidth || 1400} height={post.coverHeight || 763} loading="eager" fetchpriority="high" />}
           </div>
           <div className="tw-bi-featured-body">
             <span className={`tw-bi-featured-cat ${post.tone}`}>{post.category.label}</span>
@@ -121,7 +122,7 @@ function BlogIndexCard({ post }) {
   return (
     <a href={post.href} className="tw-bi-card">
       <div className={`tw-bi-card-img ${post.tone}`}>
-        {post.coverImage && <img src={post.coverImage} alt={post.coverAlt || post.title.replace(/<[^>]+>/g, '')} />}
+        {post.coverImage && <Pic src={post.coverImage} alt={post.coverAlt || post.title.replace(/<[^>]+>/g, '')} width={post.coverWidth || 1400} height={post.coverHeight || 763} />}
       </div>
       <div className="tw-bi-card-body">
         <span className={`tw-bi-card-cat ${post.tone}`}>{post.category.label}</span>

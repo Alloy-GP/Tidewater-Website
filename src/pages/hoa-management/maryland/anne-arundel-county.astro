@@ -6,8 +6,10 @@ import Footer from '../../../components/Footer.astro';
 import CTA from '../../../components/CTA.astro';
 import FaqAccordion from '../../../components/FaqAccordion.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
-import { serviceSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema';
+import { serviceSchema, breadcrumbSchema, faqSchema, localBusinessSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
+
+const pageUrl = SITE.url + '/hoa-management/maryland/anne-arundel-county';
 
 const countyFaqs = [
   { q: 'How is HOA management different in Anne Arundel County vs. other Maryland counties?', a: "Three things stand out: (1) Waterfront density — Annapolis, Edgewater, and Mayo have a high concentration of waterfront condo associations with master-policy and dock-management complications most Maryland counties don\'t face. (2) Master-planned scale — Crofton and Odenton have layered HOAs with sub-associations. (3) State capital regulatory access — Annapolis is the seat of state government. Tidewater\'s Anne Arundel team is sized for all three." },
@@ -22,16 +24,22 @@ const schemas = [
   serviceSchema({
     name: 'HOA Management Anne Arundel County Maryland',
     description: 'AAMC-accredited HOA and condo association management across Anne Arundel County, Maryland — Annapolis, Severna Park, Crofton, Pasadena, Glen Burnie, and Odenton.',
-    url: SITE.url + '/hoa-management/maryland/anne-arundel-county/',
+    url: pageUrl,
     areaServed: 'Anne Arundel County, Maryland',
   }),
   breadcrumbSchema([
     { name: 'Home', url: SITE.url + '/' },
     { name: 'HOA Management', url: SITE.url + '/hoa-management' },
     { name: 'Maryland', url: SITE.url + '/hoa-management/maryland' },
-    { name: 'Anne Arundel County', url: SITE.url + '/hoa-management/maryland/anne-arundel-county/' },
+    { name: 'Anne Arundel County', url: pageUrl },
   ]),
   faqSchema(countyFaqs),
+  localBusinessSchema({
+    office: 'hq',
+    url: pageUrl,
+    areaServed: { name: 'Anne Arundel County', type: 'AdministrativeArea', containedIn: 'Maryland' },
+    description: 'AAMC-accredited HOA and condo association management across Anne Arundel County, Maryland — Annapolis, Severna Park, Crofton, Pasadena, Glen Burnie, and Odenton.',
+  }),
 ];
 ---
 <BaseLayout
@@ -135,56 +143,56 @@ const schemas = [
         <p class="tw-section-lede">Most counties have one or two HOA-dense pockets. Anne Arundel has twelve. Here&rsquo;s where we&rsquo;re active.</p>
       </div>
       <div class="tw-geo-neighbors">
-        <a href="#" class="tw-geo-neighbor">
+        <div class="tw-geo-neighbor">
           <div class="tw-geo-neighbor-name">Annapolis</div>
           <div class="tw-geo-neighbor-meta">38 communities &middot; waterfront focus</div>
           <span class="tw-geo-neighbor-tag">County seat</span>
-        </a>
-        <a href="#" class="tw-geo-neighbor">
+        </div>
+        <div class="tw-geo-neighbor">
           <div class="tw-geo-neighbor-name">Severna Park</div>
           <div class="tw-geo-neighbor-meta">24 communities &middot; single-family</div>
-        </a>
-        <a href="#" class="tw-geo-neighbor">
+        </div>
+        <div class="tw-geo-neighbor">
           <div class="tw-geo-neighbor-name">Crofton</div>
           <div class="tw-geo-neighbor-meta">19 communities &middot; planned</div>
-        </a>
-        <a href="#" class="tw-geo-neighbor">
+        </div>
+        <div class="tw-geo-neighbor">
           <div class="tw-geo-neighbor-name">Pasadena</div>
           <div class="tw-geo-neighbor-meta">22 communities &middot; mixed</div>
-        </a>
-        <a href="#" class="tw-geo-neighbor">
+        </div>
+        <div class="tw-geo-neighbor">
           <div class="tw-geo-neighbor-name">Glen Burnie</div>
           <div class="tw-geo-neighbor-meta">18 communities &middot; townhome dense</div>
-        </a>
-        <a href="#" class="tw-geo-neighbor">
+        </div>
+        <div class="tw-geo-neighbor">
           <div class="tw-geo-neighbor-name">Odenton</div>
           <div class="tw-geo-neighbor-meta">14 communities &middot; new construction</div>
           <span class="tw-geo-neighbor-tag">Growing</span>
-        </a>
-        <a href="#" class="tw-geo-neighbor">
+        </div>
+        <div class="tw-geo-neighbor">
           <div class="tw-geo-neighbor-name">Arnold</div>
           <div class="tw-geo-neighbor-meta">8 communities &middot; single-family</div>
-        </a>
-        <a href="#" class="tw-geo-neighbor">
+        </div>
+        <div class="tw-geo-neighbor">
           <div class="tw-geo-neighbor-name">Edgewater</div>
           <div class="tw-geo-neighbor-meta">6 communities &middot; waterfront</div>
-        </a>
-        <a href="#" class="tw-geo-neighbor">
+        </div>
+        <div class="tw-geo-neighbor">
           <div class="tw-geo-neighbor-name">Linthicum</div>
           <div class="tw-geo-neighbor-meta">4 communities &middot; transit hub</div>
-        </a>
-        <a href="#" class="tw-geo-neighbor">
+        </div>
+        <div class="tw-geo-neighbor">
           <div class="tw-geo-neighbor-name">Davidsonville</div>
           <div class="tw-geo-neighbor-meta">3 communities &middot; rural HOA</div>
-        </a>
-        <a href="#" class="tw-geo-neighbor">
+        </div>
+        <div class="tw-geo-neighbor">
           <div class="tw-geo-neighbor-name">Mayo</div>
           <div class="tw-geo-neighbor-meta">3 communities &middot; waterfront</div>
-        </a>
-        <a href="#" class="tw-geo-neighbor">
+        </div>
+        <div class="tw-geo-neighbor">
           <div class="tw-geo-neighbor-name">Shady Side</div>
           <div class="tw-geo-neighbor-meta">2 communities &middot; seasonal</div>
-        </a>
+        </div>
       </div>
     </div>
   </section>
@@ -360,6 +368,23 @@ const schemas = [
         </div>
         <FaqAccordion items={countyFaqs} defaultOpen={0} />
       </div>
+    </div>
+  </section>
+
+  <!-- Nearby counties + related -->
+  <section class="tw-geo-section mist" style="padding:64px 0">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">Nearby Counties &amp; Related</div>
+        <h2 class="tw-section-title" style="margin:10px 0 14px">We manage across the Mid-Atlantic.</h2>
+      </div>
+      <div class="tw-geo-law-grid">
+        <a href="/hoa-management/maryland/howard-county" class="tw-geo-law-card" style="text-decoration:none"><h3>Howard County</h3><p>Columbia village associations, Ellicott City historic district, west-county developer transitions.</p><div class="tw-geo-law-foot">HOA management in Howard County &rarr;</div></a>
+        <a href="/hoa-management/maryland/baltimore-county" class="tw-geo-law-card gold" style="text-decoration:none"><h3>Baltimore County</h3><p>Our home county &mdash; Towson, Owings Mills, Pikesville, Catonsville. Older stock, real reserves.</p><div class="tw-geo-law-foot">HOA management in Baltimore County &rarr;</div></a>
+        <a href="/hoa-management/maryland/montgomery-county" class="tw-geo-law-card sage" style="text-decoration:none"><h3>Montgomery County</h3><p>CCOC registration, Chapter 10B, Bethesda and Silver Spring high-rise condominiums.</p><div class="tw-geo-law-foot">HOA management in Montgomery County &rarr;</div></a>
+        <a href="/rental-management/maryland/anne-arundel-county" class="tw-geo-law-card clay" style="text-decoration:none"><h3>Anne Arundel rentals</h3><p>Single-family and small-multifamily rental management for owners inside the communities we manage.</p><div class="tw-geo-law-foot">Anne Arundel County property management &rarr;</div></a>
+      </div>
+      <p style="margin:24px 0 0;font-family:var(--tw-font-body);font-size:.95rem;color:var(--tw-fg-muted)">Also: <a href="/hoa-management/maryland/carroll-county" style="color:var(--tw-teal)">Carroll County</a>, <a href="/hoa-management/maryland/frederick-county" style="color:var(--tw-teal)">Frederick County</a>, and <a href="/hoa-management/maryland" style="color:var(--tw-teal)">all Maryland counties</a>.</p>
     </div>
   </section>
 

@@ -24,12 +24,12 @@ function RentalDelawareHero() {
           </div>
           <div className="tw-geo-hero-stats">
             <div>
-              <div className="tw-geo-hero-stat-num">40+</div>
-              <div className="tw-geo-hero-stat-label">Delaware rentals managed [confirm]</div>
+              <div className="tw-geo-hero-stat-num">Local office</div>
+              <div className="tw-geo-hero-stat-label">20375 John J Williams Hwy, Lewes &mdash; Lewes/Rehoboth corridor</div>
             </div>
             <div>
               <div className="tw-geo-hero-stat-num gold">8.5%</div>
-              <div className="tw-geo-hero-stat-label">Flat monthly fee [confirm DE structure]</div>
+              <div className="tw-geo-hero-stat-label">Flat monthly fee on long-term leases &mdash; no tenant-placement upcharge</div>
             </div>
             <div>
               <div className="tw-geo-hero-stat-num">No sales tax</div>
@@ -91,7 +91,7 @@ function RentalDelawareWhy() {
     {
       tone: 'gold', meta: 'Market rhythm',
       title: 'Seasonal demand curve',
-      body: 'Coastal Delaware rentals don&rsquo;t lease on a Mid-Atlantic timeline. Summer-season demand from Memorial Day to Labor Day drives weekly &amp; monthly leases. Year-round long-term leases run a different cadence. [PLACEHOLDER &mdash; confirm Tidewater&rsquo;s scope: long-term, seasonal, or both.]',
+      body: 'Coastal Delaware rentals don&rsquo;t lease on a Mid-Atlantic timeline. Summer-season demand from Memorial Day to Labor Day drives weekly &amp; monthly leases. Year-round long-term leases run a different cadence. We manage both long-term and seasonal leases; we don&rsquo;t operate as a weekly vacation-rental booking shop.',
       foot: 'Different operating model than mainland MD',
     },
     {
@@ -137,30 +137,26 @@ function RentalDelawareCities() {
     {
       slug: 'rehoboth', name: 'Rehoboth Beach',
       meta: 'Adjacent market',
-      body: 'Boardwalk and downtown Rehoboth rentals. Heavy summer-season demand; some year-round long-term in surrounding neighborhoods. [PLACEHOLDER &mdash; confirm Tidewater scope in Rehoboth.]',
+      body: 'Boardwalk and downtown Rehoboth rentals. Heavy summer-season demand; some year-round long-term in surrounding neighborhoods. Served from our Lewes office.',
       cities: ['Downtown Rehoboth', 'North Shores', 'Pines'],
-      href: '#',
     },
     {
       slug: 'bethany', name: 'Bethany Beach',
       meta: 'Coastal community',
-      body: 'Family-oriented coastal community south of Rehoboth. Single-family, condo, and townhome inventory. [PLACEHOLDER &mdash; confirm Tidewater scope in Bethany.]',
+      body: 'Family-oriented coastal community south of Rehoboth. Single-family, condo, and townhome inventory. Served from our Lewes office.',
       cities: ['Bethany Beach', 'South Bethany', 'Sea Colony'],
-      href: '#',
     },
     {
       slug: 'fenwick', name: 'Fenwick Island',
       meta: 'Coastal community',
-      body: "Delaware\'s southernmost beach community, adjoining Ocean City, MD. Mixed inventory. [PLACEHOLDER &mdash; confirm Tidewater scope in Fenwick.]",
+      body: "Delaware\'s southernmost beach community, adjoining Ocean City, MD. Mixed inventory. Covered jointly with our <a href=\"/rental-management/maryland/ocean-city\">Ocean City office</a>.",
       cities: ['Fenwick Island', 'Selbyville'],
-      href: '#',
     },
     {
       slug: 'inland', name: 'Sussex Inland',
       meta: 'Year-round market',
-      body: 'Milton, Millsboro, Long Neck, Frankford, Dagsboro. Year-round single-family rental market for the workforce supporting the coastal economy. [PLACEHOLDER &mdash; confirm scope.]',
+      body: 'Milton, Millsboro, Long Neck, Frankford, Dagsboro. Year-round single-family rental market for the workforce supporting the coastal economy.',
       cities: ['Milton', 'Millsboro', 'Long Neck', 'Frankford'],
-      href: '#',
     },
   ];
   return (
@@ -172,8 +168,10 @@ function RentalDelawareCities() {
           <p className="tw-section-lede">Lewes is our anchor; the rest of the Sussex coastal corridor is in active service rotation. We&rsquo;ll be honest on the first call about which areas we can serve well today.</p>
         </div>
         <div className="tw-geo-counties">
-          {cities.map((c, i) => (
-            <a key={i} href={c.href} className={`tw-geo-county-card ${c.featured ? 'featured' : ''}`}>
+          {cities.map((c, i) => {
+            const Card = c.href ? 'a' : 'div';
+            return (
+            <Card key={i} {...(c.href ? { href: c.href } : {})} className={`tw-geo-county-card ${c.featured ? 'featured' : ''}`}>
               {c.featured && <span className="tw-geo-county-flag">Live page</span>}
               <div className="tw-geo-county-head">
                 <h3 className="tw-geo-county-name">{c.name}</h3>
@@ -184,10 +182,11 @@ function RentalDelawareCities() {
                 {c.cities.map((city, j) => <span key={j} className="tw-geo-county-city">{city}</span>)}
               </div>
               <div className="tw-geo-county-cta">
-                {c.featured ? 'View area page' : 'Page coming soon'} <span className="tw-geo-county-cta-arrow">&rarr;</span>
+                {c.featured ? <>View area page <span className="tw-geo-county-cta-arrow">&rarr;</span></> : <span style={{ color: 'var(--tw-fg-muted)' }}>Coverage area</span>}
               </div>
-            </a>
-          ))}
+            </Card>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -213,7 +212,7 @@ function RentalDelawareAudiences() {
     },
     {
       tone: 'clay', eyebrow: 'Audience 04', title: 'Accidental coastal landlords',
-      body: "You inherited Mom\'s Lewes condo. You bought during the 2020s and the math changed. We do a free rent-vs-sell analysis and lay out the math both ways. [PLACEHOLDER — confirm cross-referral to Tidewater Realty for sell-side.]",
+      body: "You inherited Mom\'s Lewes condo. You bought during the 2020s and the math changed. We do a free rent-vs-sell analysis and lay out the math both ways — and if selling wins, Tidewater Realty can list it.",
       pills: ['Rent-vs-sell analysis', 'Compliance handled', 'Lease drafting', 'Realty referral available'],
     },
   ];

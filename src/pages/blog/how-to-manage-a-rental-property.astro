@@ -1,4 +1,5 @@
 ---
+import Pic from '../../components/Pic.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Topbar from '../../components/Topbar.astro';
 import Header from '../../components/Header.astro';
@@ -74,8 +75,8 @@ const schemas = [
     headline: 'How to Manage a Rental Property: A Practical Guide for Landlords',
     description: 'How to manage a rental property — tenant screening, maintenance, finances, and local regulations. Know when to self-manage and when to hire a property manager.',
     datePublished: '2026-05-16',
+    author: { name: post.author.name, jobTitle: post.author.role, credentials: post.author.creds },
     dateModified: '2026-05-16',
-    authorName: 'Cody Bishop',
     image: `${SITE.url}/assets/how-to-manage-a-rental-property.jpg`,
     url: pageUrl,
   }),
@@ -132,7 +133,7 @@ const schemas = [
 
   <div class="tw-blog-cover">
     <div class="tw-blog-cover-inner">
-      <img src={post.coverImage} alt={post.coverAlt} />
+      <Pic src={post.coverImage} alt={post.coverAlt} width={1400} height={763} loading="eager" fetchpriority="high" />
       <div class="tw-blog-cover-paper"></div>
     </div>
     <p class="tw-blog-cover-caption">{post.coverCaption}</p>
@@ -363,11 +364,11 @@ const schemas = [
 
           <div class="tw-blog-tags">
             <span class="tw-blog-tags-label">Tagged</span>
-            <a href="#" class="tw-blog-tag">Rental property management</a>
-            <a href="#" class="tw-blog-tag">Landlord tips</a>
-            <a href="#" class="tw-blog-tag">Tenant screening</a>
-            <a href="#" class="tw-blog-tag">Property inspections</a>
-            <a href="#" class="tw-blog-tag">Maryland landlord</a>
+            <a href="/rental-management" class="tw-blog-tag">Rental property management</a>
+            <a href="/blog" class="tw-blog-tag">Landlord tips</a>
+            <a href="/rental-management/maryland" class="tw-blog-tag">Tenant screening</a>
+            <a href="/maintenance-services" class="tw-blog-tag">Property inspections</a>
+            <a href="/rental-management/maryland" class="tw-blog-tag">Maryland landlord</a>
           </div>
         </article>
 
@@ -395,7 +396,7 @@ const schemas = [
         {related.map(p => (
           <a href={p.href} class="tw-blog-related-card">
             <div class={`tw-blog-related-card-img ${p.tone}`}>
-              {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || p.title} />}
+              {p.coverImage && <Pic src={p.coverImage} alt={p.coverAlt || p.title} width={1400} height={763} />}
             </div>
             <div class="tw-blog-related-card-body">
               <div class={`tw-blog-related-card-cat ${p.tone}`}>{p.category}</div>

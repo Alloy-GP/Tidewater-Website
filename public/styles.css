@@ -1,4 +1,6 @@
 @import url('design-system/colors_and_type.css');
+/* <picture> wrappers (Pic.astro / Pic.jsx) must not add a box of their own */
+picture { display: contents; }
 
 :root { --tw-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1); }
 * { box-sizing: border-box; }

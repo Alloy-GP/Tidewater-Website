@@ -94,6 +94,7 @@ export const ALL_POSTS = [
     author: 'Marcia Goldstein',
     tone: '',
     coverImage: '/assets/tidewater-self-managed-hoa-board-members-frustrated.jpg',
+    coverWidth: 1400, coverHeight: 781,
     coverAlt: 'Self-managed HOA board members reviewing financial documents at a community meeting',
   },
 ];

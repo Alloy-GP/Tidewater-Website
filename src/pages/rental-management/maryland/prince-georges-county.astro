@@ -6,7 +6,7 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import Footer from '../../../components/Footer.astro';
 import CTA from '../../../components/CTA.astro';
 import RentalGeo, { GEO_DATA_PRINCE_GEORGES_COUNTY as geo } from '../../../components/RentalGeo.jsx';
-import { breadcrumbSchema, serviceSchema } from '../../../lib/schema';
+import { breadcrumbSchema, serviceSchema, faqSchema, localBusinessSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
 
 const pageUrl = `${SITE.url}/rental-management/maryland/prince-georges-county`;
@@ -24,6 +24,13 @@ const schemas = [
     { name: 'Maryland', url: SITE.url + '/rental-management/maryland' },
     { name: "Prince George\'s County", url: pageUrl },
   ]),
+  faqSchema(geo.faqs),
+  localBusinessSchema({
+    office: 'hq',
+    url: pageUrl,
+    areaServed: { name: "Prince George's County", type: 'AdministrativeArea', containedIn: 'Maryland' },
+    description: geo.schemaDesc,
+  }),
 ];
 ---
 

@@ -1,4 +1,5 @@
 ---
+import Pic from './Pic.astro';
 const { variant = 'hoa' } = Astro.props;
 const isRealty = variant === 'realty';
 const isRental = variant === 'rental';
@@ -6,7 +7,7 @@ const isRental = variant === 'rental';
 <section class="tw-section tw-section-cream" id="about">
   <div class="tw-container tw-mission-grid">
     <div class="tw-mission-image" style={isRental ? 'align-self:stretch' : ''}>
-      <img src="/assets/hero-mission.jpg" alt={isRealty ? 'Tidewater Realty agents with a client' : 'Family-owned community in front of their home'} style={isRental ? 'height:100%;aspect-ratio:unset' : ''} />
+      <Pic src="/assets/hero-mission.jpg" alt={isRealty ? 'Tidewater Realty agents with a client' : 'Family-owned community in front of their home'} width={1400} height={939} style={isRental ? 'height:100%;aspect-ratio:unset' : ''} />
       <div class="tw-mission-image-overlay">
         <p class="tw-mission-image-overlay-quote">&ldquo;Still family-owned. Still independent. Still here.&rdquo;</p>
         <div class="tw-mission-image-overlay-meta">Stanley &amp; Marc Greenberg</div>

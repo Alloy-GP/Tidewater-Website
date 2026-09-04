@@ -269,11 +269,12 @@ function FaqHero({ query, onQuery, onSearch }) {
           <span className="tw-faq-popular-label">Popular</span>
           {popular.map((p, i) => (
             <span key={i}>
-              <a
+              <button
+                type="button"
                 className="tw-faq-popular-link"
-                href="#"
-                onClick={(e) => { e.preventDefault(); onQuery(p); onSearch(); }}
-              >{p}</a>
+                style={{ background: 'none', border: 0, padding: 0, font: 'inherit', color: 'inherit', cursor: 'pointer' }}
+                onClick={() => { onQuery(p); onSearch(); }}
+              >{p}</button>
               {i < popular.length - 1 && <span style={{color:'var(--tw-border-strong)'}}>·</span>}
             </span>
           ))}

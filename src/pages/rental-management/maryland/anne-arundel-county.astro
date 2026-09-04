@@ -6,7 +6,7 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import Footer from '../../../components/Footer.astro';
 import CTA from '../../../components/CTA.astro';
 import RentalGeo, { GEO_DATA_ANNE_ARUNDEL as geo } from '../../../components/RentalGeo.jsx';
-import { breadcrumbSchema, serviceSchema } from '../../../lib/schema';
+import { breadcrumbSchema, serviceSchema, faqSchema, localBusinessSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
 
 const pageUrl = `${SITE.url}/rental-management/maryland/anne-arundel-county`;
@@ -24,6 +24,13 @@ const schemas = [
     { name: 'Maryland', url: SITE.url + '/rental-management/maryland' },
     { name: 'Anne Arundel County', url: pageUrl },
   ]),
+  faqSchema(geo.faqs),
+  localBusinessSchema({
+    office: 'hq',
+    url: pageUrl,
+    areaServed: { name: 'Anne Arundel County', type: 'AdministrativeArea', containedIn: 'Maryland' },
+    description: geo.schemaDesc,
+  }),
 ];
 ---
 

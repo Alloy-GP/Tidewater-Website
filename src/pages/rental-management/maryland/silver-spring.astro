@@ -6,7 +6,7 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import Footer from '../../../components/Footer.astro';
 import CTA from '../../../components/CTA.astro';
 import RentalGeo, { GEO_DATA_SILVER_SPRING as geo } from '../../../components/RentalGeo.jsx';
-import { breadcrumbSchema, serviceSchema } from '../../../lib/schema';
+import { breadcrumbSchema, serviceSchema, faqSchema, localBusinessSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
 
 const pageUrl = `${SITE.url}/rental-management/maryland/silver-spring`;
@@ -24,6 +24,13 @@ const schemas = [
     { name: 'Maryland', url: SITE.url + '/rental-management/maryland' },
     { name: 'Silver Spring', url: pageUrl },
   ]),
+  faqSchema(geo.faqs),
+  localBusinessSchema({
+    office: 'hq',
+    url: pageUrl,
+    areaServed: { name: 'Silver Spring', type: 'City', containedIn: 'Maryland' },
+    description: geo.schemaDesc,
+  }),
 ];
 ---
 

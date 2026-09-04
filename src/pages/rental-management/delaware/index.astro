@@ -6,7 +6,7 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import Footer from '../../../components/Footer.astro';
 import CTA from '../../../components/CTA.astro';
 import RentalDelaware from '../../../components/RentalDelaware.jsx';
-import { breadcrumbSchema, serviceSchema } from '../../../lib/schema';
+import { breadcrumbSchema, serviceSchema, localBusinessSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
 
 const pageUrl = `${SITE.url}/rental-management/delaware`;
@@ -23,6 +23,15 @@ const schemas = [
     { name: 'Rental Management', url: SITE.url + '/rental-management' },
     { name: 'Delaware', url: pageUrl },
   ]),
+  localBusinessSchema({
+    office: 'delaware',
+    url: pageUrl,
+    areaServed: [
+      { name: 'Sussex County', type: 'AdministrativeArea', containedIn: 'Delaware' },
+      { name: 'Delaware', type: 'State' },
+    ],
+    description: 'Rental property management across coastal Delaware from Tidewater’s office on John J Williams Highway in Lewes — Lewes, Rehoboth Beach, Bethany Beach, Fenwick Island and Sussex County.',
+  }),
 ];
 ---
 

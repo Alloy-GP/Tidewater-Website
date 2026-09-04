@@ -7,6 +7,7 @@
 //     titleHtml="Resources for <em>HOA boards.</em>"
 //   />
 
+import Pic from './Pic.jsx';
 import { ALL_POSTS } from './BlogPostsData.js';
 
 export default function FromTheBlog({ categories, eyebrow, titleHtml, limit = 3, viewAllHref = '/blog' }) {
@@ -48,7 +49,7 @@ export default function FromTheBlog({ categories, eyebrow, titleHtml, limit = 3,
           {picked.map((p, i) => (
             <a key={i} href={p.href} className="tw-blog-related-card">
               <div className={`tw-blog-related-card-img ${p.tone || ''}`}>
-                {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || ''} />}
+                {p.coverImage && <Pic src={p.coverImage} alt={p.coverAlt || ''} width={p.coverWidth || 1400} height={p.coverHeight || 763} />}
               </div>
               <div className="tw-blog-related-card-body">
                 <span className={`tw-blog-related-card-cat ${p.tone || ''}`}>

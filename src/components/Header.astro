@@ -1,4 +1,5 @@
 ---
+import Pic from './Pic.astro';
 import MobileMenu from './MobileMenu.jsx';
 interface Props {
   activeNav?: string | null;
@@ -14,7 +15,7 @@ const currentPath = Astro.url.pathname;
 <header class="tw-header">
   <div class="tw-header-inner">
     <a class="tw-header-logo" href="/">
-      <img src={logoSrc} alt={logoAlt} />
+      <img src={logoSrc} alt={logoAlt} width={logoSrc.includes("logo-main.svg") ? 166 : 536} height={logoSrc.includes("logo-main.svg") ? 70 : 226} />
     </a>
 
     <nav class="tw-header-nav" id="tw-nav">
@@ -28,7 +29,7 @@ const currentPath = Astro.url.pathname;
           <!-- Col 1: feature image -->
           <a href="/about" class="tw-mega-feature">
             <div class="tw-mega-feature-img">
-              <img src="/assets/hero-mission.jpg" alt="Tidewater team — Owings Mills, Maryland" />
+              <Pic src="/assets/hero-mission.jpg" alt="Tidewater team — Owings Mills, Maryland" width={1400} height={939} />
               <div class="tw-mega-feature-overlay"></div>
             </div>
             <div class="tw-mega-feature-body">
@@ -74,7 +75,7 @@ const currentPath = Astro.url.pathname;
             <div class="tw-mega-col-label">Solutions</div>
             <div class="tw-mega-solcards">
               <a href="/solutions/switching-hoa-management-company" class="tw-mega-solcard">
-                <img src="/assets/how-to-switch-hoa-management-companies.jpg" alt="Switching HOA management companies" />
+                <Pic src="/assets/how-to-switch-hoa-management-companies.jpg" alt="Switching HOA management companies" width={1400} height={763} />
                 <div class="tw-mega-solcard-overlay"></div>
                 <div class="tw-mega-solcard-body">
                   <div class="tw-mega-solcard-eyebrow">Thinking of switching?</div>
@@ -83,7 +84,7 @@ const currentPath = Astro.url.pathname;
                 </div>
               </a>
               <a href="/solutions/self-managed-hoa-transition" class="tw-mega-solcard">
-                <img src="/assets/hoa-management-transition-community.jpg" alt="Transitioning a self-managed HOA to professional management" />
+                <Pic src="/assets/hoa-management-transition-community.jpg" alt="Transitioning a self-managed HOA to professional management" width={1400} height={763} />
                 <div class="tw-mega-solcard-overlay"></div>
                 <div class="tw-mega-solcard-body">
                   <div class="tw-mega-solcard-eyebrow">Self-managed today?</div>
@@ -169,7 +170,7 @@ const currentPath = Astro.url.pathname;
           <!-- Col 1: blog feature -->
           <a href="/blog" class="tw-mega-feature">
             <div class="tw-mega-feature-img">
-              <img src="/assets/how-to-switch-hoa-management-companies.jpg" alt="Tidewater HOA Board Playbook blog" />
+              <Pic src="/assets/how-to-switch-hoa-management-companies.jpg" alt="Tidewater HOA Board Playbook blog" width={1400} height={763} />
               <div class="tw-mega-feature-overlay"></div>
             </div>
             <div class="tw-mega-feature-body">

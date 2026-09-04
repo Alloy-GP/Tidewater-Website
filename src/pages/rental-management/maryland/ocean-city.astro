@@ -6,7 +6,7 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import Footer from '../../../components/Footer.astro';
 import CTA from '../../../components/CTA.astro';
 import RentalGeo, { GEO_DATA_OCEAN_CITY as geo } from '../../../components/RentalGeo.jsx';
-import { breadcrumbSchema, serviceSchema } from '../../../lib/schema';
+import { breadcrumbSchema, serviceSchema, faqSchema, localBusinessSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
 
 const pageUrl = `${SITE.url}/rental-management/maryland/ocean-city`;
@@ -24,6 +24,13 @@ const schemas = [
     { name: 'Maryland', url: SITE.url + '/rental-management/maryland' },
     { name: 'Ocean City', url: pageUrl },
   ]),
+  faqSchema(geo.faqs),
+  localBusinessSchema({
+    office: 'oceanCity',
+    url: pageUrl,
+    areaServed: { name: 'Ocean City', type: 'City', containedIn: 'Maryland' },
+    description: geo.schemaDesc,
+  }),
 ];
 ---
 

@@ -159,6 +159,14 @@ function RentalMarylandCounties() {
       cities: ['Bowie', 'Largo', 'Greenbelt', 'Hyattsville'],
       href: '/rental-management/maryland/prince-georges-county',
     },
+    {
+      name: 'Ocean City',
+      meta: 'Worcester County · Coastal office',
+      featured: true,
+      body: 'Condo-dense, seasonal, and run from our own office at 8101 Coastal Highway. Long-term and seasonal leases on the island, West OC, Ocean Pines, and Berlin. Town rental license handled.',
+      cities: ['Downtown OC', 'Midtown', 'North OC', 'West OC', 'Ocean Pines'],
+      href: '/rental-management/maryland/ocean-city',
+    },
   ];
   return (
     <section id="counties" className="tw-geo-section cream">
