@@ -48,9 +48,9 @@ export const SITE = {
   // ── Physical offices (LocalBusiness nodes) ─────────────────────────────────
   // One entry per office with a street address we can verify from site copy.
   // Every location page emits a LocalBusiness for the office that serves it,
-  // with `areaServed` set to that page's county/city. The Columbia Pike office
-  // is referenced in copy but has no street address on file — add it here once
-  // confirmed and it becomes available to localBusinessSchema().
+  // with `areaServed` set to that page's county/city. Addresses per the master
+  // brief (Section 1 · Office Locations); Silver Spring units and ZIP verified
+  // against the property listing for 10770 Columbia Pike.
   localBusinessName: 'Tidewater Property Management',
   offices: {
     hq: {
@@ -62,10 +62,19 @@ export const SITE = {
       postalCode:      '21117',
       telephone:       '+14435480191',
     },
+    silverSpring: {
+      id:              'silver-spring',
+      label:           'Silver Spring Office',
+      streetAddress:   '10770 Columbia Pike, Units E-49 & E-51',
+      addressLocality: 'Silver Spring',
+      addressRegion:   'MD',
+      postalCode:      '20901',
+      telephone:       '+14435480191',
+    },
     oceanCity: {
       id:              'ocean-city',
       label:           'Ocean City Office',
-      streetAddress:   '8101 Coastal Highway',
+      streetAddress:   '8101 Coastal Highway, Suite 5',
       addressLocality: 'Ocean City',
       addressRegion:   'MD',
       postalCode:      '21842',
@@ -77,6 +86,7 @@ export const SITE = {
       streetAddress:   '20375 John J Williams Highway',
       addressLocality: 'Lewes',
       addressRegion:   'DE',
+      postalCode:      '19958',
       telephone:       '+14435480191',
     },
   },

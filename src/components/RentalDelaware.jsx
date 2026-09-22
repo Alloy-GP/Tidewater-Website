@@ -28,8 +28,8 @@ function RentalDelawareHero() {
               <div className="tw-geo-hero-stat-label">20375 John J Williams Hwy, Lewes &mdash; Lewes/Rehoboth corridor</div>
             </div>
             <div>
-              <div className="tw-geo-hero-stat-num gold">8.5%</div>
-              <div className="tw-geo-hero-stat-label">Flat monthly fee on long-term leases &mdash; no tenant-placement upcharge</div>
+              <div className="tw-geo-hero-stat-num gold">30 min</div>
+              <div className="tw-geo-hero-stat-label">Emergency callback &mdash; contractually guaranteed, 24/7</div>
             </div>
             <div>
               <div className="tw-geo-hero-stat-num">No sales tax</div>
@@ -91,7 +91,7 @@ function RentalDelawareWhy() {
     {
       tone: 'gold', meta: 'Market rhythm',
       title: 'Seasonal demand curve',
-      body: 'Coastal Delaware rentals don&rsquo;t lease on a Mid-Atlantic timeline. Summer-season demand from Memorial Day to Labor Day drives weekly &amp; monthly leases. Year-round long-term leases run a different cadence. We manage both long-term and seasonal leases; we don&rsquo;t operate as a weekly vacation-rental booking shop.',
+      body: 'Coastal Delaware rentals don&rsquo;t lease on a Mid-Atlantic timeline. Summer-season demand from Memorial Day to Labor Day drives weekly &amp; monthly leases. Year-round long-term leases run a different cadence.',
       foot: 'Different operating model than mainland MD',
     },
     {

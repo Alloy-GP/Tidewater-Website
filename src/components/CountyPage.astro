@@ -36,7 +36,7 @@ const schemas = [
     { name: c.name, url: c.seo.canonical },
   ]),
   faqSchema(c.faq),
-  localBusinessSchema({ office: 'hq', url: c.seo.canonical, areaServed: area, description: c.seo.description }),
+  localBusinessSchema({ office: c.office ?? 'hq', url: c.seo.canonical, areaServed: area, description: c.seo.description }),
 ];
 ---
 <!-- 1. Hero -->

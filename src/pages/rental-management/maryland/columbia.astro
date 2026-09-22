@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Header from '../../../components/Header.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import Footer from '../../../components/Footer.astro';
+import CTA from '../../../components/CTA.astro';
+import RentalGeo, { GEO_DATA_COLUMBIA as geo } from '../../../components/RentalGeo.jsx';
+import { breadcrumbSchema, serviceSchema, faqSchema, localBusinessSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+
+const pageUrl = `${SITE.url}/rental-management/maryland/columbia`;
+
+const schemas = [
+  serviceSchema({
+    name: 'Rental Property Management — Columbia, MD',
+    description: geo.schemaDesc,
+    url: pageUrl,
+    areaServed: 'Columbia, Maryland',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'Rental Management', url: SITE.url + '/rental-management' },
+    { name: 'Maryland', url: SITE.url + '/rental-management/maryland' },
+    { name: 'Howard County', url: SITE.url + '/rental-management/maryland/howard-county' },
+    { name: 'Columbia', url: pageUrl },
+  ]),
+  faqSchema(geo.faqs),
+  localBusinessSchema({
+    office: 'hq',
+    url: pageUrl,
+    areaServed: { name: 'Columbia', type: 'City', containedIn: 'Maryland' },
+    description: geo.schemaDesc,
+  }),
+];
+---
+
+<BaseLayout
+  title="Columbia, MD Property Management | Tidewater"
+  description="Property management in Columbia, MD — single-family, townhome and condo rentals across all ten villages and Town Center. Columbia Association charge, village covenants and the Howard County rental license handled."
+  ogType="website"
+  pageSchema={schemas}
+  pageStylesheet="styles-geo.css"
+>
+  <Topbar />
+  <Header activeNav="rental" logoSrc="/assets/Tidewater-Management-Logo.svg" logoAlt="Tidewater Management" />
+  <Breadcrumb variant="management" crumbs={[
+    { label: 'Rental Management', href: '/rental-management' },
+    { label: 'Maryland', href: '/rental-management/maryland' },
+    { label: 'Howard County', href: '/rental-management/maryland/howard-county' },
+    { label: 'Columbia' },
+  ]} />
+  <RentalGeo geo={geo} client:load />
+  <CTA variant="rental" />
+  <Footer />
+</BaseLayout>

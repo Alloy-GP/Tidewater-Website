@@ -47,6 +47,8 @@ export interface County {
   nearby?: { name: string; slug: string; note: string }[];
   /** Cross-links outside the HOA county tree (e.g. the rental page for the same county). Rendered with `nearby`. */
   related?: { label: string; href: string; note: string }[];
+  /** Office that serves this county (key of SITE.offices). Defaults to HQ. */
+  office?: 'hq' | 'silverSpring' | 'oceanCity' | 'delaware';
   map?: { query: string; zoom: number; caption: string };
 }
 
@@ -57,8 +59,8 @@ export const COUNTIES: Record<string, County> = {
     layout: 'editorial',
     seo: {
       focusKeyword: 'hoa management howard county maryland',
-      title: 'HOA Management Howard County MD — Columbia, Ellicott City | Tidewater',
-      description: 'AAMC-accredited HOA & condo association management across Howard County — Columbia, Ellicott City, Elkridge, Fulton, Clarksville. AAMC-accredited, family-owned since 1989.',
+      title: 'HOA Management Howard County MD — Columbia, Ellicott City',
+      description: 'AAMC-accredited HOA & condo association management across Howard County — Columbia, Ellicott City, Elkridge, Fulton, Clarksville.',
       canonical: 'https://tidewaterproperty.com/hoa-management/maryland/howard-county',
     },
     hero: {
@@ -74,7 +76,7 @@ export const COUNTIES: Record<string, County> = {
       eyebrow: 'Local Context',
       title: 'Howard County isn’t one HOA market. <em>It’s four.</em>',
       body: [
-        'Columbia is the county’s largest planned community, and its village-association structure &mdash; layered under the Columbia Association &mdash; creates a governance model that exists almost nowhere else in Maryland. Boards there manage a sub-association budget and CA assessments at the same time.',
+        'Columbia is the county’s largest planned community, and its village-association structure &mdash; layered under the Columbia Association &mdash; creates a governance model that exists almost nowhere else in Maryland. Boards there manage a sub-association budget and CA assessments at the same time. If you are new to the board, start with <a href="/blog/what-is-a-community-association-manager">what a community association manager actually does</a> for a community like yours.',
         'North of Route 40, Ellicott City brings historic-district architectural review and post-flood stormwater obligations that materially change a reserve plan. West, Clarksville and Fulton are the county’s newest construction — associations still in developer transition, where the fight is warranty claims and turnover audits, not deferred maintenance. And Elkridge and Jessup townhome HOAs sit closest to the BWI corridor, with the highest rental-tenant ratios in the county.',
         'A manager who only knows one of those four does not really know Howard County. Portfolios here are capped at 8&ndash;12 communities, which is what makes it possible to know the difference.',
       ],
@@ -132,7 +134,7 @@ export const COUNTIES: Record<string, County> = {
       { q: 'How quickly can you take over our Howard County community?', a: 'The controlling factor is the notice period in your current management agreement, not us. Once notice is served we work to a <strong>30/60/90-day</strong> transition plan covering records, bank accounts, vendor assignment and the first reporting cycle. See the <a href="/solutions/switching-hoa-management-company">full transition timeline</a>.' },
       { q: 'What does HOA management cost in Howard County?', a: 'It depends on community size, vendor count, meeting cadence and complexity, so we quote per association rather than publishing a rate card. <a href="/request-a-proposal">Request a proposal</a> and you will get a line-item number for your community. Boards that want professional books without full service can start at our <a href="/hoa-management/hoa-financial-management">financial-only tier</a>.' },
       { q: 'Can we speak with other Howard County boards first?', a: 'Always. We’ll connect you with 3–5 board presidents from comparable Howard County communities — same size, similar stage, similar issues. You call them, no script.' },
-      { q: 'Which office covers Howard County?', a: 'Our headquarters is in Owings Mills, and we also hold an office on Columbia Pike &mdash; four insured office locations in total across the region. Main line: <strong>(443) 548-0191</strong>, with a <strong>30-minute contractual callback guarantee</strong> after hours, answered by Tidewater managers rather than an answering service.' },
+      { q: 'Which office covers Howard County?', a: 'Our headquarters is in Owings Mills, about 25 minutes from Columbia, with a second Maryland office on Columbia Pike in Silver Spring &mdash; four insured office locations in total across the region. Main line: <strong>(443) 548-0191</strong>, with a <strong>30-minute contractual callback guarantee</strong> after hours, answered by Tidewater managers rather than an answering service.' },
     ],
     resources: {
       eyebrow: 'Local Resources',
@@ -184,7 +186,7 @@ export const COUNTIES: Record<string, County> = {
     layout: 'directory',
     seo: {
       focusKeyword: 'hoa management carroll county maryland',
-      title: 'HOA Management Carroll County MD — Westminster, Eldersburg | Tidewater',
+      title: 'HOA Management Carroll County MD — Westminster, Eldersburg',
       description: 'HOA & condo association management across Carroll County — Westminster, Eldersburg, Sykesville, Mount Airy, Hampstead. AAMC-accredited. Family-owned since 1989.',
       canonical: 'https://tidewaterproperty.com/hoa-management/maryland/carroll-county',
     },
@@ -203,7 +205,7 @@ export const COUNTIES: Record<string, County> = {
       body: [
         'Carroll County associations skew smaller and newer than the rest of our footprint, and that changes what good management looks like. A small HOA does not need a full-time on-site presence. It needs accurate books, a reserve study that holds up, covenant enforcement that does not turn into neighbors suing neighbors, and someone who answers the phone.',
         'It also cannot absorb a surprise. Private-road maintenance in Eldersburg and Sykesville, well and septic coordination in the rural north county, and stormwater-pond obligations across most post-2000 developments are the three line items that break small Carroll budgets. All three are predictable if someone is planning for them.',
-        'Plenty of boards here still self-manage, and for them the jump to full service is not the only option — our financial-only tier is a standalone finance department for boards that want to keep running their own operations.',
+        'Plenty of boards here still self-manage, and for them the jump to full service is not the only option — our financial-only tier is a standalone finance department for boards that want to keep running their own operations. Not sure what full management would even cover? <a href="/blog/what-is-a-community-association-manager">What a community association manager does</a> is the two-minute version.',
       ],
       atAGlance: [
         { label: 'County seat', value: 'Westminster' },
@@ -309,13 +311,14 @@ export const COUNTIES: Record<string, County> = {
   // no incorporated municipalities; Towson is the county seat; the state
   // reserve-study requirement (Real Prop. §11B) applies statewide.
   // ───────────────────────────────────────────────────────────
+
   'baltimore-county': {
     name: 'Baltimore County', shortName: 'Baltimore County', state: 'Maryland', stateAbbr: 'MD', slug: 'baltimore-county',
     service: 'HOA Management', servicePath: 'hoa-management', countySeat: 'Towson',
     layout: 'editorial',
     seo: {
       focusKeyword: 'hoa management baltimore county maryland',
-      title: 'HOA Management Baltimore County MD — Towson, Owings Mills | Tidewater',
+      title: 'HOA Management Baltimore County MD — Towson, Owings Mills',
       description: 'HOA & condo association management across Baltimore County — Towson, Owings Mills, Pikesville, Cockeysville, Catonsville, White Marsh. Tidewater’s home county since 1989. AAMC-accredited.',
       canonical: 'https://tidewaterproperty.com/hoa-management/maryland/baltimore-county',
     },
@@ -334,7 +337,7 @@ export const COUNTIES: Record<string, County> = {
       body: [
         'Baltimore County has no incorporated towns or cities. Every permit, inspection, zoning question and code complaint runs through county government in Towson, which keeps jurisdiction simple but means one calendar and one set of offices for every association in the county — from Catonsville to the Pennsylvania line.',
         'Much of the county’s association housing dates from the 1970s-to-1990s build-out of Towson, Pikesville, Owings Mills and the Perry Hall–White Marsh corridor. Roofs, parking lots, elevators and boilers in those communities are on their second replacement cycle, and a reserve study that still reads like the developer’s original schedule is the most common problem we inherit at takeover.',
-        'Proximity matters here in a way it cannot elsewhere. The operations and accounting teams that support every Tidewater community work from Owings Mills, so a Baltimore County board gets in-person meetings, same-day site visits and a manager who already knows the county inspector rather than a regional team travelling in.',
+        'Proximity matters here in a way it cannot elsewhere. The operations and accounting teams that support every Tidewater community work from Owings Mills, so a Baltimore County board gets in-person meetings, same-day site visits and a manager who already knows the county inspector rather than a regional team travelling in. New to the role? Start with <a href="/blog/what-is-a-community-association-manager">what a community association manager does</a>.',
       ],
       atAGlance: [
         { label: 'County seat', value: 'Towson' },
@@ -442,13 +445,15 @@ export const COUNTIES: Record<string, County> = {
   // Gaithersburg and Takoma Park are incorporated; Bethesda, Silver Spring,
   // Wheaton and Germantown are not.
   // ───────────────────────────────────────────────────────────
+
   'montgomery-county': {
     name: 'Montgomery County', shortName: 'Montgomery', state: 'Maryland', stateAbbr: 'MD', slug: 'montgomery-county',
     service: 'HOA Management', servicePath: 'hoa-management', countySeat: 'Rockville',
     layout: 'editorial',
+    office: 'silverSpring',
     seo: {
       focusKeyword: 'hoa management montgomery county maryland',
-      title: 'HOA Management Montgomery County MD — Rockville, Bethesda | Tidewater',
+      title: 'HOA Management Montgomery County MD — Rockville, Bethesda',
       description: 'HOA & condo association management across Montgomery County — Rockville, Bethesda, Silver Spring, Gaithersburg, Germantown. CCOC registration handled. AAMC-accredited, family-owned since 1989.',
       canonical: 'https://tidewaterproperty.com/hoa-management/maryland/montgomery-county',
     },
@@ -467,7 +472,7 @@ export const COUNTIES: Record<string, County> = {
       body: [
         'Montgomery County has a body most Maryland counties do not: the <strong>Commission on Common Ownership Communities</strong>, part of the county’s Office of Consumer Protection. Every HOA, condominium and cooperative in the county registers with the CCOC annually and pays a per-unit fee, and for many owner–association disputes a CCOC filing is the required first stop before anyone can go to court. Boards that treat the registration as optional find out otherwise at the worst time.',
         'Then there is the municipal layer. Rockville, Gaithersburg and Takoma Park are incorporated cities with their own permitting, inspections and &mdash; in Takoma Park’s case &mdash; a separate rent stabilization law. Bethesda, Silver Spring, Wheaton and Germantown are unincorporated and answer to the county alone. Two associations a mile apart can face different filing calendars.',
-        'The building stock is just as varied: Metro-corridor mid-rise and high-rise condominiums in Bethesda and Silver Spring, 1980s-to-2000s townhome HOAs across Germantown and Gaithersburg, and developer-controlled communities still turning over in Clarksburg. We staff each of those differently, because they are different jobs.',
+        'The building stock is just as varied: Metro-corridor mid-rise and high-rise condominiums in Bethesda and Silver Spring, 1980s-to-2000s townhome HOAs across Germantown and Gaithersburg, and developer-controlled communities still turning over in Clarksburg. We staff each of those differently, because they are different jobs. For a plain-English view of the role itself, read <a href="/blog/what-is-a-community-association-manager">what a community association manager does</a>.',
       ],
       atAGlance: [
         { label: 'County seat', value: 'Rockville' },
@@ -578,13 +583,14 @@ export const COUNTIES: Record<string, County> = {
   // Ballenger Creek and Brunswick Crossing are the major planned communities.
   // No named manager on file for Frederick — section self-hides.
   // ───────────────────────────────────────────────────────────
+
   'frederick-county': {
     name: 'Frederick County', shortName: 'Frederick', state: 'Maryland', stateAbbr: 'MD', slug: 'frederick-county',
     service: 'HOA Management', servicePath: 'hoa-management', countySeat: 'Frederick',
     layout: 'editorial',
     seo: {
       focusKeyword: 'hoa management frederick county maryland',
-      title: 'HOA Management Frederick County MD — Frederick, Urbana | Tidewater',
+      title: 'HOA Management Frederick County MD — Frederick, Urbana',
       description: 'HOA & condo association management across Frederick County — Frederick, Urbana, Ballenger Creek, Mount Airy, Brunswick, Middletown. Developer transitions handled. AAMC-accredited, family-owned since 1989.',
       canonical: 'https://tidewaterproperty.com/hoa-management/maryland/frederick-county',
     },
@@ -603,7 +609,7 @@ export const COUNTIES: Record<string, County> = {
       body: [
         'A large share of Frederick County’s association housing is less than twenty years old, and much of it is still working through the hand-off from developer control to a homeowner board. That is a different job from managing a mature community: the turnover audit, warranty claims, the first honest reserve baseline and the first real budget matter far more than deferred maintenance. Tidewater co-leads a dedicated developer management program for exactly this stage.',
         'The City of Frederick is its own jurisdiction &mdash; incorporated, with its own permitting and inspections and a Historic Preservation Commission that reviews exterior work in the downtown historic district before any association architectural approval means anything. Condominium conversions in older downtown buildings carry that overlay permanently.',
-        'Beyond the city and the I-270 corridor, the county turns rural fast. Middletown, Thurmont, Emmitsburg and the north county are small-association territory: private roads, shared wells and community septic, and volunteer boards that need accurate books more than an on-site presence. Mount Airy straddles the Carroll line, so filings follow the parcel, not the mailing address.',
+        'Beyond the city and the I-270 corridor, the county turns rural fast. Middletown, Thurmont, Emmitsburg and the north county are small-association territory: private roads, shared wells and community septic, and volunteer boards that need accurate books more than an on-site presence. Mount Airy straddles the Carroll line, so filings follow the parcel, not the mailing address. First homeowner board after turnover? Start with <a href="/blog/what-is-a-community-association-manager">what a community association manager does</a>.',
       ],
       atAGlance: [
         { label: 'County seat', value: 'Frederick' },
@@ -699,4 +705,334 @@ export const COUNTIES: Record<string, County> = {
     ],
     map: { query: 'Frederick County, Maryland', zoom: 9, caption: 'Frederick County, Maryland — Frederick, Urbana, Ballenger Creek, Brunswick, Mount Airy' },
   },
+
+  'prince-georges-county': {
+    name: 'Prince George’s County', shortName: 'Prince George’s', state: 'Maryland', stateAbbr: 'MD', slug: 'prince-georges-county',
+    service: 'HOA Management', servicePath: 'hoa-management', countySeat: 'Upper Marlboro',
+    layout: 'editorial',
+    seo: {
+      focusKeyword: 'hoa management prince georges county maryland',
+      title: 'HOA Management Prince George’s County MD — Bowie, Laurel',
+      description: 'AAMC-accredited HOA and condo association management across Prince George’s County — Bowie, Laurel, Upper Marlboro, Largo. Family-owned since 1989.',
+      canonical: 'https://tidewaterproperty.com/hoa-management/maryland/prince-georges-county',
+    },
+    hero: {
+      h1Lead: 'HOA management in', h1Accent: 'Prince George’s County.',
+      lede: 'Prince George’s runs from inside the Capital Beltway out to farmland, and the association stock changes just as sharply. AAMC-accredited, family-owned since 1989.',
+      stats: [
+        { num: '450+', label: 'Communities managed across six states' },
+        { num: 'AAMC®', label: 'CAI’s highest company accreditation · PCAM on staff', gold: true },
+        { num: '8–12', label: 'Communities per manager — portfolios capped on purpose' },
+      ],
+    },
+    intro: {
+      eyebrow: 'Local Context',
+      title: 'One county, <em>two housing markets.</em>',
+      body: [
+        'Inside the Beltway, Prince George’s association stock is older and denser &mdash; garden-style condominiums and townhome HOAs built for the federal workforce, now at the age where roofs, siding and paving all come due within a few years of each other. Reserve planning is the whole job.',
+        'Outside it, Bowie, Upper Marlboro and the southern county are dominated by newer master-planned communities, where the live issues are developer transition, turnover audits and warranty claims rather than deferred maintenance.',
+        'The county also carries a high proportion of rental-occupied units in some associations, which changes how a board should think about communication, enforcement and the practical reach of its own rules.',
+      ],
+      atAGlance: [
+        { label: 'County seat', value: 'Upper Marlboro' },
+        { label: 'Communities per manager', value: '8&ndash;12' },
+        { label: 'After-hours callback', value: '30-min guarantee' },
+        { label: 'Family-owned since', value: '1989' },
+      ],
+    },
+    cities: {
+      eyebrow: 'Cities &amp; Towns We Serve',
+      title: 'Prince George’s County coverage, <em>town by town.</em>',
+      lede: 'We cover the whole county. Each town below carries its own association mix.',
+      list: [
+        { name: 'Bowie', slug: 'bowie', focus: 'Master-planned HOA', note: 'Largest municipality, planned communities', hasPage: false },
+        { name: 'Laurel', slug: 'laurel', focus: 'Garden condo · Townhome', note: 'Shared Howard County line', hasPage: false },
+        { name: 'Upper Marlboro', slug: 'upper-marlboro', focus: 'Single-family HOA', note: 'County seat, southern county', hasPage: false },
+        { name: 'Largo', slug: 'largo', focus: 'Condo · Townhome', note: 'Metro-adjacent, mixed stock', hasPage: false },
+        { name: 'Greenbelt', slug: 'greenbelt', focus: 'Co-op · Condo', note: 'Historic planned community', hasPage: false },
+        { name: 'Hyattsville', slug: 'hyattsville', focus: 'Condo · Townhome', note: 'Inside the Beltway, dense', hasPage: false },
+        { name: 'Accokeek', slug: 'accokeek', focus: 'Single-family HOA', note: 'Southern county', hasPage: false },
+        { name: 'Fort Washington', slug: 'fort-washington', focus: 'Single-family · Townhome', note: 'Potomac-adjacent', hasPage: false },
+      ],
+    },
+    manager: {
+      initials: 'KC', name: 'Kate Cornell', creds: 'CMCA®', eyebrow: 'Baltimore &amp; DC Metro Regional Director',
+      bio: 'Kate oversees the direction and professional development of the Community Association Management team out of the Owings Mills office, and co-leads the developer management program &mdash; the team that runs developer-controlled communities through to homeowner turnover. <strong>15+ years</strong> in the industry.',
+      phone: '(443) 548-0191', phoneHref: 'tel:+14435480191',
+    },
+    resources: {
+      eyebrow: 'Local Resources',
+      title: 'Where boards here actually have to file.',
+      lede: 'The statewide filings every Maryland association deals with, plus the county’s own front door.',
+      groups: [
+        { label: 'Statewide', items: [
+          { name: 'Maryland Homeowners Association Act', org: 'Maryland General Assembly', use: 'The governing statute for HOAs', href: 'https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=grp&section=11b-101' },
+          { name: 'Annual report & personal property return', org: 'Maryland SDAT', use: 'Keeps the association in good standing', href: 'https://dat.maryland.gov' },
+          { name: 'CAI Chesapeake Chapter', org: 'Community Associations Institute', use: 'Board education and legislative updates', href: 'https://www.caimdches.org' },
+        ]},
+        { label: 'County', items: [
+          { name: 'Prince George’s County government', org: 'Prince George’s County', use: 'Permits, code enforcement, public works', href: 'https://www.princegeorgescountymd.gov' },
+        ]},
+      ],
+    },
+    faq: [
+      { q: 'Do you handle associations with a lot of rental units?', a: 'Yes. A high tenant ratio changes communication and enforcement more than it changes the budget &mdash; notices have to reach owners who do not live on site, and enforcement has to run against the owner rather than the occupant. That is a process question, and it is one we set up during transition.' },
+      { q: 'How many communities will our manager be handling?', a: 'Portfolios are capped at <strong>8&ndash;12 communities per manager</strong>. That cap is why a Prince George’s board gets a manager who knows its governing documents rather than one juggling thirty accounts.' },
+      { q: 'What happens after hours?', a: 'Our emergency line is answered by Tidewater community managers on a rotating on-call schedule, not a third-party answering service. Callback standard is 20 minutes, <strong>contractually guaranteed at 30</strong>.' },
+      { q: 'What does management cost?', a: 'We quote per association rather than publishing a rate card, because cost tracks community size, vendor count, meeting cadence and complexity. <a href="/request-a-proposal">Request a proposal</a> for a line-item number, or start with the <a href="/hoa-management/hoa-financial-management">financial-only tier</a>.' },
+      { q: 'How quickly can you take over?', a: 'The notice period in your current management agreement sets the pace. From there we work to a <strong>30/60/90-day</strong> plan covering records, bank accounts, vendor assignment and the first reporting cycle &mdash; see the <a href="/solutions/switching-hoa-management-company">full transition timeline</a>.' },
+    ],
+    nearby: [
+      { name: 'Montgomery County', slug: 'montgomery-county', note: 'Rockville, Silver Spring and Bethesda' },
+      { name: 'Anne Arundel County', slug: 'anne-arundel-county', note: 'Annapolis and the western shore' },
+      { name: 'Howard County', slug: 'howard-county', note: 'Columbia and Ellicott City' },
+    ],
+    map: { query: 'Prince George’s County, Maryland', zoom: 10, caption: 'Prince George’s County, Maryland' },
+  },
+
+  'cecil-county': {
+    name: 'Cecil County', shortName: 'Cecil', state: 'Maryland', stateAbbr: 'MD', slug: 'cecil-county',
+    service: 'HOA Management', servicePath: 'hoa-management', countySeat: 'Elkton',
+    layout: 'editorial',
+    seo: {
+      focusKeyword: 'hoa management cecil county maryland',
+      title: 'HOA Management Cecil County MD — Elkton, North East',
+      description: 'AAMC-accredited HOA and condo association management across Cecil County — Elkton, North East, Perryville, Chesapeake City. Family-owned since 1989.',
+      canonical: 'https://tidewaterproperty.com/hoa-management/maryland/cecil-county',
+    },
+    hero: {
+      h1Lead: 'HOA management in', h1Accent: 'Cecil County.',
+      lede: 'Cecil County sits at the top of the Chesapeake between Maryland, Delaware and Pennsylvania, and its associations are smaller and more waterfront-exposed than most of our footprint.',
+      stats: [
+        { num: '450+', label: 'Communities managed across six states' },
+        { num: 'AAMC®', label: 'CAI’s highest company accreditation · PCAM on staff', gold: true },
+        { num: '8–12', label: 'Communities per manager — portfolios capped on purpose' },
+      ],
+    },
+    intro: {
+      eyebrow: 'Local Context',
+      title: 'Small associations, <em>big water.</em>',
+      body: [
+        'Cecil’s association stock runs small, and a lot of it sits on or near water &mdash; the head of the Chesapeake, the Elk and North East rivers, the C&amp;D Canal. Waterfront and water-adjacent common elements change the insurance conversation and the reserve conversation at the same time: bulkheads, piers, boat ramps and shoreline all age on their own schedule and none of them are cheap.',
+        'The county also sits at a three-state junction, which matters more than it sounds. Owners commute into Delaware and Pennsylvania, vendors cross state lines, and boards routinely field questions that assume the wrong state’s rules apply.',
+        'Smaller associations here are exactly the case our financial-only tier was built for: a real finance department without full-service overhead.',
+      ],
+      atAGlance: [
+        { label: 'County seat', value: 'Elkton' },
+        { label: 'Communities per manager', value: '8&ndash;12' },
+        { label: 'After-hours callback', value: '30-min guarantee' },
+        { label: 'Family-owned since', value: '1989' },
+      ],
+    },
+    cities: {
+      eyebrow: 'Cities &amp; Towns We Serve',
+      title: 'Cecil County coverage, <em>town by town.</em>',
+      lede: 'We cover the whole county. Each town below carries its own association mix.',
+      list: [
+        { name: 'Elkton', slug: 'elkton', focus: 'Townhome · Single-family', note: 'County seat', hasPage: false },
+        { name: 'North East', slug: 'north-east', focus: 'Waterfront · Single-family', note: 'Head of the Chesapeake', hasPage: false },
+        { name: 'Perryville', slug: 'perryville', focus: 'Single-family HOA', note: 'Susquehanna adjacency', hasPage: false },
+        { name: 'Chesapeake City', slug: 'chesapeake-city', focus: 'Small association', note: 'C&amp;D Canal, historic district', hasPage: false },
+        { name: 'Rising Sun', slug: 'rising-sun', focus: 'Single-family HOA', note: 'North county, Pennsylvania line', hasPage: false },
+        { name: 'Port Deposit', slug: 'port-deposit', focus: 'Small association', note: 'Riverfront', hasPage: false },
+      ],
+    },
+    manager: {
+      initials: 'DG', name: 'Don Gentry', creds: 'CMCA® · AMS® · PCAM®', eyebrow: 'Delmarva Regional Director',
+      bio: 'Don oversees the Eastern Shore, Ocean City and Delaware portfolio. <strong>20+ years</strong> across customer service and real estate, with a background as a hotel general manager, building engineer and government contract specialist, and a Community Association Portfolio Manager since 2006.',
+      phone: '(443) 548-0191', phoneHref: 'tel:+14435480191',
+    },
+    resources: {
+      eyebrow: 'Local Resources',
+      title: 'Where boards here actually have to file.',
+      lede: 'The statewide filings every Maryland association deals with, plus the county’s own front door.',
+      groups: [
+        { label: 'Statewide', items: [
+          { name: 'Maryland Homeowners Association Act', org: 'Maryland General Assembly', use: 'The governing statute for HOAs', href: 'https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=grp&section=11b-101' },
+          { name: 'Annual report & personal property return', org: 'Maryland SDAT', use: 'Keeps the association in good standing', href: 'https://dat.maryland.gov' },
+          { name: 'CAI Chesapeake Chapter', org: 'Community Associations Institute', use: 'Board education and legislative updates', href: 'https://www.caimdches.org' },
+        ]},
+        { label: 'County', items: [
+          { name: 'Cecil County government', org: 'Cecil County', use: 'Permits, code enforcement, public works', href: 'https://www.ccgov.org' },
+        ]},
+      ],
+    },
+    faq: [
+      { q: 'Do you work with small waterfront associations?', a: 'Yes, and the waterfront part is the reason to plan early. Bulkheads, piers and shoreline are capital items with their own replacement cycle, and an association that has not modelled them into a reserve plan is usually one storm away from a special assessment.' },
+      { q: 'How many communities will our manager be handling?', a: 'Portfolios are capped at <strong>8&ndash;12 communities per manager</strong>. That cap is why a Cecil board gets a manager who knows its governing documents rather than one juggling thirty accounts.' },
+      { q: 'What happens after hours?', a: 'Our emergency line is answered by Tidewater community managers on a rotating on-call schedule, not a third-party answering service. Callback standard is 20 minutes, <strong>contractually guaranteed at 30</strong>.' },
+      { q: 'What does management cost?', a: 'We quote per association rather than publishing a rate card, because cost tracks community size, vendor count, meeting cadence and complexity. <a href="/request-a-proposal">Request a proposal</a> for a line-item number, or start with the <a href="/hoa-management/hoa-financial-management">financial-only tier</a>.' },
+      { q: 'How quickly can you take over?', a: 'The notice period in your current management agreement sets the pace. From there we work to a <strong>30/60/90-day</strong> plan covering records, bank accounts, vendor assignment and the first reporting cycle &mdash; see the <a href="/solutions/switching-hoa-management-company">full transition timeline</a>.' },
+    ],
+    nearby: [
+      { name: 'Kent County', slug: 'kent-county', note: 'Chestertown and the upper Eastern Shore' },
+      { name: 'Queen Anne’s County', slug: 'queen-annes-county', note: 'Kent Island and the Bay Bridge corridor' },
+      { name: 'Baltimore County', slug: 'baltimore-county', note: 'Towson · Owings Mills · White Marsh' },
+    ],
+    map: { query: 'Cecil County, Maryland', zoom: 10, caption: 'Cecil County, Maryland' },
+  },
+
+  'kent-county': {
+    name: 'Kent County', shortName: 'Kent', state: 'Maryland', stateAbbr: 'MD', slug: 'kent-county',
+    service: 'HOA Management', servicePath: 'hoa-management', countySeat: 'Chestertown',
+    layout: 'editorial',
+    seo: {
+      focusKeyword: 'hoa management kent county maryland',
+      title: 'HOA Management Kent County MD — Chestertown, Rock Hall',
+      description: 'AAMC-accredited HOA and condo association management across Kent County — Chestertown, Rock Hall, Betterton. Delmarva regional team. Family-owned since 1989.',
+      canonical: 'https://tidewaterproperty.com/hoa-management/maryland/kent-county',
+    },
+    hero: {
+      h1Lead: 'HOA management in', h1Accent: 'Kent County.',
+      lede: 'Kent County is Maryland’s smallest county by population, and its associations reflect that — small, often waterfront, and frequently self-managed longer than they should be.',
+      stats: [
+        { num: '450+', label: 'Communities managed across six states' },
+        { num: 'AAMC®', label: 'CAI’s highest company accreditation · PCAM on staff', gold: true },
+        { num: '8–12', label: 'Communities per manager — portfolios capped on purpose' },
+      ],
+    },
+    intro: {
+      eyebrow: 'Local Context',
+      title: 'Small county, <em>real obligations.</em>',
+      body: [
+        'Kent’s associations are small and heavily waterfront, along the Chester and Sassafras rivers and the bay shore at Rock Hall and Betterton. Waterfront common elements &mdash; piers, bulkheads, ramps, shoreline &mdash; are the capital items that most often go unplanned, and they do not get cheaper by being ignored.',
+        'A high share of the housing here is second-home or seasonal, which changes the communication problem: a board is often trying to reach owners who are not in the county for most of the year, and quorum becomes a live issue rather than a formality.',
+        'Being small does not reduce what a board is responsible for. It only reduces the overhead it can carry to get there, which is what our financial-only tier exists to solve.',
+      ],
+      atAGlance: [
+        { label: 'County seat', value: 'Chestertown' },
+        { label: 'Communities per manager', value: '8&ndash;12' },
+        { label: 'After-hours callback', value: '30-min guarantee' },
+        { label: 'Family-owned since', value: '1989' },
+      ],
+    },
+    cities: {
+      eyebrow: 'Cities &amp; Towns We Serve',
+      title: 'Kent County coverage, <em>town by town.</em>',
+      lede: 'We cover the whole county. Each town below carries its own association mix.',
+      list: [
+        { name: 'Chestertown', slug: 'chestertown', focus: 'Small association · Condo', note: 'County seat, historic district', hasPage: false },
+        { name: 'Rock Hall', slug: 'rock-hall', focus: 'Waterfront association', note: 'Bayside, marina adjacency', hasPage: false },
+        { name: 'Betterton', slug: 'betterton', focus: 'Small association', note: 'Bay beach community', hasPage: false },
+        { name: 'Galena', slug: 'galena', focus: 'Single-family HOA', note: 'North county', hasPage: false },
+        { name: 'Millington', slug: 'millington', focus: 'Single-family HOA', note: 'East county', hasPage: false },
+      ],
+    },
+    manager: {
+      initials: 'DG', name: 'Don Gentry', creds: 'CMCA® · AMS® · PCAM®', eyebrow: 'Delmarva Regional Director',
+      bio: 'Don oversees the Eastern Shore, Ocean City and Delaware portfolio. <strong>20+ years</strong> across customer service and real estate, with a background as a hotel general manager, building engineer and government contract specialist, and a Community Association Portfolio Manager since 2006.',
+      phone: '(443) 548-0191', phoneHref: 'tel:+14435480191',
+    },
+    resources: {
+      eyebrow: 'Local Resources',
+      title: 'Where boards here actually have to file.',
+      lede: 'The statewide filings every Maryland association deals with, plus the county’s own front door.',
+      groups: [
+        { label: 'Statewide', items: [
+          { name: 'Maryland Homeowners Association Act', org: 'Maryland General Assembly', use: 'The governing statute for HOAs', href: 'https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=grp&section=11b-101' },
+          { name: 'Annual report & personal property return', org: 'Maryland SDAT', use: 'Keeps the association in good standing', href: 'https://dat.maryland.gov' },
+          { name: 'CAI Chesapeake Chapter', org: 'Community Associations Institute', use: 'Board education and legislative updates', href: 'https://www.caimdches.org' },
+        ]},
+        { label: 'County', items: [
+          { name: 'Kent County government', org: 'Kent County', use: 'Permits, code enforcement, public works', href: 'https://www.kentcounty.com' },
+        ]},
+      ],
+    },
+    faq: [
+      { q: 'Most of our owners are seasonal. Can you work with that?', a: 'Yes, and it mainly changes cadence rather than scope. Notices, meeting scheduling and quorum planning all have to assume a largely non-resident ownership, which is a process we set up rather than something a board should be improvising each year.' },
+      { q: 'How many communities will our manager be handling?', a: 'Portfolios are capped at <strong>8&ndash;12 communities per manager</strong>. That cap is why a Kent board gets a manager who knows its governing documents rather than one juggling thirty accounts.' },
+      { q: 'What happens after hours?', a: 'Our emergency line is answered by Tidewater community managers on a rotating on-call schedule, not a third-party answering service. Callback standard is 20 minutes, <strong>contractually guaranteed at 30</strong>.' },
+      { q: 'What does management cost?', a: 'We quote per association rather than publishing a rate card, because cost tracks community size, vendor count, meeting cadence and complexity. <a href="/request-a-proposal">Request a proposal</a> for a line-item number, or start with the <a href="/hoa-management/hoa-financial-management">financial-only tier</a>.' },
+      { q: 'How quickly can you take over?', a: 'The notice period in your current management agreement sets the pace. From there we work to a <strong>30/60/90-day</strong> plan covering records, bank accounts, vendor assignment and the first reporting cycle &mdash; see the <a href="/solutions/switching-hoa-management-company">full transition timeline</a>.' },
+    ],
+    nearby: [
+      { name: 'Queen Anne’s County', slug: 'queen-annes-county', note: 'Kent Island and the Bay Bridge corridor' },
+      { name: 'Cecil County', slug: 'cecil-county', note: 'Elkton and the head of the Chesapeake' },
+      { name: 'Anne Arundel County', slug: 'anne-arundel-county', note: 'Annapolis and the western shore' },
+    ],
+    map: { query: 'Kent County, Maryland', zoom: 10, caption: 'Kent County, Maryland' },
+  },
+
+  'queen-annes-county': {
+    name: 'Queen Anne’s County', shortName: 'Queen Anne’s', state: 'Maryland', stateAbbr: 'MD', slug: 'queen-annes-county',
+    service: 'HOA Management', servicePath: 'hoa-management', countySeat: 'Centreville',
+    layout: 'editorial',
+    seo: {
+      focusKeyword: 'hoa management queen annes county maryland',
+      title: 'HOA Management Queen Anne’s County MD',
+      description: 'AAMC-accredited HOA and condo association management across Queen Anne’s County — Kent Island, Stevensville, Chester, Centreville. Family-owned since 1989.',
+      canonical: 'https://tidewaterproperty.com/hoa-management/maryland/queen-annes-county',
+    },
+    hero: {
+      h1Lead: 'HOA management in', h1Accent: 'Queen Anne’s County.',
+      lede: 'Queen Anne’s is the first county across the Bay Bridge, and Kent Island associations carry a mix of year-round commuters and second-home owners that few other markets do.',
+      stats: [
+        { num: '450+', label: 'Communities managed across six states' },
+        { num: 'AAMC®', label: 'CAI’s highest company accreditation · PCAM on staff', gold: true },
+        { num: '8–12', label: 'Communities per manager — portfolios capped on purpose' },
+      ],
+    },
+    intro: {
+      eyebrow: 'Local Context',
+      title: 'First stop across <em>the Bay Bridge.</em>',
+      body: [
+        'Kent Island is the county’s centre of gravity for associations, and it has an unusual ownership mix: year-round households commuting west over the bridge alongside second-home owners who are present seasonally. A board is serving two constituencies with different priorities, and the budget conversation is where that shows up.',
+        'Much of the stock is water-adjacent, which brings the same capital items that shape every Eastern Shore association &mdash; bulkheads, piers, ramps and shoreline, all with their own replacement cycles and none of them optional.',
+        'Inland, Centreville and the county’s farming communities run smaller single-family HOAs where private roads and stormwater obligations are the recurring line items.',
+      ],
+      atAGlance: [
+        { label: 'County seat', value: 'Centreville' },
+        { label: 'Communities per manager', value: '8&ndash;12' },
+        { label: 'After-hours callback', value: '30-min guarantee' },
+        { label: 'Family-owned since', value: '1989' },
+      ],
+    },
+    cities: {
+      eyebrow: 'Cities &amp; Towns We Serve',
+      title: 'Queen Anne’s County coverage, <em>town by town.</em>',
+      lede: 'We cover the whole county. Each town below carries its own association mix.',
+      list: [
+        { name: 'Stevensville', slug: 'stevensville', focus: 'Condo · Townhome', note: 'Kent Island, bridge-adjacent', hasPage: false },
+        { name: 'Chester', slug: 'chester', focus: 'Single-family · Condo', note: 'Kent Island', hasPage: false },
+        { name: 'Grasonville', slug: 'grasonville', focus: 'Waterfront association', note: 'Marina and waterfront communities', hasPage: false },
+        { name: 'Centreville', slug: 'centreville', focus: 'Single-family HOA', note: 'County seat, inland', hasPage: false },
+        { name: 'Queenstown', slug: 'queenstown', focus: 'Single-family HOA', note: 'Route 50 corridor', hasPage: false },
+        { name: 'Church Hill', slug: 'church-hill', focus: 'Small association', note: 'North county', hasPage: false },
+      ],
+    },
+    manager: {
+      initials: 'DG', name: 'Don Gentry', creds: 'CMCA® · AMS® · PCAM®', eyebrow: 'Delmarva Regional Director',
+      bio: 'Don oversees the Eastern Shore, Ocean City and Delaware portfolio. <strong>20+ years</strong> across customer service and real estate, with a background as a hotel general manager, building engineer and government contract specialist, and a Community Association Portfolio Manager since 2006.',
+      phone: '(443) 548-0191', phoneHref: 'tel:+14435480191',
+    },
+    resources: {
+      eyebrow: 'Local Resources',
+      title: 'Where boards here actually have to file.',
+      lede: 'The statewide filings every Maryland association deals with, plus the county’s own front door.',
+      groups: [
+        { label: 'Statewide', items: [
+          { name: 'Maryland Homeowners Association Act', org: 'Maryland General Assembly', use: 'The governing statute for HOAs', href: 'https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=grp&section=11b-101' },
+          { name: 'Annual report & personal property return', org: 'Maryland SDAT', use: 'Keeps the association in good standing', href: 'https://dat.maryland.gov' },
+          { name: 'CAI Chesapeake Chapter', org: 'Community Associations Institute', use: 'Board education and legislative updates', href: 'https://www.caimdches.org' },
+        ]},
+        { label: 'County', items: [
+          { name: 'Queen Anne’s County government', org: 'Queen Anne’s County', use: 'Permits, code enforcement, public works', href: 'https://www.qac.org' },
+        ]},
+      ],
+    },
+    faq: [
+      { q: 'Do you manage waterfront and marina-adjacent associations?', a: 'Yes. The distinguishing work is capital planning &mdash; bulkheads, piers, ramps and shoreline each have their own replacement cycle, and they belong in a reserve study from the beginning rather than the year they fail.' },
+      { q: 'How many communities will our manager be handling?', a: 'Portfolios are capped at <strong>8&ndash;12 communities per manager</strong>. That cap is why a Queen Anne’s board gets a manager who knows its governing documents rather than one juggling thirty accounts.' },
+      { q: 'What happens after hours?', a: 'Our emergency line is answered by Tidewater community managers on a rotating on-call schedule, not a third-party answering service. Callback standard is 20 minutes, <strong>contractually guaranteed at 30</strong>.' },
+      { q: 'What does management cost?', a: 'We quote per association rather than publishing a rate card, because cost tracks community size, vendor count, meeting cadence and complexity. <a href="/request-a-proposal">Request a proposal</a> for a line-item number, or start with the <a href="/hoa-management/hoa-financial-management">financial-only tier</a>.' },
+      { q: 'How quickly can you take over?', a: 'The notice period in your current management agreement sets the pace. From there we work to a <strong>30/60/90-day</strong> plan covering records, bank accounts, vendor assignment and the first reporting cycle &mdash; see the <a href="/solutions/switching-hoa-management-company">full transition timeline</a>.' },
+    ],
+    nearby: [
+      { name: 'Kent County', slug: 'kent-county', note: 'Chestertown and the upper Eastern Shore' },
+      { name: 'Cecil County', slug: 'cecil-county', note: 'Elkton and the head of the Chesapeake' },
+      { name: 'Anne Arundel County', slug: 'anne-arundel-county', note: 'Annapolis and the western shore' },
+    ],
+    map: { query: 'Queen Anne’s County, Maryland', zoom: 10, caption: 'Queen Anne’s County, Maryland' },
+  },
+
 };
