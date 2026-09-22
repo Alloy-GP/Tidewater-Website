@@ -16,12 +16,12 @@ const post = {
   dek: 'Switching HOA management companies follows a predictable process when you know the steps. This guide covers contract review, board votes, notice requirements, financial and records transfer, and how to evaluate your next management partner.',
   category: { label: 'HOA Management', tone: '' },
   author: {
-    name: 'Rachel Halverson',
-    creds: 'MBA, CPA',
-    initials: 'RH',
-    role: 'Director of Association Finance, Tidewater',
-    bio: 'Rachel leads the finance team at Tidewater, overseeing financial management for 400+ associations across the Mid-Atlantic. 14 years at Tidewater; previously a senior audit manager at a regional CPA firm with a CAI practice.',
-    email: 'rachel@tidewaterproperty.com',
+    name: 'Jessica Ogle',
+    creds: 'CMCA®',
+    initials: 'JO',
+    role: 'Director of Association Financial Management, Tidewater',
+    bio: 'Jessica leads Tidewater&rsquo;s association financial management team, with 15+ years in the company&rsquo;s accounting department. That tenure means the finance function is run by someone who has worked through virtually every scenario a community association can hit financially.',
+    email: 'info@tidewaterproperty.com',
   },
   date: 'May 14, 2026',
   readTime: 9,
@@ -66,20 +66,6 @@ const related = [
   },
 ];
 
-const howToSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  name: 'How to Switch HOA Management Companies',
-  description: 'A step-by-step guide for HOA boards transitioning to a new management company.',
-  totalTime: 'P60D',
-  step: [
-    { '@type': 'HowToStep', name: 'Review your current management contract', text: 'Read the termination clause. Identify notice period, early termination fees, auto-renewal date, and records-transfer language.', url: `${pageUrl}#contract` },
-    { '@type': 'HowToStep', name: 'Get board alignment and vote', text: 'Build consensus and hold a formal board vote. Document the decision in the meeting minutes. Homeowner approval typically not required.', url: `${pageUrl}#alignment` },
-    { '@type': 'HowToStep', name: 'Send proper notice to your current company', text: 'Deliver written termination notice via certified mail. Include termination date, request for records, and request for a final accounting of association funds.', url: `${pageUrl}#notice` },
-    { '@type': 'HowToStep', name: 'Manage the transition', text: 'Track the four categories of transfer: financial records and accounts, governing documents, vendor contracts, and homeowner communication. Typical timeline: 30–60 days.', url: `${pageUrl}#transition` },
-    { '@type': 'HowToStep', name: 'Evaluate your next management company', text: 'Use the transition checklist: AAMC accreditation, manager-to-community ratio, financial rigor, technology platform, vendor management, references, transparent contracts.', url: `${pageUrl}#evaluate` },
-  ],
-};
 
 const pageSchema = [
   articleSchema({
@@ -100,7 +86,6 @@ const pageSchema = [
     { name: 'Blog', url: SITE.url + '/blog' },
     { name: headline, url: pageUrl },
   ]),
-  howToSchema,
 ];
 ---
 
@@ -149,7 +134,7 @@ const pageSchema = [
 
   <div class="tw-blog-cover">
     <div class="tw-blog-cover-inner">
-      <img src={post.coverImage} alt={post.coverAlt} />
+      <img src={post.coverImage} alt={post.coverAlt}  loading="lazy" decoding="async" />
       <div class="tw-blog-cover-paper"></div>
     </div>
   </div>
@@ -258,7 +243,7 @@ const pageSchema = [
               <img
                 src="/assets/hoa-management-transition-community.jpg"
                 alt="Residential community common area representing an HOA management transition"
-              />
+               loading="lazy" decoding="async" />
             </div>
           </figure>
 
@@ -335,10 +320,10 @@ const pageSchema = [
 
           <div class="tw-blog-tags">
             <span class="tw-blog-tags-label">Tagged</span>
-            <a href="#" class="tw-blog-tag">HOA management transition</a>
-            <a href="#" class="tw-blog-tag">Switching management companies</a>
-            <a href="#" class="tw-blog-tag">Board governance</a>
-            <a href="#" class="tw-blog-tag">HOA contracts</a>
+            <span class="tw-blog-tag">HOA management transition</span>
+            <span class="tw-blog-tag">Switching management companies</span>
+            <span class="tw-blog-tag">Board governance</span>
+            <span class="tw-blog-tag">HOA contracts</span>
           </div>
         </article>
 
@@ -350,7 +335,7 @@ const pageSchema = [
             <div class="tw-blog-author-bio-role">{post.author.role}</div>
             <p class="tw-blog-author-bio-blurb">{post.author.bio}</p>
             <div class="tw-blog-author-bio-links">
-              <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg> LinkedIn</a>
+              <a href="https://www.linkedin.com/company/tidewater-property-management-inc./" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg> LinkedIn</a>
               <a href={`mailto:${post.author.email}`}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg> {post.author.email}</a>
               <a href="/about/leadership">View bio →</a>
             </div>
@@ -370,7 +355,7 @@ const pageSchema = [
         {related.map(p => (
           <a href={p.href} class="tw-blog-related-card">
             <div class={`tw-blog-related-card-img ${p.tone}`}>
-              {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || p.title} />}
+              {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || p.title}  loading="lazy" decoding="async" />}
             </div>
             <div class="tw-blog-related-card-body">
               <div class={`tw-blog-related-card-cat ${p.tone}`}>{p.category}</div>

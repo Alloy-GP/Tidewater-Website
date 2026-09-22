@@ -1,0 +1,386 @@
+[
+ {
+  "slug": "home",
+  "path": "/",
+  "eyebrow": "Tidewater",
+  "title": "Hands-On Management for the Mid-Atlantic."
+ },
+ {
+  "slug": "accessibility",
+  "path": "/accessibility",
+  "eyebrow": "Tidewater",
+  "title": "Accessibility Statement"
+ },
+ {
+  "slug": "blog",
+  "path": "/blog",
+  "eyebrow": "Tidewater",
+  "title": "The Tidewater practical guides."
+ },
+ {
+  "slug": "blog-category-finances",
+  "path": "/blog/category/finances",
+  "eyebrow": "Board Resources",
+  "title": "HOA Finances."
+ },
+ {
+  "slug": "blog-category-governance",
+  "path": "/blog/category/governance",
+  "eyebrow": "Board Resources",
+  "title": "Board Governance."
+ },
+ {
+  "slug": "blog-category-rental",
+  "path": "/blog/category/rental",
+  "eyebrow": "Board Resources",
+  "title": "Rental Management."
+ },
+ {
+  "slug": "blog-category-hoa-mgmt",
+  "path": "/blog/category/hoa-mgmt",
+  "eyebrow": "Board Resources",
+  "title": "HOA Management."
+ },
+ {
+  "slug": "blog-category-solutions",
+  "path": "/blog/category/solutions",
+  "eyebrow": "Board Resources",
+  "title": "Solutions."
+ },
+ {
+  "slug": "blog-hoa-board-responsibilities",
+  "path": "/blog/hoa-board-responsibilities",
+  "eyebrow": "Board Resources",
+  "title": "HOA board member responsibilities & fiduciary duty, explained."
+ },
+ {
+  "slug": "blog-hoa-fees",
+  "path": "/blog/hoa-fees",
+  "eyebrow": "Board Resources",
+  "title": "What are HOA fees? What they cover, why they change, and what happens if you don\u2019t pay."
+ },
+ {
+  "slug": "blog-how-to-manage-a-rental-property",
+  "path": "/blog/how-to-manage-a-rental-property",
+  "eyebrow": "Board Resources",
+  "title": "How to manage a rental property: a practical guide for landlords."
+ },
+ {
+  "slug": "blog-how-to-switch-hoa-management-companies",
+  "path": "/blog/how-to-switch-hoa-management-companies",
+  "eyebrow": "Board Resources",
+  "title": "How to switch HOA management companies: a step-by-step guide."
+ },
+ {
+  "slug": "blog-what-is-a-community-association-manager",
+  "path": "/blog/what-is-a-community-association-manager",
+  "eyebrow": "Board Resources",
+  "title": "What is a community association manager? Roles, responsibilities, and what your board should expect."
+ },
+ {
+  "slug": "blog-what-is-quorum-and-why-is-it-important",
+  "path": "/blog/what-is-quorum-and-why-is-it-important",
+  "eyebrow": "Board Resources",
+  "title": "What is a quorum? Definition, requirements, and why it matters for your board."
+ },
+ {
+  "slug": "condo-management",
+  "path": "/condo-management",
+  "eyebrow": "Tidewater",
+  "title": "Condo Association Management with the Insight Highrises Demand."
+ },
+ {
+  "slug": "hoa-management",
+  "path": "/hoa-management",
+  "eyebrow": "Tidewater",
+  "title": "Hands-On Management. Personalized Insight."
+ },
+ {
+  "slug": "hoa-management-commercial-association-management",
+  "path": "/hoa-management/commercial-association-management",
+  "eyebrow": "HOA Management",
+  "title": "Commercial association management for the buildings that work for a living."
+ },
+ {
+  "slug": "hoa-management-delaware",
+  "path": "/hoa-management/delaware",
+  "eyebrow": "HOA Management",
+  "title": "HOA & condo management in Delaware."
+ },
+ {
+  "slug": "hoa-management-hoa-financial-management",
+  "path": "/hoa-management/hoa-financial-management",
+  "eyebrow": "HOA Management",
+  "title": "A CPA-led finance team for the community you already manage."
+ },
+ {
+  "slug": "hoa-management-maryland",
+  "path": "/hoa-management/maryland",
+  "eyebrow": "HOA Management",
+  "title": "HOA management across Maryland \u2014 from the Bay to the Blue Ridge."
+ },
+ {
+  "slug": "hoa-management-maryland-anne-arundel-county",
+  "path": "/hoa-management/maryland/anne-arundel-county",
+  "eyebrow": "Maryland HOA Management",
+  "title": "HOA management in Anne Arundel County."
+ },
+ {
+  "slug": "hoa-management-maryland-howard-county",
+  "path": "/hoa-management/maryland/howard-county",
+  "eyebrow": "Maryland HOA Management",
+  "title": "HOA management in Howard County."
+ },
+ {
+  "slug": "hoa-management-maryland-carroll-county",
+  "path": "/hoa-management/maryland/carroll-county",
+  "eyebrow": "Maryland HOA Management",
+  "title": "HOA management in Carroll County."
+ },
+ {
+  "slug": "hoa-management-maryland-baltimore-county",
+  "path": "/hoa-management/maryland/baltimore-county",
+  "eyebrow": "Maryland HOA Management",
+  "title": "HOA management in Baltimore County."
+ },
+ {
+  "slug": "hoa-management-maryland-montgomery-county",
+  "path": "/hoa-management/maryland/montgomery-county",
+  "eyebrow": "Maryland HOA Management",
+  "title": "HOA management in Montgomery County."
+ },
+ {
+  "slug": "hoa-management-maryland-prince-georges-county",
+  "path": "/hoa-management/maryland/prince-georges-county",
+  "eyebrow": "Maryland HOA Management",
+  "title": "HOA management in Prince George\u2019s County."
+ },
+ {
+  "slug": "hoa-management-maryland-frederick-county",
+  "path": "/hoa-management/maryland/frederick-county",
+  "eyebrow": "Maryland HOA Management",
+  "title": "HOA management in Frederick County."
+ },
+ {
+  "slug": "hoa-management-maryland-cecil-county",
+  "path": "/hoa-management/maryland/cecil-county",
+  "eyebrow": "Maryland HOA Management",
+  "title": "HOA management in Cecil County."
+ },
+ {
+  "slug": "hoa-management-maryland-kent-county",
+  "path": "/hoa-management/maryland/kent-county",
+  "eyebrow": "Maryland HOA Management",
+  "title": "HOA management in Kent County."
+ },
+ {
+  "slug": "hoa-management-maryland-queen-annes-county",
+  "path": "/hoa-management/maryland/queen-annes-county",
+  "eyebrow": "Maryland HOA Management",
+  "title": "HOA management in Queen Anne\u2019s County."
+ },
+ {
+  "slug": "hoa-management-pennsylvania",
+  "path": "/hoa-management/pennsylvania",
+  "eyebrow": "HOA Management",
+  "title": "HOA & condo management in Pennsylvania."
+ },
+ {
+  "slug": "hoa-management-townhome-community-management",
+  "path": "/hoa-management/townhome-community-management",
+  "eyebrow": "HOA Management",
+  "title": "Townhome management for communities that share walls and standards."
+ },
+ {
+  "slug": "hoa-management-virginia",
+  "path": "/hoa-management/virginia",
+  "eyebrow": "HOA Management",
+  "title": "HOA & condo management in Virginia."
+ },
+ {
+  "slug": "hoa-management-washington-dc",
+  "path": "/hoa-management/washington-dc",
+  "eyebrow": "HOA Management",
+  "title": "HOA & condo management in Washington, DC."
+ },
+ {
+  "slug": "hoa-management-west-virginia",
+  "path": "/hoa-management/west-virginia",
+  "eyebrow": "HOA Management",
+  "title": "HOA & condo management in West Virginia."
+ },
+ {
+  "slug": "hoa-management-covenant-enforcement",
+  "path": "/hoa-management/covenant-enforcement",
+  "eyebrow": "HOA Management",
+  "title": "Covenant enforcement, without making your board the bad guy."
+ },
+ {
+  "slug": "privacy",
+  "path": "/privacy",
+  "eyebrow": "Tidewater",
+  "title": "Privacy Policy"
+ },
+ {
+  "slug": "rental-listings",
+  "path": "/rental-listings",
+  "eyebrow": "Tidewater",
+  "title": "Find your next home in Maryland & Delaware."
+ },
+ {
+  "slug": "rental-management",
+  "path": "/rental-management",
+  "eyebrow": "Tidewater",
+  "title": "One flat management fee. Everything included. Down to the inspection."
+ },
+ {
+  "slug": "rental-management-delaware",
+  "path": "/rental-management/delaware",
+  "eyebrow": "Rental Management",
+  "title": "Rental management across coastal Delaware."
+ },
+ {
+  "slug": "rental-management-delaware-lewes",
+  "path": "/rental-management/delaware/lewes",
+  "eyebrow": "Rental Management",
+  "title": "Rental property management in Lewes, Delaware."
+ },
+ {
+  "slug": "rental-management-maryland",
+  "path": "/rental-management/maryland",
+  "eyebrow": "Rental Management",
+  "title": "Rental management across Maryland \u2014 from the Bay to the Beltway."
+ },
+ {
+  "slug": "rental-management-maryland-anne-arundel-county",
+  "path": "/rental-management/maryland/anne-arundel-county",
+  "eyebrow": "Rental Management",
+  "title": "Rental property management in Anne Arundel County."
+ },
+ {
+  "slug": "rental-management-maryland-baltimore-county",
+  "path": "/rental-management/maryland/baltimore-county",
+  "eyebrow": "Rental Management",
+  "title": "Rental property management in Baltimore County."
+ },
+ {
+  "slug": "rental-management-maryland-howard-county",
+  "path": "/rental-management/maryland/howard-county",
+  "eyebrow": "Rental Management",
+  "title": "Rental property management in Howard County."
+ },
+ {
+  "slug": "rental-management-maryland-montgomery-county",
+  "path": "/rental-management/maryland/montgomery-county",
+  "eyebrow": "Rental Management",
+  "title": "Rental property management in Montgomery County."
+ },
+ {
+  "slug": "rental-management-maryland-ocean-city",
+  "path": "/rental-management/maryland/ocean-city",
+  "eyebrow": "Rental Management",
+  "title": "Rental property management in Ocean City, MD."
+ },
+ {
+  "slug": "rental-management-maryland-prince-georges-county",
+  "path": "/rental-management/maryland/prince-georges-county",
+  "eyebrow": "Rental Management",
+  "title": "Rental property management in Prince George's County."
+ },
+ {
+  "slug": "rental-management-maryland-silver-spring",
+  "path": "/rental-management/maryland/silver-spring",
+  "eyebrow": "Rental Management",
+  "title": "Rental property management in Silver Spring."
+ },
+ {
+  "slug": "resources",
+  "path": "/resources",
+  "eyebrow": "Board Resources",
+  "title": "More than management. Your trusted community resource."
+ },
+ {
+  "slug": "resources-newsletter",
+  "path": "/resources/newsletter",
+  "eyebrow": "The Board Brief",
+  "title": "The Board Brief."
+ },
+ {
+  "slug": "resources-newsletter-august-2026",
+  "path": "/resources/newsletter/august-2026",
+  "eyebrow": "The Board Brief",
+  "title": "August is where next year gets decided."
+ },
+ {
+  "slug": "service-areas",
+  "path": "/service-areas",
+  "eyebrow": "Tidewater",
+  "title": "Six states. One family-owned management firm."
+ },
+ {
+  "slug": "solutions-self-managed-hoa-transition",
+  "path": "/solutions/self-managed-hoa-transition",
+  "eyebrow": "Solutions",
+  "title": "You\u2019re not failing \u2014 you\u2019re scaling."
+ },
+ {
+  "slug": "solutions-switching-hoa-management-company",
+  "path": "/solutions/switching-hoa-management-company",
+  "eyebrow": "Solutions",
+  "title": "Switching management companies, done right."
+ },
+ {
+  "slug": "terms",
+  "path": "/terms",
+  "eyebrow": "Tidewater",
+  "title": "Terms of Use"
+ },
+ {
+  "slug": "faq",
+  "path": "/faq",
+  "eyebrow": "Tidewater",
+  "title": "Tidewater answered."
+ },
+ {
+  "slug": "request-a-proposal",
+  "path": "/request-a-proposal",
+  "eyebrow": "Tidewater",
+  "title": "Let\u2019s talk about your community."
+ },
+ {
+  "slug": "about",
+  "path": "/about",
+  "eyebrow": "About Tidewater",
+  "title": "Family-owned in the Mid-Atlantic since 1989."
+ },
+ {
+  "slug": "about-leadership",
+  "path": "/about/leadership",
+  "eyebrow": "About Tidewater",
+  "title": "The team boards actually meet."
+ },
+ {
+  "slug": "testimonials",
+  "path": "/testimonials",
+  "eyebrow": "Tidewater",
+  "title": "The boards who know us, on the record."
+ },
+ {
+  "slug": "careers",
+  "path": "/careers",
+  "eyebrow": "Tidewater",
+  "title": "Build a career somewhere that still answers to its own door."
+ },
+ {
+  "slug": "real-estate",
+  "path": "/real-estate",
+  "eyebrow": "Tidewater",
+  "title": "Your guide in buying and selling."
+ },
+ {
+  "slug": "maintenance-services",
+  "path": "/maintenance-services",
+  "eyebrow": "Tidewater",
+  "title": "Reliable. Professional. Detail-driven."
+ }
+]
