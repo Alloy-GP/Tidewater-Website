@@ -1,4 +1,5 @@
 ---
+import Pic from '../components/Pic.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Topbar from '../components/Topbar.astro';
 import Header from '../components/Header.astro';
@@ -56,7 +57,7 @@ const steps = [
   <!-- Tenant hero -->
   <section class="tw-hero">
     <div class="tw-hero-bg">
-      <img src="/assets/hero-aerial.jpg" alt="Maryland and Delaware neighborhoods where Tidewater manages rentals"  loading="lazy" decoding="async" />
+      <Pic width={1400} height={764} loading="eager" fetchpriority="high" src="/assets/hero-aerial.jpg" alt="Maryland and Delaware neighborhoods where Tidewater manages rentals" />
     </div>
     <div class="tw-hero-paper" aria-hidden="true"></div>
 
@@ -83,7 +84,7 @@ const steps = [
       <div class="tw-hero-side">
         <div class="tw-rh2-card">
           <div class="tw-rh2-card-img">
-            <img src="/assets/virginia-jane-way.jpg" alt="A Tidewater-managed rental home in Maryland" onerror="this.style.display='none'"  loading="lazy" decoding="async" />
+            <Pic width={1050} height={1400} src="/assets/virginia-jane-way.jpg" alt="A Tidewater-managed rental home in Maryland" />
             <span class="tw-rh2-card-badge matched">Now Leasing</span>
           </div>
           <div class="tw-rh2-card-body">

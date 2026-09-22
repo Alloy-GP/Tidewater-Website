@@ -1,0 +1,78 @@
+---
+// /login — router for owners, board members and tenants looking for "the portal".
+// Brand searches for "tidewater property management login" land on the homepage
+// today; this page answers the intent directly and sends each audience to the
+// right system (CINC for association owners/boards, AppFolio for rentals).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Topbar from '../components/Topbar.astro';
+import Header from '../components/Header.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Footer from '../components/Footer.astro';
+import { breadcrumbSchema } from '../lib/schema';
+import { SITE } from '../config/site';
+
+const CINC = 'https://tidewater.cincwebaxis.com';
+const APPFOLIO = 'https://account.appfolio.com/realms/foliospace/protocol/openid-connect/auth?activation_state&client_id=client-aa200e11a2d03f6365c1d339b05d19bf63850b9d&portfolio_uuid&redirect_uri=https%3A%2F%2Ftidewater.appfolio.com%2Fconnect%2Fusers%2Foauth%2Fcallback&response_type=code&scope=openid&session_timed_out=false&state';
+const pageUrl = `${SITE.url}/login`;
+const schemas = [breadcrumbSchema([{ name: 'Home', url: SITE.url + '/' }, { name: 'Login', url: pageUrl }])];
+---
+<BaseLayout
+  title="Tidewater Property Management Login | Owner, Board & Tenant Portals"
+  description="Log in to your Tidewater portal. HOA and condo owners and board members use the Tidewater PM (CINC) portal to pay assessments, submit requests and view documents. Rental owners and tenants use AppFolio."
+  pageSchema={schemas}
+>
+  <Topbar variant="homeowner" />
+  <Header activeNav={null} />
+  <Breadcrumb crumbs={[{ label: 'Login' }]} />
+
+  <section class="tw-sol-hero" style="padding:64px 0 48px">
+    <div class="tw-container" style="max-width:840px">
+      <div class="tw-eyebrow">Owner, Board &amp; Tenant Login</div>
+      <h1 class="tw-section-title" style="margin:10px 0 14px">Which Tidewater portal <em>do you need?</em></h1>
+      <p class="tw-section-lede">Tidewater runs two systems. If you live in or serve on the board of a community we manage, you want the Tidewater PM portal. If you rent from us or own a rental we manage, you want AppFolio. Both are secure, both work on your phone, and neither is this website.</p>
+    </div>
+  </section>
+
+  <section class="tw-owner-actions" id="portals" style="padding-top:8px">
+    <div class="tw-container-wide">
+      <div class="tw-owner-actions-grid">
+        <a href={CINC} target="_blank" rel="noopener noreferrer" class="tw-owner-action">
+          <div class="tw-owner-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <div class="tw-owner-action-title">HOA &amp; condo owners</div>
+          <div class="tw-owner-action-sub">Tidewater PM portal (CINC): pay assessments, submit requests, read documents</div>
+        </a>
+        <a href={CINC} target="_blank" rel="noopener noreferrer" class="tw-owner-action">
+          <div class="tw-owner-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div class="tw-owner-action-title">Board members</div>
+          <div class="tw-owner-action-sub">Financials, action items, work orders, ACC requests, meeting materials</div>
+        </a>
+        <a href={APPFOLIO} target="_blank" rel="noopener noreferrer" class="tw-owner-action">
+          <div class="tw-owner-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+          <div class="tw-owner-action-title">Rental owners</div>
+          <div class="tw-owner-action-sub">AppFolio owner portal: statements, direct deposits, inspection photos</div>
+        </a>
+        <a href={APPFOLIO} target="_blank" rel="noopener noreferrer" class="tw-owner-action">
+          <div class="tw-owner-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4l-3 3-2-2 3-3z"/></svg></div>
+          <div class="tw-owner-action-title">Tenants</div>
+          <div class="tw-owner-action-sub">AppFolio resident portal: pay rent, maintenance requests, your lease</div>
+        </a>
+        <a href="https://tidewaterproperty.condocerts.com/resale/" target="_blank" rel="noopener noreferrer" class="tw-owner-action">
+          <div class="tw-owner-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg></div>
+          <div class="tw-owner-action-title">Resale package</div>
+          <div class="tw-owner-action-sub">Condo questionnaires and resale certificates via CondoCerts</div>
+        </a>
+        <a href="tel:+14435480191" class="tw-owner-action">
+          <div class="tw-owner-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.7a2 2 0 0 1 1.7 2z"/></svg></div>
+          <div class="tw-owner-action-title">Emergency</div>
+          <div class="tw-owner-action-sub">(443) 548-0191, any hour. Manager callback within 30 minutes, guaranteed.</div>
+        </a>
+      </div>
+      <div style="max-width:840px;margin:36px 0 0;font-family:var(--tw-font-body);font-size:.95rem;color:var(--tw-fg-muted);line-height:1.6">
+        <p style="margin:0 0 10px"><strong style="color:var(--tw-dark)">First time here?</strong> Association owners: use the email address your community has on file and choose &ldquo;First-time login&rdquo; in the portal to receive an invitation. Rental owners and tenants receive their AppFolio invitation by email when the lease or management agreement is signed.</p>
+        <p style="margin:0"><strong style="color:var(--tw-dark)">Looking for management for your community or rental instead?</strong> Start with <a href="/hoa-management" style="color:var(--tw-teal)">HOA property management</a> or <a href="/rental-management" style="color:var(--tw-teal)">rental property management</a>, or <a href="/request-a-proposal" style="color:var(--tw-teal)">request a proposal</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

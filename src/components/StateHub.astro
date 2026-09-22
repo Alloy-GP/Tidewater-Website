@@ -5,54 +5,37 @@
 import FaqAccordion from './FaqAccordion.astro';
 import { TRUST_STATS, type StateHub } from '../data/states';
 import { SITE } from '../config/site';
+import { breadcrumbSchema, faqSchema, localBusinessSchema } from '../lib/schema';
 
 interface Props { state: StateHub; }
 const { state: st } = Astro.props;
 
 const url = `${SITE.url}/hoa-management/${st.slug}`;
-const strip = (s: string) => String(s).replace(/<[^>]+>/g, '');
 
-const provider = {
-  '@type': 'LocalBusiness',
-  name: SITE.name,
-  telephone: SITE.org.telephone,
-  url: SITE.url + '/',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '3600 Crondall Lane, Suite 100',
-    addressLocality: SITE.org.addressLocality,
-    addressRegion: SITE.org.addressRegion,
-    postalCode: '21117',
-    addressCountry: 'US',
-  },
-};
+// Office that serves this state: Delaware from Lewes, DC from the Silver Spring
+// office (brief: Kate Cornell runs the Owings Mills and Silver Spring offices;
+// service-areas copy: Silver Spring covers the District), everything else HQ.
+const office = st.slug === 'delaware' ? 'delaware' : st.slug === 'washington-dc' ? 'silverSpring' : 'hq';
+const areaType = st.slug === 'washington-dc' ? 'City' : 'State';
 
 const pageSchema = [
   {
     '@context': 'https://schema.org', '@type': 'Service',
     serviceType: 'HOA and Condominium Association Management',
-    provider,
-    areaServed: { '@type': 'AdministrativeArea', name: st.name },
+    name: `HOA & Condo Association Management — ${st.name}`,
+    provider: { '@type': 'Organization', '@id': `${SITE.url}/#organization`, name: SITE.name, url: SITE.url },
+    areaServed: { '@type': areaType === 'City' ? 'City' : 'State', name: st.name },
     description: st.seo.description,
     url,
   },
-  {
-    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
-      { '@type': 'ListItem', position: 2, name: 'HOA Management', item: `${SITE.url}/hoa-management` },
-      { '@type': 'ListItem', position: 3, name: st.name, item: url },
-    ],
-  },
-  {
-    '@context': 'https://schema.org', '@type': 'FAQPage',
-    mainEntity: st.faq.map((f) => ({
-      '@type': 'Question', name: strip(f.q),
-      acceptedAnswer: { '@type': 'Answer', text: strip(f.a) },
-    })),
-  },
+  breadcrumbSchema([
+    { name: 'Home', url: `${SITE.url}/` },
+    { name: 'HOA Management', url: `${SITE.url}/hoa-management` },
+    { name: st.name, url },
+  ]),
+  faqSchema(st.faq),
+  localBusinessSchema({ office, url, areaServed: { name: st.name, type: areaType as 'City' | 'State' }, description: st.seo.description }),
 ];
-export { pageSchema };
 ---
 <section class="tw-geo-hero">
   <div class="tw-geo-hero-bg"></div>
@@ -131,3 +114,5 @@ export { pageSchema };
     <FaqAccordion items={st.faq} />
   </div>
 </section>
+
+{pageSchema.map((sch) => <script type="application/ld+json" set:html={JSON.stringify(sch)} />)}

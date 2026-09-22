@@ -1,8 +1,9 @@
 ---
+import Pic from './Pic.astro';
 ---
 <section class="tw-hero">
   <div class="tw-hero-bg">
-    <img src="/assets/hero-mission.jpg" alt="A Maryland rental property"  loading="lazy" decoding="async" />
+    <Pic src="/assets/hero-mission.jpg" alt="A Maryland rental property" width={1400} height={939} loading="eager" fetchpriority="high" />
   </div>
   <div class="tw-hero-paper" aria-hidden="true"></div>
 

@@ -5,6 +5,31 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/owner-login",
+      "destination": "/login",
+      "permanent": true
+    },
+    {
+      "source": "/portal",
+      "destination": "/login",
+      "permanent": true
+    },
+    {
+      "source": "/owner-portal",
+      "destination": "/login",
+      "permanent": true
+    },
+    {
+      "source": "/board-portal",
+      "destination": "/login",
+      "permanent": true
+    },
+    {
+      "source": "/pay",
+      "destination": "/login",
+      "permanent": true
+    },
+    {
       "source": "/privacypolicy",
       "destination": "/privacy",
       "permanent": true
@@ -976,12 +1001,12 @@
     },
     {
       "source": "/service-area/columbia-md",
-      "destination": "/rental-management/maryland/howard-county",
+      "destination": "/rental-management/maryland/columbia",
       "permanent": true
     },
     {
       "source": "/service-area/columbia-md/",
-      "destination": "/rental-management/maryland/howard-county",
+      "destination": "/rental-management/maryland/columbia",
       "permanent": true
     },
     {

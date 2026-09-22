@@ -5,7 +5,7 @@ import Topbar from '../../../components/Topbar.astro';
 import Footer from '../../../components/Footer.astro';
 import CTA from '../../../components/CTA.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
-import { serviceSchema, breadcrumbSchema } from '../../../lib/schema';
+import { serviceSchema, breadcrumbSchema, localBusinessSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
 
 const schemas = [
@@ -20,11 +20,17 @@ const schemas = [
     { name: 'HOA Management', url: SITE.url + '/hoa-management' },
     { name: 'Maryland', url: SITE.url + '/hoa-management/maryland' },
   ]),
+  localBusinessSchema({
+    office: 'hq',
+    url: SITE.url + '/hoa-management/maryland',
+    areaServed: { name: 'Maryland', type: 'State' },
+    description: 'AAMC-accredited HOA and condo association management across Maryland from Tidewater’s Owings Mills headquarters.',
+  }),
 ];
 ---
 <BaseLayout
   title="HOA Management Companies in Maryland | Tidewater"
-  description="HOA management across Maryland — Baltimore, Anne Arundel, Howard, Montgomery, Prince George’s and the Eastern Shore. AAMC-accredited, family-owned since 1989."
+  description="HOA management companies serving Maryland — Baltimore, Anne Arundel, Howard, Montgomery, Prince George's, Frederick. AAMC-accredited, family-owned association management."
   pageSchema={schemas}
 >
   <Topbar variant="default" />
@@ -163,7 +169,7 @@ const schemas = [
             <span class="tw-geo-county-city">Hunt Valley</span>
           </div>
           <div class="tw-geo-county-cta">
-            County page coming soon <span class="tw-geo-county-cta-arrow">&rarr;</span>
+            View county page <span class="tw-geo-county-cta-arrow">&rarr;</span>
           </div>
         </a>
         <!-- Howard County -->
@@ -180,7 +186,7 @@ const schemas = [
             <span class="tw-geo-county-city">Glenelg</span>
           </div>
           <div class="tw-geo-county-cta">
-            County page coming soon <span class="tw-geo-county-cta-arrow">&rarr;</span>
+            View county page <span class="tw-geo-county-cta-arrow">&rarr;</span>
           </div>
         </a>
         <!-- Montgomery County -->
@@ -197,7 +203,7 @@ const schemas = [
             <span class="tw-geo-county-city">Silver Spring</span>
           </div>
           <div class="tw-geo-county-cta">
-            County page coming soon <span class="tw-geo-county-cta-arrow">&rarr;</span>
+            View county page <span class="tw-geo-county-cta-arrow">&rarr;</span>
           </div>
         </a>
         <!-- Prince George\'s County -->
@@ -214,7 +220,7 @@ const schemas = [
             <span class="tw-geo-county-city">Hyattsville</span>
           </div>
           <div class="tw-geo-county-cta">
-            County page coming soon <span class="tw-geo-county-cta-arrow">&rarr;</span>
+            View county page <span class="tw-geo-county-cta-arrow">&rarr;</span>
           </div>
         </a>
         <!-- Frederick County -->
@@ -231,7 +237,24 @@ const schemas = [
             <span class="tw-geo-county-city">Brunswick</span>
           </div>
           <div class="tw-geo-county-cta">
-            County page coming soon <span class="tw-geo-county-cta-arrow">&rarr;</span>
+            View county page <span class="tw-geo-county-cta-arrow">&rarr;</span>
+          </div>
+        </a>
+        <!-- Carroll County -->
+        <a href="/hoa-management/maryland/carroll-county" class="tw-geo-county-card">
+          <div class="tw-geo-county-head">
+            <h3 class="tw-geo-county-name">Carroll County</h3>
+          </div>
+          <div class="tw-geo-county-meta" style="font-family:var(--tw-font-mono);font-size:11px;color:var(--tw-fg-subtle);letter-spacing:0.04em">Westminster &middot; Eldersburg</div>
+          <p class="tw-geo-county-body">Smaller, newer associations &mdash; private roads, stormwater ponds, well-and-septic north county. Financial-only is a legitimate starting tier here.</p>
+          <div class="tw-geo-county-cities">
+            <span class="tw-geo-county-city">Westminster</span>
+            <span class="tw-geo-county-city">Eldersburg</span>
+            <span class="tw-geo-county-city">Sykesville</span>
+            <span class="tw-geo-county-city">Mount Airy</span>
+          </div>
+          <div class="tw-geo-county-cta">
+            View county page <span class="tw-geo-county-cta-arrow">&rarr;</span>
           </div>
         </a>
         <!-- Cecil County -->
@@ -248,7 +271,7 @@ const schemas = [
             <span class="tw-geo-county-city">Chesapeake City</span>
           </div>
           <div class="tw-geo-county-cta">
-            County page coming soon <span class="tw-geo-county-cta-arrow">&rarr;</span>
+            View county page <span class="tw-geo-county-cta-arrow">&rarr;</span>
           </div>
         </a>
         <!-- Kent County -->
@@ -263,7 +286,7 @@ const schemas = [
             <span class="tw-geo-county-city">Rock Hall</span>
           </div>
           <div class="tw-geo-county-cta">
-            County page coming soon <span class="tw-geo-county-cta-arrow">&rarr;</span>
+            View county page <span class="tw-geo-county-cta-arrow">&rarr;</span>
           </div>
         </a>
         <!-- Queen Anne's County -->
@@ -280,7 +303,7 @@ const schemas = [
             <span class="tw-geo-county-city">Centreville</span>
           </div>
           <div class="tw-geo-county-cta">
-            County page coming soon <span class="tw-geo-county-cta-arrow">&rarr;</span>
+            View county page <span class="tw-geo-county-cta-arrow">&rarr;</span>
           </div>
         </a>
       </div>

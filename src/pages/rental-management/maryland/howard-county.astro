@@ -6,7 +6,7 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import Footer from '../../../components/Footer.astro';
 import CTA from '../../../components/CTA.astro';
 import RentalGeo, { GEO_DATA_HOWARD_COUNTY as geo } from '../../../components/RentalGeo.jsx';
-import { breadcrumbSchema, serviceSchema } from '../../../lib/schema';
+import { breadcrumbSchema, serviceSchema, faqSchema, localBusinessSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
 
 const pageUrl = `${SITE.url}/rental-management/maryland/howard-county`;
@@ -24,12 +24,19 @@ const schemas = [
     { name: 'Maryland', url: SITE.url + '/rental-management/maryland' },
     { name: 'Howard County', url: pageUrl },
   ]),
+  faqSchema(geo.faqs),
+  localBusinessSchema({
+    office: 'hq',
+    url: pageUrl,
+    areaServed: { name: 'Howard County', type: 'AdministrativeArea', containedIn: 'Maryland' },
+    description: geo.schemaDesc,
+  }),
 ];
 ---
 
 <BaseLayout
-  title="Howard County Rental Management | Tidewater"
-  description="Rental property management in Howard County, MD — Columbia, Ellicott City, Elkridge, Clarksville. Village HOA rules navigated. Flat 8.5% fee."
+  title="Property Management in Howard County, MD | Tidewater"
+  description="Property management in Howard County, MD — Columbia, Ellicott City, Elkridge, Clarksville. Columbia village rules navigated, county rental license handled. One flat all-inclusive fee, no placement upcharge."
   ogType="website"
   pageSchema={schemas}
   pageStylesheet="styles-geo.css"

@@ -69,7 +69,7 @@ const schemas = [
         <div style="font-family:var(--tw-font-heading);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tw-teal);margin-bottom:10px">Service Area</div>
         <h2 style="font-family:var(--tw-font-heading);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--tw-dark);margin:0 0 12px">Rental management across Maryland &amp; Delaware</h2>
         <p style="font-family:var(--tw-font-body);font-size:1rem;color:var(--tw-fg-muted);margin:0">We manage rental property across <a href="/rental-management/maryland">Maryland</a> and <a href="/rental-management/delaware">coastal Delaware</a>. Explore county-level coverage, local landlord laws, and licensing requirements for your area.</p>
-        <p class="tw-rental-counties">Popular markets: <a href="/rental-management/maryland/montgomery-county">property management in Montgomery County</a>, <a href="/rental-management/maryland/silver-spring">Silver Spring</a>, <a href="/rental-management/maryland/baltimore-county">Baltimore County</a>, <a href="/rental-management/maryland/howard-county">Howard County</a>, <a href="/rental-management/maryland/anne-arundel-county">Anne Arundel County</a>, <a href="/rental-management/maryland/prince-georges-county">Prince George&rsquo;s County</a>, and <a href="/rental-management/maryland/ocean-city">Ocean City</a>.</p>
+        <p class="tw-rental-counties">Popular markets: <a href="/rental-management/maryland/montgomery-county">property management in Montgomery County</a>, <a href="/rental-management/maryland/silver-spring">Silver Spring</a>, <a href="/rental-management/maryland/baltimore-county">Baltimore County</a>, <a href="/rental-management/maryland/howard-county">Howard County</a>, <a href="/rental-management/maryland/anne-arundel-county">Anne Arundel County</a>, <a href="/rental-management/maryland/prince-georges-county">Prince George&rsquo;s County</a>, <a href="/rental-management/maryland/ocean-city">Ocean City</a>, and <a href="/rental-management/delaware">coastal Delaware</a>. Repairs are handled by our in-house <a href="/maintenance-services">rental property maintenance company</a>.</p>
       </div>
       <div class="tw-geo-counties">
         <a href="/rental-management/maryland" class="tw-geo-county-card featured">
@@ -86,17 +86,20 @@ const schemas = [
             </div>
           </div>
         </a>
-        <div class="tw-geo-county-card" style="pointer-events:none;opacity:.65">
+        <a href="/rental-management/delaware" class="tw-geo-county-card">
           <div class="tw-geo-county-flag">DE</div>
           <div>
             <div class="tw-geo-county-head">
               <div class="tw-geo-county-name">Delaware</div>
               <div class="tw-geo-county-meta">Coastal &amp; Sussex County rentals</div>
             </div>
-            <div class="tw-geo-county-body">Rental management for coastal Delaware owners &mdash; Lewes, Rehoboth, and Sussex County. Long-term rental management only.</div>
-            <div class="tw-geo-county-cta" style="color:var(--tw-fg-muted)">Coverage page coming soon</div>
+            <div class="tw-geo-county-body">Rental management for coastal Delaware owners &mdash; <a href="/rental-management/delaware/lewes">Lewes</a>, Rehoboth, and Sussex County. Long-term and seasonal leases from our Delaware office.</div>
+            <div class="tw-geo-county-cta">
+              Explore Delaware coverage
+              <svg class="tw-geo-county-cta-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-left:4px"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </section>

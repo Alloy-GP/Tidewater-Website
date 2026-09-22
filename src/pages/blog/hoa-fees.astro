@@ -1,4 +1,5 @@
 ---
+import Pic from '../../components/Pic.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Topbar from '../../components/Topbar.astro';
 import Header from '../../components/Header.astro';
@@ -72,6 +73,7 @@ const pageSchema = [
     description,
     url: pageUrl,
     datePublished: '2026-08-04',
+    author: { name: post.author.name, jobTitle: post.author.role, credentials: post.author.creds },
     image: `${SITE.url}/assets/hoa-fees.jpg`,
     about: ['HOA fees', 'HOA dues', 'special assessment', 'reserve fund', 'HOA budget', 'condo fees'],
   }),
@@ -148,14 +150,7 @@ const pageSchema = [
 
   <div class="tw-blog-cover">
     <div class="tw-blog-cover-inner">
-      <img
-        src="/assets/hoa-fees.jpg"
-        alt="Well-maintained townhome community common area managed under an HOA budget"
-        width="1400"
-        height="763"
-        fetchpriority="high"
-        decoding="async"
-      />
+      <Pic src="/assets/hoa-fees.jpg" alt="Well-maintained townhome community common area managed under an HOA budget" width={1400} height={763} loading="eager" fetchpriority="high" />
       <div class="tw-blog-cover-paper"></div>
     </div>
   </div>
@@ -377,7 +372,7 @@ const pageSchema = [
         {related.map(p => (
           <a href={p.href} class="tw-blog-related-card">
             <div class={`tw-blog-related-card-img ${p.tone}`}>
-              {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || p.title} width="1400" height="763" loading="lazy" decoding="async" />}
+              {p.coverImage && <Pic src={p.coverImage} alt={p.coverAlt || p.title} width={1400} height={763} />}
             </div>
             <div class="tw-blog-related-card-body">
               <div class={`tw-blog-related-card-cat ${p.tone}`}>{p.category}</div>

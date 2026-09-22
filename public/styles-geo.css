@@ -558,3 +558,7 @@
     -webkit-overflow-scrolling: touch;
   }
 }
+
+/* links inside the geo hero lede (e.g. Silver Spring → Montgomery County) */
+.tw-geo-hero-lede a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.tw-geo-hero-lede a:hover { color: var(--tw-gold); }

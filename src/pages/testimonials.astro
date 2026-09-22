@@ -15,9 +15,14 @@ import { SITE } from '../config/site';
 const reviewSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  name: SITE.name,
-  url: SITE.url + '/',
+  '@id': `${SITE.url}/#office-owings-mills`,
+  name: SITE.localBusinessName,
+  alternateName: SITE.name,
+  url: SITE.url + '/testimonials',
+  image: SITE.org.logo,
   telephone: SITE.org.telephone,
+  areaServed: SITE.org.areaServed.map((a) => ({ '@type': 'AdministrativeArea', name: a })),
+  priceRange: SITE.org.priceRange,
   address: {
     '@type': 'PostalAddress',
     streetAddress: '3600 Crondall Lane, Suite 100',
@@ -61,7 +66,7 @@ const schemas = [
           The boards who know us, <em>on the record.</em>
         </h1>
         <p class="tw-sol-hero-lede">
-          Reviews from the people who hire us &mdash; named, attributed, and from communities you can call. We&rsquo;ve curated this page to board presidents, treasurers, and developers because they&rsquo;re the buyers; if you want the unfiltered resident view, our 552 Google reviews are one click away.
+          Reviews from the people who hire us &mdash; named, attributed, and from communities you can call. We&rsquo;ve curated this page to board presidents, treasurers, and developers because they&rsquo;re the buyers; if you want the unfiltered resident view, our 590+ Google reviews are one click away.
         </p>
         <div class="tw-sol-hero-actions">
           <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-lg">Request a proposal &rarr;</a>
@@ -109,7 +114,7 @@ const schemas = [
   <section class="tw-tst-context" style="display:none">
     <div class="tw-tst-context-inner">
       <div class="tw-tst-context-note">
-        <strong>About our Google reviews.</strong> Most of our 552 Google reviews come from individual residents in the 450+ communities we manage. Resident reviews tend to skew toward complaint (every late fee, every covenant letter), which is normal for the industry. We don&rsquo;t hide them &mdash; <a href="https://www.google.com/search?q=tidewater+property+management+maryland" target="_blank" rel="noopener">read every one here</a>. What you see on this page is curated for the board buyer.
+        <strong>About our Google reviews.</strong> Most of our 590+ Google reviews come from individual residents in the 450+ communities we manage. Resident reviews tend to skew toward complaint (every late fee, every covenant letter), which is normal for the industry. We don&rsquo;t hide them &mdash; <a href="https://www.google.com/search?q=tidewater+property+management+maryland" target="_blank" rel="noopener">read every one here</a>. What you see on this page is curated for the board buyer.
       </div>
       <!-- PLACEHOLDER: replace with real board rating stats once collected -->
       <div class="tw-tst-context-stat" style="display:none">

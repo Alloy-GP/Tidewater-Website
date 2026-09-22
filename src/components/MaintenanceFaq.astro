@@ -1,0 +1,19 @@
+---
+// Visible FAQ for /maintenance-services. Items come from src/data/maintenanceFaq.ts,
+// the same source the page uses for FAQPage schema.
+import FaqAccordion from './FaqAccordion.astro';
+import { MAINTENANCE_FAQ } from '../data/maintenanceFaq';
+---
+<section class="tw-section tw-sol-faq-section" id="faq">
+  <div class="tw-container-wide">
+    <div class="tw-sol-faq-grid">
+      <div class="tw-sol-faq-head">
+        <div class="tw-eyebrow" style="color:var(--tw-sage)">Maintenance FAQs</div>
+        <h2>The property maintenance <em>questions</em> we get most.</h2>
+        <p>Maintenance is one part of the picture. See how it fits into <a href="/rental-management" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">rental property management</a> and <a href="/hoa-management" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">HOA property management</a>, or browse the <a href="/faq" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">main FAQ hub</a>.</p>
+        <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Request a maintenance assessment →</a>
+      </div>
+      <FaqAccordion items={MAINTENANCE_FAQ} defaultOpen={0} />
+    </div>
+  </div>
+</section>

@@ -1,6 +1,6 @@
 // Maryland Rental Management Hub — /rental-management/maryland
 // Audience: deployed military, out-of-state investors, accidental landlords, first-time owners.
-// Stack: AppFolio. Flat 8.5% fee.
+// Stack: AppFolio. One flat, all-inclusive fee (percentage pending client sign-off — do not publish a number).
 
 const CheckSmIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ width: 18, height: 18 }}>
@@ -65,7 +65,7 @@ function RentalMarylandHero() {
             Rental management <em>across Maryland</em> &mdash; from the Bay to the Beltway.
           </h1>
           <p className="tw-geo-hero-lede">
-            For owners who don&rsquo;t live where their rental does. Deployed military, out-of-state investors, accidental landlords, first-time owners. We manage 700+ single-family and small-multifamily rentals across the state &mdash; one flat fee, AppFolio-backed, named local property managers in every market.
+            For owners who don&rsquo;t live where their rental does. Deployed military, out-of-state investors, accidental landlords, first-time owners. We manage single-family and small-multifamily rentals across the state &mdash; one flat fee, AppFolio-backed, named local property managers in every market.
           </p>
           <div className="tw-geo-hero-actions">
             <a href="/request-a-proposal" className="tw-btn tw-btn-primary tw-btn-lg">Get a free rental analysis →</a>
@@ -73,12 +73,12 @@ function RentalMarylandHero() {
           </div>
           <div className="tw-geo-hero-stats">
             <div>
-              <div className="tw-geo-hero-stat-num">700+</div>
-              <div className="tw-geo-hero-stat-label">Maryland single-family &amp; small-multi rentals managed</div>
+              <div className="tw-geo-hero-stat-num">30 min</div>
+              <div className="tw-geo-hero-stat-label">Emergency callback &mdash; contractually guaranteed, 24/7</div>
             </div>
             <div>
-              <div className="tw-geo-hero-stat-num gold">8.5%</div>
-              <div className="tw-geo-hero-stat-label">Flat monthly fee &mdash; no tenant-placement upcharge</div>
+              <div className="tw-geo-hero-stat-num gold">One flat fee</div>
+              <div className="tw-geo-hero-stat-label">All-inclusive percentage of rent &mdash; no tenant-placement upcharge</div>
             </div>
             <div>
               <div className="tw-geo-hero-stat-num">35 yrs</div>
@@ -113,15 +113,15 @@ function RentalMarylandCounties() {
   const counties = [
     {
       name: 'Anne Arundel County',
-      meta: '420+ rentals · Naval Academy &amp; Fort Meade',
+      meta: 'Naval Academy &amp; Fort Meade',
       featured: true,
-      body: 'Highest density of single-family rentals in our Maryland portfolio. Strong demand from Naval Academy, Fort Meade, BWI corridor. Annapolis waterfront and Severna Park family homes lease in 14&ndash;21 days.',
+      body: 'Highest density of single-family rentals in our Maryland portfolio. Strong demand from Naval Academy, Fort Meade, BWI corridor. Annapolis waterfront and Severna Park family homes lease quickly.',
       cities: ['Annapolis', 'Severna Park', 'Crofton', 'Pasadena', 'Glen Burnie', 'Odenton'],
       href: '/rental-management/maryland/anne-arundel-county',
     },
     {
       name: 'Silver Spring',
-      meta: '180+ rentals · DC commuter market',
+      meta: 'DC commuter market · Montgomery County',
       featured: true,
       body: 'Metro-adjacent rental demand from DC commuters, NIH/FDA workforce, University of Maryland-bound households. Mix of single-family, downtown condo, and townhome.',
       cities: ['Downtown SS', 'Four Corners', 'Forest Glen', 'Aspen Hill', 'Wheaton border'],
@@ -129,11 +129,19 @@ function RentalMarylandCounties() {
     },
     {
       name: 'Baltimore County',
-      meta: 'HQ county · ~150 rentals',
+      meta: 'HQ county · Owings Mills',
       featured: true,
       body: "Tidewater\'s home county. Strong single-family and condo rental demand around Towson, Owings Mills, and the Hunt Valley corridor. County rental licensing handled.",
       cities: ['Towson', 'Cockeysville', 'Pikesville', 'Owings Mills'],
       href: '/rental-management/maryland/baltimore-county',
+    },
+    {
+      name: 'Columbia',
+      meta: 'Howard County · planned community',
+      featured: true,
+      body: 'Ten villages under the Columbia Association, each with its own covenants. Single-family, townhome, and condo rentals across all ten plus Town Center &mdash; CA charge, village rules, and the Howard County license handled.',
+      cities: ['Town Center', 'Wilde Lake', 'Oakland Mills', 'River Hill'],
+      href: '/rental-management/maryland/columbia',
     },
     {
       name: 'Howard County',
@@ -159,6 +167,14 @@ function RentalMarylandCounties() {
       cities: ['Bowie', 'Largo', 'Greenbelt', 'Hyattsville'],
       href: '/rental-management/maryland/prince-georges-county',
     },
+    {
+      name: 'Ocean City',
+      meta: 'Worcester County · Coastal office',
+      featured: true,
+      body: 'Condo-dense, seasonal, and run from our own office at 8101 Coastal Highway. Long-term and seasonal leases on the island, West OC, Ocean Pines, and Berlin. Town rental license handled.',
+      cities: ['Downtown OC', 'Midtown', 'North OC', 'West OC', 'Ocean Pines'],
+      href: '/rental-management/maryland/ocean-city',
+    },
   ];
   return (
     <section id="counties" className="tw-geo-section cream">
@@ -181,7 +197,7 @@ function RentalMarylandCounties() {
                 {c.cities.map((city, j) => <span key={j} className="tw-geo-county-city">{city}</span>)}
               </div>
               <div className="tw-geo-county-cta">
-                {c.featured ? 'View county page' : 'County page coming soon'} <span className="tw-geo-county-cta-arrow">→</span>
+                {c.featured ? `Property management in ${c.name.replace(/&amp;/g, '&')}` : 'County page coming soon'} <span className="tw-geo-county-cta-arrow">→</span>
               </div>
             </a>
           ))}
@@ -270,9 +286,9 @@ function RentalMarylandFee() {
     'Free rental market analysis before you sign',
   ];
   const rows = [
-    { label: 'Tidewater', sub: '8.5% mgmt only', val: '$2,550', detail: 'in fees, year one', highlight: true },
-    { label: 'Typical Maryland competitor', sub: '50% placement + 10% mgmt', val: '$4,250', detail: 'in fees, year one' },
-    { label: 'Self-managed', sub: 'Your time at $50/hr · ~6 hrs/mo', val: '$3,600', detail: 'opportunity cost, year one' },
+    { label: 'Tidewater', sub: 'One flat percentage of rent collected', val: 'All-inclusive', detail: 'no placement fee · no markups · no renewal fee', highlight: true },
+    { label: 'Typical Maryland competitor', sub: 'Monthly % plus add-ons', val: 'Layered', detail: 'placement fee of 50–100% of a month’s rent, maintenance markups' },
+    { label: 'Self-managed', sub: 'Showings, screening, dispatch, compliance', val: 'Your time', detail: 'plus the cost of a missed license or deposit rule' },
   ];
   return (
     <section style={{ background: 'var(--tw-dark)', color: 'var(--tw-cream)', padding: '56px 0' }}>
@@ -281,7 +297,7 @@ function RentalMarylandFee() {
           <div>
             <div className="tw-eyebrow tw-eyebrow-gold">One Flat Fee</div>
             <h2 style={{ fontFamily: 'var(--tw-font-heading)', fontWeight: 800, fontSize: 'clamp(28px, 2.8vw, 36px)', lineHeight: 1.15, letterSpacing: '-0.015em', color: 'var(--tw-cream)', margin: '10px 0 18px', textWrap: 'balance' }}>
-              <em style={{ fontStyle: 'italic', fontWeight: 300, color: 'var(--tw-gold)' }}>8.5%</em> of monthly rent collected. That&rsquo;s it.
+              One flat percentage of <em style={{ fontStyle: 'italic', fontWeight: 300, color: 'var(--tw-gold)' }}>rent collected.</em> That&rsquo;s it.
             </h2>
             <p style={{ fontFamily: 'var(--tw-font-body)', fontSize: 16, lineHeight: 1.65, color: 'rgba(254,252,248,0.78)', margin: '0 0 18px', maxWidth: 560 }}>
               Most Maryland competitors charge a tenant-placement fee equal to 50&ndash;100% of one month&rsquo;s rent, plus a monthly management fee on top, plus maintenance markups. We don&rsquo;t. One flat percentage, no surprises.
@@ -296,7 +312,7 @@ function RentalMarylandFee() {
             </ul>
           </div>
           <aside style={{ background: 'rgba(254,252,248,0.04)', border: '1px solid rgba(254,252,248,0.12)', borderRadius: 14, padding: 32, backdropFilter: 'blur(8px)' }}>
-            <div style={{ fontFamily: 'var(--tw-font-heading)', fontWeight: 700, fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--tw-gold)', marginBottom: 18 }}>Cost comparison · sample 3BR home @ $2,500/mo</div>
+            <div style={{ fontFamily: 'var(--tw-font-heading)', fontWeight: 700, fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--tw-gold)', marginBottom: 18 }}>How the fee models compare</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {rows.map((row, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 14, padding: '14px 0', borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.10)' : 'none' }}>
@@ -312,7 +328,7 @@ function RentalMarylandFee() {
               ))}
             </div>
             <div style={{ marginTop: 16, padding: '10px 12px', background: 'rgba(191,172,95,0.10)', border: '1px solid rgba(191,172,95,0.30)', borderRadius: 8, fontFamily: 'var(--tw-font-body)', fontSize: 11.5, color: 'rgba(254,252,248,0.70)', lineHeight: 1.45, fontStyle: 'italic' }}>
-              Sample math &mdash; actual fees depend on rent collected and re-lease frequency.
+              Your exact percentage is quoted in writing, up front, before you sign anything.
             </div>
           </aside>
         </div>

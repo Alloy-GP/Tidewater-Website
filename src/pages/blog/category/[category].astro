@@ -7,6 +7,7 @@ import Topbar from '../../../components/Topbar.astro';
 import Header from '../../../components/Header.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import Footer from '../../../components/Footer.astro';
+import Pic from '../../../components/Pic.astro';
 import ResourcesNewsletter from '../../../components/ResourcesNewsletter.astro';
 import { ALL_POSTS } from '../../../components/BlogPostsData.js';
 import { breadcrumbSchema } from '../../../lib/schema';
@@ -71,7 +72,7 @@ const pageSchema = [
         <a class="tw-bi-card" href={p.href}>
           {p.coverImage && (
             <div class="tw-bi-card-img">
-              <img src={p.coverImage} alt={p.coverAlt || ''} width="1400" height="763" loading="lazy" decoding="async" />
+              <Pic src={p.coverImage} alt={p.coverAlt || ''} width={p.coverWidth || 1400} height={p.coverHeight || 763} />
             </div>
           )}
           <div class="tw-bi-card-body">

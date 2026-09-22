@@ -1,6 +1,10 @@
-// Rental Geo — shared component for /rental-management/maryland/<county-or-city>/
-// Two pages: Anne Arundel County and Silver Spring.
-// Pass GEO_DATA_ANNE_ARUNDEL or GEO_DATA_SILVER_SPRING as the `geo` prop.
+// Rental Geo — shared component for /rental-management/<state>/<county-or-city>
+// One GEO_DATA_* export per page; pass it as the `geo` prop.
+//
+// Data rules (tidewater-master-brief-v2.2): rental property counts, vacancy,
+// time-to-lease and the fee percentage are all PENDING client confirmation —
+// none may be published. Named managers must appear on /about/leadership.
+// Never ship a "[confirm]" or "[PLACEHOLDER" tag; the build check greps for both.
 
 import { useState } from 'react';
 import FaqAccordion from './FaqAccordion.jsx';
@@ -54,7 +58,7 @@ function RentalGeoHero({ geo }) {
       <div className="tw-geo-hero-grid">
         <div className="tw-geo-hero-copy">
           <h1 className="tw-geo-hero-title" dangerouslySetInnerHTML={{ __html: geo.heroTitle }} />
-          <p className="tw-geo-hero-lede">{geo.heroLede}</p>
+          <p className="tw-geo-hero-lede" dangerouslySetInnerHTML={{ __html: geo.heroLede }} />
           <div className="tw-geo-hero-actions">
             <a href="/request-a-proposal" className="tw-btn tw-btn-primary tw-btn-lg">Get a free rental analysis →</a>
             <a href="#services" className="tw-btn tw-btn-ghost">What&rsquo;s included →</a>
@@ -151,7 +155,7 @@ function RentalGeoNeighbors({ geo }) {
 function RentalGeoServices({ geo }) {
   const services = [
     { tone: '', icon: 'shield', title: 'Tenant placement & screening', body: 'Marketing, showings, application processing, background &amp; credit checks, income verification. Most homes leased within 21 days of listing in this market.', cta: 'How placement works' },
-    { tone: 'gold', icon: 'wrench', title: 'Maintenance & emergency response', body: 'AppFolio-integrated request workflow. 24/7 dispatch with named on-call manager. Vetted vendor network covering plumbing, HVAC, electrical, appliance.', cta: 'See maintenance workflow' },
+    { tone: 'gold', icon: 'wrench', title: 'Maintenance & emergency response', body: 'AppFolio-integrated request workflow. 24/7 dispatch with named on-call manager. Repairs by our in-house <a href="/maintenance-services">rental property maintenance company</a>, plus a vetted vendor network for plumbing, HVAC, electrical, appliance.', cta: 'See maintenance workflow', href: '/maintenance-services' },
     { tone: 'sage', icon: 'cash', title: 'Rent collection & owner reporting', body: 'Online tenant payment portal. Monthly owner statements, year-end 1099 prep. Funds direct-deposited to your account within 7 business days.', cta: 'How reporting works' },
   ];
   return (
@@ -167,7 +171,7 @@ function RentalGeoServices({ geo }) {
             <div key={i} className={`tw-geo-law-card ${s.tone}`}>
               <h3>{s.title}</h3>
               <p dangerouslySetInnerHTML={{ __html: s.body }} />
-              <div className="tw-geo-law-foot">{s.cta} →</div>
+              <div className="tw-geo-law-foot">{s.href ? <a href={s.href} style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: 3 }}>{s.cta} →</a> : <>{s.cta} →</>}</div>
             </div>
           ))}
         </div>
@@ -180,18 +184,24 @@ function RentalGeoServices({ geo }) {
 // Local manager
 // ─────────────────────────────────────────────────────────────
 function RentalGeoManager({ geo }) {
+  if (!geo.manager) return null;
+  const isDirector = Boolean(geo.manager.role);
   return (
     <section className="tw-geo-section cream" style={{ padding: '64px 0' }}>
       <div className="tw-container-wide">
         <div className="tw-section-head-left" style={{ maxWidth: 760, margin: '0 0 12px' }}>
-          <div className="tw-eyebrow">Your Local Property Manager</div>
-          <h2 className="tw-section-title" style={{ margin: '10px 0 14px' }}>A <em>{geo.name}</em> property manager, not a rotating pool.</h2>
+          <div className="tw-eyebrow">{isDirector ? 'Your Rental Team' : 'Your Local Property Manager'}</div>
+          <h2 className="tw-section-title" style={{ margin: '10px 0 14px' }}>
+            {isDirector
+              ? <>A named <em>{geo.name}</em> team, not a rotating pool.</>
+              : <>A <em>{geo.name}</em> property manager, not a rotating pool.</>}
+          </h2>
           <p className="tw-section-lede">Same person at every inspection. Same person at every move-in. Same person tenants and owners email.</p>
         </div>
         <div className="tw-geo-manager">
           <div className="tw-geo-manager-avatar">{geo.manager.initials}</div>
           <div>
-            <div className="tw-geo-manager-eyebrow">Property Manager · {geo.name}</div>
+            <div className="tw-geo-manager-eyebrow">{isDirector ? `${geo.manager.role} · Tidewater` : `Property Manager · ${geo.name}`}</div>
             <div className="tw-geo-manager-name">
               {geo.manager.name} <span>{geo.manager.creds}</span>
             </div>
@@ -201,6 +211,33 @@ function RentalGeoManager({ geo }) {
             <a href="/request-a-proposal" className="tw-btn tw-btn-primary tw-btn-block">Email {geo.manager.name.split(' ')[0]} →</a>
             <a href="tel:+14435480191" className="tw-btn tw-btn-outline tw-btn-block">(443) 548-0191</a>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Related pages — parent hub, the HOA side of the same county,
+// neighbouring markets, and maintenance. Drives internal linking.
+// ─────────────────────────────────────────────────────────────
+function RentalGeoRelated({ geo }) {
+  if (!geo.related || geo.related.length === 0) return null;
+  return (
+    <section className="tw-geo-section mist" style={{ padding: '64px 0' }}>
+      <div className="tw-container-wide">
+        <div className="tw-section-head-left" style={{ maxWidth: 760, margin: '0 0 12px' }}>
+          <div className="tw-eyebrow">Nearby &amp; Related</div>
+          <h2 className="tw-section-title" style={{ margin: '10px 0 14px' }}>More Tidewater coverage <em>around {geo.name}.</em></h2>
+        </div>
+        <div className="tw-geo-law-grid">
+          {geo.related.map((r, i) => (
+            <a key={i} href={r.href} className={`tw-geo-law-card ${['', 'gold', 'sage', 'clay'][i % 4]}`} style={{ textDecoration: 'none' }}>
+              <h3>{r.label}</h3>
+              <p>{r.note}</p>
+              <div className="tw-geo-law-foot">Open →</div>
+            </a>
+          ))}
         </div>
       </div>
     </section>
@@ -240,6 +277,7 @@ export default function RentalGeo({ geo }) {
       <RentalGeoManager geo={geo} />
       <RentalGeoServices geo={geo} />
       <RentalGeoFaq geo={geo} />
+      <RentalGeoRelated geo={geo} />
     </>
   );
 }
@@ -253,11 +291,12 @@ export const GEO_DATA_ANNE_ARUNDEL = {
   fullName: 'Anne Arundel County',
   url: '/rental-management/maryland/anne-arundel-county',
   scope: 'county',
-  heroTitle: 'Rental property management in <em>Anne Arundel County.</em>',
-  heroLede: 'For owners who don\'t live in Annapolis — deployed military, out-of-state investors, accidental landlords, and first-time owners. We\'ve been managing single-family and small-multifamily rentals across Anne Arundel since 1996. Flat monthly fee. AppFolio-backed. Real property managers.',
+  heroTitle: 'Anne Arundel County <em>property management.</em>',
+  heroLede: 'For owners who don\'t live in Annapolis — deployed military, out-of-state investors, accidental landlords, and first-time owners. We manage single-family and small-multifamily rentals across Anne Arundel County. One flat, all-inclusive fee. AppFolio-backed. Real property managers.',
   heroStats: [
-    { num: '420+', label: 'Anne Arundel single-family &amp; small-multi rentals managed' },
-    { num: '21 days', tone: 'gold', label: 'Avg. days-to-lease across the county' },
+    { num: '30 min', tone: 'gold', label: 'Emergency callback — contractually guaranteed, 24/7' },
+    { num: 'AppFolio', label: 'Owner portal — monthly statements, photos, direct deposit' },
+    { num: 'Since 1989', label: 'Family-owned Mid-Atlantic manager' },
   ],
   mapHeading: 'Where we manage',
   mapHqLabel: 'County seat · Annapolis',
@@ -276,46 +315,53 @@ export const GEO_DATA_ANNE_ARUNDEL = {
   factsTitle: 'The Anne Arundel rental market, <em>in data.</em>',
   factsLede: 'Strong single-family rental demand fueled by Fort Meade, BWI, and Naval Academy proximity. Tight supply, quick lease turnarounds.',
   facts: [
-    { label: 'Median single-family rent', val: '$2,640 <span class="gold">/mo</span>', sub: '3BR/2BA · 2026 estimate' },
-    { label: 'Median days-to-lease', val: '21 days', sub: 'Tidewater portfolio avg.' },
-    { label: 'Tenant retention rate', val: '78%', sub: 'Year-over-year, county-wide' },
-    { label: 'Owners out-of-state', val: '34%', sub: 'Of our Anne Arundel portfolio' },
+    { label: 'Landlord compliance', val: 'Handled', sub: 'County registration, lead-paint, MD deposit rules' },
+    { label: 'Military & remote owners', val: 'Core specialty', sub: 'Naval Academy · Fort Meade · deployed and out-of-state' },
+    { label: 'Emergency callback', val: '30 <span class="gold">min</span>', sub: 'Contractual guarantee on the 24/7 line' },
+    { label: 'Owner reporting', val: 'Monthly', sub: 'AppFolio owner portal · direct deposit' },
   ],
   neighborsEyebrow: 'Where We Manage',
   neighborsTitle: 'Anne Arundel cities &amp; towns, <em>by rental density.</em>',
   neighborsLede: 'Twelve markets across the county. Single-family, townhome, and 2–4 unit properties.',
   neighbors: [
-    { name: 'Annapolis',     meta: '88 units · waterfront & downtown',  tag: 'County seat' },
-    { name: 'Severna Park',  meta: '64 units · single-family',          tag: '' },
-    { name: 'Crofton',       meta: '52 units · planned community',      tag: '' },
-    { name: 'Pasadena',      meta: '48 units · mixed',                  tag: '' },
-    { name: 'Glen Burnie',   meta: '46 units · townhome dense',         tag: '' },
-    { name: 'Odenton',       meta: '38 units · Fort Meade proximity',   tag: 'Military' },
-    { name: 'Arnold',        meta: '22 units · single-family',          tag: '' },
-    { name: 'Edgewater',     meta: '16 units · waterfront',             tag: '' },
-    { name: 'Linthicum',     meta: '12 units · BWI corridor',           tag: 'BWI' },
-    { name: 'Hanover',       meta: '10 units · new construction',       tag: '' },
-    { name: 'Davidsonville', meta: '8 units · rural',                   tag: '' },
-    { name: 'Mayo',          meta: '6 units · waterfront',              tag: '' },
+    { name: 'Annapolis',     meta: 'waterfront & downtown',  tag: 'County seat' },
+    { name: 'Severna Park',  meta: 'single-family',          tag: '' },
+    { name: 'Crofton',       meta: 'planned community',      tag: '' },
+    { name: 'Pasadena',      meta: 'mixed',                  tag: '' },
+    { name: 'Glen Burnie',   meta: 'townhome dense',         tag: '' },
+    { name: 'Odenton',       meta: 'Fort Meade proximity',   tag: 'Military' },
+    { name: 'Arnold',        meta: 'single-family',          tag: '' },
+    { name: 'Edgewater',     meta: 'waterfront',             tag: '' },
+    { name: 'Linthicum',     meta: 'BWI corridor',           tag: 'BWI' },
+    { name: 'Hanover',       meta: 'new construction',       tag: '' },
+    { name: 'Davidsonville', meta: 'rural',                   tag: '' },
+    { name: 'Mayo',          meta: 'waterfront',              tag: '' },
   ],
   manager: {
-    name: 'Marcus Webb',
-    creds: 'MPM®',
-    initials: 'MW',
-    bio: '<strong>14 years</strong> managing Anne Arundel rentals — specialty in deployed-military owners and Naval Academy-area properties. Lives in Severna Park. Drives the county Monday, Wednesday, Friday each week.',
+    name: 'Cody Bishop',
+    creds: 'Broker',
+    initials: 'CB',
+    role: 'Director of Rental Management',
+    bio: '<strong>Licensed real estate broker</strong> and Tidewater\'s Director of Rental Management, overseeing rental operations across Maryland, Delaware, and Virginia from our Owings Mills headquarters. Every Anne Arundel County owner works with a named portfolio manager on Cody\'s team.',
   },
   schemaDesc: 'Single-family and small-multifamily rental property management across Anne Arundel County, Maryland — Annapolis, Severna Park, Crofton, Pasadena, Glen Burnie, Odenton.',
+  related: [
+    { label: 'HOA management in Anne Arundel County', href: '/hoa-management/maryland/anne-arundel-county', note: 'The association side of the county — Annapolis to Glen Burnie.' },
+    { label: 'Property management in Howard County', href: '/rental-management/maryland/howard-county', note: 'Columbia, Ellicott City, Elkridge — next door on Route 32.' },
+    { label: 'Prince George’s County property management', href: '/rental-management/maryland/prince-georges-county', note: 'Bowie, Largo, Laurel — the other side of the Fort Meade corridor.' },
+    { label: 'Rental property maintenance', href: '/maintenance-services', note: 'In-house technicians and 24/7 mitigation for the properties we manage.' },
+  ],
   faqs: [
     {
       q: 'I\'m deployed — can you manage my Anne Arundel rental remotely?',
       a: [
-        '<strong>Yes — this is one of our core specialties.</strong> Anne Arundel has the Naval Academy and a heavy active-duty footprint; roughly a third of our county portfolio is owned by deployed or out-of-state military personnel.',
+        '<strong>Yes — this is one of our core specialties.</strong> Anne Arundel has the Naval Academy and a heavy active-duty footprint; a large share of our county portfolio is owned by deployed or out-of-state military personnel.',
         'You\'ll get a single point of contact, signed owner agreements via DocuSign, monthly statements + photos delivered via AppFolio owner portal, and a 24/7 emergency line that lets you sleep at night. We can also act under power of attorney where needed.',
       ],
     },
     {
       q: 'How fast will my property lease in Anne Arundel?',
-      a: 'Our Anne Arundel portfolio averages <strong>21 days from listing to lease signing</strong> for properly-priced single-family homes. Severna Park, Annapolis downtown, and Odenton (Fort Meade) typically lease in 14–18 days; waterfront and rural Davidsonville/Mayo can take longer.',
+      a: 'Properly priced single-family homes in Anne Arundel County lease quickly relative to the region. Severna Park, downtown Annapolis and Odenton near Fort Meade typically lease fastest; waterfront and rural Davidsonville and Mayo can take longer. You follow showing and application activity in the AppFolio owner portal rather than waiting for a call.',
     },
     {
       q: 'What\'s your management fee structure?',
@@ -341,11 +387,12 @@ export const GEO_DATA_SILVER_SPRING = {
   fullName: 'Silver Spring',
   url: '/rental-management/maryland/silver-spring',
   scope: 'city',
-  heroTitle: 'Rental property management in <em>Silver Spring.</em>',
-  heroLede: 'For owners outside the Beltway who need a manager inside it. Silver Spring single-family and condo rentals — DC commuter market, Metro proximity, NIH/FDA corridor demand. We rank #3 for "silver spring property management" for a reason.',
+  heroTitle: 'Silver Spring <em>property management.</em>',
+  heroLede: 'For owners outside the Beltway who need a manager inside it. Silver Spring single-family and condo rentals — DC commuter market, Metro proximity, NIH/FDA corridor demand. Part of our <a href="/rental-management/maryland/montgomery-county">Montgomery County</a> rental portfolio, with a manager dedicated to this submarket.',
   heroStats: [
-    { num: '180+', label: 'Silver Spring rentals managed' },
-    { num: '17 days', tone: 'gold', label: 'Avg. days-to-lease in this submarket' },
+    { num: '30 min', tone: 'gold', label: 'Emergency callback — contractually guaranteed, 24/7' },
+    { num: 'AppFolio', label: 'Owner portal — monthly statements, photos, direct deposit' },
+    { num: 'Since 1989', label: 'Family-owned Mid-Atlantic manager' },
   ],
   mapHeading: 'Silver Spring submarkets',
   mapHqLabel: 'Downtown · Metro hub',
@@ -364,31 +411,38 @@ export const GEO_DATA_SILVER_SPRING = {
   factsTitle: 'The Silver Spring rental market, <em>in data.</em>',
   factsLede: 'Metro-adjacent demand from DC commuters, NIH/FDA professionals, and University of Maryland-bound households. Tighter inventory than the county average.',
   facts: [
-    { label: 'Median single-family rent', val: '$2,950 <span class="gold">/mo</span>', sub: '3BR/2BA · 2026 estimate' },
-    { label: 'Median condo rent', val: '$2,150 <span class="gold">/mo</span>', sub: '2BR · downtown corridor' },
-    { label: 'Median days-to-lease', val: '17 days', sub: 'Tidewater portfolio avg.' },
-    { label: 'Owners out-of-state', val: '41%', sub: 'Of our Silver Spring portfolio' },
+    { label: 'County rental license', val: 'Required', sub: 'Montgomery County — we file & track renewal' },
+    { label: 'Rent stabilization', val: 'Tracked', sub: 'CPI-based cap on covered units, run at every renewal' },
+    { label: 'Emergency callback', val: '30 <span class="gold">min</span>', sub: 'Contractual guarantee on the 24/7 line' },
+    { label: 'Owner reporting', val: 'Monthly', sub: 'AppFolio owner portal · direct deposit' },
   ],
   neighborsEyebrow: 'Where We Manage',
   neighborsTitle: 'Silver Spring submarkets, <em>by rental density.</em>',
   neighborsLede: 'Six submarkets across the Silver Spring footprint. Single-family, townhome, and condo properties.',
   neighbors: [
-    { name: 'Downtown Silver Spring', meta: '52 units · condo dense',   tag: 'Metro hub' },
-    { name: 'Four Corners',           meta: '38 units · single-family', tag: '' },
-    { name: 'Forest Glen',            meta: '28 units · single-family', tag: '' },
-    { name: 'Takoma Park edge',       meta: '22 units · mixed',         tag: '' },
-    { name: 'Wheaton border',         meta: '18 units · townhome',      tag: '' },
-    { name: 'Aspen Hill',             meta: '16 units · single-family', tag: '' },
-    { name: 'Layhill',                meta: '8 units · single-family',  tag: '' },
-    { name: 'Hillandale',             meta: '6 units · single-family',  tag: '' },
+    { name: 'Downtown Silver Spring', meta: 'condo dense',   tag: 'Metro hub' },
+    { name: 'Four Corners',           meta: 'single-family', tag: '' },
+    { name: 'Forest Glen',            meta: 'single-family', tag: '' },
+    { name: 'Takoma Park edge',       meta: 'mixed',         tag: '' },
+    { name: 'Wheaton border',         meta: 'townhome',      tag: '' },
+    { name: 'Aspen Hill',             meta: 'single-family', tag: '' },
+    { name: 'Layhill',                meta: 'single-family',  tag: '' },
+    { name: 'Hillandale',             meta: 'single-family',  tag: '' },
   ],
   manager: {
-    name: 'Priya Sharma',
-    creds: 'MPM®',
-    initials: 'PS',
-    bio: '<strong>9 years</strong> managing Silver Spring rentals — specialty in Metro-corridor condo associations and DC-commuter single-family homes. Lives in Wheaton. Drives the submarket Monday, Tuesday, Thursday each week.',
+    name: 'Cody Bishop',
+    creds: 'Broker',
+    initials: 'CB',
+    role: 'Director of Rental Management',
+    bio: '<strong>Licensed real estate broker</strong> and Tidewater\'s Director of Rental Management, overseeing rental operations across Maryland, Delaware, and Virginia from our Owings Mills headquarters. Every Silver Spring owner works with a named portfolio manager on Cody\'s team.',
   },
   schemaDesc: 'Single-family, condo, and townhome rental property management in Silver Spring, Maryland — Downtown, Four Corners, Forest Glen, Takoma Park edge, Wheaton border, Aspen Hill.',
+  related: [
+    { label: 'Property management in Montgomery County', href: '/rental-management/maryland/montgomery-county', note: 'The county-wide page — Rockville, Bethesda, Gaithersburg, Germantown, Wheaton.' },
+    { label: 'HOA management in Montgomery County', href: '/hoa-management/maryland/montgomery-county', note: 'For the condo and HOA boards your Silver Spring rental sits inside.' },
+    { label: 'Rental property maintenance', href: '/maintenance-services', note: 'In-house technicians and 24/7 mitigation for the properties we manage.' },
+    { label: 'All Maryland rental markets', href: '/rental-management/maryland', note: 'Anne Arundel, Baltimore, Howard, Prince George’s, Ocean City.' },
+  ],
   faqs: [
     {
       q: 'Why does Silver Spring need its own rental specialist?',
@@ -400,7 +454,7 @@ export const GEO_DATA_SILVER_SPRING = {
     },
     {
       q: 'How fast will my Silver Spring property lease?',
-      a: 'Median 17 days listing-to-lease in our Silver Spring portfolio. Metro-corridor condos can lease in under 10 days. Single-family in Four Corners and Forest Glen averages 14–21 days.',
+      a: 'Metro-corridor condos lease fastest, followed by single-family in Four Corners and Forest Glen. We price to current comps and you follow showing and application activity in the AppFolio owner portal.',
     },
     {
       q: 'What\'s your management fee?',
@@ -412,7 +466,7 @@ export const GEO_DATA_SILVER_SPRING = {
     },
     {
       q: 'Can you manage a property I just moved out of?',
-      a: 'Yes — "accidental landlord" is roughly half our Silver Spring portfolio. Owners who took DC jobs, moved abroad, or relocated for federal positions and decided to hold the property. We do a free rent-vs-sell analysis as part of the first call.',
+      a: 'Yes — "accidental landlord" is a large share of our Silver Spring portfolio. Owners who took DC jobs, moved abroad, or relocated for federal positions and decided to hold the property. We do a free rent-vs-sell analysis as part of the first call.',
     },
   ],
 };
@@ -425,10 +479,12 @@ export const GEO_DATA_BALTIMORE_COUNTY = {
   fullName: 'Baltimore County',
   url: '/rental-management/maryland/baltimore-county',
   scope: 'county',
-  heroTitle: 'Rental property management in <em>Baltimore County.</em>',
+  heroTitle: 'Baltimore County <em>property management.</em>',
   heroLede: 'Tidewater\'s home county. Our headquarters is in Owings Mills and our managers know every corridor from Towson to Catonsville to White Marsh. Single-family, townhome, and condo rentals across the county — one flat monthly fee, AppFolio-backed, named local property manager.',
   heroStats: [
-    { num: '150+', label: 'Baltimore County rentals managed' },
+    { num: '30 min', tone: 'gold', label: 'Emergency callback — contractually guaranteed, 24/7' },
+    { num: 'AppFolio', label: 'Owner portal — monthly statements, photos, direct deposit' },
+    { num: 'Since 1989', label: 'Family-owned Mid-Atlantic manager' },
   ],
   mapHeading: 'Where we manage',
   mapHqLabel: 'Headquarters · Owings Mills',
@@ -448,8 +504,10 @@ export const GEO_DATA_BALTIMORE_COUNTY = {
   factsTitle: 'The Baltimore County rental market, <em>in data.</em>',
   factsLede: 'Diverse rental demand — graduate students near Towson University & Johns Hopkins, Hunt Valley corporate corridor, and the I-83/I-695 commuter rings. Strong year-round occupancy.',
   facts: [
-    { label: 'Median single-family rent', val: '$2,200 <span class="gold">/mo</span>', sub: '3BR/2BA — 2026 estimate' },
-    { label: 'County rental license', val: 'Required', sub: 'Tidewater files & tracks renewal' },
+    { label: 'County rental license', val: 'Required', sub: 'Baltimore County — we file & track renewal' },
+    { label: 'Headquarters', val: 'Owings Mills', sub: '3600 Crondall Lane — operations and accounting on site' },
+    { label: 'Emergency callback', val: '30 <span class="gold">min</span>', sub: 'Contractual guarantee on the 24/7 line' },
+    { label: 'Owner reporting', val: 'Monthly', sub: 'AppFolio owner portal · direct deposit' },
   ],
   neighborsEyebrow: 'Where We Manage',
   neighborsTitle: 'Baltimore County submarkets, <em>by rental density.</em>',
@@ -469,12 +527,19 @@ export const GEO_DATA_BALTIMORE_COUNTY = {
     { name: 'Essex',         meta: 'mixed',                 tag: '' },
   ],
   manager: {
-    name: 'Kate Cornell',
-    creds: 'CMCA®',
-    initials: 'KC',
-    bio: 'Baltimore and DC Metro rentals sit under Kate Cornell, Regional Director, with a named portfolio manager assigned to each owner. Our headquarters is in Owings Mills and the team is in the county daily.',
+    name: 'Cody Bishop',
+    creds: 'Broker',
+    initials: 'CB',
+    role: 'Director of Rental Management',
+    bio: '<strong>Licensed real estate broker</strong> and Tidewater\'s Director of Rental Management, overseeing rental operations across Maryland, Delaware, and Virginia from our Owings Mills headquarters. Every Baltimore County owner works with a named portfolio manager on Cody\'s team.',
   },
   schemaDesc: 'Single-family, townhome, and condo rental property management across Baltimore County, Maryland — Towson, Owings Mills, Pikesville, Cockeysville, Catonsville, White Marsh, Dundalk, and surrounding markets.',
+  related: [
+    { label: 'HOA management in Baltimore County', href: '/hoa-management/maryland/baltimore-county', note: 'The association side of our home county — Towson, Owings Mills, Pikesville boards.' },
+    { label: 'Property management in Howard County', href: '/rental-management/maryland/howard-county', note: 'Columbia, Ellicott City, Elkridge — south on I-70 and Route 29.' },
+    { label: 'Anne Arundel County property management', href: '/rental-management/maryland/anne-arundel-county', note: 'Annapolis, Severna Park, Glen Burnie, Odenton.' },
+    { label: 'Rental property maintenance', href: '/maintenance-services', note: 'In-house technicians dispatched from the same Owings Mills office.' },
+  ],
   faqs: [
     {
       q: 'Why does headquartering in Baltimore County matter for my rental?',
@@ -489,7 +554,7 @@ export const GEO_DATA_BALTIMORE_COUNTY = {
     },
     {
       q: 'How fast will my Baltimore County property lease?',
-      a: 'Our Baltimore County portfolio typically averages around 21 days from listing to lease signing for properly-priced single-family homes. Towson University-area properties and Hunt Valley corridor condos lease faster; rural northern county properties take longer.',
+      a: 'Properly priced single-family homes in Baltimore County lease quickly relative to the region. Towson University-area properties and Hunt Valley corridor condos lease fastest; rural northern county properties take longer. We price to current comps and you follow showing and application activity in the AppFolio owner portal.',
     },
     {
       q: 'What\'s your management fee structure?',
@@ -514,10 +579,12 @@ export const GEO_DATA_HOWARD_COUNTY = {
   fullName: 'Howard County',
   url: '/rental-management/maryland/howard-county',
   scope: 'county',
-  heroTitle: 'Rental property management in <em>Howard County.</em>',
-  heroLede: 'Columbia\'s village structure layered HOAs over rental properties — we navigate both. Single-family, townhome, and condo rentals across Columbia, Ellicott City, Elkridge, and the Route 32 corridor. AppFolio-backed. Flat monthly fee. Local manager who knows the village covenants.',
+  heroTitle: 'Property management in <em>Howard County.</em>',
+  heroLede: 'Columbia\'s village structure layered HOAs over rental properties — we navigate both. Single-family, townhome, and condo rentals across <a href="/rental-management/maryland/columbia">Columbia</a>, Ellicott City, Elkridge, and the Route 32 corridor. AppFolio-backed. Flat monthly fee. Local manager who knows the village covenants.',
   heroStats: [
-    { num: '80+', label: 'Howard County rentals managed' },
+    { num: '30 min', tone: 'gold', label: 'Emergency callback — contractually guaranteed, 24/7' },
+    { num: 'AppFolio', label: 'Owner portal — monthly statements, photos, direct deposit' },
+    { num: 'Since 1989', label: 'Family-owned Mid-Atlantic manager' },
   ],
   mapHeading: 'Where we manage',
   mapHqLabel: 'County seat · Ellicott City',
@@ -536,7 +603,10 @@ export const GEO_DATA_HOWARD_COUNTY = {
   factsTitle: 'The Howard County rental market, <em>in data.</em>',
   factsLede: 'Strong rental demand from corporate transferees (NSA, Verizon, GEICO at Route 32), Johns Hopkins APL, and Columbia\'s built-in pull as a planned community. Higher median rents than Baltimore or PG counties.',
   facts: [
-    { label: 'Columbia HOA overlay', val: 'Yes', sub: 'Village association layered on county' },
+    { label: 'County rental license', val: 'Required', sub: 'Howard County registration & inspection — we file & track' },
+    { label: 'Columbia HOA overlay', val: 'Yes', sub: 'Village association layered on county rules' },
+    { label: 'Emergency callback', val: '30 <span class="gold">min</span>', sub: 'Contractual guarantee on the 24/7 line' },
+    { label: 'Owner reporting', val: 'Monthly', sub: 'AppFolio owner portal · direct deposit' },
   ],
   neighborsEyebrow: 'Where We Manage',
   neighborsTitle: 'Howard County submarkets, <em>by rental density.</em>',
@@ -552,12 +622,19 @@ export const GEO_DATA_HOWARD_COUNTY = {
     { name: 'West Friendship', meta: 'rural',                 tag: '' },
   ],
   manager: {
-    name: 'Kate Cornell',
-    creds: 'CMCA®',
-    initials: 'KC',
-    bio: 'Baltimore and DC Metro rentals sit under Kate Cornell, Regional Director, with a named portfolio manager assigned to each owner. Our headquarters is in Owings Mills and the team is in the county daily.',
+    name: 'Cody Bishop',
+    creds: 'Broker',
+    initials: 'CB',
+    role: 'Director of Rental Management',
+    bio: '<strong>Licensed real estate broker</strong> and Tidewater\'s Director of Rental Management, overseeing rental operations across Maryland, Delaware, and Virginia from our Owings Mills headquarters. Every Howard County owner works with a named portfolio manager on Cody\'s team.',
   },
   schemaDesc: 'Single-family, townhome, and condo rental property management across Howard County, Maryland — Columbia, Ellicott City, Elkridge, Clarksville, Fulton, and surrounding markets.',
+  related: [
+    { label: 'Property management in Columbia, MD', href: '/rental-management/maryland/columbia', note: 'Our dedicated Columbia page — the ten villages, CA charge, village covenants.' },
+    { label: 'HOA management in Howard County', href: '/hoa-management/maryland/howard-county', note: 'Columbia village associations, Ellicott City condos, west-county developer transitions.' },
+    { label: 'Property management in Montgomery County', href: '/rental-management/maryland/montgomery-county', note: 'Rockville, Bethesda, Gaithersburg — across the Patuxent.' },
+    { label: 'Rental property maintenance', href: '/maintenance-services', note: 'In-house technicians and 24/7 mitigation for the properties we manage.' },
+  ],
   faqs: [
     {
       q: 'Do you handle Columbia\'s village association rules?',
@@ -572,7 +649,7 @@ export const GEO_DATA_HOWARD_COUNTY = {
     },
     {
       q: 'How fast will my Howard County property lease?',
-      a: 'Our Howard County rentals typically average around 18 days from listing to lease signing. Columbia condos and Elkridge townhomes lease fastest; larger single-family homes in Clarksville and the western county take 21–30 days.',
+      a: 'Columbia condos and Elkridge townhomes lease fastest; larger single-family homes in Clarksville and the western county take longer. We price to current comps, and you follow showing and application activity in the AppFolio owner portal rather than waiting for a call.',
     },
     {
       q: 'What\'s your management fee?',
@@ -597,10 +674,12 @@ export const GEO_DATA_MONTGOMERY_COUNTY = {
   fullName: 'Montgomery County',
   url: '/rental-management/maryland/montgomery-county',
   scope: 'county',
-  heroTitle: 'Rental property management in <em>Montgomery County.</em>',
+  heroTitle: 'Property management in <em>Montgomery County.</em>',
   heroLede: 'Beyond Silver Spring — Rockville, Gaithersburg, Bethesda, Germantown. The country\'s densest federal workforce, the NIH/FDA corridor, and the Metro Red Line spine all run through this county. We manage single-family, townhome, and condo rentals across the whole footprint.',
   heroStats: [
-    { num: '200+', label: 'Montgomery County rentals managed (incl. Silver Spring)' },
+    { num: '30 min', tone: 'gold', label: 'Emergency callback — contractually guaranteed, 24/7' },
+    { num: 'AppFolio', label: 'Owner portal — monthly statements, photos, direct deposit' },
+    { num: 'Since 1989', label: 'Family-owned Mid-Atlantic manager' },
   ],
   mapHeading: 'Where we manage',
   mapHqLabel: 'County seat · Rockville',
@@ -620,13 +699,16 @@ export const GEO_DATA_MONTGOMERY_COUNTY = {
   factsTitle: 'The Montgomery County rental market, <em>in data.</em>',
   factsLede: 'Federal workforce, biotech (NIH, FDA, NIST), and DC commuter demand make this Maryland\'s tightest rental submarket. Median rents run 20–30% above the state average.',
   facts: [
-    { label: 'County rental license', val: 'Required', sub: 'Tidewater files & tracks renewal' },
+    { label: 'County rental license', val: 'Required', sub: 'Montgomery County — we file & track renewal' },
+    { label: 'Rent stabilization', val: 'Tracked', sub: 'CPI-based cap on covered units, run at every renewal' },
+    { label: 'Emergency callback', val: '30 <span class="gold">min</span>', sub: 'Contractual guarantee on the 24/7 line' },
+    { label: 'Owner reporting', val: 'Monthly', sub: 'AppFolio owner portal · direct deposit' },
   ],
   neighborsEyebrow: 'Where We Manage',
   neighborsTitle: 'Montgomery County submarkets, <em>by rental density.</em>',
   neighborsLede: 'From the Bethesda Metro spine to the I-270 biotech corridor and the Patuxent watershed beyond.',
   neighbors: [
-    { name: 'Silver Spring',  meta: '180+ units · dedicated city page', tag: 'Live page' },
+    { name: 'Silver Spring',  meta: 'dedicated city page', tag: 'Live page' },
     { name: 'Rockville',      meta: 'mixed',                tag: 'County seat' },
     { name: 'Bethesda',       meta: 'condo dense',          tag: '' },
     { name: 'Gaithersburg',   meta: 'townhome',             tag: '' },
@@ -638,12 +720,19 @@ export const GEO_DATA_MONTGOMERY_COUNTY = {
     { name: 'Kensington',     meta: 'single-family',         tag: '' },
   ],
   manager: {
-    name: 'Kate Cornell',
-    creds: 'CMCA®',
-    initials: 'KC',
-    bio: 'Baltimore and DC Metro rentals sit under Kate Cornell, Regional Director, with a named portfolio manager assigned to each owner. Our headquarters is in Owings Mills and the team is in the county daily.',
+    name: 'Cody Bishop',
+    creds: 'Broker',
+    initials: 'CB',
+    role: 'Director of Rental Management',
+    bio: '<strong>Licensed real estate broker</strong> and Tidewater\'s Director of Rental Management, overseeing rental operations across Maryland, Delaware, and Virginia from our Owings Mills headquarters. Every Montgomery County owner works with a named portfolio manager on Cody\'s team.',
   },
   schemaDesc: 'Single-family, townhome, and condo rental property management across Montgomery County, Maryland — Rockville, Bethesda, Gaithersburg, Germantown, Silver Spring, Wheaton, Potomac, and the I-270 biotech corridor.',
+  related: [
+    { label: 'Silver Spring property management', href: '/rental-management/maryland/silver-spring', note: 'Our dedicated Silver Spring submarket page — Downtown, Four Corners, Forest Glen.' },
+    { label: 'HOA management in Montgomery County', href: '/hoa-management/maryland/montgomery-county', note: 'CCOC registration, Chapter 10B, and the condo boards your rental sits inside.' },
+    { label: 'Property management in Howard County', href: '/rental-management/maryland/howard-county', note: 'Columbia, Ellicott City, Elkridge — north on Route 29.' },
+    { label: 'Rental property maintenance', href: '/maintenance-services', note: 'In-house technicians who know the county rental-license inspection checklist.' },
+  ],
   faqs: [
     {
       q: 'Does Montgomery County have its own rental license?',
@@ -654,11 +743,11 @@ export const GEO_DATA_MONTGOMERY_COUNTY = {
     },
     {
       q: 'What\'s the rent control situation in Montgomery County?',
-      a: '<strong>Montgomery County\'s rent stabilization law limits annual rent increases for many rental units.</strong> The formula is tied to CPI plus a fixed percentage. We track which of your properties are covered, run the math for compliant increases at renewal, and document the calculation for your records.',
+      a: '<strong>Montgomery County\'s rent stabilization law limits annual rent increases on covered units.</strong> Since the law took effect in 2024 the allowable increase has been tied to CPI plus 3 percent, capped at 6 percent, with exemptions for newer buildings and certain other unit types. We track which of your properties are covered, run the math for a compliant increase at renewal, and document the calculation for your records.',
     },
     {
       q: 'How fast will my Montgomery County property lease?',
-      a: 'Metro-corridor condos in Bethesda, Silver Spring, and Wheaton typically lease in under 14 days. Single-family in Rockville, Gaithersburg, and Potomac averages 17–25 days. Federal hiring cycles and lease-expiration patterns drive the seasonality.',
+      a: 'Metro-corridor condos in Bethesda, Silver Spring, and Wheaton lease fastest; single-family in Rockville, Gaithersburg, and Potomac takes longer. Federal hiring cycles and lease-expiration patterns drive the seasonality, and you follow activity in the AppFolio owner portal.',
     },
     {
       q: 'Do you manage condos with HOA rental caps?',
@@ -683,10 +772,12 @@ export const GEO_DATA_PRINCE_GEORGES_COUNTY = {
   fullName: "Prince George\'s County",
   url: '/rental-management/maryland/prince-georges-county',
   scope: 'county',
-  heroTitle: "Rental property management in <em>Prince George\'s County.</em>",
+  heroTitle: "Prince George\'s County <em>property management.</em>",
   heroLede: 'Bowie, Largo, Greenbelt, Hyattsville, Laurel. Townhome and garden-style rentals with heavy demand from federal workforce (NASA Goddard, Census Bureau), University of Maryland-bound households, and DC commuters east of the Anacostia. We handle the county rental license, lead-paint compliance, and the inspection cadence.',
   heroStats: [
-    { num: '100+', label: "Prince George\'s County rentals managed" },
+    { num: '30 min', tone: 'gold', label: 'Emergency callback — contractually guaranteed, 24/7' },
+    { num: 'AppFolio', label: 'Owner portal — monthly statements, photos, direct deposit' },
+    { num: 'Since 1989', label: 'Family-owned Mid-Atlantic manager' },
   ],
   mapHeading: 'Where we manage',
   mapHqLabel: 'County seat · Upper Marlboro',
@@ -706,7 +797,10 @@ export const GEO_DATA_PRINCE_GEORGES_COUNTY = {
   factsTitle: "The Prince George\'s County rental market, <em>in data.</em>",
   factsLede: 'Federal-workforce demand from NASA Goddard, the Census Bureau, the IRS, and University of Maryland faculty & staff. Townhome and garden-condo heavy, with single-family pockets in Bowie and Fort Washington.',
   facts: [
-    { label: 'County rental license', val: 'Required', sub: 'Tidewater files & tracks renewal' },
+    { label: 'County rental license', val: 'Required', sub: 'Prince George’s County — annual, we file & track' },
+    { label: 'Lead-paint compliance', val: 'Handled', sub: 'Pre-1978 registration, inspection & certificates' },
+    { label: 'Emergency callback', val: '30 <span class="gold">min</span>', sub: 'Contractual guarantee on the 24/7 line' },
+    { label: 'Owner reporting', val: 'Monthly', sub: 'AppFolio owner portal · direct deposit' },
   ],
   neighborsEyebrow: 'Where We Manage',
   neighborsTitle: "Prince George\'s County submarkets, <em>by rental density.</em>",
@@ -724,12 +818,19 @@ export const GEO_DATA_PRINCE_GEORGES_COUNTY = {
     { name: 'Beltsville',     meta: 'townhome',                  tag: '' },
   ],
   manager: {
-    name: 'Don Gentry',
-    creds: '',
-    initials: 'DG',
-    bio: "Prince George\'s County rentals are overseen by Kate Cornell, Baltimore Metro Regional Director. Our manager knows the county rental license cycle, the lead-paint compliance flow, and the heavy federal-workforce tenant pool.",
+    name: 'Cody Bishop',
+    creds: 'Broker',
+    initials: 'CB',
+    role: 'Director of Rental Management',
+    bio: '<strong>Licensed real estate broker</strong> and Tidewater\'s Director of Rental Management, overseeing rental operations across Maryland, Delaware, and Virginia from our Owings Mills headquarters. Every Prince George\'s County owner works with a named portfolio manager on Cody\'s team.',
   },
   schemaDesc: "Single-family, townhome, and condo rental property management across Prince George\'s County, Maryland — Bowie, Largo, Greenbelt, Hyattsville, Laurel, College Park, Upper Marlboro, Fort Washington, and the DC commuter corridor.",
+  related: [
+    { label: 'Anne Arundel County property management', href: '/rental-management/maryland/anne-arundel-county', note: 'Odenton, Crofton, Glen Burnie — the Fort Meade side of the line.' },
+    { label: 'Property management in Montgomery County', href: '/rental-management/maryland/montgomery-county', note: 'Silver Spring, Wheaton, Bethesda — across the DC suburbs.' },
+    { label: 'HOA management in Prince George’s County', href: '/hoa-management/maryland/prince-georges-county', note: 'For the Bowie and Largo association boards your rental sits inside.' },
+    { label: 'Rental property maintenance', href: '/maintenance-services', note: 'In-house technicians who know the PG County inspection checklist.' },
+  ],
   faqs: [
     {
       q: "Does Prince George\'s County require a rental license?",
@@ -744,7 +845,7 @@ export const GEO_DATA_PRINCE_GEORGES_COUNTY = {
     },
     {
       q: 'How fast will my PG County property lease?',
-      a: 'Townhomes in Largo and Bowie typically lease in 14–21 days. College Park area properties lease around the U of MD academic calendar. Single-family in Mitchellville and Fort Washington averages 21–30 days.',
+      a: 'Townhomes in Largo and Bowie lease fastest. College Park area properties lease around the University of Maryland academic calendar, and single-family in Mitchellville and Fort Washington takes longer. You follow showing and application activity in the AppFolio owner portal.',
     },
     {
       q: 'Do you manage in the Bowie planned-community structure?',
@@ -756,7 +857,7 @@ export const GEO_DATA_PRINCE_GEORGES_COUNTY = {
     },
     {
       q: 'Do you handle Section 8 / Housing Choice Voucher tenants in PG?',
-      a: 'Maryland and PG County both have specific landlord obligations around source-of-income protections and HCV inspection. We\'ll walk through your options on the first call.',
+      a: 'Yes. Maryland\'s HOME Act prohibits turning down an applicant solely because of a lawful source of income, including a Housing Choice Voucher, so voucher applicants are screened on the same criteria as everyone else. A voucher tenancy adds a housing-authority inspection and a HAP contract on top of the lease; we manage both and keep the paperwork current.',
     },
   ],
 };
@@ -769,9 +870,12 @@ export const GEO_DATA_OCEAN_CITY = {
   fullName: 'Ocean City',
   url: '/rental-management/maryland/ocean-city',
   scope: 'city',
-  heroTitle: 'Rental property management in <em>Ocean City, MD.</em>',
-  heroLede: 'A different market than the rest of the state — seasonal demand, condo-dense, and a tenant pool that turns over with the rental season. Tidewater\'s Ocean City office at 8101 Coastal Highway has run rentals on the island and the West OC mainland for years.',
+  heroTitle: 'Ocean City <em>property management.</em>',
+  heroLede: 'A different market than the rest of the state — seasonal demand, condo-dense, and a tenant pool that turns over with the rental season. Tidewater\'s Ocean City office at 8101 Coastal Highway, Suite 5, serves the island and the West OC mainland with the same AppFolio-backed operation as our Maryland mainland portfolio.',
   heroStats: [
+    { num: 'Local office', label: '8101 Coastal Highway, Suite 5, Ocean City' },
+    { num: '30 min', tone: 'gold', label: 'Emergency callback — contractually guaranteed, 24/7' },
+    { num: 'Since 1989', label: 'Family-owned Mid-Atlantic manager' },
   ],
   mapHeading: 'Where we manage',
   mapHqLabel: 'OC office · 8101 Coastal Hwy',
@@ -793,7 +897,8 @@ export const GEO_DATA_OCEAN_CITY = {
   facts: [
     { label: 'Property mix', val: 'Condo-heavy', sub: 'Single-family in West OC + Ocean Pines' },
     { label: 'Peak season', val: 'Memorial–Labor', sub: '14 weeks of compressed demand' },
-    { label: 'Year-round vs seasonal mix', val: '[Confirm]', sub: 'Portfolio split needed' },
+    { label: 'Rental license', val: 'Required', sub: 'Town of Ocean City — we file and track renewals' },
+    { label: 'Emergency callback', val: '30 <span class="gold">min</span>', sub: 'Contractual guarantee on the 24/7 line' },
   ],
   neighborsEyebrow: 'Where We Manage',
   neighborsTitle: 'Ocean City submarkets, <em>by section.</em>',
@@ -814,6 +919,12 @@ export const GEO_DATA_OCEAN_CITY = {
     bio: '<strong>20+ years</strong> in the Delmarva real estate market. Delmarva Regional Director overseeing Ocean City and Delaware operations. Real estate broker and customer-service background. Day-to-day OC property manager.',
   },
   schemaDesc: 'Rental property management in Ocean City, Maryland — condo, single-family, and small-multi rentals across Downtown, Midtown, North OC, Uptown, West Ocean City, Ocean Pines, and Berlin.',
+  related: [
+    { label: 'Lewes, Delaware rentals', href: '/rental-management/delaware/lewes', note: 'Our Delaware office, 30 minutes up Route 1 — same regional director.' },
+    { label: 'Delaware rental management', href: '/rental-management/delaware', note: 'Rehoboth, Bethany, Fenwick Island and the Sussex County corridor.' },
+    { label: 'All Maryland rental markets', href: '/rental-management/maryland', note: 'Anne Arundel, Baltimore, Howard, Montgomery, Prince George’s.' },
+    { label: 'Property maintenance & storm mitigation', href: '/maintenance-services', note: 'Pre-season inspections, mitigation crews, insurance documentation.' },
+  ],
   faqs: [
     {
       q: 'Do you manage long-term, seasonal, or weekly rentals?',
@@ -836,7 +947,7 @@ export const GEO_DATA_OCEAN_CITY = {
     },
     {
       q: "What\'s your fee structure for Ocean City?",
-      a: ' Long-term rentals: typically flat 8.5% of monthly rent collected. Seasonal/weekly vacation rental management uses a different fee model.',
+      a: '<strong>A flat percentage of monthly rent collected &mdash; quoted up front, with no surprises.</strong> No tenant-placement fee, no maintenance markup, no annual renewal fees. Seasonal leases are quoted per property because the turnover and marketing work differs; either way you get a written number before you sign anything.',
     },
     {
       q: 'Do you handle hurricane / storm season?',
@@ -858,9 +969,12 @@ export const GEO_DATA_LEWES = {
     href: '/rental-management/delaware',
     urlPath: 'delaware',
   },
-  heroTitle: 'Rental property management in <em>Lewes, Delaware.</em>',
+  heroTitle: 'Lewes, Delaware <em>rental property management.</em>',
   heroLede: 'Sussex County\'s "first town" — coastal, second-home heavy, and a different rental rhythm than the Mid-Atlantic mainland. Tidewater\'s Delaware office at 20375 John J Williams Highway sits in the Lewes–Rehoboth corridor. We manage single-family, condo, and townhome rentals across Lewes, Cape Henlopen, and the Route 1 coastal communities.',
   heroStats: [
+    { num: 'Local office', label: '20375 John J Williams Hwy, Lewes — Lewes/Rehoboth corridor' },
+    { num: '30 min', tone: 'gold', label: 'Emergency callback — contractually guaranteed, 24/7' },
+    { num: 'Since 1989', label: 'Family-owned Mid-Atlantic manager' },
   ],
   mapHeading: 'Where we manage',
   mapHqLabel: 'DE office · John J Williams Hwy',
@@ -881,6 +995,8 @@ export const GEO_DATA_LEWES = {
   facts: [
     { label: 'Property mix', val: 'Mixed', sub: 'Single-family, condo, townhome' },
     { label: 'Tax advantage', val: 'No DE sales tax', sub: 'Owners often surprised by this' },
+    { label: 'Statewide rental license', val: 'None', sub: 'Delaware has no statewide landlord license; HOA rules still apply' },
+    { label: 'Emergency callback', val: '30 <span class="gold">min</span>', sub: 'Contractual guarantee on the 24/7 line' },
   ],
   neighborsEyebrow: 'Where We Manage',
   neighborsTitle: 'Lewes-area submarkets, <em>by section.</em>',
@@ -901,6 +1017,12 @@ export const GEO_DATA_LEWES = {
     bio: '<strong>20+ years</strong> in the Delmarva real estate market. Delmarva Regional Director overseeing Delaware and Ocean City operations from our Route 1 office in the Lewes–Rehoboth corridor.',
   },
   schemaDesc: 'Rental property management in Lewes, Delaware — single-family, condo, and townhome rentals across Old Town Lewes, Cape Henlopen, Pilottown, Henlopen Acres, Milton, and the Sussex County coastal corridor.',
+  related: [
+    { label: 'Delaware rental management', href: '/rental-management/delaware', note: 'The state hub — Rehoboth, Bethany, Fenwick Island, Sussex inland.' },
+    { label: 'Ocean City property management', href: '/rental-management/maryland/ocean-city', note: 'Our Ocean City office, 30 minutes down Route 1 — same regional director.' },
+    { label: 'Rental management in Maryland & Delaware', href: '/rental-management', note: 'How the flat fee, AppFolio portal, and 24/7 line work everywhere we manage.' },
+    { label: 'Property maintenance & storm mitigation', href: '/maintenance-services', note: 'Pre-season inspections, mitigation crews, insurance documentation.' },
+  ],
   faqs: [
     {
       q: "How is Delaware\'s rental landscape different from Maryland\'s?",
@@ -927,7 +1049,111 @@ export const GEO_DATA_LEWES = {
     },
     {
       q: "What\'s your management fee?",
-      a: ' Long-term rentals are typically flat 8.5% of monthly rent collected. Seasonal/weekly vacation rental management uses a different fee model.',
+      a: '<strong>A flat percentage of monthly rent collected &mdash; quoted up front, with no surprises.</strong> No tenant-placement fee, no maintenance markup, no annual renewal fees. Seasonal leases are quoted per property because the turnover and marketing work differs; you get a written number before you sign anything.',
+    },
+  ],
+};
+
+// ─────────────────────────────────────────────────────────────
+// COLUMBIA, MD — /rental-management/maryland/columbia
+// Public facts only: Columbia's ten villages, the Columbia Association
+// annual charge, village architectural covenants, Howard County rental
+// registration. No portfolio counts (brief: pending).
+// ─────────────────────────────────────────────────────────────
+export const GEO_DATA_COLUMBIA = {
+  name: 'Columbia',
+  fullName: 'Columbia, Maryland',
+  url: '/rental-management/maryland/columbia',
+  scope: 'city',
+  heroTitle: 'Property management in <em>Columbia, MD.</em>',
+  heroLede: 'Columbia is a planned community of ten villages, each with its own covenants layered under the Columbia Association &mdash; and every rental inside it answers to the village, the CA, and <a href="/rental-management/maryland/howard-county">Howard County</a> at the same time. We manage single-family, townhome, and condo rentals across all ten villages and Town Center, with a team that already works with Columbia\'s associations on the HOA side.',
+  heroStats: [
+    { num: '10 villages', label: 'Wilde Lake to River Hill — each with its own covenants' },
+    { num: '30 min', tone: 'gold', label: 'Emergency callback — contractually guaranteed, 24/7' },
+    { num: 'Since 1989', label: 'Family-owned Mid-Atlantic manager' },
+  ],
+  mapHeading: 'Columbia villages',
+  mapHqLabel: 'Town Center · The Mall & Lakefront',
+  mapViewBox: '0 0 360 290',
+  mapOutline: 'M60 70 L170 30 L290 55 L330 140 L290 240 L170 265 L60 225 L30 145 Z',
+  mapWaterPath: 'M150 135 Q175 125 195 140 Q205 160 185 170 Q160 172 150 155 Z',
+  mapCities: [
+    { name: 'Town Center',        x: 180, y: 150, hq: true },
+    { name: 'Wilde Lake',         x: 130, y: 120 },
+    { name: 'Harper\'s Choice',   x: 60,  y: 170 },
+    { name: 'Oakland Mills',      x: 235, y: 130 },
+    { name: 'Long Reach',         x: 275, y: 100 },
+    { name: 'Owen Brown',         x: 250, y: 200 },
+    { name: 'Hickory Ridge',      x: 140, y: 210 },
+    { name: 'Kings Contrivance',  x: 200, y: 240 },
+    { name: 'Dorsey\'s Search',   x: 120, y: 70 },
+    { name: 'River Hill',         x: 70,  y: 195 },
+  ],
+  factsEyebrow: 'By the Numbers',
+  factsTitle: 'The Columbia rental market, <em>in data.</em>',
+  factsLede: 'Demand from the Route 32 employers (NSA, Johns Hopkins APL, federal contractors), the Route 29 commute to both Baltimore and Washington, and Columbia\'s own schools and amenities. Layered governance is the defining operational fact.',
+  facts: [
+    { label: 'Columbia Association charge', val: 'Annual', sub: 'Levied on every Columbia property, on top of village dues' },
+    { label: 'Village covenants', val: '10 rule books', sub: 'Architectural review and exterior standards vary by village' },
+    { label: 'County rental license', val: 'Required', sub: 'Howard County registration & inspection — we file & track' },
+    { label: 'Emergency callback', val: '30 <span class="gold">min</span>', sub: 'Contractual guarantee on the 24/7 line' },
+  ],
+  neighborsEyebrow: 'Where We Manage',
+  neighborsTitle: 'Columbia\'s ten villages, <em>plus Town Center.</em>',
+  neighborsLede: 'Each village is its own community association with its own architectural committee. We track all ten rule books for the properties we manage.',
+  neighbors: [
+    { name: 'Town Center',       meta: 'lakefront condos · mid-rise',      tag: 'Downtown' },
+    { name: 'Wilde Lake',        meta: 'the original village · mixed',    tag: 'Est. 1967' },
+    { name: 'Harper\'s Choice',  meta: 'townhome & single-family',        tag: '' },
+    { name: 'Oakland Mills',     meta: 'townhome dense',                  tag: '' },
+    { name: 'Long Reach',        meta: 'townhome & garden condo',         tag: '' },
+    { name: 'Owen Brown',        meta: 'single-family & townhome',        tag: '' },
+    { name: 'Hickory Ridge',     meta: 'single-family',                   tag: '' },
+    { name: 'Kings Contrivance', meta: 'single-family & townhome',        tag: '' },
+    { name: 'Dorsey\'s Search',  meta: 'single-family',                   tag: '' },
+    { name: 'River Hill',        meta: 'large-lot single-family',         tag: 'Newest village' },
+  ],
+  manager: {
+    name: 'Cody Bishop',
+    creds: 'Broker',
+    initials: 'CB',
+    role: 'Director of Rental Management',
+    bio: '<strong>Licensed real estate broker</strong> and Tidewater\'s Director of Rental Management, overseeing rental operations across Maryland, Delaware, and Virginia from our Owings Mills headquarters. Every Columbia owner works with a named portfolio manager on Cody\'s team.',
+  },
+  schemaDesc: 'Single-family, townhome, and condo rental property management in Columbia, Maryland — all ten villages and Town Center, with Columbia Association and village covenant compliance handled.',
+  related: [
+    { label: 'Property management in Howard County', href: '/rental-management/maryland/howard-county', note: 'The county-wide page — Ellicott City, Elkridge, Clarksville, Fulton.' },
+    { label: 'HOA management in Howard County', href: '/hoa-management/maryland/howard-county', note: 'We manage Columbia village and Howard County association boards too.' },
+    { label: 'Property management in Montgomery County', href: '/rental-management/maryland/montgomery-county', note: 'South on Route 29 — Silver Spring, Rockville, Bethesda.' },
+    { label: 'Rental property maintenance', href: '/maintenance-services', note: 'In-house technicians and 24/7 mitigation for the properties we manage.' },
+  ],
+  faqs: [
+    {
+      q: 'What does the Columbia Association have to do with my rental?',
+      a: [
+        'Every property in Columbia pays the <strong>Columbia Association annual charge</strong>, which funds the pools, paths, open space and community facilities, and sits on top of your village association dues. Both are owner obligations, not tenant obligations, and both have to be modelled into the rent.',
+        'We track CA and village due dates for the properties we manage, keep the account current, and make sure a tenant\'s use of CA facilities is set up correctly at move-in.',
+      ],
+    },
+    {
+      q: 'Do the village covenants apply to a rental?',
+      a: 'Yes. Each of Columbia\'s ten villages has its own architectural committee and exterior standards, and some have rental notification or registration requirements. We hold the current rule book for every village we manage in, prep tenants on what the covenants mean day to day, and handle any correspondence from the village office.',
+    },
+    {
+      q: 'Does Howard County require a rental license in Columbia?',
+      a: 'Yes. Howard County requires rental property registration and periodic inspection county-wide, Columbia included. We file the initial registration, schedule the inspection, address any deficiencies through our vendor network, and track the renewal date alongside your CA and village calendars.',
+    },
+    {
+      q: 'How fast will my Columbia property lease?',
+      a: 'Town Center condos and townhomes in Oakland Mills and Long Reach lease fastest; large-lot single-family in River Hill and Hickory Ridge takes longer. We price to current comps and you follow showing and application activity in the AppFolio owner portal rather than waiting for a call.',
+    },
+    {
+      q: 'What\'s your management fee?',
+      a: '<strong>A flat percentage of monthly rent collected &mdash; quoted up front, with no surprises.</strong> No tenant-placement fee, no maintenance markup, no annual renewal fees. Free rental market analysis before you sign anything.',
+    },
+    {
+      q: 'I took a job elsewhere and I\'m keeping my Columbia home. Can you take it from here?',
+      a: 'Yes. A large share of our Howard County portfolio is owned by NSA, Johns Hopkins APL and federal contractor employees on rotation elsewhere. We handle DocuSign agreements, the AppFolio owner portal, and direct deposit for owners overseas or on TDY, and we do a free rent-vs-sell analysis on the first call.',
     },
   ],
 };

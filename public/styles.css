@@ -1,4 +1,6 @@
 @import url('design-system/colors_and_type.css');
+/* <picture> wrappers (Pic.astro / Pic.jsx) must not add a box of their own */
+picture { display: contents; }
 
 :root { --tw-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1); }
 * { box-sizing: border-box; }
@@ -527,7 +529,7 @@ img { max-width: 100%; display: block; }
 
 /* ============= Footer ============= */
 .tw-footer { background: var(--tw-dark); color: var(--tw-cream); padding: 80px 0 0; }
-.tw-footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; }
+.tw-footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 56px; }
 .tw-footer-brand img { height: 54px; margin-bottom: 22px; }
 .tw-footer-brand p { font-family: var(--tw-font-body); font-size: 15px; line-height: 1.6; color: #cfcdc6; margin: 0 0 22px; max-width: 320px; }
 .tw-footer-social { display: flex; gap: 10px; }

@@ -129,7 +129,7 @@ export default function MobileMenu({ currentPath = '', logoSrc = '/assets/logo-m
     <div className={'tw-mm-overlay' + (open ? ' is-open' : '')} aria-hidden={!open}>
       <div className="tw-mm">
         <header className="tw-mm-head">
-          <a href="/" className="tw-mm-logo"><img src={logoSrc} alt={logoAlt}  loading="lazy" decoding="async" /></a>
+          <a href="/" className="tw-mm-logo"><img src={logoSrc} alt={logoAlt} width={logoSrc && logoSrc.includes("logo-main.svg") ? 166 : 536} height={logoSrc && logoSrc.includes("logo-main.svg") ? 70 : 226} /></a>
           <button className="tw-mm-iconbtn" onClick={close} aria-label="Close menu"><Icon name="close" /></button>
         </header>
 

@@ -6,7 +6,7 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import Footer from '../../../components/Footer.astro';
 import CTA from '../../../components/CTA.astro';
 import RentalGeo, { GEO_DATA_OCEAN_CITY as geo } from '../../../components/RentalGeo.jsx';
-import { breadcrumbSchema, serviceSchema } from '../../../lib/schema';
+import { breadcrumbSchema, serviceSchema, faqSchema, localBusinessSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
 
 const pageUrl = `${SITE.url}/rental-management/maryland/ocean-city`;
@@ -24,12 +24,19 @@ const schemas = [
     { name: 'Maryland', url: SITE.url + '/rental-management/maryland' },
     { name: 'Ocean City', url: pageUrl },
   ]),
+  faqSchema(geo.faqs),
+  localBusinessSchema({
+    office: 'oceanCity',
+    url: pageUrl,
+    areaServed: { name: 'Ocean City', type: 'City', containedIn: 'Maryland' },
+    description: geo.schemaDesc,
+  }),
 ];
 ---
 
 <BaseLayout
-  title="Ocean City MD Rental Management | Tidewater"
-  description="Rental property management in Ocean City, MD — condo and single-family rentals on the barrier island and West OC. Tidewater\'s local office. Flat fee."
+  title="Ocean City Property Management | Tidewater"
+  description="Ocean City property management from Tidewater\'s office at 8101 Coastal Highway — condo and single-family rentals on the island, West OC, Ocean Pines and Berlin. Town rental license handled."
   ogType="website"
   pageSchema={schemas}
   pageStylesheet="styles-geo.css"

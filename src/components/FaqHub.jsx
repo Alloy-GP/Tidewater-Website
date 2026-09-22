@@ -60,16 +60,16 @@ const FAQ_CATEGORIES = [
       },
       {
         q: "What\'s your typical response time?",
-        a: 'Same business day, 95% of the time, on board email. Documented monthly and reported quarterly. After-hours emergencies (water, fire, storm damage, mechanical failure) get a manager callback within 30 minutes via our 24/7 line at <strong>(443) 548-0191</strong>.',
+        a: 'Next business day on board email as the standard, and usually faster. After-hours emergencies (water, fire, storm damage, mechanical failure) get a manager callback within 30 minutes via our 24/7 line at <strong>(443) 548-0191</strong> — a contractual guarantee, answered by Tidewater managers rather than an answering service.',
       },
       {
         q: 'Are your contracts long-term lock-ins?',
-        a: "<strong>No.</strong> Our standard agreement is a 12-month initial term with <strong>30-day termination, no penalty</strong>, after that. Some companies bury 36-month auto-renewals with five-figure exit fees. We don\'t. Our 12-month retention rate is 97%, which we\'d rather have speak for itself than trap anyone.",
+        a: "<strong>No.</strong> We don\'t rely on long auto-renewals or exit fees to keep communities. The term and termination provisions are spelled out in plain language in every proposal, and you can read the standard agreement before you sign anything. We\'d rather earn the renewal each year.",
       },
       {
         q: 'What does Tidewater management cost?',
         a: [
-          'For full-service management of an 80&ndash;250 door HOA in Maryland, fees typically run <strong>$28&ndash;$42 per unit per month</strong>. Variables: community complexity, vendor count, meeting cadence, governing-document state. We quote line-item &mdash; no setup fees, no hidden surcharges, no transition fees.',
+          'It depends on community size, vendor count, meeting cadence and complexity, so we quote per association rather than publishing a rate card. <a href="/request-a-proposal">Request a proposal</a> and you will get a line-item number for your community &mdash; no setup fees, no hidden surcharges, no transition fees.',
           'Financial-only management runs roughly 35&ndash;55% of full-service for a comparable community.',
         ],
       },
@@ -171,7 +171,7 @@ const FAQ_CATEGORIES = [
     qs: [
       {
         q: 'How long does the transition from another company take?',
-        a: 'Typically <strong>7 weeks</strong> from signed proposal to first managed board meeting. Self-managed communities transition in <strong>4&ndash;5 weeks</strong>. We run the transition on your behalf; the board reviews, doesn\'t lift. See the <a href="/solutions/switching-hoa-management-company#timeline">week-by-week timeline</a>.',
+        a: 'The notice period in your current management agreement sets the pace. Once notice is served we work to a <strong>30/60/90-day</strong> plan covering records, bank accounts, vendor assignment and the first reporting cycle; self-managed communities usually move faster because there is no outgoing company to wait on. We run the transition on your behalf; the board reviews, doesn\'t lift. See the <a href="/solutions/switching-hoa-management-company#timeline">week-by-week timeline</a>.',
       },
       {
         q: 'What does the transition cost?',
@@ -272,6 +272,7 @@ function FaqHero({ query, onQuery, onSearch }) {
               <button
                 type="button"
                 className="tw-faq-popular-link"
+                style={{ background: 'none', border: 0, padding: 0, font: 'inherit', color: 'inherit', cursor: 'pointer' }}
                 onClick={() => { onQuery(p); onSearch(); }}
               >{p}</button>
               {i < popular.length - 1 && <span style={{color:'var(--tw-border-strong)'}}>·</span>}

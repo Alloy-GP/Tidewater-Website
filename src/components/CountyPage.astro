@@ -4,6 +4,8 @@
 // Reuses .tw-geo-* (styles-geo.css) + .tw-cty-* (styles-county-template.css).
 import FaqAccordion from './FaqAccordion.astro';
 import type { County } from '../data/counties';
+import { breadcrumbSchema, faqSchema, localBusinessSchema } from '../lib/schema';
+import { SITE } from '../config/site';
 
 interface Props { county: County; }
 const { county: c } = Astro.props;
@@ -21,23 +23,20 @@ const layout = c.layout ?? 'editorial';
 
 const mapsKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
 
-// ── JSON-LD: Service (LocalBusiness provider, nested) + Breadcrumb + FAQPage ──
-const strip = (s: string) => String(s).replace(/<[^>]+>/g, '');
-const provider = {
-  '@type': 'LocalBusiness', name: 'Tidewater Property Management', telephone: '+1-443-548-0191', url: base + '/',
-  address: { '@type': 'PostalAddress', streetAddress: '3600 Crondall Lane, Suite 100', addressLocality: 'Owings Mills', addressRegion: 'MD', postalCode: '21117', addressCountry: 'US' },
-};
+// ── JSON-LD: Service + Breadcrumb + FAQPage + LocalBusiness (office scoped to this county) ──
+const area = { name: c.name, type: 'AdministrativeArea' as const, containedIn: c.state };
 const schemas = [
-  { '@context': 'https://schema.org', '@type': 'Service', serviceType: c.service, provider,
+  { '@context': 'https://schema.org', '@type': 'Service', serviceType: c.service, name: `${c.service} — ${c.name}, ${c.stateAbbr}`,
+    provider: { '@type': 'Organization', '@id': `${SITE.url}/#organization`, name: SITE.name, url: SITE.url },
     areaServed: { '@type': 'AdministrativeArea', name: `${c.name}, ${c.state}` }, description: c.seo.description, url: c.seo.canonical },
-  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: `${base}/` },
-    { '@type': 'ListItem', position: 2, name: c.service, item: `${base}${servicePill}` },
-    { '@type': 'ListItem', position: 3, name: c.state, item: `${base}${stateHub}` },
-    { '@type': 'ListItem', position: 4, name: c.name, item: c.seo.canonical },
-  ]},
-  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: c.faq.map((f) => ({
-    '@type': 'Question', name: strip(f.q), acceptedAnswer: { '@type': 'Answer', text: strip(f.a) } })) },
+  breadcrumbSchema([
+    { name: 'Home', url: `${base}/` },
+    { name: c.service, url: `${base}${servicePill}` },
+    { name: c.state, url: `${base}${stateHub}` },
+    { name: c.name, url: c.seo.canonical },
+  ]),
+  faqSchema(c.faq),
+  localBusinessSchema({ office: c.office ?? 'hq', url: c.seo.canonical, areaServed: area, description: c.seo.description }),
 ];
 ---
 <!-- 1. Hero -->
@@ -291,22 +290,28 @@ const schemas = [
   </div>
 </section>
 
-{/* 9. Nearby counties */}
-{c.nearby && c.nearby.length > 0 && (
+{/* 9. Nearby counties + related pages (rental side of the same county, etc.) */}
+{((c.nearby && c.nearby.length > 0) || (c.related && c.related.length > 0)) && (
   <section class="tw-geo-section mist" style="padding:64px 0">
     <div class="tw-container-wide">
       <div class="tw-cty-nearby-head">
         <div>
-          <div class="tw-eyebrow">Nearby Counties</div>
+          <div class="tw-eyebrow">Nearby Counties &amp; Related</div>
           <h2 class="tw-section-title" style="margin:10px 0 0;font-size:28px">We manage across the Mid-Atlantic.</h2>
         </div>
         <a href={stateHub} class="tw-btn tw-btn-outline">All {c.state} counties →</a>
       </div>
       <div class="tw-cty-nearby">
-        {c.nearby.map((n) => (
+        {(c.nearby ?? []).map((n) => (
           <a href={nearbyHref(n.slug)} class="tw-cty-nearby-card">
             <div class="tw-cty-nearby-name">{n.name}</div>
             <div class="tw-cty-nearby-note">{n.note}</div>
+          </a>
+        ))}
+        {(c.related ?? []).map((r) => (
+          <a href={r.href} class="tw-cty-nearby-card">
+            <div class="tw-cty-nearby-name">{r.label}</div>
+            <div class="tw-cty-nearby-note">{r.note}</div>
           </a>
         ))}
       </div>

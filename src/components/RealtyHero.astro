@@ -1,4 +1,5 @@
 ---
+import Pic from './Pic.astro';
 ---
 <section class="tw-rh2">
   <div class="tw-rh2-grid">
@@ -20,7 +21,7 @@
     <div>
       <div class="tw-rh2-card">
         <div class="tw-rh2-card-img">
-          <img src="/assets/hero-aerial.jpg" alt="Maryland and Delaware neighborhoods served by Tidewater Realty Group" onerror="this.style.display='none'"  loading="lazy" decoding="async" />
+          <Pic src="/assets/hero-aerial.jpg" alt="Maryland and Delaware neighborhoods served by Tidewater Realty Group" width={1400} height={764} loading="eager" fetchpriority="high" />
           <span class="tw-rh2-card-badge matched">Free market analysis</span>
         </div>
         <div class="tw-rh2-card-body">

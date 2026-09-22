@@ -1,0 +1,27 @@
+---
+// Responsive <picture>: serves the .webp twin (generated at build-prep time,
+// see the sharp one-liner in the SEO PR) with the original JPG as fallback.
+// Always sets width/height (reserves layout → no CLS) and a loading policy.
+// Above-the-fold hero images: loading="eager" fetchpriority="high".
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  class?: string;
+  style?: string;
+  sizes?: string;
+}
+import fs from 'node:fs';
+import path from 'node:path';
+const { src, alt, width, height, loading = 'lazy', fetchpriority, class: cls, style, sizes } = Astro.props;
+// Build-time check: only advertise a .webp twin that actually exists in /public.
+const candidate = /\.jpe?g$/i.test(src) ? src.replace(/\.jpe?g$/i, '.webp') : null;
+const webp = candidate && fs.existsSync(path.join(process.cwd(), 'public', candidate)) ? candidate : null;
+---
+<picture>
+  {webp && <source type="image/webp" srcset={webp} sizes={sizes} />}
+  <img src={src} alt={alt} width={width} height={height} loading={loading} decoding="async" fetchpriority={fetchpriority} class={cls} style={style} sizes={sizes} />
+</picture>

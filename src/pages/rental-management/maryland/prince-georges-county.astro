@@ -6,7 +6,7 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import Footer from '../../../components/Footer.astro';
 import CTA from '../../../components/CTA.astro';
 import RentalGeo, { GEO_DATA_PRINCE_GEORGES_COUNTY as geo } from '../../../components/RentalGeo.jsx';
-import { breadcrumbSchema, serviceSchema } from '../../../lib/schema';
+import { breadcrumbSchema, serviceSchema, faqSchema, localBusinessSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
 
 const pageUrl = `${SITE.url}/rental-management/maryland/prince-georges-county`;
@@ -24,12 +24,19 @@ const schemas = [
     { name: 'Maryland', url: SITE.url + '/rental-management/maryland' },
     { name: "Prince George\'s County", url: pageUrl },
   ]),
+  faqSchema(geo.faqs),
+  localBusinessSchema({
+    office: 'hq',
+    url: pageUrl,
+    areaServed: { name: "Prince George's County", type: 'AdministrativeArea', containedIn: 'Maryland' },
+    description: geo.schemaDesc,
+  }),
 ];
 ---
 
 <BaseLayout
-  title="Prince George\'s County Rental Management | Tidewater"
-  description="Rental property management in Prince George\'s County, MD — Bowie, Largo, Greenbelt, Hyattsville. County license + lead-paint compliance handled. Flat 8.5% fee."
+  title="Prince George\'s County Property Management | Tidewater"
+  description="Rental property management in Prince George\'s County, MD — Bowie, Largo, Greenbelt, Hyattsville. County license + lead-paint compliance handled. One flat all-inclusive fee."
   ogType="website"
   pageSchema={schemas}
   pageStylesheet="styles-geo.css"

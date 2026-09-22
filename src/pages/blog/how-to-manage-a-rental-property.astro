@@ -1,4 +1,5 @@
 ---
+import Pic from '../../components/Pic.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Topbar from '../../components/Topbar.astro';
 import Header from '../../components/Header.astro';
@@ -74,8 +75,8 @@ const schemas = [
     headline: 'How to Manage a Rental Property: A Practical Guide for Landlords',
     description: 'How to manage a rental property — tenant screening, maintenance, finances, and local regulations. Know when to self-manage and when to hire a property manager.',
     datePublished: '2026-05-16',
+    author: { name: post.author.name, jobTitle: post.author.role, credentials: post.author.creds },
     dateModified: '2026-05-16',
-    authorName: 'Cody Bishop',
     image: `${SITE.url}/assets/how-to-manage-a-rental-property.jpg`,
     url: pageUrl,
   }),
@@ -132,7 +133,7 @@ const schemas = [
 
   <div class="tw-blog-cover">
     <div class="tw-blog-cover-inner">
-      <img src={post.coverImage} alt={post.coverAlt}  loading="lazy" decoding="async" />
+      <Pic src={post.coverImage} alt={post.coverAlt} width={1400} height={763} loading="eager" fetchpriority="high" />
       <div class="tw-blog-cover-paper"></div>
     </div>
     <p class="tw-blog-cover-caption">{post.coverCaption}</p>
@@ -223,6 +224,10 @@ const schemas = [
 
           <p>
             The Maryland regulatory stack includes state law (the Maryland Real Property Code), county-level regulations, city ordinances, and in some cases town-level rules that all apply to a single rental property. A rental license or registration may be required at the county or city level before you can legally lease the property. Baltimore City, Baltimore County, Montgomery County, Prince George&rsquo;s County, and many others each maintain specific licensing, registration, or inspection requirements. Lead paint disclosure is required for properties built before 1978, and Maryland imposes its own lead paint requirements beyond federal law.
+          </p>
+
+          <p>
+            County by county, the rules differ enough that we keep a page for each market we manage in: <a href="/rental-management/maryland/montgomery-county">property management in Montgomery County</a> (rent stabilization and the county rental license), <a href="/rental-management/maryland/howard-county">property management in Howard County</a> and <a href="/rental-management/maryland/columbia">Columbia</a> (village covenants under the Columbia Association), <a href="/rental-management/maryland/prince-georges-county">Prince George&rsquo;s County property management</a> (annual license and lead-paint enforcement), <a href="/rental-management/maryland/baltimore-county">Baltimore County</a>, <a href="/rental-management/maryland/anne-arundel-county">Anne Arundel County</a>, <a href="/rental-management/maryland/silver-spring">Silver Spring</a>, and <a href="/rental-management/maryland/ocean-city">Ocean City</a>.
           </p>
 
           <div class="tw-blog-callout">
@@ -363,11 +368,11 @@ const schemas = [
 
           <div class="tw-blog-tags">
             <span class="tw-blog-tags-label">Tagged</span>
-            <span class="tw-blog-tag">Rental property management</span>
-            <span class="tw-blog-tag">Landlord tips</span>
-            <span class="tw-blog-tag">Tenant screening</span>
-            <span class="tw-blog-tag">Property inspections</span>
-            <span class="tw-blog-tag">Maryland landlord</span>
+            <a href="/rental-management" class="tw-blog-tag">Rental property management</a>
+            <a href="/blog" class="tw-blog-tag">Landlord tips</a>
+            <a href="/rental-management/maryland" class="tw-blog-tag">Tenant screening</a>
+            <a href="/maintenance-services" class="tw-blog-tag">Property inspections</a>
+            <a href="/rental-management/maryland" class="tw-blog-tag">Maryland landlord</a>
           </div>
         </article>
 
@@ -395,7 +400,7 @@ const schemas = [
         {related.map(p => (
           <a href={p.href} class="tw-blog-related-card">
             <div class={`tw-blog-related-card-img ${p.tone}`}>
-              {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || p.title}  loading="lazy" decoding="async" />}
+              {p.coverImage && <Pic src={p.coverImage} alt={p.coverAlt || p.title} width={1400} height={763} />}
             </div>
             <div class="tw-blog-related-card-body">
               <div class={`tw-blog-related-card-cat ${p.tone}`}>{p.category}</div>

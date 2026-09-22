@@ -1,4 +1,5 @@
 ---
+import Pic from '../../components/Pic.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Topbar from '../../components/Topbar.astro';
 import Header from '../../components/Header.astro';
@@ -23,7 +24,8 @@ const post = {
     email: 'info@tidewaterproperty.com',
   },
   date: 'May 15, 2026',
-  readTime: 9,
+  updated: 'September 22, 2026',
+  readTime: 10,
   coverImage: '/assets/what-is-a-community-association-manager.jpg',
   coverAlt: 'Community association manager shaking hands with HOA board members outside a community clubhouse',
   coverCaption: 'A community association manager greets HOA board members outside the community clubhouse — partnership, accountability, and local connection are the daily work of the role.',
@@ -35,6 +37,7 @@ const toc = [
   { id: 'cam-vs-pm',          label: 'CAM vs. property manager' },
   { id: 'credentials',        label: 'Credentials to look for' },
   { id: 'signs-of-great',     label: 'Signs of great management' },
+  { id: 'evaluating',         label: 'Evaluating a management company' },
   { id: 'faq',                label: 'FAQ' },
   { id: 'conclusion',         label: 'Closing thought' },
 ];
@@ -80,8 +83,8 @@ const schemas = [
     headline: 'What Is a Community Association Manager? Roles, Responsibilities, and What Your Board Should Expect',
     description: 'A community association manager (CAM) is the professional hired by an HOA or condo board to handle day-to-day community operations. This guide covers what a CAM does, how the role works with the board, what credentials matter, and how to tell if your management company is meeting the standard.',
     datePublished: '2026-05-15',
-    dateModified: '2026-05-15',
-    authorName: 'Gail Windisch',
+    author: { name: post.author.name, jobTitle: post.author.role, credentials: post.author.creds },
+    dateModified: '2026-09-22',
     image: `${SITE.url}/assets/what-is-a-community-association-manager.jpg`,
     url: pageUrl,
   }),
@@ -123,7 +126,7 @@ const schemas = [
           </div>
         </div>
         <div class="tw-blog-meta-divider"></div>
-        <div class="tw-blog-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> {post.date}</div>
+        <div class="tw-blog-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> {post.date}{post.updated && <span> &middot; Updated {post.updated}</span>}</div>
         <div class="tw-blog-meta-divider"></div>
         <div class="tw-blog-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> {post.readTime} min read</div>
         <div class="tw-blog-share">
@@ -138,7 +141,7 @@ const schemas = [
 
   <div class="tw-blog-cover">
     <div class="tw-blog-cover-inner">
-      <img src={post.coverImage} alt={post.coverAlt}  loading="lazy" decoding="async" />
+      <Pic src={post.coverImage} alt={post.coverAlt} width={1400} height={763} loading="eager" fetchpriority="high" />
       <div class="tw-blog-cover-paper"></div>
     </div>
     <p class="tw-blog-cover-caption">{post.coverCaption}</p>
@@ -260,7 +263,7 @@ const schemas = [
           </table>
 
           <p>
-            Some management companies provide both community association management and rental property management under the same umbrella. The important thing for boards to understand is that the skill sets are different, the governance frameworks are different, and the reporting relationships are different. When you&rsquo;re evaluating a management company for your HOA or condo association, look for one that specializes in community association management specifically &mdash; not one that manages rental units and treats your association the same way.
+            Some management companies provide both <a href="/hoa-management">community association management</a> and <a href="/rental-management">rental property management</a> under the same umbrella. The important thing for boards to understand is that the skill sets are different, the governance frameworks are different, and the reporting relationships are different. When you&rsquo;re evaluating a management company for your HOA or condo association, look for one that specializes in community association management specifically &mdash; not one that manages rental units and treats your association the same way.
           </p>
 
           <h2 id="credentials">CAM Credentials: What to Look For</h2>
@@ -346,6 +349,24 @@ const schemas = [
             Evaluate against clear standards: consistent communication on a set schedule, proactive maintenance rather than reactive scrambling, transparent and timely financial reporting, responsiveness to board and homeowner inquiries, and documented follow-through on action items. If your board is spending meetings chasing status updates, fielding homeowner complaints about responsiveness, or struggling to get clean financial reports, those are signs the management relationship needs to be re-evaluated.
           </p>
 
+          <h2 id="evaluating">How to Evaluate a Community Association Management Company</h2>
+
+          <p>
+            Most boards hire a company, not an individual, so the questions that matter are about the organisation behind the manager. Before you sign a <a href="/hoa-management">community association management</a> agreement, get written answers to these:
+          </p>
+
+          <ul>
+            <li><strong>Who is our manager, and how many communities do they carry?</strong> A portfolio capped in the range of 8&ndash;12 communities per manager is a meaningful commitment; an uncapped one is a warning sign.</li>
+            <li><strong>What happens after hours?</strong> Ask for the callback standard in writing and whether it is a contractual guarantee answered by a manager, not an answering service.</li>
+            <li><strong>Who audits the manager?</strong> A quality-assurance function that reviews management plans, vendor insurance and inspections across the portfolio is what separates a firm from a collection of individuals.</li>
+            <li><strong>Which credentials sit at the top?</strong> PCAM&reg; leadership and company-level AAMC&reg; accreditation mean the standards described in this article are audited, not aspirational.</li>
+            <li><strong>Can we speak to boards like ours?</strong> Ask for references from communities of similar size and stage, and call them without a script.</li>
+          </ul>
+
+          <p>
+            If you are comparing firms now, our guides on <a href="/blog/how-to-switch-hoa-management-companies">switching HOA management companies</a> and <a href="/solutions/self-managed-hoa-transition">moving from self-managed to professional management</a> walk through the process step by step, and the <a href="/hoa-management/maryland">Maryland county pages</a> show how the work changes from Columbia to Bethesda to Ocean City.
+          </p>
+
           <h2 id="conclusion">The Operational Backbone of a Well-Run Community</h2>
 
           <p>
@@ -361,11 +382,11 @@ const schemas = [
 
           <div class="tw-blog-tags">
             <span class="tw-blog-tags-label">Tagged</span>
-            <span class="tw-blog-tag">Community association manager</span>
-            <span class="tw-blog-tag">HOA management</span>
-            <span class="tw-blog-tag">Board governance</span>
-            <span class="tw-blog-tag">CAM responsibilities</span>
-            <span class="tw-blog-tag">HOA manager</span>
+            <a href="/hoa-management" class="tw-blog-tag">Community association manager</a>
+            <a href="/hoa-management" class="tw-blog-tag">HOA management</a>
+            <a href="/blog/hoa-board-responsibilities" class="tw-blog-tag">Board governance</a>
+            <a href="/blog" class="tw-blog-tag">CAM responsibilities</a>
+            <a href="/hoa-management/maryland" class="tw-blog-tag">HOA manager</a>
           </div>
         </article>
 
@@ -377,7 +398,7 @@ const schemas = [
             <div class="tw-blog-author-bio-role">{post.author.role}</div>
             <p class="tw-blog-author-bio-blurb">{post.author.bio}</p>
             <div class="tw-blog-author-bio-links">
-              <a href="https://www.linkedin.com/company/tidewater-property-management-inc./" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg> LinkedIn</a>
+              <a href="https://www.linkedin.com/company/tidewater-property-management-inc./" target="_blank" rel="noopener noreferrer" aria-label="Tidewater on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg> LinkedIn</a>
               <a href={`mailto:${post.author.email}`}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg> {post.author.email}</a>
               <a href="/about/leadership">View bio &rarr;</a>
             </div>
@@ -397,7 +418,7 @@ const schemas = [
         {related.map(p => (
           <a href={p.href} class="tw-blog-related-card">
             <div class={`tw-blog-related-card-img ${p.tone}`}>
-              {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || p.title}  loading="lazy" decoding="async" />}
+              {p.coverImage && <Pic src={p.coverImage} alt={p.coverAlt || p.title} width={1400} height={763} />}
             </div>
             <div class="tw-blog-related-card-body">
               <div class={`tw-blog-related-card-cat ${p.tone}`}>{p.category}</div>

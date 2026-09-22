@@ -1,4 +1,5 @@
 ---
+import Pic from './Pic.astro';
 import ActivityFeedWidget from './ActivityFeedWidget.jsx';
 import FitCheckWidget from './FitCheckWidget.jsx';
 
@@ -43,7 +44,7 @@ const actCfg     = config.activity   || {};
 
 <section class="tw-hero">
   <div class="tw-hero-bg">
-    <img src={heroImage} alt={heroImageAlt}  fetchpriority="high" decoding="async" />
+    <Pic src={heroImage} alt={heroImageAlt} width={1400} height={764} loading="eager" fetchpriority="high" />
   </div>
   <div class="tw-hero-paper" aria-hidden="true"></div>
 

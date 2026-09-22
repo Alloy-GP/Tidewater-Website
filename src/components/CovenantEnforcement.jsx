@@ -46,6 +46,7 @@ function CovenantHeroSide() {
         ))}
       </div>
       <div style={{ marginTop: 14, padding: '10px 14px', background: 'var(--tw-warm-100)', border: '1px dashed var(--tw-border-strong)', borderRadius: 8, fontFamily: 'var(--tw-font-body)', fontSize: 11.5, color: 'var(--tw-fg-muted)', lineHeight: 1.45, fontStyle: 'italic' }}>
+        Illustrative action-item list. Your board sees the live version, with real-time status on every open item, in the CINC board portal.
       </div>
     </div>
   );
@@ -320,7 +321,7 @@ function CovenantFaq() {
           <div className="tw-sol-faq-head">
             <div className="tw-eyebrow">Board Questions</div>
             <h2>The covenant-enforcement <em>questions</em> we get most.</h2>
-            <p>For a deeper walkthrough of the violation lifecycle, see the related blog spoke: <em></em>.</p>
+            <p>For where enforcement sits in a director&rsquo;s duties, read <a href="/blog/hoa-board-responsibilities" style={{ color: 'var(--tw-teal-500)', textDecoration: 'underline', textUnderlineOffset: 3 }}>HOA board responsibilities &amp; fiduciary duty</a>. For all-purpose questions see the <a href="/faq" style={{ color: 'var(--tw-teal-500)', textDecoration: 'underline', textUnderlineOffset: 3 }}>main FAQ hub</a>.</p>
             <a href="/request-a-proposal" className="tw-btn tw-btn-primary">Ask your own question →</a>
           </div>
           <FaqAccordion items={FAQS} defaultOpen={0} />

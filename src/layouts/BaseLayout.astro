@@ -90,14 +90,18 @@ const ogImageAlt = ogImageAltProp ?? SITE.name;
 const orgLd = {
   '@context': 'https://schema.org',
   '@type': SITE.org.type,
+  '@id': `${SITE.url}/#organization`,
   name: SITE.name,
+  alternateName: SITE.localBusinessName,
   url: SITE.url,
   logo: SITE.org.logo,
   description,
   address: {
     '@type': 'PostalAddress',
+    streetAddress: SITE.org.streetAddress,
     addressLocality: SITE.org.addressLocality,
     addressRegion: SITE.org.addressRegion,
+    postalCode: SITE.org.postalCode,
     addressCountry: SITE.org.addressCountry,
   },
   telephone: SITE.org.telephone,
@@ -118,6 +122,7 @@ const orgLd = {
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalUrl} />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Tidewater — HOA Board Blog & Playbooks" href="/rss.xml" />
 
   <!-- Robots (only emitted when explicitly set) -->
   {robots && <meta name="robots" content={robots} />}
