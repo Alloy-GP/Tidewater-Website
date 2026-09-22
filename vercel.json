@@ -121,7 +121,7 @@
     },
     {
       "source": "/service-area/howard-county-md",
-      "destination": "/service-areas",
+      "destination": "/rental-management/maryland/howard-county",
       "permanent": true
     },
     {
@@ -1126,12 +1126,12 @@
     },
     {
       "source": "/service-area/towson-md",
-      "destination": "/hoa-management/maryland",
+      "destination": "/rental-management/maryland/baltimore-county",
       "permanent": true
     },
     {
       "source": "/service-area/towson-md/",
-      "destination": "/hoa-management/maryland",
+      "destination": "/rental-management/maryland/baltimore-county",
       "permanent": true
     },
     {
@@ -1192,6 +1192,11 @@
     {
       "source": "/service-area/:city/:sub",
       "destination": "/hoa-management",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/elkton-md",
+      "destination": "/rental-management/maryland",
       "permanent": true
     },
     {
