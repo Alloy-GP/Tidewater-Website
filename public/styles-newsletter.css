@@ -1,0 +1,130 @@
+/* ============================================================
+   Tidewater — Newsletter archive (The Board Brief)
+   Prefix: tw-nl-   ·   Page: /resources/newsletter
+   Ported from design_handoff_newsletter. Tokens only — no new values.
+   The spotlight's `cover` and `contents` variants and the list-view
+   archive layout were in the handoff but are not shipped; see the
+   handoff bundle if the archive outgrows the card grid.
+   ============================================================ */
+:root { --tw-nl-noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='2.4' numOctaves='1' stitchTiles='stitch' seed='4'/><feColorMatrix values='0 0 0 0 0.30  0 0 0 0 0.22  0 0 0 0 0.12  0 0 0 1.6 -0.4'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+
+/* ===== Hero ===== */
+.tw-nl-hero { position: relative; background: var(--tw-dark); color: var(--tw-cream); overflow: hidden; isolation: isolate; }
+.tw-nl-hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse at 12% 20%, rgba(58,146,166,0.32) 0%, transparent 58%), radial-gradient(ellipse at 88% 90%, rgba(191,172,95,0.13) 0%, transparent 52%), var(--tw-dark); }
+.tw-nl-hero-paper { position: absolute; inset: 0; z-index: 1; pointer-events: none; background-image: var(--tw-nl-noise); background-size: 160px 160px; mix-blend-mode: screen; opacity: .16; }
+.tw-nl-hero-inner { position: relative; z-index: 5; max-width: 1320px; margin: 0 auto; padding: 52px 32px 52px; }
+.tw-nl-crumb { display: flex; align-items: center; gap: 8px; font-family: var(--tw-font-heading); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: rgba(254,252,248,.6); margin-bottom: 26px; }
+.tw-nl-crumb a { color: rgba(254,252,248,.6); text-decoration: none; }
+.tw-nl-crumb a:hover { color: var(--tw-gold); }
+.tw-nl-crumb .sep { color: rgba(254,252,248,.3); }
+.tw-nl-crumb .cur { color: var(--tw-gold); }
+.tw-nl-hero-eyebrow { font-family: var(--tw-font-heading); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .2em; color: var(--tw-gold); margin-bottom: 14px; }
+.tw-nl-hero h1 { font-family: var(--tw-font-heading); font-weight: 800; font-size: clamp(42px, 5vw, 68px); line-height: 1.02; letter-spacing: -.024em; color: var(--tw-cream); margin: 0 0 16px; }
+.tw-nl-hero h1 em { font-style: italic; font-weight: 300; color: var(--tw-gold); }
+.tw-nl-hero p { font-family: var(--tw-font-body); font-size: 18px; line-height: 1.6; color: rgba(254,252,248,.78); margin: 0 0 22px; max-width: 620px; text-wrap: pretty; }
+.tw-nl-hero-stats { display: flex; align-items: center; gap: 14px 30px; flex-wrap: wrap; font-family: var(--tw-font-body); font-size: 13px; color: rgba(254,252,248,.6); }
+.tw-nl-hero-stats strong { font-family: var(--tw-font-heading); font-weight: 700; color: var(--tw-cream); margin-right: 6px; }
+
+/* ===== Latest-issue spotlight (overlaps hero) ===== */
+.tw-nl-spot-section { background: var(--tw-cream); padding: 72px 0 64px; position: relative; }
+.tw-nl-spot-section::after { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: var(--tw-nl-noise); background-size: 160px 160px; mix-blend-mode: multiply; opacity: .05; }
+.tw-nl-spot-section > * { position: relative; z-index: 2; }
+.tw-nl-spot { display: grid; grid-template-columns: 1.02fr .98fr; gap: 0; align-items: stretch; background: var(--tw-cream); border: 1px solid var(--tw-border); border-radius: 16px; overflow: hidden; box-shadow: var(--tw-shadow-xl); margin-top: 0; }
+.tw-nl-spot-copy { padding: 48px 44px 44px; display: flex; flex-direction: column; align-items: flex-start; }
+.tw-nl-spot-label { display: inline-flex; align-items: center; gap: 9px; font-family: var(--tw-font-heading); font-weight: 700; font-size: 11.5px; text-transform: uppercase; letter-spacing: .16em; color: var(--tw-teal-700); background: var(--tw-teal-50); border: 1px solid var(--tw-teal-100); border-radius: 999px; padding: 7px 14px; margin-bottom: 20px; }
+.tw-nl-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--tw-teal); box-shadow: 0 0 0 3px rgba(58,146,166,.18); }
+.tw-nl-spot-meta { font-family: var(--tw-font-mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--tw-fg-subtle); margin-bottom: 12px; }
+.tw-nl-spot h2 { font-family: var(--tw-font-heading); font-weight: 800; font-size: clamp(28px, 3vw, 38px); line-height: 1.14; letter-spacing: -.02em; color: var(--tw-dark); margin: 0 0 16px; text-wrap: balance; }
+.tw-nl-spot p { font-family: var(--tw-font-body); font-size: 16.5px; line-height: 1.62; color: var(--tw-fg-muted); margin: 0 0 28px; max-width: 52ch; text-wrap: pretty; }
+.tw-nl-spot-actions { display: flex; align-items: center; gap: 14px 18px; flex-wrap: wrap; margin-top: auto; }
+.tw-nl-spot-sub { font-family: var(--tw-font-heading); font-weight: 700; font-size: 13.5px; color: var(--tw-teal-500); text-decoration: none; transition: color .15s var(--tw-ease-out); }
+.tw-nl-spot-sub:hover { color: var(--tw-teal-700); }
+.tw-nl-spot-side { background: var(--tw-linen); border-left: 1px solid var(--tw-border); display: flex; align-items: center; justify-content: center; padding: 40px; position: relative; overflow: hidden; }
+.tw-nl-spot-side::before { content: ''; position: absolute; inset: 0; background-image: var(--tw-nl-noise); background-size: 160px 160px; mix-blend-mode: multiply; opacity: .07; }
+
+.tw-nl-spot-side.is-image { padding: 0; background: var(--tw-dark); }
+.tw-nl-spot-side.is-image::before { display: none; }
+/* Sized by the artwork's own aspect ratio rather than height:100%, which
+   resolved against the flex parent to a box far taller than the visible panel -
+   .tw-nl-spot-side clips the overflow, so a contained image centred out of
+   sight. Aspect-ratio keeps the whole calendar on screen at every width. */
+.tw-nl-spot-img { position: relative; width: 100%; aspect-ratio: 1200 / 840; }
+/* The cover is generated calendar art, not photography, so it must never be
+   cropped - `contain` keeps the whole month visible when the card stacks on
+   mobile. The letterbox is invisible: .is-image is already Dark Tide, which is
+   the artwork's own background. */
+.tw-nl-spot-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.tw-nl-spot-img-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(23,35,37,0) 45%, rgba(23,35,37,.72) 100%); }
+
+
+/* ===== Year filter ===== */
+.tw-nl-filter { position: sticky; top: 80px; z-index: 20; background: rgba(254,252,248,.96); border-top: 1px solid var(--tw-border); border-bottom: 1px solid var(--tw-border); }
+.tw-nl-filter-inner { max-width: 1320px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.tw-nl-filter-label { font-family: var(--tw-font-heading); font-weight: 700; font-size: 11.5px; text-transform: uppercase; letter-spacing: .18em; color: var(--tw-fg-subtle); }
+.tw-nl-chips { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.tw-nl-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; background: var(--tw-cream); border: 1.5px solid var(--tw-border); border-radius: 999px; font-family: var(--tw-font-heading); font-weight: 600; font-size: 13px; color: var(--tw-dark); cursor: pointer; transition: all .15s var(--tw-ease-out); }
+.tw-nl-chip:hover { border-color: var(--tw-teal); color: var(--tw-teal); }
+.tw-nl-chip.is-active { background: var(--tw-teal); border-color: var(--tw-teal); color: var(--tw-cream); }
+.tw-nl-chip-count { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 18px; padding: 0 6px; border-radius: 999px; background: var(--tw-warm-100); color: var(--tw-fg-muted); font-family: var(--tw-font-mono); font-weight: 700; font-size: 11px; }
+.tw-nl-chip.is-active .tw-nl-chip-count { background: rgba(254,252,248,.18); color: var(--tw-cream); }
+
+/* ===== Archive ===== */
+.tw-nl-archive { background: var(--tw-cream); padding: 56px 0 96px; position: relative; overflow: hidden; }
+.tw-nl-archive::before { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: var(--tw-nl-noise); background-size: 160px 160px; mix-blend-mode: multiply; opacity: .05; }
+.tw-nl-archive > * { position: relative; z-index: 1; }
+.tw-nl-group + .tw-nl-group { margin-top: 56px; }
+.tw-nl-group-head { display: flex; align-items: center; gap: 18px; margin-bottom: 26px; }
+.tw-nl-group-head h3 { font-family: var(--tw-font-heading); font-weight: 800; font-size: 26px; letter-spacing: -.015em; color: var(--tw-dark); margin: 0; }
+.tw-nl-group-rule { flex: 1; height: 1px; background: var(--tw-border); }
+.tw-nl-group-count { font-family: var(--tw-font-mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--tw-fg-subtle); }
+
+.tw-nl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.tw-nl-card { display: flex; flex-direction: column; background: var(--tw-cream); border: 1px solid var(--tw-border); border-radius: 12px; padding: 24px 24px 20px; text-decoration: none; transition: all .22s var(--tw-ease-standard); }
+.tw-nl-card:hover { transform: translateY(-2px); box-shadow: var(--tw-shadow-md); border-color: var(--tw-teal-100); }
+.tw-nl-card-top { display: flex; align-items: center; gap: 10px; padding-bottom: 14px; border-bottom: 1px solid var(--tw-divider); margin-bottom: 16px; }
+.tw-nl-card-no { font-family: var(--tw-font-heading); font-weight: 800; font-size: 13px; color: var(--tw-teal); letter-spacing: -.01em; }
+.tw-nl-card-date { margin-left: auto; font-family: var(--tw-font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--tw-fg-subtle); }
+.tw-nl-card-pill { display: inline-flex; align-items: center; font-family: var(--tw-font-heading); font-weight: 700; font-size: 9.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--tw-dark); background: var(--tw-gold); border-radius: 999px; padding: 3px 8px; }
+.tw-nl-card h3 { font-family: var(--tw-font-heading); font-weight: 800; font-size: 18px; line-height: 1.26; letter-spacing: -.008em; color: var(--tw-dark); margin: 0 0 14px; text-wrap: balance; }
+.tw-nl-card-topics { list-style: none; margin: 0 0 18px; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.tw-nl-card-topics li { position: relative; padding-left: 15px; font-family: var(--tw-font-body); font-size: 13.5px; line-height: 1.45; color: var(--tw-fg-muted); }
+.tw-nl-card-topics li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 999px; background: var(--tw-gold); }
+.tw-nl-card-foot { display: flex; align-items: center; gap: 12px; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--tw-divider); }
+.tw-nl-card-cta { font-family: var(--tw-font-heading); font-weight: 700; font-size: 13px; color: var(--tw-teal); }
+.tw-nl-card:hover .tw-nl-card-cta { color: var(--tw-teal-700); }
+.tw-nl-card-pdf { margin-left: auto; font-family: var(--tw-font-heading); font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: var(--tw-fg-subtle); border: 1px solid var(--tw-border-strong); border-radius: 4px; padding: 3px 7px; }
+
+/* First-issue state */
+.tw-nl-first { text-align: center; padding: 56px 32px 60px; background: var(--tw-warm-100); border: 1px dashed var(--tw-border-strong); border-radius: 12px; }
+.tw-nl-first-eyebrow { font-family: var(--tw-font-heading); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .2em; color: var(--tw-teal); }
+.tw-nl-first h2 { font-family: var(--tw-font-heading); font-weight: 800; font-size: clamp(24px, 2.4vw, 30px); letter-spacing: -.015em; color: var(--tw-dark); margin: 12px 0 12px; }
+.tw-nl-first p { font-family: var(--tw-font-body); font-size: 16px; line-height: 1.6; color: var(--tw-fg-muted); margin: 0 auto 24px; max-width: 56ch; text-wrap: pretty; }
+
+/* Load more */
+.tw-nl-more { text-align: center; margin-top: 48px; }
+.tw-nl-more button { background: var(--tw-cream); border: 1.5px solid var(--tw-border-strong); color: var(--tw-dark); font-family: var(--tw-font-heading); font-weight: 700; font-size: 14px; padding: 14px 28px; border-radius: 999px; cursor: pointer; transition: all .15s var(--tw-ease-out); }
+.tw-nl-more button:hover { border-color: var(--tw-teal); color: var(--tw-teal); }
+.tw-nl-more-count { margin-top: 12px; font-family: var(--tw-font-mono); font-size: 11.5px; letter-spacing: .06em; color: var(--tw-fg-subtle); }
+
+/* Links (editor-added anchors inherit brand color) */
+.tw-nl-archive a:not([class]), .tw-nl-spot-section a:not([class]) { color: var(--tw-teal-500); text-decoration: underline; text-underline-offset: 3px; }
+.tw-nl-archive a:not([class]):hover, .tw-nl-spot-section a:not([class]):hover { color: var(--tw-teal-700); }
+
+/* ===== Responsive ===== */
+@media (max-width: 1080px) {
+  .tw-nl-hero-inner { padding: 44px 28px 44px; }
+  .tw-nl-spot { grid-template-columns: 1fr; }
+  .tw-nl-spot-side { border-left: 0; border-top: 1px solid var(--tw-border); order: -1; padding: 36px 28px; }
+  .tw-nl-spot-side.is-image { border-top: 0; }
+  .tw-nl-spot-copy { padding: 36px 28px 32px; }
+  .tw-nl-grid { grid-template-columns: 1fr 1fr; }
+  .tw-nl-filter { top: 0; }
+}
+@media (max-width: 640px) {
+  .tw-nl-hero-inner { padding: 36px 20px 38px; }
+  .tw-nl-hero-stats { gap: 8px 18px; }
+  .tw-nl-spot { margin-top: 0; }
+  .tw-nl-spot-section { padding-top: 48px; }
+  .tw-nl-grid { grid-template-columns: 1fr; }
+  .tw-nl-spot-actions .tw-btn { width: 100%; justify-content: center; }
+}

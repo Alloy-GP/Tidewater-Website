@@ -559,7 +559,7 @@
   text-decoration: none;
   transition: all .15s ease;
 }
-.tw-blog-tag:hover {
+a.tw-blog-tag:hover {
   border-color: var(--tw-teal);
   color: var(--tw-teal);
 }

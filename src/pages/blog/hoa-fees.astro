@@ -105,6 +105,8 @@ const pageSchema = [
   title="What Are HOA Fees? A Homeowner's Guide | Tidewater"
   description={description}
   ogType="article"
+  ogImage="/assets/og-hoa-fees.jpg"
+  ogImageAlt="What Are HOA Fees? — a Tidewater guide for homeowners and boards"
   pageSchema={pageSchema}
   pageStylesheet="styles-blog.css"
 >
@@ -149,6 +151,10 @@ const pageSchema = [
       <img
         src="/assets/hoa-fees.jpg"
         alt="Well-maintained townhome community common area managed under an HOA budget"
+        width="1400"
+        height="763"
+        fetchpriority="high"
+        decoding="async"
       />
       <div class="tw-blog-cover-paper"></div>
     </div>
@@ -341,10 +347,10 @@ const pageSchema = [
 
           <div class="tw-blog-tags">
             <span class="tw-blog-tags-label">Tagged</span>
-            <a href="#" class="tw-blog-tag">HOA fees</a>
-            <a href="#" class="tw-blog-tag">HOA dues</a>
-            <a href="#" class="tw-blog-tag">HOA budgeting</a>
-            <a href="#" class="tw-blog-tag">Homeowner resources</a>
+            <span class="tw-blog-tag">HOA fees</span>
+            <span class="tw-blog-tag">HOA dues</span>
+            <span class="tw-blog-tag">HOA budgeting</span>
+            <span class="tw-blog-tag">Homeowner resources</span>
           </div>
         </article>
 
@@ -371,7 +377,7 @@ const pageSchema = [
         {related.map(p => (
           <a href={p.href} class="tw-blog-related-card">
             <div class={`tw-blog-related-card-img ${p.tone}`}>
-              {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || p.title} />}
+              {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || p.title} width="1400" height="763" loading="lazy" decoding="async" />}
             </div>
             <div class="tw-blog-related-card-body">
               <div class={`tw-blog-related-card-cat ${p.tone}`}>{p.category}</div>

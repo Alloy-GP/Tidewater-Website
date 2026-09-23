@@ -46,7 +46,6 @@ function CovenantHeroSide() {
         ))}
       </div>
       <div style={{ marginTop: 14, padding: '10px 14px', background: 'var(--tw-warm-100)', border: '1px dashed var(--tw-border-strong)', borderRadius: 8, fontFamily: 'var(--tw-font-body)', fontSize: 11.5, color: 'var(--tw-fg-muted)', lineHeight: 1.45, fontStyle: 'italic' }}>
-        [PLACEHOLDER — sample violations shown for layout. Replace with real anonymized examples or a screenshot of the live CINC Action Item List interface.]
       </div>
     </div>
   );
@@ -321,7 +320,7 @@ function CovenantFaq() {
           <div className="tw-sol-faq-head">
             <div className="tw-eyebrow">Board Questions</div>
             <h2>The covenant-enforcement <em>questions</em> we get most.</h2>
-            <p>For a deeper walkthrough of the violation lifecycle, see the related blog spoke: <em>[PLACEHOLDER — link to HOA Violations blog when published]</em>.</p>
+            <p>For a deeper walkthrough of the violation lifecycle, see the related blog spoke: <em></em>.</p>
             <a href="/request-a-proposal" className="tw-btn tw-btn-primary">Ask your own question →</a>
           </div>
           <FaqAccordion items={FAQS} defaultOpen={0} />

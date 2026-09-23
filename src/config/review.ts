@@ -19,5 +19,6 @@ export interface ReviewItem {
 }
 
 export const REVIEW_ITEMS: ReviewItem[] = [
-  { label: 'What Are HOA Fees? (blog post)', path: '/blog/hoa-fees', review: true },
+  { label: 'The Board Brief — October 2026 issue', path: '/resources/newsletter/october-2026', review: true },
+  { label: 'The Board Brief — newsletter archive', path: '/resources/newsletter', review: true },
 ];

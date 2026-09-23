@@ -3,7 +3,9 @@
 // Data-driven from src/data/counties.ts (one entry per slug). Existing
 // hand-built pages (anne-arundel-county.astro, index.astro) take precedence —
 // only slugs present in COUNTIES are generated here, so no route collision.
-// SHELL: noindex until Justin fills real content and the flag is removed.
+// Indexable. Every number and name in counties.ts is sourced from
+// tidewater-master-brief-v2.2; see the provenance header in that file for what
+// was removed as unverifiable and what is deliberately absent.
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Topbar from '../../../components/Topbar.astro';
 import Header from '../../../components/Header.astro';
@@ -24,7 +26,6 @@ const { county } = Astro.props;
   title={county.seo.title}
   description={county.seo.description}
   ogType="website"
-  robots="noindex"
   pageStylesheet={["styles-geo.css", "styles-county-template.css"]}
 >
   <Topbar variant="default" />

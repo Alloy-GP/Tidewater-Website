@@ -12,6 +12,7 @@
 //   <BaseLayout title="…" description="…" robots="noindex,nofollow">
 
 import { SITE } from '../config/site';
+import { OG_BY_PATH } from '../config/og-map';
 import SpeedInsights from '@vercel/speed-insights/astro';
 
 interface Props {
@@ -27,6 +28,8 @@ interface Props {
   ogType?: 'website' | 'article';
   /** Per-page OG image. Absolute path from /public. Defaults to SITE.defaultOgImage. */
   ogImage?: string;
+  /** Alt text for the OG image. Defaults to SITE.name. Set this whenever ogImage is set. */
+  ogImageAlt?: string;
   /** robots meta content. Omit for normal indexed pages. Use "noindex,nofollow" for staging/legal. */
   robots?: string;
   /** Page-specific JSON-LD. Pass a single object or an array from src/lib/schema.ts. */
@@ -40,6 +43,7 @@ const {
   pageStylesheet,
   ogType = 'website',
   ogImage: ogImageProp,
+  ogImageAlt: ogImageAltProp,
   robots: robotsProp,
   pageSchema,
 } = Astro.props;
@@ -70,10 +74,18 @@ const pageStylesheets = pageStylesheet
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? SITE.url).toString();
 
-const resolvedOgImage = new URL(
-  ogImageProp ?? SITE.defaultOgImage,
-  Astro.site ?? SITE.url
-).toString();
+// Per-page OG card when one exists for this path, then an explicit prop, then
+// the site default. Explicit props still win — the newsletter and the HOA fees
+// post pass purpose-built cards.
+const ogPathKey = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const ogImagePath = ogImageProp ?? OG_BY_PATH[ogPathKey] ?? SITE.defaultOgImage;
+const resolvedOgImage = new URL(ogImagePath, Astro.site ?? SITE.url).toString();
+
+// og:image:type must match the actual file — a jpg served as image/png is
+// rejected by some scrapers. All OG images are authored at 1200x630.
+const OG_MIME = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp' };
+const ogImageType = OG_MIME[ogImagePath.split('.').pop()?.toLowerCase() ?? ''] ?? 'image/png';
+const ogImageAlt = ogImageAltProp ?? SITE.name;
 
 const orgLd = {
   '@context': 'https://schema.org',
@@ -118,10 +130,10 @@ const orgLd = {
   <meta property="og:site_name" content={SITE.name} />
   <meta property="og:locale" content={SITE.locale} />
   <meta property="og:image" content={resolvedOgImage} />
-  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:type" content={ogImageType} />
   <meta property="og:image:width" content={SITE.ogImageWidth} />
   <meta property="og:image:height" content={SITE.ogImageHeight} />
-  <meta property="og:image:alt" content={SITE.name} />
+  <meta property="og:image:alt" content={ogImageAlt} />
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -129,7 +141,7 @@ const orgLd = {
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={resolvedOgImage} />
-  <meta name="twitter:image:alt" content={SITE.name} />
+  <meta name="twitter:image:alt" content={ogImageAlt} />
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="/styles.css" />
@@ -279,7 +291,7 @@ const orgLd = {
             'padding:10px 16px;cursor:pointer;font-weight:700;font-size:13px;display:flex;align-items:center;' +
             'gap:8px;box-shadow:0 4px 20px rgba(56,28,79,.35);letter-spacing:.01em;font-family:' + FONT + ';' +
             'transition:background 150ms,box-shadow 150ms;">' +
-              '<img src="/assets/alloy-icon.png" alt="" style="width:20px;height:20px;display:block;flex-shrink:0;" />' +
+              '<img src="/assets/alloy-icon.png" alt="" style="width:20px;height:20px;display:block;flex-shrink:0;"  loading="lazy" decoding="async" />' +
               '<span>Review Checklist</span>' +
               '<span style="background:' + PK + ';color:#fff;border-radius:20px;padding:1px 7px;' +
               'font-size:11px;font-weight:800;">' + n + '/' + tot + '</span>' +
@@ -299,7 +311,7 @@ const orgLd = {
           '<div style="background:' + P + ';color:#fff;padding:13px 16px;display:flex;' +
           'align-items:center;justify-content:space-between;">' +
             '<div style="display:flex;align-items:center;gap:10px;">' +
-              '<img src="/assets/alloy-icon.png" alt="" style="width:28px;height:28px;border-radius:6px;background:rgba(255,255,255,.15);padding:3px;display:block;flex-shrink:0;" />' +
+              '<img src="/assets/alloy-icon.png" alt="" style="width:28px;height:28px;border-radius:6px;background:rgba(255,255,255,.15);padding:3px;display:block;flex-shrink:0;"  loading="lazy" decoding="async" />' +
               '<div>' +
                 '<div style="font-weight:700;font-size:14px;line-height:1.2;">Review Checklist</div>' +
                 '<div style="font-size:10px;opacity:.7;font-weight:400;letter-spacing:.01em;">Check off each page as you review it</div>' +

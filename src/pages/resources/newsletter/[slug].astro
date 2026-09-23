@@ -1,0 +1,27 @@
+---
+// /resources/newsletter/<slug> — one route for every Board Brief issue.
+//
+// Each issue is a complete page in src/components/newsletter/issues/<slug>.astro
+// (layout, hero, stories, CTA — copy the latest one to start the next). This
+// file only decides which of them get built: the LIVE list in
+// src/data/newsletters.ts, which on production excludes any issue whose send
+// date has not arrived. An issue that is not built is a real 404 and stays out
+// of the sitemap, so next month's issue can be merged as soon as it is written.
+import { LIVE } from '../../../data/newsletters';
+
+export function getStaticPaths() {
+  return LIVE.map((issue) => ({ params: { slug: issue.slug } }));
+}
+
+const pages = import.meta.glob<{ default: any }>('../../../components/newsletter/issues/*.astro', {
+  eager: true,
+});
+
+const slug = String(Astro.params.slug);
+const match = Object.entries(pages).find(([path]) => path.endsWith(`/${slug}.astro`));
+if (!match) {
+  throw new Error(`No page for issue "${slug}". Add src/components/newsletter/issues/${slug}.astro.`);
+}
+const Issue = match[1].default;
+---
+<Issue />

@@ -162,3 +162,25 @@ export function localBusinessSchema(opts?: { description?: string }) {
     ...(opts?.description ? { description: opts.description } : {}),
   };
 }
+
+/**
+ * WebSite + SearchAction. Emitted once, on the homepage only — Google expects a
+ * single WebSite node per site, on the root. Points at the FAQ hub, which is
+ * the site's only real search surface.
+ */
+export function websiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url + '/',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE.url}/faq?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+}

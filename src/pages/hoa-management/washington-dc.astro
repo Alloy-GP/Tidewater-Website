@@ -1,0 +1,23 @@
+---
+// Washington, DC HOA hub. Content lives in src/data/states.ts.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Topbar from '../../components/Topbar.astro';
+import Header from '../../components/Header.astro';
+import StateHub, { pageSchema } from '../../components/StateHub.astro';
+import CTA from '../../components/CTA.astro';
+import Footer from '../../components/Footer.astro';
+import { STATES } from '../../data/states';
+
+const state = STATES['washington-dc'];
+---
+<BaseLayout
+  title={state.seo.title}
+  description={state.seo.description}
+  pageStylesheet={['styles-pages.css', 'styles-geo.css']}
+>
+  <Topbar variant="default" />
+  <Header activeNav="mgmt" />
+  <StateHub state={state} />
+  <CTA />
+  <Footer />
+</BaseLayout>

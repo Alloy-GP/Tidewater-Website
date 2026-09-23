@@ -1,0 +1,56 @@
+# Publishes a scheduled Board Brief issue on its send date.
+#
+# src/data/newsletters.ts only builds an issue on production once its dateIso
+# has arrived (Eastern time). Vercel builds on push, so an issue merged ahead of
+# its date still needs a build to run on the day. This job runs every morning,
+# checks whether an issue is dated today, and if one is, triggers a production
+# build:
+#   - through a Vercel Deploy Hook when the VERCEL_DEPLOY_HOOK_URL secret is set
+#     (Vercel → Project Settings → Git → Deploy Hooks; create one for main), or
+#   - by pushing an empty commit to main otherwise.
+# Run it by hand from the Actions tab to publish an issue dated today.
+name: Publish scheduled newsletter
+
+on:
+  schedule:
+    - cron: '0 12 * * *' # 12:00 UTC — 8:00 AM EDT / 7:00 AM EST, every day
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Is an issue dated today?
+        id: today
+        run: |
+          TODAY="$(TZ=America/New_York date +%F)"
+          if grep -q "dateIso: '$TODAY'" src/data/newsletters.ts; then
+            echo "An issue is dated $TODAY. Triggering a production build."
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No issue dated $TODAY. Nothing to do."
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Trigger a production build
+        if: steps.today.outputs.publish == 'true'
+        env:
+          DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -n "$DEPLOY_HOOK" ]; then
+            curl -fsS -X POST "$DEPLOY_HOOK" > /dev/null
+            echo "Deploy hook called."
+          else
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit --allow-empty -m "Publish today's Board Brief issue (scheduled rebuild)"
+            git push origin HEAD:main
+            echo "Empty commit pushed to main."
+          fi

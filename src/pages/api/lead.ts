@@ -6,7 +6,6 @@ export const prerender = false;
 
 import type { APIRoute } from "astro";
 import { Resend } from "resend";
-import mailchimp from "@mailchimp/mailchimp_marketing";
 import { EMAIL_CONFIG } from "../../lib/email.config";
 import { sendWithAlert, notifySubmission, fieldsFromFormData } from "../../lib/form-alert";
 
@@ -16,11 +15,6 @@ const resend = new Resend(import.meta.env.RESEND_API_KEY);
 // shared fallback for clients without a channel of their own.
 const SLACK_WEBHOOK =
   import.meta.env.FORM_SLACK_WEBHOOK || import.meta.env.FORM_ALERT_SLACK_URL;
-
-mailchimp.setConfig({
-  apiKey:  import.meta.env.MAILCHIMP_API_KEY,
-  server:  import.meta.env.MAILCHIMP_SERVER_PREFIX,
-});
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -126,24 +120,6 @@ export const POST: APIRoute = async ({ request }) => {
       html:    intentCfg.confirmBody(firstName, EMAIL_CONFIG.brand.url),
     });
     if (confirmError) console.error("Resend confirm error:", confirmError);
-
-    // Mailchimp — always adds leads to the list
-    if (EMAIL_CONFIG.mailchimp.enabled) {
-      try {
-        await mailchimp.lists.addListMember(import.meta.env.MAILCHIMP_AUDIENCE_ID, {
-          email_address: email,
-          status:        "subscribed",
-          merge_fields: {
-            FNAME:   name.split(" ")[0],
-            LNAME:   name.split(" ").slice(1).join(" "),
-            COMPANY: company,
-          },
-          tags: EMAIL_CONFIG.mailchimp.defaultTags,
-        });
-      } catch (err: any) {
-        console.error("Mailchimp lead error:", err?.response?.body ?? err);
-      }
-    }
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (err) {

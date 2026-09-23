@@ -4,13 +4,38 @@ import Header from '../components/Header.astro';
 import Topbar from '../components/Topbar.astro';
 import CTA from '../components/CTA.astro';
 import Footer from '../components/Footer.astro';
+import { ALL_REVIEWS } from '../components/TestimonialsGrid.jsx';
 import TestimonialsGrid from '../components/TestimonialsGrid.jsx';
 import GoogleReviewsGrid from '../components/GoogleReviewsGrid.jsx';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { breadcrumbSchema } from '../lib/schema';
 import { SITE } from '../config/site';
 
+
+const reviewSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: SITE.name,
+  url: SITE.url + '/',
+  telephone: SITE.org.telephone,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '3600 Crondall Lane, Suite 100',
+    addressLocality: SITE.org.addressLocality,
+    addressRegion: SITE.org.addressRegion,
+    postalCode: '21117',
+    addressCountry: 'US',
+  },
+  review: ALL_REVIEWS.filter((r) => r.name && r.quote).map((r) => ({
+    '@type': 'Review',
+    author: { '@type': 'Person', name: r.name },
+    reviewBody: r.quote,
+    itemReviewed: { '@type': 'LocalBusiness', name: SITE.name },
+  })),
+};
+
 const schemas = [
+  reviewSchema,
   breadcrumbSchema([
     { name: 'Home', url: SITE.url + '/' },
     { name: 'Testimonials', url: SITE.url + '/testimonials' },
@@ -45,7 +70,7 @@ const schemas = [
         <div class="tw-sol-hero-stats">
           <!-- PLACEHOLDER: replace with real board rating once data is collected -->
           <div>
-            <div class="tw-sol-hero-stat-num gold">300+</div>
+            <div class="tw-sol-hero-stat-num gold">450+</div>
             <div class="tw-sol-hero-stat-label">Communities managed across the Mid-Atlantic</div>
           </div>
           <!-- PLACEHOLDER: replace with real board retention rate once confirmed -->
@@ -84,7 +109,7 @@ const schemas = [
   <section class="tw-tst-context" style="display:none">
     <div class="tw-tst-context-inner">
       <div class="tw-tst-context-note">
-        <strong>About our Google reviews.</strong> Most of our 552 Google reviews come from individual residents in the 300+ communities we manage. Resident reviews tend to skew toward complaint (every late fee, every covenant letter), which is normal for the industry. We don&rsquo;t hide them &mdash; <a href="https://www.google.com/search?q=tidewater+property+management+maryland" target="_blank" rel="noopener">read every one here</a>. What you see on this page is curated for the board buyer.
+        <strong>About our Google reviews.</strong> Most of our 552 Google reviews come from individual residents in the 450+ communities we manage. Resident reviews tend to skew toward complaint (every late fee, every covenant letter), which is normal for the industry. We don&rsquo;t hide them &mdash; <a href="https://www.google.com/search?q=tidewater+property+management+maryland" target="_blank" rel="noopener">read every one here</a>. What you see on this page is curated for the board buyer.
       </div>
       <!-- PLACEHOLDER: replace with real board rating stats once collected -->
       <div class="tw-tst-context-stat" style="display:none">
