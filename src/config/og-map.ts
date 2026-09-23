@@ -67,6 +67,7 @@ export const OG_BY_PATH: Record<string, string> = {
   '/resources': '/assets/og/resources.jpg',
   '/resources/newsletter': '/assets/og/resources-newsletter.jpg',
   '/resources/newsletter/august-2026': '/assets/og/resources-newsletter-august-2026.jpg',
+  '/resources/newsletter/october-2026': '/assets/og/resources-newsletter-october-2026.jpg',
   '/service-areas': '/assets/og/service-areas.jpg',
   '/solutions/self-managed-hoa-transition': '/assets/og/solutions-self-managed-hoa-transition.jpg',
   '/solutions/switching-hoa-management-company': '/assets/og/solutions-switching-hoa-management-company.jpg',
