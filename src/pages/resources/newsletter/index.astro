@@ -6,7 +6,7 @@ import ResourcesNewsletter from '../../../components/ResourcesNewsletter.astro';
 import Footer from '../../../components/Footer.astro';
 import { breadcrumbSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
-import { SORTED, CURRENT, PAST, YEARS, href, issueLabel } from '../../../data/newsletters';
+import { SORTED, CURRENT, FIRST, PAST, YEARS, href, issueLabel } from '../../../data/newsletters';
 
 const pageUrl = `${SITE.url}/resources/newsletter`;
 
@@ -70,7 +70,7 @@ const issueCount = SORTED.length;
             ? <><strong>Issue No. 01</strong></>
             : <><strong>{issueCount}</strong>issues</>}
         </span>
-        <span><strong>Monthly</strong>since {CURRENT.month} {CURRENT.year}</span>
+        <span><strong>Monthly</strong>since {FIRST.month} {FIRST.year}</span>
         <span><strong>Free</strong>for boards and owners</span>
       </div>
     </div>

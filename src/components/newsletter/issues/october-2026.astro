@@ -1,0 +1,188 @@
+---
+// The Board Brief — Issue No. 02, October 2026.
+// Content is the web version of the October 2026 Mailchimp email and must stay
+// 1:1 with it. The "In This Issue" lines are generated from the issue's
+// `topics` in src/data/newsletters.ts, so they cannot drift from the index —
+// but they must be kept identical to the section headlines by hand.
+//
+// Two photo slots in the email (the Expo booth, the Stratosphere Social
+// afternoon) were placeholders when this was built and are left out here.
+// Routed by src/pages/resources/newsletter/[slug].astro.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Header from '../../../components/Header.astro';
+import IssueSection from '../../../components/newsletter/IssueSection.astro';
+import ResourcesNewsletter from '../../../components/ResourcesNewsletter.astro';
+import Footer from '../../../components/Footer.astro';
+import { articleSchema, breadcrumbSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+import { ISSUES, issueLabel } from '../../../data/newsletters';
+
+const issue = ISSUES.find((i) => i.slug === 'october-2026')!;
+const pageUrl = `${SITE.url}/resources/newsletter/${issue.slug}`;
+
+const headline = 'This is the month the plan becomes a vote.';
+const description =
+  'The Board Brief, October 2026: the Delmarva Expo on November 13, adopting the 2027 budget inside the notice window, winterization, and annual meeting season.';
+
+const DELMARVA_URL = 'https://caimdches.org/';
+
+const pageSchema = [
+  articleSchema({
+    headline,
+    description,
+    url: pageUrl,
+    datePublished: issue.dateIso,
+    image: `${SITE.url}${issue.ogImage}`,
+    about: ['HOA budgets', 'assessment notice', 'winterization', 'annual meetings', 'CAI'],
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'Resources', url: SITE.url + '/resources' },
+    { name: 'The Board Brief', url: SITE.url + '/resources/newsletter' },
+    { name: `${issue.month} ${issue.year}`, url: pageUrl },
+  ]),
+];
+---
+<BaseLayout
+  title="The Board Brief, October 2026 | Tidewater"
+  description={description}
+  ogType="article"
+  ogImage={issue.ogImage}
+  ogImageAlt={issue.imageAlt}
+  bodyClass="tw-bb"
+  pageStylesheet={['styles-pages.css', 'styles-newsletter-issue.css']}
+  pageSchema={pageSchema}
+>
+  <Topbar variant="homeowner" />
+  <Header activeNav="resources" />
+
+  <article>
+    <section class="tw-bb-hero">
+      <div class="tw-bb-hero-bg"></div>
+      <div class="tw-bb-hero-paper"></div>
+      <div class="tw-bb-hero-inner">
+        <nav class="tw-bb-crumb" aria-label="Breadcrumb">
+          <a href="/resources">Resources</a>
+          <span class="sep" aria-hidden="true">&rsaquo;</span>
+          <a href="/resources/newsletter">The Board Brief</a>
+          <span class="sep" aria-hidden="true">&rsaquo;</span>
+          <span class="cur" aria-current="page">{issue.month} {issue.year}</span>
+        </nav>
+        <div class="tw-bb-issuebar">
+          <span>The Board Brief</span>
+          <span>{issueLabel(issue)} &middot; {issue.month} {issue.year}</span>
+        </div>
+        <h1>{headline}</h1>
+        <span class="tw-bb-rule"></span>
+        <p>Budgets get adopted, annual meetings get noticed, and the first hard freeze arrives before the last leaf is down. Here&rsquo;s what belongs on your agenda before the year closes.</p>
+      </div>
+    </section>
+
+    <nav class="tw-bb-index" aria-label="In this issue">
+      <div class="tw-bb-wrap">
+        <div class="tw-bb-index-head">In This Issue</div>
+        <ol>
+          {issue.topics.map((topic, i) => (
+            <li>
+              <a href={`#s${i + 1}`}>
+                <span class="n">{String(i + 1).padStart(2, '0')}</span>
+                <span>{topic}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </nav>
+
+    <IssueSection id="s1" n={1} kicker="What's Happening" title="A full booth at the Chesapeake Expo — and Delmarva is next">
+      <p>Yesterday&rsquo;s Symposium &amp; Expo at Maryland LIVE! brought 100+ exhibitors and a full day of governance and legislative sessions, and our booth stayed busy. Gail Windisch was on the program as a speaker. If you missed this one, the Chesapeake chapter runs a second expo on Delmarva next month &mdash; closer to home for our Eastern Shore and Delaware communities, and worth the morning.</p>
+      <dl class="tw-bb-detail">
+        <div><dt>Date</dt><dd>Friday, November 13, 2026 &middot; 8:00 AM &ndash; 3:00 PM</dd></div>
+        <div><dt>Where</dt><dd>Rehoboth Beach Convention Center &middot; 229 Rehoboth Avenue</dd></div>
+        <div><dt>Us</dt><dd>Stop by the Tidewater booth</dd></div>
+      </dl>
+      <a class="tw-btn tw-btn-primary tw-btn-lg" href={DELMARVA_URL} target="_blank" rel="noopener">Register for Delmarva</a>
+    </IssueSection>
+
+    <IssueSection id="s2" n={2} kicker="On The Agenda" title="Adopting the 2027 budget — mind the notice window" tone="linen">
+      <p>If you&rsquo;re on a January fiscal year, the draft should be in front of the board now. Adoption is the easy part. The part that trips boards up is the notice period your governing documents require between adoption and the date assessments take effect &mdash; miss it and you&rsquo;re collecting under last year&rsquo;s number.</p>
+      <div class="tw-bb-timeline">
+        <div>
+          <span class="when">October</span>
+          <p>Final draft review with your community manager. Confirm every contract renewal is priced in, not estimated.</p>
+        </div>
+        <div>
+          <span class="when">November</span>
+          <p>Adopt. Count backward from January 1 to find your notice deadline, then send early enough that a mailing delay doesn&rsquo;t cost you the window.</p>
+        </div>
+        <div>
+          <span class="when">December</span>
+          <p>Notice owners with the new assessment amount, the effective date, and payment instructions. Update auto-draft and portal payment amounts.</p>
+        </div>
+        <div>
+          <span class="when">January</span>
+          <p>Confirm the first cycle posts correctly. Catch coupon or draft errors in week one, not in March.</p>
+        </div>
+      </div>
+      <div class="tw-bb-callout">
+        <div class="tw-bb-callout-label">Don&rsquo;t Forget</div>
+        <p><strong>Reserve contributions are a line item, not a leftover.</strong> If the funding plan got trimmed to hold the assessment flat, put that decision in the minutes with the reason. Boards change; the record is what protects the ones who come next.</p>
+      </div>
+    </IssueSection>
+
+    <IssueSection id="s3" n={3} kicker="Seasonal" title="Winterize before the first freeze, not after">
+      <p>The Mid-Atlantic&rsquo;s first hard freeze usually beats the first snow by weeks, and it&rsquo;s the one that does the expensive damage. Five things worth confirming now.</p>
+      <ol class="tw-bb-checklist">
+        <li><span><strong>Irrigation.</strong> Blow out the lines and shut off exterior spigots. A cracked backflow preventer discovered in April is a spring you spend on plumbing instead of landscaping.</span></li>
+        <li><span><strong>Vacant and seasonal units.</strong> Confirm minimum heat settings in units between tenants, seasonal properties, and any unoccupied common-area building. One unheated unit can take out the pipes above and below it.</span></li>
+        <li><span><strong>Gutters, again.</strong> They were cleared in September and they are full again. Blocked gutters in freezing weather become ice dams, and ice dams become roof and ceiling claims.</span></li>
+        <li><span><strong>Snow contract.</strong> Confirm your trigger depth, priority routes, pre-treatment terms, and who has authority to call a service. Settle that in October and nobody is negotiating at 5 a.m.</span></li>
+        <li><span><strong>Shutoffs.</strong> Make sure more than one person knows where the main water shutoffs are and how to reach them after hours. A burst pipe is contained by whoever gets there first.</span></li>
+      </ol>
+    </IssueSection>
+
+    <IssueSection id="s4" n={4} kicker="On The Agenda" title="Annual meetings and the year-end close" tone="linen">
+      <p>Fall annual meetings live and die on quorum. Solicit candidates earlier than feels necessary, send proxies with the notice rather than after it, and give owners a reason to show up &mdash; a five-minute reserve update and a look at next year&rsquo;s projects does more for attendance than a reminder postcard.</p>
+      <p>The financial close runs on a parallel track. Confirm your audit or review engagement is scheduled, collect W-9s from every contractor paid this year before 1099s come due in January, and make sure the tax return preparer has what they need. These are unglamorous and entirely avoidable as emergencies. Your manager can tell you which ones are already handled for your community.</p>
+    </IssueSection>
+
+    <IssueSection id="s5" n={5} kicker="Inside Tidewater" title="Five new community managers — and why ours stay">
+      <p>Kristine Santo, Amanda Cooper, Hal Morley, Kristy Morley, and Madi White have all joined the Tidewater management team. Growth is the easy part of that sentence. The harder part is keeping people: industry-wide, the average community manager moves on in about two years, while many of ours are past five and a few are approaching fifteen.</p>
+      <p>That isn&rsquo;t an accident, and it isn&rsquo;t only about compensation. We build portfolios that a person can actually carry, we pay for CAI credentialing up front, and last month the whole company shut down for an afternoon at Stratosphere Social &mdash; the kind of thing that sounds like a perk and functions like retention. Board members feel the result in the only way that matters: you are not re-explaining your community to a stranger every eighteen months.</p>
+    </IssueSection>
+
+    <section class="tw-bb-spotlight">
+      <div class="tw-bb-wrap">
+        <div class="tw-bb-spot-eyebrow">Meet The Team</div>
+        <div class="tw-bb-spot-card">
+          <h3>Gail Windisch, CMCA, AMS, PCAM</h3>
+          <div class="tw-bb-spot-role">Senior Director of Operations</div>
+          <span class="tw-bb-spot-rule"></span>
+          <p>Gail has been with Tidewater more than twenty years and oversees operations across all four offices. She has served the CAI Chesapeake Chapter as President, Secretary, and Vice President, which is why she was on the program at the Expo this month rather than just walking the floor. She holds the PCAM, the industry&rsquo;s highest individual credential. If your board is stuck on something that feels harder than it should be, she has almost certainly seen it resolved.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tw-bb-cta">
+      <div class="tw-bb-wrap">
+        <div class="tw-bb-cta-eyebrow">Since 1989</div>
+        <h2>More than management.<br />Your trusted community resource.</h2>
+        <p>Family-owned, AAMC&reg;-accredited, and managing 450+ communities across the Mid-Atlantic &mdash; with portfolios sized so your manager knows your community, not just your account number.</p>
+        <div class="tw-bb-proof">
+          <div><span class="v">450+</span><span class="l">Communities</span></div>
+          <div><span class="v">AAMC&reg;</span><span class="l">CAI Accredited</span></div>
+          <div><span class="v">20 min</span><span class="l">Emergency callback</span></div>
+        </div>
+        <div class="tw-bb-cta-actions">
+          <a class="tw-btn tw-btn-primary tw-btn-lg" href="/request-a-proposal">Talk With Tidewater</a>
+          <a class="tw-bb-cta-link" href="/resources/newsletter">&larr; All issues</a>
+        </div>
+        <p class="tw-bb-cta-fine">Already with us? Reach your community manager any time through the <a href="https://tidewater.cincwebaxis.com" target="_blank" rel="noopener">Tidewater PM portal</a>.</p>
+      </div>
+    </section>
+  </article>
+
+  <ResourcesNewsletter />
+  <Footer />
+</BaseLayout>
