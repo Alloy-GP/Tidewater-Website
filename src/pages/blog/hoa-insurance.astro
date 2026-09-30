@@ -1,0 +1,448 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Topbar from '../../components/Topbar.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Footer from '../../components/Footer.astro';
+import { articleSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+import { SITE } from '../../config/site';
+
+const pageUrl = `${SITE.url}/blog/hoa-insurance`;
+const headline = 'HOA & Condo Insurance: What Your Board Must Carry (and Common Gaps)';
+const description = "A board's guide to HOA and condo insurance — required coverage, the gaps that cause claims, and how an annual review protects your association.";
+
+const post = {
+  title: 'HOA &amp; condo insurance: <em>what your board must carry</em> (and common gaps).',
+  dek: 'Most boards learn how HOA insurance works during a claim, which is the worst time to find out. Here is what your association must carry, how master policies split responsibility with owners, what Maryland law requires now and in 2027, and the gaps that cause uncovered losses.',
+  category: { id: 'insurance', label: 'Insurance & Risk Management', tone: '' },
+  author: {
+    name: 'Joe Jordan',
+    creds: 'CMCA · AMS · PCAM',
+    initials: 'JJ',
+    role: 'Director of Quality Assurance, Tidewater',
+    bio: "Joe is Tidewater's Director of Quality Assurance, leading the QA and Compliance team. A former CAI Chesapeake Chapter President (2012), his background includes Senior Project Manager experience at a leading engineering firm — a structural mind for a structural function. CMCA, AMS, and PCAM credentialed.",
+    email: 'jjordan@tidewaterproperty.com',
+  },
+  date: 'September 30, 2026',
+  dateIso: '2026-09-30',
+  readTime: 10,
+};
+
+const toc = [
+  { id: 'what-is',       label: 'What HOA insurance is' },
+  { id: 'coverage',      label: 'Core coverage' },
+  { id: 'condo-master',  label: 'Condo master policy' },
+  { id: 'maryland',      label: 'Maryland requirements' },
+  { id: 'gaps',          label: 'Five common gaps' },
+  { id: 'annual-review', label: 'The annual review' },
+  { id: 'faq',           label: 'FAQ' },
+  { id: 'bottom-line',   label: 'Bottom line' },
+];
+
+const related = [
+  {
+    tone: '', category: 'HOA Finances',
+    title: 'What are HOA fees? What they cover, why they change, and what happens if you don\'t pay.',
+    dek: 'An HOA fee covers insurance, upkeep, and the reserves that pay for future repairs — but who decides the amount, and why does it keep going up?',
+    date: 'August 4, 2026', readTime: 8, href: '/blog/hoa-fees',
+    coverImage: '/assets/hoa-fees.jpg',
+    coverAlt: 'Well-maintained townhome community common area managed under an HOA budget',
+  },
+  {
+    tone: '', category: 'Board Governance',
+    title: 'HOA board member responsibilities & fiduciary duty, explained.',
+    dek: 'The fiduciary duties that attach to every seat, what each officer position involves, and where the board\'s job ends and delegation begins.',
+    date: 'August 3, 2026', readTime: 7, href: '/blog/hoa-board-responsibilities',
+    coverImage: '/assets/hoa-board-responsibilities.jpg',
+    coverAlt: "HOA board member reviewing the association's governing-documents binder at her kitchen table",
+  },
+  {
+    tone: '', category: 'HOA Management',
+    title: 'What is a community association manager? Roles, responsibilities, and what your board should expect.',
+    dek: 'How the CAM role works alongside the board, what credentials matter, and how to evaluate whether your management company is meeting the standard.',
+    date: 'May 15, 2026', readTime: 9, href: '/blog/what-is-a-community-association-manager',
+    coverImage: '/assets/what-is-a-community-association-manager.jpg',
+    coverAlt: 'Community association manager shaking hands with HOA board members outside a community clubhouse',
+  },
+];
+
+const pageSchema = [
+  articleSchema({
+    headline,
+    description,
+    url: pageUrl,
+    datePublished: '2026-09-30',
+    image: `${SITE.url}/assets/hoa-insurance.jpg`,
+    about: ['HOA insurance', 'condo insurance', 'HOA master insurance policy', 'directors and officers insurance', 'fidelity coverage', 'Maryland Condominium Act', 'HOA reserves'],
+  }),
+  faqSchema([
+    {
+      q: 'What kind of insurance should an HOA have?',
+      a: 'At minimum: property coverage for what the association must insure, general liability, directors and officers, and fidelity or crime coverage. The specifics come from the governing documents, state law and lender standards.',
+    },
+    {
+      q: 'How much does HOA insurance cost?',
+      a: "There is no standard price. HOA insurance premiums move with the community's size, building values, age, amenities, claims history and location risk. The deductible is the lever boards control most directly: raising it lowers the premium but shifts more first-dollar risk onto the association and its owners.",
+    },
+    {
+      q: 'Who pays the master policy deductible in a Maryland condominium?',
+      a: "The owner of the unit where the damage originates pays the council's property insurance deductible, up to $10,000 through September 30, 2027, and the association covers the rest as a common expense. If the cause starts in the common elements or outside the units entirely, the whole deductible is a common expense. On October 1, 2027 the owner's share becomes the least of the repair cost, the council's deductible, or $25,000.",
+    },
+    {
+      q: "Is Maryland's condominium insurance deductible law changing?",
+      a: "Yes, and it is already enacted. Under Chapter 717 of 2026 (SB 747 / HB 469), effective October 1, 2027, the originating owner's share becomes the least of the repair or replacement cost, the association's property deductible, or $25,000. New § 11-114.3 will also require owners in condominiums not composed entirely of similar detached units to carry a unit-owners policy covering their share of the deductible, at least $25,000 of loss assessment coverage, and dwelling coverage of at least $25,000 or the cost to replace their improvements, whichever is greater. Build it into 2027 budgets and owner notices now.",
+    },
+    {
+      q: 'Does HOA insurance cover the inside of my home or unit?',
+      a: 'Usually not fully. In a condominium it depends on whether the master policy is bare walls, single entity or all-in; in a single-family HOA the association typically insures only the common areas. HOA insurance stops where the declaration and state law say it stops, so make sure your HO-3 or HO-6 policy picks up the rest.',
+    },
+  ]),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'Blog', url: SITE.url + '/blog' },
+    { name: headline, url: pageUrl },
+  ]),
+];
+---
+
+<BaseLayout
+  title="HOA Insurance Guide: What Your Board Must Carry | Tidewater"
+  description={description}
+  ogType="article"
+  ogImageAlt="HOA & Condo Insurance: What Your Board Must Carry — a Tidewater guide for boards"
+  pageSchema={pageSchema}
+  pageStylesheet="styles-blog.css"
+>
+  <Topbar variant="homeowner" />
+  <Header activeNav="blog" />
+  <Breadcrumb crumbs={[
+    { label: 'Blog', href: '/blog' },
+    { label: 'HOA & Condo Insurance' },
+  ]} />
+
+  <div class="tw-blog-progress" id="tw-blog-progress"></div>
+
+  <section class="tw-blog-hero">
+    <div class="tw-blog-hero-inner">
+      <span class={`tw-blog-category ${post.category.tone}`}>{post.category.label}</span>
+      <h1 class="tw-blog-title" set:html={post.title}></h1>
+      <p class="tw-blog-dek">{post.dek}</p>
+      <div class="tw-blog-meta">
+        <div class="tw-blog-meta-author">
+          <div class="tw-blog-meta-avatar">{post.author.initials}</div>
+          <div>
+            <div class="tw-blog-meta-name">{post.author.name}</div>
+            <div class="tw-blog-meta-role">{post.author.role}</div>
+          </div>
+        </div>
+        <div class="tw-blog-meta-divider"></div>
+        <div class="tw-blog-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> {post.date}</div>
+        <div class="tw-blog-meta-divider"></div>
+        <div class="tw-blog-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> {post.readTime} min read</div>
+        <div class="tw-blog-share">
+          <button type="button" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg></button>
+          <button type="button" data-share="x" title="Share on X" aria-label="Share on X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></button>
+          <button type="button" data-share="email" title="Share by email" aria-label="Share by email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></button>
+          <button type="button" data-share="copy" title="Copy link" aria-label="Copy link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tw-blog-cover">
+    <div class="tw-blog-cover-inner">
+      <img
+        src="/assets/hoa-insurance.jpg"
+        alt="Two homeowners looking up at a large tree limb fallen across the roof of a brick home after a storm"
+        width="1400"
+        height="763"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <div class="tw-blog-cover-paper"></div>
+    </div>
+  </div>
+
+  <div class="tw-blog-body-wrap">
+    <div class="tw-blog-layout">
+      <aside class="tw-blog-toc">
+        <div class="tw-blog-toc-label">In this article</div>
+        <ul class="tw-blog-toc-list">
+          {toc.map(it => <li><a href={`#${it.id}`} set:html={it.label}></a></li>)}
+        </ul>
+      </aside>
+      <div>
+        <article class="tw-blog-article">
+
+          <p>
+            A supply line fails in an upper-level unit on a Sunday night. Water reaches three units below before anyone finds the shutoff. By Monday the board is fielding calls from four owners and learning who pays the deductible and what the master policy excludes. That is when most boards learn how HOA insurance works, and it is the worst possible moment.
+          </p>
+
+          <p>
+            This guide covers the core HOA insurance coverages, how master policies split responsibility with owners, what Maryland requires, the gaps that produce uncovered losses, and a yearly review routine.
+          </p>
+
+          <h2 id="what-is">What Is HOA Insurance?</h2>
+
+          <p>
+            HOA insurance is the set of policies a community association buys to protect the property it owns or must insure, the association against liability claims, and the volunteer leaders on its board.
+          </p>
+
+          <p>
+            The master policy covers whatever the governing documents assign to the association. Everything else belongs to owners, who carry an HO-3 policy on a single-family home or an HO-6 on a condominium unit. <strong>The declaration and bylaws set where that line falls, and in a Maryland condominium &sect; 11-114 sets a floor the documents cannot undercut</strong>, so read both before you read the policy.
+          </p>
+
+          <h2 id="coverage">What Does HOA Insurance Cover? The Core Coverage Every Board Should Carry</h2>
+
+          <p>
+            Most associations carry four types of HOA insurance coverage as a baseline: property, general liability, directors and officers (D&amp;O), and fidelity or crime coverage. Workers&rsquo; compensation, umbrella and flood get added based on employees, exposure and location. <strong>When boards ask what does HOA insurance cover, the accurate answer is that these policies cover the association&rsquo;s obligations, not everything inside the community&rsquo;s borders.</strong>
+          </p>
+
+          <h3>Property Coverage (the Master Policy)</h3>
+
+          <p>
+            Property coverage protects the buildings and common elements the association must insure: clubhouses, pools, roofs and exteriors. The HOA master insurance policy is the largest insurance line in most budgets and the one most often out of date. Check that it is written at replacement cost rather than actual cash value, and when the valuation was last updated.
+          </p>
+
+          <h3>General Liability</h3>
+
+          <p>
+            HOA general liability insurance responds to bodily injury and property damage claims arising from the common areas, such as a slip on an icy sidewalk or an injury at the pool. Maryland&rsquo;s Condominium Act requires condominium associations to carry it, including medical payments.
+          </p>
+
+          <h3>Directors &amp; Officers (D&amp;O)</h3>
+
+          <p>
+            Directors and officers coverage protects volunteer board members personally when someone challenges a board decision: a covenant enforcement action, a contract award, a denied architectural request. CAI recommends a broad named-insured definition and adding the management company to the association&rsquo;s HOA directors and officers insurance.
+          </p>
+
+          <h3>Fidelity / Crime Coverage</h3>
+
+          <p>
+            Fidelity or crime coverage protects association funds against theft or embezzlement by a board member, employee or the management company. <a href="https://www.caionline.org/advocacy/advocacy-priorities-overview/risk-management-and-insurance-for-community-associations/" target="_blank" rel="noopener">CAI&rsquo;s benchmark</a> is a limit of at least three months of assessments plus all reserve funds, and associations with growing reserves quietly outgrow theirs. Tidewater&rsquo;s association accounting is in house, led by a 15-year Director of Association Financial Management and an MBA/CPA Controller.
+          </p>
+
+          <h3>Workers&rsquo; Comp, Umbrella and Other Coverage</h3>
+
+          <ul>
+            <li><strong>Workers&rsquo; compensation:</strong> required when the association employs anyone directly.</li>
+            <li><strong>Umbrella liability:</strong> adds limits above general liability and, when scheduled as underlying, D&amp;O.</li>
+            <li><strong>Flood:</strong> excluded from standard property policies and bought separately, which matters for Eastern Shore and waterfront communities.</li>
+          </ul>
+
+          <h2 id="condo-master">How a Condo Master Policy Differs: Walls-Out, Walls-In and All-In</h2>
+
+          <p>
+            A condo master policy is written to one of three scopes, and the scope decides how much of each unit the association insures. The declaration sets it, and the master policy has to follow.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Scope</th>
+                <th>Association insures</th>
+                <th>Owner&rsquo;s HO-6 must cover</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Bare walls (walls-out)</strong></td>
+                <td>Structure, common elements, roofs, exterior</td>
+                <td>Everything inside the finished surfaces</td>
+              </tr>
+              <tr>
+                <td><strong>Single entity (walls-in)</strong></td>
+                <td>Structure plus original fixtures and finishes</td>
+                <td>Owner upgrades and improvements</td>
+              </tr>
+              <tr>
+                <td><strong>All-in</strong></td>
+                <td>Structure plus original and upgraded fixtures</td>
+                <td>Personal property and anything excluded</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            Maryland&rsquo;s statute makes the middle row the floor for attached and multifamily condominiums: documents can require more than single entity, not less. Owners fill the rest with their own unit-owners policy. Loss assessment coverage responds to certain assessments after a master-policy loss, but it is not automatically coverage for the association&rsquo;s deductible, and owners need both. <strong>Every board should be able to name its master policy scope in one sentence, because every owner conversation after a loss depends on it.</strong> Condo boards wanting more depth can start with our <a href="/condo-management">condominium association management</a> overview.
+          </p>
+
+          <h2 id="maryland">Maryland HOA Insurance Requirements Boards Should Know</h2>
+
+          <p>
+            Maryland&rsquo;s Condominium Act, <a href="https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=grp&amp;section=11-114" target="_blank" rel="noopener">Real Property &sect; 11-114</a>, sets the HOA insurance requirements for condominium associations: property insurance against direct physical loss, plus general liability including medical payments. What the property policy covers depends on the community. In condominiums with attached or multifamily units, it covers the common elements and the units, excluding improvements and betterments installed by owners other than the developer. In a condominium composed entirely of similar detached units, the council insures only the common elements and must give those owners annual written notice that they insure their own units. For non-condominium HOAs, the governing documents and lender requirements set the obligations.
+          </p>
+
+          <div class="tw-blog-callout">
+            <div class="tw-blog-callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+            <div class="tw-blog-callout-content">
+              <h4>Maryland&rsquo;s unit-owner deductible rule</h4>
+              <ul>
+                <li><strong>Current through September 30, 2027:</strong> when damage originates in a unit, that owner is responsible for the council&rsquo;s property deductible, up to $10,000, a cap raised from $5,000 on October 1, 2020. Any deductible above the cap is a common expense.</li>
+                <li><strong>When the cause starts elsewhere:</strong> if the damage originates in the common elements, or from an event outside the units and common elements, the entire deductible is a common expense.</li>
+                <li><strong>Annual notice:</strong> the council of unit owners must notify every owner in writing each year of this responsibility and the deductible amount.</li>
+                <li><strong>Effective October 1, 2027 (already enacted as Chapter 717):</strong> the originating owner becomes responsible for the least of the repair or replacement cost, the council&rsquo;s deductible as specified in its policy, or $25,000. New &sect; 11-114.3 will also require owners in condominiums not composed entirely of similar detached units to carry a unit-owners policy covering their share of the council&rsquo;s deductible, at least $25,000 of loss assessment coverage, and dwelling coverage of at least $25,000 or the cost to replace their improvements, whichever is greater.</li>
+              </ul>
+            </div>
+          </div>
+
+          <p>
+            <strong>The annual notice is the requirement boards miss most often, and one letter a year satisfies it.</strong> The 2027 changes are already enacted, so they belong in 2027 budget planning and owner notices now. Lender standards matter too: <a href="https://selling-guide.fanniemae.com/sel/b7-3-03/master-property-insurance-requirements-project-developments" target="_blank" rel="noopener">Fannie Mae&rsquo;s master policy requirements</a> affect whether buyers can finance in the community.
+          </p>
+
+          <h2 id="gaps">Five HOA Insurance Gaps That Catch Boards Off Guard</h2>
+
+          <p>
+            Most HOA insurance failures are not caused by a missing policy. They come from predictable gaps inside policies the association already has.
+          </p>
+
+          <ol>
+            <li><strong>Outdated replacement-cost valuations.</strong> Construction costs have outrun most valuation schedules. Request a current one and adjust the limit.</li>
+            <li><strong>Deductibles nobody has explained.</strong> A higher deductible lowers the premium, often the right call, but only when owners have been told (required annually in Maryland condominiums) and the board knows who pays what.</li>
+            <li><strong>Fidelity limits below the association&rsquo;s actual funds.</strong> Reserve balances grow; fidelity limits sit still. Compare the limit to three months of assessments plus current reserves at every renewal.</li>
+            <li><strong>Contractors working without current insurance.</strong> A lapsed contractor policy becomes the association&rsquo;s claim. Tidewater&rsquo;s in-house Vendor Compliance Program sets insurance standards, vets every new contractor and monitors compliance, with no third-party fees.</li>
+            <li><strong>Excluded perils assumed to be covered.</strong> Flood, sewer backup and ordinance-or-law upgrades after a loss are standard exclusions. Read that page yearly and price the endorsements the community needs.</li>
+          </ol>
+
+          <p>
+            An uncovered loss or an unplanned deductible usually reaches the community as a special assessment, which is why coverage belongs in the same conversation as reserves and the budget.
+          </p>
+
+          <h2 id="annual-review">How an Annual HOA Insurance Review Protects Your Association</h2>
+
+          <p>
+            An annual HOA insurance review, run before renewal and before the budget is finalized, is the most reliable way to catch gaps while they are cheap to close. For most Maryland boards that falls in September and October, alongside next year&rsquo;s numbers.
+          </p>
+
+          <div class="tw-blog-callout">
+            <div class="tw-blog-callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="tw-blog-callout-content">
+              <h4>The annual review checklist</h4>
+              <ul>
+                <li>Confirm the replacement-cost valuation and its date</li>
+                <li>Compare the deductible to what owners have been told</li>
+                <li>Check fidelity limits against current assessments and reserves</li>
+                <li>Confirm D&amp;O scope and named insureds</li>
+                <li>Flag any exclusion the board assumed was covered</li>
+                <li>Collect current certificates of insurance from every contractor</li>
+              </ul>
+            </div>
+          </div>
+
+          <p>
+            Tidewater-managed boards do not run it alone. The Quality Assurance department, led by Joe Jordan, CMCA, AMS, PCAM, tracks every association&rsquo;s HOA insurance policies in the QA Insurance Database, currently 1,000+ active policies at a 99% compliance rate, and alerts association managers before each renewal. Every community also receives a no-cost annual review from third-party broker partners through the Integrated Business Partner Insurance Review Program, with findings sent to the board. <strong>It is a second set of eyes on every community, a standing quality standard rather than a fix after the fact.</strong> That comes standard with <a href="/hoa-management">full-service HOA management</a>, and the board keeps every decision.
+          </p>
+
+          <p>
+            Tidewater is not an insurance broker or agent. Confirm coverage decisions with a licensed broker and your association&rsquo;s counsel.
+          </p>
+
+          <h2 id="faq">Frequently Asked Questions</h2>
+
+          <h3>What kind of insurance should an HOA have?</h3>
+          <p>
+            At minimum: property coverage for what the association must insure, general liability, directors and officers, and fidelity or crime coverage. The specifics come from the governing documents, state law and lender standards.
+          </p>
+
+          <h3>How much does HOA insurance cost?</h3>
+          <p>
+            There is no standard price. HOA insurance premiums move with the community&rsquo;s size, building values, age, amenities, claims history and location risk. The deductible is the lever boards control most directly: raising it lowers the premium but shifts more first-dollar risk onto the association and its owners.
+          </p>
+
+          <h3>Who pays the master policy deductible in a Maryland condominium?</h3>
+          <p>
+            The owner of the unit where the damage originates pays the council&rsquo;s property insurance deductible, up to $10,000 through September 30, 2027, and the association covers the rest as a common expense. If the cause starts in the common elements or outside the units entirely, the whole deductible is a common expense. On October 1, 2027 the owner&rsquo;s share becomes the least of the repair cost, the council&rsquo;s deductible, or $25,000.
+          </p>
+
+          <h3>Is Maryland&rsquo;s condominium insurance deductible law changing?</h3>
+          <p>
+            Yes, and it is already enacted. Under Chapter 717 of 2026 (SB 747 / HB 469), effective October 1, 2027, the originating owner&rsquo;s share becomes the least of the repair or replacement cost, the association&rsquo;s property deductible, or $25,000. New &sect; 11-114.3 will also require owners in condominiums not composed entirely of similar detached units to carry a unit-owners policy covering their share of the deductible, at least $25,000 of loss assessment coverage, and dwelling coverage of at least $25,000 or the cost to replace their improvements, whichever is greater. Build it into 2027 budgets and owner notices now.
+          </p>
+
+          <h3>Does HOA insurance cover the inside of my home or unit?</h3>
+          <p>
+            Usually not fully. In a condominium it depends on whether the master policy is bare walls, single entity or all-in; in a single-family HOA the association typically insures only the common areas. HOA insurance stops where the declaration and state law say it stops, so make sure your HO-3 or HO-6 policy picks up the rest.
+          </p>
+
+          <h2 id="bottom-line">Insurance Is Manageable When It Is Reviewed on a Schedule</h2>
+
+          <p>
+            Coverage works when the board knows what the association carries, where the gaps are, and when someone last checked. A yearly HOA insurance review turns an intimidating topic into a routine agenda item, handled before renewal instead of after a loss. The board keeps every decision. Tidewater handles the tracking and coordination.
+          </p>
+
+          <div class="tw-blog-cta">
+            <div class="tw-blog-cta-eyebrow">Insurance &amp; risk management</div>
+            <h3>Want a management partner that tracks coverage before renewal, not after a claim?</h3>
+            <p>Request a proposal and see how Tidewater tracks every association&rsquo;s policies, flags gaps before renewal, and coordinates a no-cost annual review &mdash; while the board keeps every decision.</p>
+            <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-lg">Request a proposal for your association &rarr;</a>
+          </div>
+
+          <div class="tw-blog-tags">
+            <span class="tw-blog-tags-label">Tagged</span>
+            <span class="tw-blog-tag">HOA insurance</span>
+            <span class="tw-blog-tag">Master insurance policy</span>
+            <span class="tw-blog-tag">Condo insurance</span>
+            <span class="tw-blog-tag">Maryland Condominium Act</span>
+            <span class="tw-blog-tag">Board education</span>
+            <span class="tw-blog-tag">Risk management</span>
+          </div>
+        </article>
+
+        <div class="tw-blog-author-bio">
+          <div class="tw-blog-author-bio-avatar">{post.author.initials}</div>
+          <div>
+            <div class="tw-blog-author-bio-eyebrow">About the author</div>
+            <div class="tw-blog-author-bio-name">{post.author.name} <span>{post.author.creds}</span></div>
+            <div class="tw-blog-author-bio-role">{post.author.role}</div>
+            <p class="tw-blog-author-bio-blurb">{post.author.bio}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="tw-blog-related">
+    <div class="tw-blog-related-inner">
+      <div class="tw-blog-related-head">
+        <div class="tw-blog-related-eyebrow">Continue Reading</div>
+        <h2>More for your <em>board.</em></h2>
+      </div>
+      <div class="tw-blog-related-grid">
+        {related.map(p => (
+          <a href={p.href} class="tw-blog-related-card">
+            <div class={`tw-blog-related-card-img ${p.tone}`}>
+              {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || p.title} width="1400" height="763" loading="lazy" decoding="async" />}
+            </div>
+            <div class="tw-blog-related-card-body">
+              <div class={`tw-blog-related-card-cat ${p.tone}`}>{p.category}</div>
+              <h3>{p.title}</h3>
+              <p>{p.dek}</p>
+              <div class="tw-blog-related-card-meta">{p.date} &middot; {p.readTime} min read</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-blog-newsletter">
+    <div class="tw-blog-newsletter-inner">
+      <div class="tw-blog-newsletter-eyebrow">Tidewater Resources</div>
+      <h2>Get the <em>monthly board memo</em> in your inbox.</h2>
+      <p>One email a month. Practical board playbooks, Maryland HOA law updates, governance deep-dives. Written for working boards, not vendors. No fluff.</p>
+      <form class="tw-blog-newsletter-form">
+        <div class="tw-hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <input type="email" name="email" placeholder="board@yourcommunity.org" aria-label="Email address" required/>
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="tw-blog-newsletter-thanks" hidden style="font-family:var(--tw-font-heading);font-weight:700;font-size:15px;color:var(--tw-gold)">Thanks &mdash; first issue lands the first Tuesday of next month.</div>
+      <div class="tw-blog-newsletter-fine">Unsubscribe any time &middot; We never share your email &middot; 4,200+ board members subscribed</div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  import '../../scripts/blog-interactivity.js';
+</script>

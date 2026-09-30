@@ -19,6 +19,7 @@ export interface ReviewItem {
 }
 
 export const REVIEW_ITEMS: ReviewItem[] = [
+  { label: 'HOA & Condo Insurance (blog post)', path: '/blog/hoa-insurance', review: true },
   { label: 'The Board Brief — October 2026 issue', path: '/resources/newsletter/october-2026', review: true },
   { label: 'The Board Brief — newsletter archive', path: '/resources/newsletter', review: true },
 ];
