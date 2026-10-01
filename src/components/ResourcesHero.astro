@@ -1,9 +1,9 @@
 ---
 const auds = [
-  { title: 'HOA Boards',            sub: 'Reserves, vendor compliance, meeting cadence, fiduciary essentials.', icon: 'board' },
-  { title: 'Rental Owners',         sub: 'Maryland county rules, out-of-state owners, leasing playbooks.',       icon: 'landlord' },
-  { title: 'Homeowners & Residents',sub: 'Pay assessments, submit requests, find your community portal.',        icon: 'homeowner' },
-  { title: 'Investors',             sub: 'Submarket trends and exit-strategy thinking for rental owners.',       icon: 'investor' },
+  { title: 'HOA Boards',            sub: 'Reserves, vendor compliance, meeting cadence, fiduciary essentials.', icon: 'board',     href: '/blog' },
+  { title: 'Rental Owners',         sub: 'Maryland county rules, out-of-state owners, leasing playbooks.',       icon: 'landlord',  href: '/blog/category/rental' },
+  { title: 'Homeowners & Residents',sub: 'Pay assessments, submit requests, find your community portal.',        icon: 'homeowner', href: 'https://tidewater.cincwebaxis.com', external: true },
+  { title: 'Investors',             sub: 'Investment property buying, selling, and management with Tidewater Realty.', icon: 'investor', href: '/real-estate' },
 ];
 ---
 <section class="tw-rsh" id="resources">
@@ -18,7 +18,7 @@ const auds = [
       <div style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;color:var(--tw-fg-subtle);margin-bottom:14px">I&rsquo;m here for&hellip;</div>
       <div class="tw-rsh-picker">
         {auds.map(a => (
-          <a href="#library" class="tw-rsh-aud">
+          <a href={a.href} class="tw-rsh-aud" {...(a.external ? { target: '_blank', rel: 'noopener' } : {})}>
             <div class="tw-rsh-aud-icon">
               {a.icon === 'board' && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>}
               {a.icon === 'landlord' && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg>}
