@@ -1,4 +1,16 @@
 ---
+// HOA Management — Anne Arundel County, MD. Hand-built to the Howard/Baltimore/
+// Montgomery standard (tw-geo). Board audience. HOA page owns "anne arundel
+// county hoa management" / "hoa management anne arundel county". Self-canonical.
+// Wrong-audience cross-link to the rental county page. See
+// docs/county-page-playbook.md.
+//
+// MAKEOVER NOTE: the prior version published unverifiable per-county figures
+// (157+ communities, "since 1995", "< 1 hr" SLA, 38,400 HOA homes, $310 median,
+// $28-42/unit fees, a named sample-communities table) and a manager not in the
+// Master Brief ("Sarah Patel"). All removed. Anne Arundel is Kate Cornell's
+// territory (Baltimore & DC Metro / Capital region). Only portfolio-level,
+// brief-confirmed facts + publicly verifiable local context remain.
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Header from '../../../components/Header.astro';
 import Topbar from '../../../components/Topbar.astro';
@@ -10,38 +22,53 @@ import { serviceSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema'
 import { SITE } from '../../../config/site';
 
 const countyFaqs = [
-  { q: 'How is HOA management different in Anne Arundel County vs. other Maryland counties?', a: "Three things stand out: (1) Waterfront density — Annapolis, Edgewater, and Mayo have a high concentration of waterfront condo associations with master-policy and dock-management complications most Maryland counties don\'t face. (2) Master-planned scale — Crofton and Odenton have layered HOAs with sub-associations. (3) State capital regulatory access — Annapolis is the seat of state government. Tidewater\'s Anne Arundel team is sized for all three." },
-  { q: 'Do you serve all of Anne Arundel County?', a: 'Yes — from Linthicum and Glen Burnie in the north, to Annapolis and Severna Park in the center, down to Edgewater, Shady Side, and Deale in the south. Our regional manager covers the entire county on a Tuesday/Thursday on-site cadence.' },
-  { q: 'How quickly can you start managing our Anne Arundel community?', a: '4-5 weeks from signed proposal for self-managed transitions; 7 weeks when switching from another company. We run the transition on your behalf.' },
-  { q: "What\'s your fee structure for Anne Arundel HOAs?", a: 'Full-service runs $28-$42 per unit per month depending on community size, vendor count, meeting cadence, and complexity. Financial-only tier runs roughly 35-55% of that. We quote line-item with no hidden setup or transition fees.' },
-  { q: 'Can we talk to other Anne Arundel boards before signing?', a: "Always. We\'ll connect you with 3-5 board presidents from comparable Anne Arundel communities — same size, similar stage, similar issues. You call them, no script." },
-  { q: "What\'s your Anne Arundel office address?", a: 'Our headquarters is in Owings Mills (Baltimore County). Our Anne Arundel regional manager works on-site twice a week and from a satellite address in Severna Park. Main line: (443) 548-0191.' },
+  { q: 'How is HOA management different in Anne Arundel County?', a: 'Three things stand out: a high concentration of <strong>waterfront condo associations</strong> around Annapolis, Edgewater, and Mayo, where master-policy insurance and dock, pier, and bulkhead upkeep add complexity most counties never see; <strong>Annapolis historic-district</strong> associations that route exterior changes through city preservation review; and <strong>master-planned communities</strong> in Crofton and Odenton layered with sub-associations.' },
+  { q: 'Do you serve all of Anne Arundel County?', a: 'Yes &mdash; from Linthicum and Glen Burnie in the north, through Annapolis and Severna Park in the center, down to Edgewater, Shady Side, and Deale in the south. The county is covered by our Baltimore &amp; DC Metro team.' },
+  { q: 'How many communities will our manager be handling?', a: 'Manager portfolios are capped at <strong>8&ndash;12 communities</strong> &mdash; a hard ceiling, so an Anne Arundel board gets a manager who knows its governing documents rather than one lost in an overloaded book.' },
+  { q: 'What does HOA management cost in Anne Arundel County?', a: 'We quote per association rather than publishing a rate card, because cost tracks community size, vendor count, meeting cadence and complexity. <a href="/request-a-proposal">Request a proposal</a> for a line-item number, or start with the <a href="/hoa-management/hoa-financial-management">financial-only tier</a>.' },
+  { q: 'How quickly can you take over our Anne Arundel community?', a: 'The notice period in your current management agreement sets the pace. From there we work to a <strong>30/60/90-day</strong> plan covering records, bank accounts, vendor assignment and the first reporting cycle &mdash; see the <a href="/solutions/switching-hoa-management-company">full transition timeline</a>.' },
+  { q: 'Can we talk to other Anne Arundel boards before signing?', a: 'Always. We&rsquo;ll connect you with board presidents from comparable Anne Arundel communities &mdash; same size, similar stage, similar issues. You call them, no script.' },
 ];
+
+const canonical = SITE.url + '/hoa-management/maryland/anne-arundel-county';
 
 const schemas = [
   serviceSchema({
     name: 'HOA Management Anne Arundel County Maryland',
     description: 'AAMC-accredited HOA and condo association management across Anne Arundel County, Maryland — Annapolis, Severna Park, Crofton, Pasadena, Glen Burnie, and Odenton.',
-    url: SITE.url + '/hoa-management/maryland/anne-arundel-county/',
+    url: canonical,
     areaServed: 'Anne Arundel County, Maryland',
   }),
   breadcrumbSchema([
     { name: 'Home', url: SITE.url + '/' },
     { name: 'HOA Management', url: SITE.url + '/hoa-management' },
     { name: 'Maryland', url: SITE.url + '/hoa-management/maryland' },
-    { name: 'Anne Arundel County', url: SITE.url + '/hoa-management/maryland/anne-arundel-county/' },
+    { name: 'Anne Arundel County', url: canonical },
   ]),
   faqSchema(countyFaqs),
+];
+
+const cities = [
+  { name: 'Annapolis',     meta: 'Waterfront condo · historic district', tag: 'County seat' },
+  { name: 'Severna Park',  meta: 'Single-family · the Ritchie Highway corridor' },
+  { name: 'Crofton',       meta: 'Master-planned · sub-associations' },
+  { name: 'Pasadena',      meta: 'Mixed townhome & single-family' },
+  { name: 'Glen Burnie',   meta: 'Townhome-dense · BWI corridor' },
+  { name: 'Odenton',       meta: 'New-build master-planned · Fort Meade', tag: 'Growing' },
+  { name: 'Arnold',        meta: 'Single-family' },
+  { name: 'Edgewater',     meta: 'Waterfront' },
+  { name: 'Linthicum',     meta: 'Transit hub' },
+  { name: 'Mayo',          meta: 'Waterfront' },
+  { name: 'Davidsonville', meta: 'Rural HOA' },
+  { name: 'Shady Side',    meta: 'Waterfront · seasonal' },
 ];
 ---
 <BaseLayout
   title="HOA Management Anne Arundel County Maryland — Tidewater"
-  description="HOA and condo management in Anne Arundel County — Annapolis, Severna Park, Crofton, Pasadena, Glen Burnie, Odenton. AAMC-accredited regional manager."
+  description="HOA and condo management in Anne Arundel County — Annapolis, Severna Park, Crofton, Pasadena, Glen Burnie, and Odenton. AAMC-accredited, family-owned since 1989."
   pageSchema={schemas}
+  pageStylesheet="styles-geo.css"
 >
-  <style is:global>
-    /* ensure React island styles reach DOM */
-  </style>
   <Topbar variant="default" />
   <Header activeNav="mgmt" logoSrc="/assets/Tidewater-Management-Logo.svg" logoAlt="Tidewater Management" />
   <Breadcrumb variant="management" crumbs={[
@@ -60,31 +87,31 @@ const schemas = [
           HOA management in <em>Anne Arundel County.</em>
         </h1>
         <p class="tw-geo-hero-lede">
-          From the Annapolis waterfront to the Severna Park corridor to Glen Burnie townhomes &mdash; we&rsquo;ve been managing Anne Arundel HOAs and condo associations for 30 years. Local manager, named &amp; PCAM-credentialed, who can be on-site within an hour.
+          From the Annapolis waterfront to the Severna Park corridor to the Glen Burnie townhome belt &mdash; Anne Arundel runs from historic-district condos to master-planned HOAs, and the association stock changes with it. Family-owned since 1989, AAMC-accredited, with capped manager portfolios so yours is known rather than numbered.
         </p>
         <div class="tw-geo-hero-actions">
           <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-lg">Request a proposal &rarr;</a>
-          <a href="#communities" class="tw-btn tw-btn-ghost">See communities we manage &rarr;</a>
+          <a href="#communities" class="tw-btn tw-btn-ghost">See where we manage &rarr;</a>
         </div>
         <div class="tw-geo-hero-stats">
           <div>
-            <div class="tw-geo-hero-stat-num">157+</div>
-            <div class="tw-geo-hero-stat-label">Anne Arundel communities currently under management</div>
+            <div class="tw-geo-hero-stat-num">450+</div>
+            <div class="tw-geo-hero-stat-label">Communities managed across six states</div>
           </div>
           <div>
-            <div class="tw-geo-hero-stat-num gold">30 yrs</div>
-            <div class="tw-geo-hero-stat-label">Active in the county since 1995</div>
+            <div class="tw-geo-hero-stat-num gold">AAMC&reg;</div>
+            <div class="tw-geo-hero-stat-label">CAI&rsquo;s highest company accreditation &middot; PCAM on staff</div>
           </div>
           <div>
-            <div class="tw-geo-hero-stat-num">&lt; 1 hr</div>
-            <div class="tw-geo-hero-stat-label">On-site response time, county-wide</div>
+            <div class="tw-geo-hero-stat-num">1989</div>
+            <div class="tw-geo-hero-stat-label">Family-owned and operated &mdash; 35+ years in the Mid-Atlantic</div>
           </div>
         </div>
       </div>
       <aside class="tw-geo-hero-side">
         <div class="tw-geo-hero-side-eyebrow">In Anne Arundel</div>
         <h3>Where we manage</h3>
-        <!-- Anne Arundel county SVG map -->
+        <!-- Anne Arundel county SVG map (schematic) -->
         <svg viewBox="0 0 360 290" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Map of Anne Arundel County">
           <!-- Chesapeake / waterfront on the right edge -->
           <path d="M295 85 Q320 130 320 180 Q315 220 305 240 L360 240 L360 50 L320 50 Z" fill="rgba(58,146,166,0.15)"/>
@@ -101,7 +128,7 @@ const schemas = [
           <!-- Severna Park -->
           <circle cx="240" cy="130" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Severna Park</title></circle>
           <text x="250" y="134" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10" letter-spacing="0.02em">Severna Park</text>
-          <!-- Annapolis (HQ dot) -->
+          <!-- Annapolis (county seat) -->
           <circle class="tw-geo-map-dot-pulse" cx="270" cy="200" r="8"/>
           <circle cx="270" cy="200" r="6" fill="var(--tw-gold)" stroke="var(--tw-cream)" stroke-width="2"><title>Annapolis</title></circle>
           <text x="280" y="204" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="800" font-size="11" letter-spacing="0.02em">Annapolis</text>
@@ -126,97 +153,56 @@ const schemas = [
     </div>
   </section>
 
-  <!-- Neighborhoods / cities served -->
+  <!-- Wrong-audience catch: rental -->
+  <div class="tw-geo-section linen" style="padding:14px 0">
+    <div class="tw-container-wide" style="text-align:center">
+      <p style="margin:0;font-size:14px;color:var(--tw-fg-muted)">Managing a rental property in Anne Arundel County? See <a href="/rental-management/maryland/anne-arundel-county" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">Anne Arundel County rental management</a> instead &mdash; this page is for HOA &amp; condo association boards.</p>
+    </div>
+  </div>
+
+  <!-- Coverage areas / cities served -->
   <section class="tw-geo-section cream">
     <div class="tw-container-wide">
       <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
         <div class="tw-eyebrow">Where We Manage</div>
-        <h2 class="tw-section-title">Anne Arundel cities &amp; towns, <em>by community count.</em></h2>
-        <p class="tw-section-lede">Most counties have one or two HOA-dense pockets. Anne Arundel has twelve. Here&rsquo;s where we&rsquo;re active.</p>
+        <h2 class="tw-section-title">Anne Arundel coverage, <em>town by town.</em></h2>
+        <p class="tw-section-lede">We cover the whole county &mdash; the waterfront, the Ritchie Highway corridor, the BWI belt, and the master-planned west. Each town carries its own association mix.</p>
       </div>
       <div class="tw-geo-neighbors">
-        <a href="/hoa-management/maryland" class="tw-geo-neighbor">
-          <div class="tw-geo-neighbor-name">Annapolis</div>
-          <div class="tw-geo-neighbor-meta">38 communities &middot; waterfront focus</div>
-          <span class="tw-geo-neighbor-tag">County seat</span>
-        </a>
-        <a href="/hoa-management/maryland" class="tw-geo-neighbor">
-          <div class="tw-geo-neighbor-name">Severna Park</div>
-          <div class="tw-geo-neighbor-meta">24 communities &middot; single-family</div>
-        </a>
-        <a href="/hoa-management/maryland" class="tw-geo-neighbor">
-          <div class="tw-geo-neighbor-name">Crofton</div>
-          <div class="tw-geo-neighbor-meta">19 communities &middot; planned</div>
-        </a>
-        <a href="/hoa-management/maryland" class="tw-geo-neighbor">
-          <div class="tw-geo-neighbor-name">Pasadena</div>
-          <div class="tw-geo-neighbor-meta">22 communities &middot; mixed</div>
-        </a>
-        <a href="/hoa-management/maryland" class="tw-geo-neighbor">
-          <div class="tw-geo-neighbor-name">Glen Burnie</div>
-          <div class="tw-geo-neighbor-meta">18 communities &middot; townhome dense</div>
-        </a>
-        <a href="/hoa-management/maryland" class="tw-geo-neighbor">
-          <div class="tw-geo-neighbor-name">Odenton</div>
-          <div class="tw-geo-neighbor-meta">14 communities &middot; new construction</div>
-          <span class="tw-geo-neighbor-tag">Growing</span>
-        </a>
-        <a href="/hoa-management/maryland" class="tw-geo-neighbor">
-          <div class="tw-geo-neighbor-name">Arnold</div>
-          <div class="tw-geo-neighbor-meta">8 communities &middot; single-family</div>
-        </a>
-        <a href="/hoa-management/maryland" class="tw-geo-neighbor">
-          <div class="tw-geo-neighbor-name">Edgewater</div>
-          <div class="tw-geo-neighbor-meta">6 communities &middot; waterfront</div>
-        </a>
-        <a href="/hoa-management/maryland" class="tw-geo-neighbor">
-          <div class="tw-geo-neighbor-name">Linthicum</div>
-          <div class="tw-geo-neighbor-meta">4 communities &middot; transit hub</div>
-        </a>
-        <a href="/hoa-management/maryland" class="tw-geo-neighbor">
-          <div class="tw-geo-neighbor-name">Davidsonville</div>
-          <div class="tw-geo-neighbor-meta">3 communities &middot; rural HOA</div>
-        </a>
-        <a href="/hoa-management/maryland" class="tw-geo-neighbor">
-          <div class="tw-geo-neighbor-name">Mayo</div>
-          <div class="tw-geo-neighbor-meta">3 communities &middot; waterfront</div>
-        </a>
-        <a href="/hoa-management/maryland" class="tw-geo-neighbor">
-          <div class="tw-geo-neighbor-name">Shady Side</div>
-          <div class="tw-geo-neighbor-meta">2 communities &middot; seasonal</div>
-        </a>
+        {cities.map((ct) => (
+          <a href="/hoa-management/maryland" class="tw-geo-neighbor">
+            <div class="tw-geo-neighbor-name">{ct.name}</div>
+            <div class="tw-geo-neighbor-meta">{ct.meta}</div>
+            {ct.tag && <span class="tw-geo-neighbor-tag">{ct.tag}</span>}
+          </a>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- Local facts strip -->
-  <section class="tw-geo-section linen" style="padding:64px 0">
+  <!-- What's different here -->
+  <section class="tw-geo-section linen">
     <div class="tw-container-wide">
       <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
-        <div class="tw-eyebrow">By the Numbers</div>
-        <h2 class="tw-section-title" style="margin:10px 0 14px">The Anne Arundel HOA landscape, <em>in data.</em></h2>
-        <p class="tw-section-lede">Maryland&rsquo;s highest-density HOA county &mdash; and the most active CAI Chesapeake Chapter market.</p>
+        <div class="tw-eyebrow">What&rsquo;s Different Here</div>
+        <h2 class="tw-section-title">Where the Chesapeake <em>changes the job.</em></h2>
+        <p class="tw-section-lede">Anne Arundel&rsquo;s waterfront, its capital city, and its master-planned west each add obligations a board should plan for.</p>
       </div>
-      <div class="tw-geo-facts">
-        <div class="tw-geo-fact">
-          <div class="tw-geo-fact-label">HOA-governed homes</div>
-          <div class="tw-geo-fact-val">38,400+</div>
-          <div class="tw-geo-fact-sub">Across 540+ associations (county-wide)</div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card">
+          <h3>Waterfront associations</h3>
+          <p>Annapolis, Edgewater, and Mayo carry a high concentration of waterfront condos, where <strong>master-policy insurance</strong> and dock, pier, and bulkhead upkeep add a layer most inland associations never deal with.</p>
+          <div class="tw-geo-law-foot">Annapolis · Edgewater · Mayo</div>
         </div>
-        <div class="tw-geo-fact">
-          <div class="tw-geo-fact-label">Median assessment</div>
-          <div class="tw-geo-fact-val">$310 <span class="gold">/mo</span></div>
-          <div class="tw-geo-fact-sub">Townhome HOA &middot; 2026 estimate</div>
+        <div class="tw-geo-law-card gold">
+          <h3>Annapolis historic district</h3>
+          <p>Associations inside the Annapolis historic district route exterior changes through <strong>city preservation review</strong> before an ARC approval means anything &mdash; two calendars to track, not one.</p>
+          <div class="tw-geo-law-foot">State capital</div>
         </div>
-        <div class="tw-geo-fact">
-          <div class="tw-geo-fact-label">Tidewater communities</div>
-          <div class="tw-geo-fact-val">157+</div>
-          <div class="tw-geo-fact-sub">~29% of county total under our management</div>
-        </div>
-        <div class="tw-geo-fact">
-          <div class="tw-geo-fact-label">Avg. reserve gap</div>
-          <div class="tw-geo-fact-val">22 pts</div>
-          <div class="tw-geo-fact-sub">Under-funded vs. industry 70% target</div>
+        <div class="tw-geo-law-card sage">
+          <h3>Master-planned sub-associations</h3>
+          <p>Crofton and Odenton layer sub-associations under a master association, so budgets, delinquency, and architectural jurisdiction have to be read against both sets of covenants.</p>
+          <div class="tw-geo-law-foot">Crofton · Odenton</div>
         </div>
       </div>
     </div>
@@ -226,91 +212,51 @@ const schemas = [
   <section class="tw-geo-section cream" style="padding:64px 0">
     <div class="tw-container-wide">
       <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
-        <div class="tw-eyebrow">Your Local Manager</div>
-        <h2 class="tw-section-title" style="margin:10px 0 14px">An Anne Arundel manager, <em>not a rotating pool.</em></h2>
-        <p class="tw-section-lede">Same person at every board meeting. Same person at the vendor walk-through. Same person residents email.</p>
+        <div class="tw-eyebrow">Regional Leadership</div>
+        <h2 class="tw-section-title" style="margin:10px 0 14px">A dedicated CAM, <em>backed by regional leadership.</em></h2>
+        <p class="tw-section-lede">Anne Arundel is covered by our Baltimore &amp; DC Metro team, so your board&rsquo;s dedicated CAM works alongside the regional director and the full support team.</p>
       </div>
       <div class="tw-geo-manager">
-        <div class="tw-geo-manager-avatar">SP</div>
+        <div class="tw-geo-manager-avatar">KC</div>
         <div>
-          <div class="tw-geo-manager-eyebrow">Regional Manager &middot; Anne Arundel</div>
-          <div class="tw-geo-manager-name">
-            Sarah Patel <span>CMCA&reg;, PCAM&reg;</span>
-          </div>
+          <div class="tw-geo-manager-eyebrow">Baltimore &amp; DC Metro Regional Director</div>
+          <div class="tw-geo-manager-name">Kate Cornell</div>
           <p class="tw-geo-manager-role">
-            <strong>11 years</strong> managing Anne Arundel HOAs &amp; condos. Lives in Severna Park. Drives the county Tuesday &amp; Thursday each week. Specialty: waterfront condo associations and master-planned community sub-association coordination.
+            Kate oversees the direction and professional development of the Community Association Management team across the Owings Mills and Silver Spring offices, and co-leads the developer management program. Manager portfolios here are capped at 8&ndash;12 communities, so your board works with a dedicated CAM as its day-to-day point of contact, not a rotating pool. <strong>15+ years</strong> in the industry.
           </p>
         </div>
         <div style="display:flex;flex-direction:column;gap:8px;min-width:200px">
-          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-block">Email Sarah &rarr;</a>
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-block">Request a proposal &rarr;</a>
           <a href="tel:+14435480191" class="tw-btn tw-btn-outline tw-btn-block">(443) 548-0191</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Communities table -->
+  <!-- What we manage -->
   <section id="communities" class="tw-geo-section mist">
     <div class="tw-container-wide">
       <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
-        <div class="tw-eyebrow">Sample Communities</div>
-        <h2 class="tw-section-title">A sample of the <em>157+</em> Anne Arundel communities we manage.</h2>
-        <p class="tw-section-lede">Representative sample by type, size, and location. Board references available on request &mdash; we&rsquo;d rather you talk to them than read about us.</p>
+        <div class="tw-eyebrow">What We Manage</div>
+        <h2 class="tw-section-title">The kinds of communities we run <em>across Anne Arundel.</em></h2>
+        <p class="tw-section-lede">Board references available on request &mdash; we&rsquo;d rather you talk to a comparable Anne Arundel board than read about us.</p>
       </div>
-      <div class="tw-geo-communities">
-        <div class="tw-geo-communities-head">
-          <div>Type</div>
-          <div>City</div>
-          <div>Units</div>
-          <div>Client since</div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card">
+          <h3>Waterfront condos</h3>
+          <p>Annapolis, Edgewater, and Mayo associations with master-policy insurance, flood exposure, and marine-structure upkeep to manage.</p>
         </div>
-        <div class="tw-geo-communities-row">
-          <div class="name">Single-family planned community</div>
-          <div class="type">Crofton</div>
-          <div>184</div>
-          <div>2014</div>
+        <div class="tw-geo-law-card">
+          <h3>Master-planned HOAs</h3>
+          <p>Crofton and Odenton communities with layered sub-associations and the dual-budget coordination that comes with them.</p>
         </div>
-        <div class="tw-geo-communities-row">
-          <div class="name">Waterfront mid-rise condo</div>
-          <div class="type">Annapolis</div>
-          <div>124</div>
-          <div>2007</div>
+        <div class="tw-geo-law-card">
+          <h3>Established single-family</h3>
+          <p>Severna Park and Arnold communities where reserves and capital planning carry the budget.</p>
         </div>
-        <div class="tw-geo-communities-row">
-          <div class="name">Townhome HOA</div>
-          <div class="type">Severna Park</div>
-          <div>96</div>
-          <div>2011</div>
-        </div>
-        <div class="tw-geo-communities-row">
-          <div class="name">Mixed townhome &amp; single-family HOA</div>
-          <div class="type">Pasadena</div>
-          <div>212</div>
-          <div>2018</div>
-        </div>
-        <div class="tw-geo-communities-row">
-          <div class="name">High-rise condo &middot; mixed-use</div>
-          <div class="type">Annapolis</div>
-          <div>188</div>
-          <div>2009</div>
-        </div>
-        <div class="tw-geo-communities-row">
-          <div class="name">Townhome HOA</div>
-          <div class="type">Glen Burnie</div>
-          <div>156</div>
-          <div>2016</div>
-        </div>
-        <div class="tw-geo-communities-row">
-          <div class="name">Single-family &middot; master-planned community</div>
-          <div class="type">Odenton</div>
-          <div>342</div>
-          <div>2020</div>
-        </div>
-        <div class="tw-geo-communities-row">
-          <div class="name">Single-family HOA</div>
-          <div class="type">Arnold</div>
-          <div>72</div>
-          <div>2003</div>
+        <div class="tw-geo-law-card">
+          <h3>Townhome &amp; BWI-corridor associations</h3>
+          <p>Glen Burnie, Linthicum, and Pasadena townhome and mixed communities near the BWI and transit corridors.</p>
         </div>
       </div>
       <div style="display:flex;justify-content:center;margin-top:32px;gap:14px;flex-wrap:wrap">
@@ -325,23 +271,23 @@ const schemas = [
     <div class="tw-container-wide">
       <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
         <div class="tw-eyebrow">Services in Anne Arundel</div>
-        <h2 class="tw-section-title">Three service tiers, <em>same regional team.</em></h2>
-        <p class="tw-section-lede">Pick the level of service your board needs &mdash; everything else stays the same.</p>
+        <h2 class="tw-section-title">Three service tiers, <em>same local team.</em></h2>
+        <p class="tw-section-lede">Pick the level your board needs &mdash; the manager, the response time, and the accreditation stay the same.</p>
       </div>
       <div class="tw-geo-law-grid" style="margin-top:48px">
         <a href="/hoa-management" class="tw-geo-law-card" style="text-decoration:none">
-          <h3>Full HOA Management</h3>
-          <p>AAMC-accredited service for single-family, townhome, and master-planned HOAs. Includes financials, vendor management, covenant enforcement, board meetings, and 24/7 emergency response.</p>
+          <h3>Full Service</h3>
+          <p>Financial and full property management for single-family, townhome, and condo associations: board-meeting attendance, neighborhood inspections, vendor management and on-site oversight, financial controls, and day-to-day operations &mdash; including HR for association employees.</p>
           <div class="tw-geo-law-foot">Full-service details &rarr;</div>
         </a>
         <a href="/hoa-management#tiers" class="tw-geo-law-card gold" style="text-decoration:none">
           <h3>Flex Service</h3>
-          <p>Lower base fee with &agrave;-la-carte involvement for established Anne Arundel boards. Includes full financial controls, owner portal, and 24/7 emergency coverage &mdash; without the standing on-site presence.</p>
+          <p>Governance, legal affairs, risk management, maintenance coordination, contracting, and full financial management &mdash; with meetings, inspections, and on-site presence available &agrave; la carte at a set hourly rate. Built for boards that want budget precision without constant on-site involvement.</p>
           <div class="tw-geo-law-foot">Flex tier details &rarr;</div>
         </a>
         <a href="/hoa-management/hoa-financial-management" class="tw-geo-law-card sage" style="text-decoration:none">
-          <h3>Financial Management Only</h3>
-          <p>For self-managed boards in Anne Arundel that want CPA-led books without giving up operational control. Monthly statements, A/R, audit support, reserve study refresh.</p>
+          <h3>Financial Only</h3>
+          <p>Strictly financial for self-managed Anne Arundel boards: budgets, reserves, assessment collection, accounts payable and receivable, GAAP-compliant bookkeeping, audit coordination, and resale-certificate preparation.</p>
           <div class="tw-geo-law-foot">Financial-only tier &rarr;</div>
         </a>
       </div>
