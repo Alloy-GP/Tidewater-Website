@@ -166,7 +166,6 @@ function RentalDelawareCities() {
         <div className="tw-geo-counties">
           {cities.map((c, i) => (
             <a key={i} href={c.href} className={`tw-geo-county-card ${c.featured ? 'featured' : ''}`}>
-              {c.featured && <span className="tw-geo-county-flag">Live page</span>}
               <div className="tw-geo-county-head">
                 <h3 className="tw-geo-county-name">{c.name}</h3>
               </div>
