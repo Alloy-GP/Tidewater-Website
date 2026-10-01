@@ -1,0 +1,160 @@
+---
+// Office / location page — Lewes, DE. NEUTRAL (both verticals).
+// Per docs office-location spec: NAP-matched GBP anchor that forks to HOA vs
+// rental. One authoritative location entity for this address.
+//
+// NAP (Master Brief): 20375 John J Williams Hwy, Lewes, DE. ZIP inferred as
+// 19958 — CONFIRM against the GBP (NAP must be exact). Phone is the shared
+// company line per client.
+// Team: Don Gentry, CMCA/AMS/PCAM — Delmarva Regional Director.
+//
+// GAPS TO FILL (do not invent): ZIP confirmation, office hours, geo lat/lng,
+// GBP URL (sameAs + "view on Google"), office photo. HOA fork points to the
+// Delaware HOA hub as interim — repoint to a Sussex County / Delaware HOA page
+// once built (spec §4).
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import CTA from '../../../components/CTA.astro';
+import { breadcrumbSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+
+const canonical = SITE.url + '/locations/delaware/lewes';
+const office = {
+  name: 'Tidewater Property Management — Lewes',
+  street: '20375 John J Williams Hwy',
+  city: 'Lewes', region: 'DE', postal: '19958',
+  phone: '(443) 548-0191', phoneHref: 'tel:+14435480191',
+};
+const mapsQuery = encodeURIComponent('Tidewater Property Management, 20375 John J Williams Hwy, Lewes, DE 19958');
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': canonical + '#office',
+    name: office.name,
+    url: canonical,
+    telephone: '+1-443-548-0191',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: office.street,
+      addressLocality: office.city,
+      addressRegion: office.region,
+      postalCode: office.postal,
+      addressCountry: 'US',
+    },
+    areaServed: ['Lewes, DE', 'Rehoboth Beach, DE', 'Milton, DE', 'Sussex County, DE'],
+    // TODO(client): confirm ZIP; add geo {lat,lng}, openingHoursSpecification, sameAs [GBP URL]
+  },
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'Service Areas', url: SITE.url + '/service-areas' },
+    { name: 'Lewes Office', url: canonical },
+  ]),
+];
+---
+<BaseLayout
+  title="Tidewater Property Management — Lewes, DE Office"
+  description="Tidewater's Lewes office on John J Williams Hwy — HOA, condo, and rental property management for Lewes, Rehoboth Beach, Milton, and Sussex County. Call (443) 548-0191."
+  ogType="website"
+  pageSchema={schemas}
+  pageStylesheet="styles-geo.css"
+>
+  <Topbar variant="default" />
+  <Header />
+  <Breadcrumb crumbs={[
+    { label: 'Service Areas', href: '/service-areas' },
+    { label: 'Lewes Office' },
+  ]} />
+
+  <section class="tw-geo-hero">
+    <div class="tw-geo-hero-bg"></div>
+    <div class="tw-geo-hero-paper"></div>
+    <div class="tw-geo-hero-grid">
+      <div class="tw-geo-hero-copy">
+        <h1 class="tw-geo-hero-title">
+          Lewes property management: <em>HOA, condo &amp; rental.</em>
+        </h1>
+        <p class="tw-geo-hero-lede">
+          Our Lewes office on John J Williams Highway serves Lewes, Rehoboth Beach, Milton, and the wider Sussex County coast &mdash; community associations and rental owners alike. Tell us which you are and we&rsquo;ll point you to the right team.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section cream" style="padding:40px 0">
+    <div class="tw-container-wide">
+      <div class="tw-geo-law-grid">
+        <a href="/hoa-management/delaware" class="tw-geo-law-card" style="text-decoration:none">
+          <h3>Manage a community association? &rarr;</h3>
+          <p>HOA and condo association management for Sussex County boards &mdash; AAMC-accredited, financials, vendor and reserve oversight, backed by our Delmarva regional team.</p>
+          <div class="tw-geo-law-foot">Delaware HOA &amp; condo management</div>
+        </a>
+        <a href="/rental-management/delaware/lewes" class="tw-geo-law-card gold" style="text-decoration:none">
+          <h3>Own a rental property? &rarr;</h3>
+          <p>Full-service rental management for coastal Sussex County condos and single-family homes &mdash; one flat fee, leasing through maintenance.</p>
+          <div class="tw-geo-law-foot">Lewes rental management</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section linen" style="padding:56px 0">
+    <div class="tw-container-wide">
+      <div class="tw-geo-hero-grid" style="gap:36px;align-items:start">
+        <div class="tw-geo-hero-copy" style="max-width:none">
+          <div class="tw-eyebrow">Our Lewes Office</div>
+          <h2 class="tw-section-title" style="margin:10px 0 18px">Visit or call the <em>Lewes team.</em></h2>
+          <address style="font-style:normal;font-family:var(--tw-font-body);font-size:16px;line-height:1.7;color:var(--tw-fg)">
+            <strong>{office.name}</strong><br/>
+            {office.street}<br/>
+            {office.city}, {office.region} {office.postal}<br/>
+            <a href={office.phoneHref} style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">{office.phone}</a><br/>
+            <span style="color:var(--tw-fg-muted)">Office hours: call ahead &mdash; {office.phone}</span>
+          </address>
+          <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
+            <a href={office.phoneHref} class="tw-btn tw-btn-primary">Call the office &rarr;</a>
+            <a href="/request-a-proposal" class="tw-btn tw-btn-outline">Request a proposal &rarr;</a>
+          </div>
+        </div>
+        <div>
+          <iframe
+            title="Map to Tidewater Property Management, Lewes"
+            src={`https://www.google.com/maps?q=${mapsQuery}&output=embed`}
+            width="100%" height="320" style="border:0;border-radius:12px"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section cream" style="padding:56px 0">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">Your Delmarva Team</div>
+        <h2 class="tw-section-title" style="margin:10px 0 14px">Local to the coast, <em>not run from afar.</em></h2>
+        <p class="tw-section-lede">The Lewes office anchors our coastal-Delaware coverage and connects to the wider Eastern Shore and Ocean City team.</p>
+      </div>
+      <div class="tw-geo-manager">
+        <div class="tw-geo-manager-avatar">DG</div>
+        <div>
+          <div class="tw-geo-manager-eyebrow">Delmarva Regional Director</div>
+          <div class="tw-geo-manager-name">Don Gentry <span>CMCA&reg;, AMS&reg;, PCAM&reg;</span></div>
+          <p class="tw-geo-manager-role">
+            Don oversees the Eastern Shore, Ocean City, and Delaware portfolio &mdash; 20+ years across community association management and real estate. He backs the local Lewes team that handles day-to-day board and owner contact.
+          </p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:200px">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-block">Request a proposal &rarr;</a>
+          <a href={office.phoneHref} class="tw-btn tw-btn-outline tw-btn-block">{office.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+  <Footer />
+</BaseLayout>
