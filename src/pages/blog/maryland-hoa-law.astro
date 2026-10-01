@@ -1,0 +1,418 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Topbar from '../../components/Topbar.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Footer from '../../components/Footer.astro';
+import Disclaimer from '../../components/Disclaimer.astro';
+import { articleSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+import { SITE } from '../../config/site';
+
+const pageUrl = `${SITE.url}/blog/maryland-hoa-law`;
+const headline = 'Maryland HOA Law: The Homeowners Association Act and Board Duties';
+const description = 'A plain-English guide to Maryland HOA law: what the Homeowners Association Act requires of your board, which rules are unenforceable, and county rules.';
+
+const post = {
+  title: 'Maryland HOA law: <em>the Homeowners Association Act</em> and board duties.',
+  dek: 'Maryland HOA law starts with Title 11B, the Homeowners Association Act. Here is the practitioner’s translation: what the Act requires your board to do, which rules will not hold up, whether your association registers anywhere, and where county rules add a layer.',
+  category: { id: 'governance', label: 'Board Governance', tone: '' },
+  author: {
+    name: 'Gail Windisch',
+    creds: 'CMCA® · AMS® · PCAM®',
+    initials: 'GW',
+    role: 'Senior Director of Operations, Tidewater',
+    bio: 'Gail oversees operations across Tidewater&rsquo;s management teams and has served the CAI Chesapeake Chapter as President, Vice President and Secretary &mdash; the highest levels of chapter leadership. CMCA, AMS and PCAM credentialed.',
+    email: 'info@tidewaterproperty.com',
+  },
+  date: 'October 1, 2026',
+  dateIso: '2026-10-01',
+  readTime: 9,
+};
+
+const toc = [
+  { id: 'covers',        label: 'What Title 11B covers' },
+  { id: 'requires',      label: 'What your board must do' },
+  { id: 'unenforceable', label: 'Unenforceable rules' },
+  { id: 'register',      label: 'Do you register?' },
+  { id: 'county',        label: 'County rules (CCOC)' },
+  { id: 'faq',           label: 'FAQ' },
+  { id: 'throughline',   label: 'Bottom line' },
+];
+
+const related = [
+  {
+    tone: '', category: 'Board Governance',
+    title: 'HOA board member responsibilities & fiduciary duty, explained.',
+    dek: 'The fiduciary duties that attach to every seat, what each officer position involves, and where the board\'s job ends and delegation begins.',
+    date: 'August 3, 2026', readTime: 7, href: '/blog/hoa-board-responsibilities',
+    coverImage: '/assets/hoa-board-responsibilities.jpg',
+    coverAlt: "HOA board member reviewing the association's governing-documents binder at her kitchen table",
+  },
+  {
+    tone: '', category: 'Board Governance',
+    title: 'What is a quorum? Definition, requirements, and why it matters for your board.',
+    dek: 'How quorum works for board and annual meetings, what happens when it is not met, and how proxy voting affects the count.',
+    date: 'May 14, 2026', readTime: 8, href: '/blog/what-is-quorum-and-why-is-it-important',
+    coverImage: '/assets/quorum-community-manager.jpg',
+    coverAlt: 'Tidewater community association manager walking through a planned neighborhood in Maryland during a site inspection',
+  },
+  {
+    tone: '', category: 'HOA Finances',
+    title: 'What are HOA fees? What they cover, why they change, and what happens if you don\'t pay.',
+    dek: 'An HOA fee covers insurance, upkeep, and the reserves that pay for future repairs — but who decides the amount, and why does it keep going up?',
+    date: 'August 4, 2026', readTime: 8, href: '/blog/hoa-fees',
+    coverImage: '/assets/hoa-fees.jpg',
+    coverAlt: 'Well-maintained townhome community common area managed under an HOA budget',
+  },
+];
+
+const pageSchema = [
+  articleSchema({
+    headline,
+    description,
+    url: pageUrl,
+    datePublished: '2026-10-01',
+    image: `${SITE.url}/assets/maryland-hoa-law.jpg`,
+    about: ['Maryland HOA law', 'Maryland Homeowners Association Act', 'Title 11B', 'HOA board duties', 'unenforceable HOA rules', 'HOA governance'],
+  }),
+  faqSchema([
+    {
+      q: 'Does Maryland have a state agency that regulates HOAs?',
+      a: "No. Maryland HOA law creates no statewide agency that regulates HOAs or resolves disputes. Montgomery County and Prince George's County run their own Commissions on Common Ownership Communities. Everywhere else, disputes move through the association's internal process and then the courts.",
+    },
+    {
+      q: 'What are the new Maryland HOA laws for 2025 and 2026?',
+      a: 'Maryland HOA law changed substantially in 2025: a reserve funding plan and a five-year ramp after an initial study, new board election procedures, and Prince George’s County registration (§ 11B-112.4). The 2026 session moved the candidate-sign window to 45 days before early voting, and added § 11B-111.13, effective October 1, 2026, barring governing documents from blocking the board from installing EV charging in common-use parking spaces. Owner chargers in a deeded space remain § 11B-111.8. Confirm the current list with counsel.',
+    },
+    {
+      q: 'Does the Maryland Homeowners Association Act apply to condominiums?',
+      a: 'No. Condominiums are governed by the Maryland Condominium Act, Real Property Title 11, while Maryland HOA law sits in Title 11B. Concepts run parallel, but sections and some substance differ, so a condominium board working from Title 11B is reading the wrong statute.',
+    },
+    {
+      q: 'Can a Maryland HOA foreclose on a home for unpaid assessments?',
+      a: 'Yes in some circumstances, but not casually. Assessment liens are created and enforced under the Maryland Contract Lien Act (Real Property §§ 14-201 through 14-206), not the HOA Act. The association must give notice of intent to create a lien and a chance to dispute it before recording a statement of lien, and foreclosure follows the mortgage path. Fines generally cannot support a foreclosure. Treat it as a last resort, with counsel.',
+    },
+    {
+      q: 'Where can I read the full Maryland Homeowners Association Act?',
+      a: "The full text of Maryland HOA law is Title 11B of the Real Property Article, free on the Maryland General Assembly's website. It is dense statutory language and it changes most years, which is why a plain-English version belongs alongside it rather than instead of it.",
+    },
+  ]),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'Articles & Guides', url: SITE.url + '/blog' },
+    { name: headline, url: pageUrl },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Maryland HOA Law: The Homeowners Association Act & Board Duties"
+  description={description}
+  ogType="article"
+  ogImageAlt="Maryland HOA Law: The Homeowners Association Act and Board Duties — a Tidewater guide for boards"
+  pageSchema={pageSchema}
+  pageStylesheet="styles-blog.css"
+>
+  <Topbar variant="homeowner" />
+  <Header activeNav="blog" />
+  <Breadcrumb crumbs={[
+    { label: 'Articles & Guides', href: '/blog' },
+    { label: 'Maryland HOA Law' },
+  ]} />
+
+  <div class="tw-blog-progress" id="tw-blog-progress"></div>
+
+  <section class="tw-blog-hero">
+    <div class="tw-blog-hero-inner">
+      <span class={`tw-blog-category ${post.category.tone}`}>{post.category.label}</span>
+      <h1 class="tw-blog-title" set:html={post.title}></h1>
+      <p class="tw-blog-dek">{post.dek}</p>
+      <div class="tw-blog-meta">
+        <div class="tw-blog-meta-author">
+          <div class="tw-blog-meta-avatar">{post.author.initials}</div>
+          <div>
+            <div class="tw-blog-meta-name">{post.author.name}</div>
+            <div class="tw-blog-meta-role">{post.author.role}</div>
+          </div>
+        </div>
+        <div class="tw-blog-meta-divider"></div>
+        <div class="tw-blog-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> {post.date}</div>
+        <div class="tw-blog-meta-divider"></div>
+        <div class="tw-blog-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> {post.readTime} min read</div>
+        <div class="tw-blog-share">
+          <button type="button" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg></button>
+          <button type="button" data-share="x" title="Share on X" aria-label="Share on X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></button>
+          <button type="button" data-share="email" title="Share by email" aria-label="Share by email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></button>
+          <button type="button" data-share="copy" title="Copy link" aria-label="Copy link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tw-blog-cover">
+    <div class="tw-blog-cover-inner">
+      <img
+        src="/assets/maryland-hoa-law.jpg"
+        alt="Open meeting at a Maryland homeowners association, as required under Title 11B"
+        width="1400"
+        height="763"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <div class="tw-blog-cover-paper"></div>
+    </div>
+  </div>
+
+  <div class="tw-blog-body-wrap">
+    <div class="tw-blog-layout">
+      <aside class="tw-blog-toc">
+        <div class="tw-blog-toc-label">In this article</div>
+        <ul class="tw-blog-toc-list">
+          {toc.map(it => <li><a href={`#${it.id}`} set:html={it.label}></a></li>)}
+        </ul>
+      </aside>
+      <div>
+        <article class="tw-blog-article">
+
+          <p>
+            You joined the board in March. By June someone has demanded the financial records, a neighbor has posted a political sign the covenants appear to forbid, and a seller&rsquo;s agent wants a disclosure packet by Friday. Nobody handed you the statute.
+          </p>
+
+          <p>
+            Maryland HOA law starts with one document: the Maryland Homeowners Association Act, Title 11B of the Real Property Article. This is the practitioner&rsquo;s translation, written from the manager&rsquo;s chair rather than the statute&rsquo;s. It covers what Maryland HOA laws require your board to do, which rules will not hold up, whether your association registers anywhere, and where county rules add a layer statewide guides miss.
+          </p>
+
+          <h2 id="covers">What the Maryland Homeowners Association Act (Title 11B) Covers</h2>
+
+          <p>
+            Maryland HOA law begins with the Maryland Homeowners Association Act, Title 11B of the Real Property Article. It governs homeowners associations, meaning lot-and-subdivision communities created by a recorded declaration, and sets the baseline rules between the association, its board and its owners.
+          </p>
+
+          <p>
+            Title 11B sets a floor, not a complete rulebook. Your declaration, bylaws and architectural standards fill in what the Act leaves open. What they cannot do is contract around it.
+          </p>
+
+          <div class="tw-blog-callout">
+            <div class="tw-blog-callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+            <div class="tw-blog-callout-content">
+              <h4>HOA or condominium? They are different statutes.</h4>
+              <ul>
+                <li><strong>Homeowners associations:</strong> Maryland Homeowners Association Act, Real Property Title 11B.</li>
+                <li><strong>Condominiums:</strong> the separate Maryland Condominium Act, Real Property Title 11.</li>
+                <li><strong>Cooperatives:</strong> the Maryland Cooperative Housing Corporation Act.</li>
+              </ul>
+              <p>Provisions run parallel, but sections and some substance differ. This guide covers HOAs. If your community is a <a href="/condo-management">condominium</a>, the Maryland HOA Act is not your statute.</p>
+            </div>
+          </div>
+
+          <h2 id="requires">What Maryland HOA Law Requires Your Board to Do</h2>
+
+          <p>
+            Maryland HOA law imposes four categories of duty on a board: transparency, financial management, accurate disclosure and fair enforcement.
+          </p>
+
+          <h3>Open Meetings and Access to Records</h3>
+
+          <p>
+            Maryland HOA law makes transparency the default. Association meetings, including board and committee meetings, must be open to members or their agents, with reasonable notice of regularly scheduled open meetings (&sect; 11B-111). Closed sessions are allowed only for listed purposes such as personnel matters or litigation. Members may also inspect the books and records (&sect; 11B-112). The <a href="https://oag.maryland.gov/resources-info/Pages/hoa-open-records-and-meetings-law.aspx" target="_blank" rel="noopener">Maryland Attorney General</a> summarizes both.
+          </p>
+
+          <h3>Budgets, Assessments and Reserves</h3>
+
+          <p>
+            Under Maryland HOA law your board must adopt a budget and fund reserves. Maryland HOA reserve requirements track the reserve study: for an association responsible for maintaining common areas, reserves are funded at the amount the most recent study recommends (&sect; 11B-112.2(d)), with the study required under &sect; 11B-112.3. After an initial study the board has five fiscal years to reach that level, under a funding plan. A non-emergency expenditure raising the year&rsquo;s assessments more than 15% above the adopted budget needs a budget amendment at a special meeting, on at least 10 days&rsquo; notice (&sect; 11B-112.2(f)). Our guide to <a href="/blog/hoa-special-assessment">HOA special assessments</a> walks through both in depth.
+          </p>
+
+          <h3>Disclosures and the Resale Package</h3>
+
+          <p>
+            When a lot sells, Maryland HOA law requires the association to supply statutory resale disclosures on request, within the Act&rsquo;s timelines (&sect; 11B-106). The package covers the governing documents, budget, assessment amounts and balances, and reserves. A late or inaccurate package can give a buyer cancellation rights, so track the deadline.
+          </p>
+
+          <h3>Covenant and Architectural Enforcement</h3>
+
+          <p>
+            The authority to adopt architectural standards comes from the declaration; Maryland HOA law supplies the procedure for enforcing them. Unless the governing documents set a different process, &sect; 11B-111.10 requires written notice, a cure period of at least 15 days for a continuing violation, and a right to request a hearing before any sanction, appealable to the Maryland courts. The hearing happens if the owner asks for one. The section does not reach the Columbia Association or Columbia&rsquo;s village associations. <strong>Rules properly adopted, reasonable and applied consistently survive challenges; the same rule enforced against one owner and not another usually does not.</strong>
+          </p>
+
+          <div class="tw-blog-callout">
+            <div class="tw-blog-callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="tw-blog-callout-content">
+              <h4>Board duties at a glance</h4>
+              <ul>
+                <li>Hold open meetings with notice; keep minutes</li>
+                <li>Make books and records available on request</li>
+                <li>Adopt a budget and fund reserves to the study</li>
+                <li>Follow the 15% budget-amendment process for large non-emergency spending</li>
+                <li>Produce accurate resale disclosures on time</li>
+                <li>Enforce consistently, with notice, a cure period and a hearing right</li>
+                <li>Keep the association in good standing</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2 id="unenforceable">Unenforceable HOA Rules in Maryland</h2>
+
+          <p>
+            A rule is generally unenforceable if it was not properly adopted, is unreasonable or arbitrary, is applied selectively, or conflicts with state or federal law. That last category catches boards out, because Maryland HOA law has carved several subjects out of association control whatever the declaration says.
+          </p>
+
+          <ul>
+            <li><strong>Solar collector systems.</strong> A restriction may not impose an unreasonable limitation, meaning one that significantly increases cost or decreases efficiency (Real Property &sect; 2-119). Reasonable placement conditions survive; blanket bans do not.</li>
+            <li><strong>Candidate and ballot-question signs.</strong> A rule may not prohibit these on a lot (&sect; 11B-111.2), though the association may still restrict them in common areas. Where local law sets no window, display runs from at least 45 days before early voting starts, or 45 days before the election if there is none, through 7 days after. This replaced the old 30-day rule on April 28, 2026.</li>
+            <li><strong>The U.S. flag.</strong> Maryland protects display of one portable, removable United States flag (Real Property &sect; 14-128), alongside the federal Freedom to Display the American Flag Act. The protection is that specific, not a general right to fly any flag.</li>
+            <li><strong>Clotheslines, composting and owner EV charging.</strong> Each is carved out as well (&sect; 14-130, &sect; 11B-111.9, &sect; 11B-111.8).</li>
+            <li><strong>Family child care homes and ADUs.</strong> Since 2025 an association may not expressly prohibit a family child care home (&sect; 11B-111.1), though it may require notice and a reasonable share of costs. Unreasonable limits on accessory dwelling units, including bans, are barred by Real Property &sect; 2-126, while &sect; 11B-111.11 lets a board treat an ADU as a separate lot for voting.</li>
+            <li><strong>Anything conflicting with fair housing law,</strong> including reasonable accommodations.</li>
+          </ul>
+
+          <p>
+            <strong>The expensive mistake is not having an unenforceable rule on the books. It is enforcing one selectively.</strong> Have counsel review your architectural standards against this list; most Maryland declarations predate several of these statutes.
+          </p>
+
+          <h2 id="register">Does a Maryland HOA Have to Register With the State?</h2>
+
+          <p>
+            There is no general statewide Maryland HOA registry, and no state agency that licenses or supervises HOAs. A 2023 legislative task force confirmed registration is not required statewide, which is why nobody knows how many HOAs Maryland has. Maryland HOA law still leaves your association things to keep current.
+          </p>
+
+          <div class="tw-blog-callout">
+            <div class="tw-blog-callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+            <div class="tw-blog-callout-content">
+              <h4>What a Maryland HOA actually has to keep current</h4>
+              <ul>
+                <li><strong>Business entity standing.</strong> Stay in good standing with the Maryland State Department of Assessments and Taxation. A forfeited charter can block the association from maintaining suit.</li>
+                <li><strong>Recorded and deposited documents.</strong> The declaration is recorded in county land records. Bylaws, rules and the disclosures the Act names go into the homeowners association depository kept by the clerk of court (&sect; 11B-113).</li>
+                <li><strong>Prince George&rsquo;s County.</strong> HOAs must register with the Community Association Registry (&sect; 11B-112.4, effective July 1, 2025), under Real Property &sect; 14-131.</li>
+                <li><strong>Montgomery County.</strong> Every common ownership community must register annually with the county under Chapter 10B.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2 id="county">Where County Rules Add a Layer: Montgomery County&rsquo;s CCOC</h2>
+
+          <p>
+            Maryland HOA law is statewide, but some counties add a layer. The most developed is <a href="/hoa-management/maryland/montgomery-county">Montgomery County&rsquo;s</a> <a href="https://www.montgomerycountymd.gov/DHCA/housing/commonownership/" target="_blank" rel="noopener">Commission on Common Ownership Communities</a> under County Code Chapter 10B, with <a href="/hoa-management/maryland/prince-georges-county">Prince George&rsquo;s County</a> running a comparable program of its own.
+          </p>
+
+          <p>
+            The CCOC provides binding dispute resolution, education and oversight for HOAs, condominiums and cooperatives. Every community there registers annually, and owners generally must exhaust the association&rsquo;s internal process first.
+          </p>
+
+          <p>
+            <strong>For boards everywhere else, the absence is the point: there is no statewide equivalent.</strong> Outside those counties a dispute runs through the association&rsquo;s internal process and then to the courts. Two associations ten miles apart can face different procedures, which is why <a href="/hoa-management/maryland">management across Maryland counties</a> is a county-by-county discipline, not one statewide checklist.
+          </p>
+
+          <h2 id="faq">Frequently Asked Questions</h2>
+
+          <h3>Does Maryland have a state agency that regulates HOAs?</h3>
+          <p>
+            No. Maryland HOA law creates no statewide agency that regulates HOAs or resolves disputes. Montgomery County and Prince George&rsquo;s County each run their own commission. Everywhere else, disputes move through the association&rsquo;s internal process and then the courts.
+          </p>
+
+          <h3>What are the new Maryland HOA laws for 2025 and 2026?</h3>
+          <p>
+            Maryland HOA law changed substantially in 2025: a reserve funding plan and a five-year ramp after an initial study, new board election procedures, and Prince George&rsquo;s County registration (&sect; 11B-112.4). The 2026 session moved the candidate-sign window to 45 days before early voting, and added &sect; 11B-111.13, effective October 1, 2026, barring governing documents from blocking the board from installing EV charging in common-use parking spaces. Owner chargers in a deeded space remain &sect; 11B-111.8. Confirm the current list with counsel.
+          </p>
+
+          <h3>Does the Maryland Homeowners Association Act apply to condominiums?</h3>
+          <p>
+            No. Condominiums are governed by the Maryland Condominium Act, Real Property Title 11, while Maryland HOA law sits in Title 11B. Concepts run parallel, but a condominium board working from Title 11B is reading the wrong statute.
+          </p>
+
+          <h3>Can a Maryland HOA foreclose on a home for unpaid assessments?</h3>
+          <p>
+            Yes in some circumstances, but not casually. Assessment liens are created and enforced under the Maryland Contract Lien Act (Real Property &sect;&sect; 14-201 through 14-206), not the HOA Act. The association must give notice of intent and a chance to dispute before recording a statement of lien, and foreclosure follows the mortgage path. Fines cannot support a foreclosure. Treat it as a last resort, with counsel.
+          </p>
+
+          <h3>Where can I read the full Maryland Homeowners Association Act?</h3>
+          <p>
+            The full text of Maryland HOA law is <a href="https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=grp&amp;section=11b-101" target="_blank" rel="noopener">Title 11B of the Real Property Article</a>, free on the Maryland General Assembly&rsquo;s website. It is dense, and it changes most years, which is why a plain-English version belongs alongside it rather than instead of it.
+          </p>
+
+          <h2 id="throughline">The Throughline for Maryland Boards</h2>
+
+          <p>
+            Nearly every obligation in Maryland HOA law reduces to the same habits: meet in the open, keep records available, fund reserves to the study, disclose accurately, enforce consistently, stay in good standing, and know which county you are in.
+          </p>
+
+          <p>
+            This is a plain-English overview, not legal advice. Every declaration differs and the Act changes most sessions, so work from your documents with counsel. Tidewater is a Maryland-based, AAMC&reg;-accredited <a href="/hoa-management">association management</a> firm whose managers work inside Maryland HOA law daily, and whose leadership includes past presidents of the CAI Chesapeake Chapter.
+          </p>
+
+          <div class="tw-blog-cta">
+            <div class="tw-blog-cta-eyebrow">Maryland association management</div>
+            <h3>Want a management team that already knows which county rules apply to your community?</h3>
+            <p>Request a proposal and see how Tidewater keeps boards inside Maryland HOA law &mdash; open meetings, records, reserves, disclosures and consistent enforcement &mdash; while the board keeps every decision.</p>
+            <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-lg">Request your association management proposal &rarr;</a>
+          </div>
+
+          <div class="tw-blog-tags">
+            <span class="tw-blog-tags-label">Tagged</span>
+            <span class="tw-blog-tag">Maryland HOA law</span>
+            <span class="tw-blog-tag">Homeowners Association Act</span>
+            <span class="tw-blog-tag">Board responsibilities</span>
+            <span class="tw-blog-tag">HOA governance</span>
+            <span class="tw-blog-tag">Board education</span>
+          </div>
+          <Disclaimer type="legal" />
+        </article>
+
+        <div class="tw-blog-author-bio">
+          <div class="tw-blog-author-bio-avatar">{post.author.initials}</div>
+          <div>
+            <div class="tw-blog-author-bio-eyebrow">About the author</div>
+            <div class="tw-blog-author-bio-name">{post.author.name} <span>{post.author.creds}</span></div>
+            <div class="tw-blog-author-bio-role">{post.author.role}</div>
+            <p class="tw-blog-author-bio-blurb" set:html={post.author.bio}></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="tw-blog-related">
+    <div class="tw-blog-related-inner">
+      <div class="tw-blog-related-head">
+        <div class="tw-blog-related-eyebrow">Continue Reading</div>
+        <h2>More for your <em>board.</em></h2>
+      </div>
+      <div class="tw-blog-related-grid">
+        {related.map(p => (
+          <a href={p.href} class="tw-blog-related-card">
+            <div class={`tw-blog-related-card-img ${p.tone}`}>
+              {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || p.title} width="1400" height="763" loading="lazy" decoding="async" />}
+            </div>
+            <div class="tw-blog-related-card-body">
+              <div class={`tw-blog-related-card-cat ${p.tone}`}>{p.category}</div>
+              <h3>{p.title}</h3>
+              <p>{p.dek}</p>
+              <div class="tw-blog-related-card-meta">{p.date} &middot; {p.readTime} min read</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-blog-newsletter">
+    <div class="tw-blog-newsletter-inner">
+      <div class="tw-blog-newsletter-eyebrow">Tidewater Resources</div>
+      <h2>Get the <em>monthly board memo</em> in your inbox.</h2>
+      <p>One email a month. Practical board playbooks, Maryland HOA law updates, governance deep-dives. Written for working boards, not vendors. No fluff.</p>
+      <form class="tw-blog-newsletter-form">
+        <div class="tw-hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <input type="email" name="email" placeholder="board@yourcommunity.org" aria-label="Email address" required/>
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="tw-blog-newsletter-thanks" hidden style="font-family:var(--tw-font-heading);font-weight:700;font-size:15px;color:var(--tw-gold)">Thanks &mdash; first issue lands the first Tuesday of next month.</div>
+      <div class="tw-blog-newsletter-fine">Unsubscribe any time &middot; We never share your email &middot; 4,200+ board members subscribed</div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  import '../../scripts/blog-interactivity.js';
+</script>

@@ -6,6 +6,19 @@
 
 export const ALL_POSTS = [
   {
+    slug: 'maryland-hoa-law',
+    href: '/blog/maryland-hoa-law',
+    title: 'Maryland HOA law: <em>the Homeowners Association Act</em> and board duties.',
+    dek: 'Maryland HOA law starts with Title 11B, the Homeowners Association Act. The practitioner&rsquo;s translation: what the Act requires your board to do, which rules will not hold up, whether your association registers anywhere, and where county rules add a layer.',
+    category: { id: 'governance', label: 'Board Governance', tone: '' },
+    date: 'October 1, 2026', dateIso: '2026-10-01',
+    readTime: 9,
+    author: 'Gail Windisch',
+    tone: '',
+    coverImage: '/assets/maryland-hoa-law.jpg',
+    coverAlt: 'Open meeting at a Maryland homeowners association, as required under Title 11B',
+  },
+  {
     slug: 'hoa-special-assessment',
     href: '/blog/hoa-special-assessment',
     title: 'HOA special assessments: <em>why they happen</em> (and how to avoid surprises).',

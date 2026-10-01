@@ -19,6 +19,7 @@ export interface ReviewItem {
 }
 
 export const REVIEW_ITEMS: ReviewItem[] = [
+  { label: 'Maryland HOA Law (blog post)', path: '/blog/maryland-hoa-law', review: true },
   { label: 'HOA Special Assessments (blog post)', path: '/blog/hoa-special-assessment', review: true },
   { label: 'HOA & Condo Insurance (blog post)', path: '/blog/hoa-insurance', review: true },
   { label: 'The Board Brief — October 2026 issue', path: '/resources/newsletter/october-2026', review: true },
