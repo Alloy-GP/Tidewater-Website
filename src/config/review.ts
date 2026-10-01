@@ -23,6 +23,7 @@ export const REVIEW_ITEMS: ReviewItem[] = [
   { label: 'HOA Reserve Study (blog post)', path: '/blog/hoa-reserve-study', review: true },
   { label: 'HOA Special Assessments (blog post)', path: '/blog/hoa-special-assessment', review: true },
   { label: 'HOA & Condo Insurance (blog post)', path: '/blog/hoa-insurance', review: true },
-  { label: 'The Board Brief — October 2026 issue', path: '/resources/newsletter/october-2026', review: true },
-  { label: 'The Board Brief — newsletter archive', path: '/resources/newsletter', review: true },
+  { label: 'Owings Mills office (city page)', path: '/locations/maryland/owings-mills', review: true },
+  { label: 'Ocean City office (city page)', path: '/locations/maryland/ocean-city', review: true },
+  { label: 'Lewes office (city page)', path: '/locations/delaware/lewes', review: true },
 ];
