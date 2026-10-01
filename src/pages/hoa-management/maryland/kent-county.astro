@@ -1,0 +1,234 @@
+---
+// HOA Management — Kent County, MD. Hand-built to the standard (tw-geo).
+// Lead: Don Gentry (Delmarva). Self-canonical; rental cross-link to the hub
+// (no Kent rental page). See docs/county-page-playbook.md. Verified local only.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Footer from '../../../components/Footer.astro';
+import CTA from '../../../components/CTA.astro';
+import FaqAccordion from '../../../components/FaqAccordion.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { serviceSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+
+const countyFaqs = [
+  { q: 'Most of our owners are seasonal. Can you work with that?', a: 'Yes, and it mainly changes cadence rather than scope. Notices, meeting scheduling and quorum planning all have to assume a largely non-resident ownership &mdash; a process we set up rather than something a board should be improvising each year.' },
+  { q: 'How many communities will our manager be handling?', a: 'Manager portfolios are capped at <strong>8&ndash;12 communities</strong> &mdash; a hard ceiling, so a Kent board gets a manager who knows its governing documents rather than one lost in an overloaded book.' },
+  { q: 'What happens after hours?', a: 'Our emergency line is answered by Tidewater community managers on a rotating on-call schedule, not a third-party answering service. Callback standard is 20 minutes, <strong>contractually guaranteed at 30</strong>.' },
+  { q: 'What does HOA management cost in Kent County?', a: 'We quote per association rather than publishing a rate card, because cost tracks community size, vendor count, meeting cadence and complexity. <a href="/request-a-proposal">Request a proposal</a> for a line-item number, or start with the <a href="/hoa-management/hoa-financial-management">financial-only tier</a>.' },
+  { q: 'How quickly can you take over our Kent County community?', a: 'The notice period in your current management agreement sets the pace. From there we work to a <strong>30/60/90-day</strong> plan covering records, bank accounts, vendor assignment and the first reporting cycle &mdash; see the <a href="/solutions/switching-hoa-management-company">full transition timeline</a>.' },
+];
+
+const canonical = SITE.url + '/hoa-management/maryland/kent-county';
+
+const schemas = [
+  serviceSchema({
+    name: 'HOA Management Kent County Maryland',
+    description: 'AAMC-accredited HOA and condo association management across Kent County, Maryland — Chestertown, Rock Hall, and Betterton.',
+    url: canonical,
+    areaServed: 'Kent County, Maryland',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'HOA Management', url: SITE.url + '/hoa-management' },
+    { name: 'Maryland', url: SITE.url + '/hoa-management/maryland' },
+    { name: 'Kent County', url: canonical },
+  ]),
+  faqSchema(countyFaqs),
+];
+
+const cities = [
+  { name: 'Chestertown', meta: 'Small association · condo · historic district', tag: 'County seat' },
+  { name: 'Rock Hall',   meta: 'Waterfront association · marina-adjacent' },
+  { name: 'Betterton',   meta: 'Small association · bay beach community' },
+  { name: 'Galena',      meta: 'Single-family HOA · north county' },
+  { name: 'Millington',  meta: 'Single-family HOA · east county' },
+];
+---
+<BaseLayout
+  title="HOA Management Kent County Maryland — Tidewater"
+  description="HOA and condo association management in Kent County — Chestertown, Rock Hall, and Betterton. Delmarva regional team. AAMC-accredited, family-owned since 1989."
+  pageSchema={schemas}
+  pageStylesheet="styles-geo.css"
+>
+  <Topbar variant="default" />
+  <Header activeNav="mgmt" logoSrc="/assets/Tidewater-Management-Logo.svg" logoAlt="Tidewater Management" />
+  <Breadcrumb variant="management" crumbs={[
+    { label: 'HOA Management', href: '/hoa-management' },
+    { label: 'Maryland', href: '/hoa-management/maryland' },
+    { label: 'Kent County' },
+  ]} />
+
+  <section class="tw-geo-hero">
+    <div class="tw-geo-hero-bg"></div>
+    <div class="tw-geo-hero-paper"></div>
+    <div class="tw-geo-hero-grid">
+      <div class="tw-geo-hero-copy">
+        <h1 class="tw-geo-hero-title">HOA management in <em>Kent County.</em></h1>
+        <p class="tw-geo-hero-lede">
+          Kent is Maryland&rsquo;s smallest county by population, and its associations reflect that &mdash; small, often waterfront, and frequently self-managed longer than they should be. Family-owned since 1989, AAMC-accredited, with capped manager portfolios so yours is known rather than numbered.
+        </p>
+        <div class="tw-geo-hero-actions">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-lg">Request a proposal &rarr;</a>
+          <a href="#communities" class="tw-btn tw-btn-ghost">See where we manage &rarr;</a>
+        </div>
+        <div class="tw-geo-hero-stats">
+          <div><div class="tw-geo-hero-stat-num">450+</div><div class="tw-geo-hero-stat-label">Communities managed across six states</div></div>
+          <div><div class="tw-geo-hero-stat-num gold">AAMC&reg;</div><div class="tw-geo-hero-stat-label">CAI&rsquo;s highest company accreditation &middot; PCAM on staff</div></div>
+          <div><div class="tw-geo-hero-stat-num">1989</div><div class="tw-geo-hero-stat-label">Family-owned and operated &mdash; 35+ years in the Mid-Atlantic</div></div>
+        </div>
+      </div>
+      <aside class="tw-geo-hero-side">
+        <div class="tw-geo-hero-side-eyebrow">In Kent County</div>
+        <h3>Where we manage</h3>
+        <svg viewBox="0 0 360 290" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Schematic map of Kent County, Maryland">
+          <path d="M92 70 Q150 56 206 70 L250 108 Q258 150 230 186 L188 216 Q146 210 126 176 L98 140 Q78 104 92 70 Z" class="tw-geo-map-county served" style="cursor:default"><title>Kent County</title></path>
+          <circle cx="132" cy="94" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Betterton</title></circle>
+          <text x="66" y="92" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Betterton</text>
+          <circle cx="204" cy="100" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Galena</title></circle>
+          <text x="212" y="98" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Galena</text>
+          <circle class="tw-geo-map-dot-pulse" cx="170" cy="138" r="8"/>
+          <circle cx="170" cy="138" r="6" fill="var(--tw-gold)" stroke="var(--tw-cream)" stroke-width="2"><title>Chestertown</title></circle>
+          <text x="180" y="142" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="800" font-size="11">Chestertown</text>
+          <circle cx="216" cy="160" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Millington</title></circle>
+          <text x="224" y="164" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Millington</text>
+          <circle cx="128" cy="172" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Rock Hall</title></circle>
+          <text x="62" y="176" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Rock Hall</text>
+        </svg>
+        <div class="tw-geo-map-legend">
+          <div class="tw-geo-map-legend-row"><span class="tw-geo-map-legend-swatch served"></span>Cities &amp; towns we serve</div>
+          <div class="tw-geo-map-legend-row"><span class="tw-geo-map-legend-swatch hq"></span>County seat &middot; Chestertown</div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="tw-geo-section linen" style="padding:14px 0">
+    <div class="tw-container-wide" style="text-align:center">
+      <p style="margin:0;font-size:14px;color:var(--tw-fg-muted)">Managing a rental property in Kent County? See <a href="/rental-management/maryland" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">Tidewater rental management</a> instead &mdash; this page is for HOA &amp; condo association boards.</p>
+    </div>
+  </div>
+
+  <section class="tw-geo-section cream">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">Where We Manage</div>
+        <h2 class="tw-section-title">Kent County coverage, <em>town by town.</em></h2>
+        <p class="tw-section-lede">We cover the whole county &mdash; the Chester and Sassafras river shores, the bay beaches, and the inland north and east. Each town carries its own association mix.</p>
+      </div>
+      <div class="tw-geo-neighbors">
+        {cities.map((ct) => (
+          <a href="/hoa-management/maryland" class="tw-geo-neighbor">
+            <div class="tw-geo-neighbor-name">{ct.name}</div>
+            <div class="tw-geo-neighbor-meta">{ct.meta}</div>
+            {ct.tag && <span class="tw-geo-neighbor-tag">{ct.tag}</span>}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">What&rsquo;s Different Here</div>
+        <h2 class="tw-section-title">Small county, <em>real obligations.</em></h2>
+        <p class="tw-section-lede">Being small doesn&rsquo;t reduce what a board is responsible for &mdash; only the overhead it can carry to get there.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card">
+          <h3>Waterfront capital items</h3>
+          <p>Along the Chester and Sassafras rivers and the bay shore at Rock Hall and Betterton, piers, bulkheads, ramps and shoreline are the capital items that most often go unplanned &mdash; and they don&rsquo;t get cheaper by being ignored.</p>
+          <div class="tw-geo-law-foot">Bayside &amp; riverfront</div>
+        </div>
+        <div class="tw-geo-law-card gold">
+          <h3>Seasonal ownership</h3>
+          <p>A high share of housing here is second-home or seasonal, so a board is often trying to reach owners who aren&rsquo;t in the county most of the year. Quorum becomes a live issue rather than a formality, and notice cadence has to plan for it.</p>
+          <div class="tw-geo-law-foot">Communication &amp; quorum</div>
+        </div>
+        <div class="tw-geo-law-card sage">
+          <h3>Right-sized for small boards</h3>
+          <p>Our financial-only tier exists for exactly this: a real finance department &mdash; GAAP-compliant books, collections, audit support &mdash; without the overhead of full service a small association doesn&rsquo;t need.</p>
+          <div class="tw-geo-law-foot">Financial-only fit</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section cream" style="padding:64px 0">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">Regional Leadership</div>
+        <h2 class="tw-section-title" style="margin:10px 0 14px">Your Delmarva director, <em>backing the local team.</em></h2>
+        <p class="tw-section-lede">Kent is part of our Delmarva portfolio, so your board&rsquo;s dedicated CAM works with a regional director who runs Eastern Shore and Delaware communities day to day.</p>
+      </div>
+      <div class="tw-geo-manager">
+        <div class="tw-geo-manager-avatar">DG</div>
+        <div>
+          <div class="tw-geo-manager-eyebrow">Delmarva Regional Director</div>
+          <div class="tw-geo-manager-name">Don Gentry <span>CMCA&reg;, AMS&reg;, PCAM&reg;</span></div>
+          <p class="tw-geo-manager-role">
+            Don oversees the Eastern Shore, Ocean City and Delaware portfolio &mdash; <strong>20+ years</strong> across customer service and real estate, with a background as a hotel general manager, building engineer and government contract specialist, and a Community Association Portfolio Manager since 2006. Manager portfolios are capped at 8&ndash;12 communities, so your board works with a dedicated CAM, not a rotating pool.
+          </p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:200px">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-block">Request a proposal &rarr;</a>
+          <a href="tel:+14435480191" class="tw-btn tw-btn-outline tw-btn-block">(443) 548-0191</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="communities" class="tw-geo-section mist">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">What We Manage</div>
+        <h2 class="tw-section-title">The kinds of communities we run <em>across Kent County.</em></h2>
+        <p class="tw-section-lede">Board references available on request &mdash; we&rsquo;d rather you talk to a comparable Kent board than read about us.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card"><h3>Waterfront &amp; marina associations</h3><p>Rock Hall and riverfront communities with piers, bulkheads, and shoreline to plan and reserve for.</p></div>
+        <div class="tw-geo-law-card"><h3>Historic Chestertown</h3><p>Small associations and condos inside the Chestertown historic district, with the review that comes with it.</p></div>
+        <div class="tw-geo-law-card"><h3>Seasonal &amp; second-home communities</h3><p>Betterton and bayside associations where non-resident ownership shapes communication and quorum.</p></div>
+        <div class="tw-geo-law-card"><h3>Financial-only boards</h3><p>Small self-managed associations that want CPA-led books and audit support without full-service overhead.</p></div>
+      </div>
+      <div style="display:flex;justify-content:center;margin-top:32px;gap:14px;flex-wrap:wrap">
+        <a href="/testimonials" class="tw-btn tw-btn-outline">Read board reviews &rarr;</a>
+        <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Get board references &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">Services in Kent County</div>
+        <h2 class="tw-section-title">Three service tiers, <em>same local team.</em></h2>
+        <p class="tw-section-lede">Pick the level your board needs &mdash; the manager, the response time, and the accreditation stay the same.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:48px">
+        <a href="/hoa-management" class="tw-geo-law-card" style="text-decoration:none"><h3>Full Service</h3><p>Financial and full property management: board-meeting attendance, neighborhood inspections, vendor management and on-site oversight, financial controls, and day-to-day operations &mdash; including HR for association employees.</p><div class="tw-geo-law-foot">Full-service details &rarr;</div></a>
+        <a href="/hoa-management#tiers" class="tw-geo-law-card gold" style="text-decoration:none"><h3>Flex Service</h3><p>Governance, legal affairs, risk management, maintenance coordination, contracting, and full financial management &mdash; with meetings, inspections, and on-site presence available &agrave; la carte at a set hourly rate.</p><div class="tw-geo-law-foot">Flex tier details &rarr;</div></a>
+        <a href="/hoa-management/hoa-financial-management" class="tw-geo-law-card sage" style="text-decoration:none"><h3>Financial Only</h3><p>Strictly financial for self-managed Kent boards: budgets, reserves, assessment collection, accounts payable and receivable, GAAP-compliant bookkeeping, audit coordination, and resale certificates.</p><div class="tw-geo-law-foot">Financial-only tier &rarr;</div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-section tw-sol-faq-section">
+    <div class="tw-container-wide">
+      <div class="tw-sol-faq-grid">
+        <div class="tw-sol-faq-head">
+          <div class="tw-eyebrow">Kent County FAQs</div>
+          <h2>The county-specific <em>questions</em> we get.</h2>
+          <p>For all-purpose HOA questions see our <a href="/faq" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">main FAQ hub</a>.</p>
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Ask your own question &rarr;</a>
+        </div>
+        <FaqAccordion items={countyFaqs} defaultOpen={0} />
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+  <Footer />
+</BaseLayout>

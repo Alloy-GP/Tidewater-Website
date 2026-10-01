@@ -1,0 +1,239 @@
+---
+// HOA Management — Frederick County, MD. Hand-built to the standard (tw-geo).
+// Lead: Kate Cornell (Baltimore & DC Metro — Frederick sits on the I-270/I-70
+// corridor, not the Eastern Shore). Self-canonical; rental cross-link.
+// See docs/county-page-playbook.md. Verified local context only.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Footer from '../../../components/Footer.astro';
+import CTA from '../../../components/CTA.astro';
+import FaqAccordion from '../../../components/FaqAccordion.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { serviceSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+
+const countyFaqs = [
+  { q: 'Our community just came out of developer control. What should we do first?', a: 'A transition audit, before anything else. It establishes what the developer actually handed over &mdash; records, reserves, common-area condition &mdash; while warranty claims are still open. Skipping it is the single most expensive mistake a newly turned-over board makes.' },
+  { q: 'How many communities will our manager be handling?', a: 'Manager portfolios are capped at <strong>8&ndash;12 communities</strong> &mdash; a hard ceiling, so a Frederick board gets a manager who knows its governing documents rather than one lost in an overloaded book.' },
+  { q: 'What happens after hours?', a: 'Our emergency line is answered by Tidewater community managers on a rotating on-call schedule, not a third-party answering service. Callback standard is 20 minutes, <strong>contractually guaranteed at 30</strong>.' },
+  { q: 'What does HOA management cost in Frederick County?', a: 'We quote per association rather than publishing a rate card, because cost tracks community size, vendor count, meeting cadence and complexity. <a href="/request-a-proposal">Request a proposal</a> for a line-item number, or start with the <a href="/hoa-management/hoa-financial-management">financial-only tier</a>.' },
+  { q: 'How quickly can you take over our Frederick County community?', a: 'The notice period in your current management agreement sets the pace. From there we work to a <strong>30/60/90-day</strong> plan covering records, bank accounts, vendor assignment and the first reporting cycle &mdash; see the <a href="/solutions/switching-hoa-management-company">full transition timeline</a>.' },
+];
+
+const canonical = SITE.url + '/hoa-management/maryland/frederick-county';
+
+const schemas = [
+  serviceSchema({
+    name: 'HOA Management Frederick County Maryland',
+    description: 'AAMC-accredited HOA and condo association management across Frederick County, Maryland — Frederick, Urbana, Middletown, Mount Airy, and Brunswick.',
+    url: canonical,
+    areaServed: 'Frederick County, Maryland',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'HOA Management', url: SITE.url + '/hoa-management' },
+    { name: 'Maryland', url: SITE.url + '/hoa-management/maryland' },
+    { name: 'Frederick County', url: canonical },
+  ]),
+  faqSchema(countyFaqs),
+];
+
+const cities = [
+  { name: 'Frederick',    meta: 'Condo · single-family · historic district', tag: 'County seat' },
+  { name: 'Urbana',       meta: 'Master-planned HOA · growth corridor', tag: 'Growing' },
+  { name: 'Middletown',   meta: 'Single-family HOA · western county' },
+  { name: 'Mount Airy',   meta: 'Single-family HOA · Carroll County line' },
+  { name: 'Walkersville', meta: 'Townhome · single-family · north of the city' },
+  { name: 'Brunswick',    meta: 'Single-family HOA · Potomac-adjacent' },
+  { name: 'New Market',   meta: 'Single-family HOA · east-county growth' },
+];
+---
+<BaseLayout
+  title="HOA Management Frederick County Maryland — Tidewater"
+  description="HOA and condo management in Frederick County — Frederick, Urbana, Middletown, Mount Airy, and Brunswick. AAMC-accredited, family-owned since 1989."
+  pageSchema={schemas}
+  pageStylesheet="styles-geo.css"
+>
+  <Topbar variant="default" />
+  <Header activeNav="mgmt" logoSrc="/assets/Tidewater-Management-Logo.svg" logoAlt="Tidewater Management" />
+  <Breadcrumb variant="management" crumbs={[
+    { label: 'HOA Management', href: '/hoa-management' },
+    { label: 'Maryland', href: '/hoa-management/maryland' },
+    { label: 'Frederick County' },
+  ]} />
+
+  <section class="tw-geo-hero">
+    <div class="tw-geo-hero-bg"></div>
+    <div class="tw-geo-hero-paper"></div>
+    <div class="tw-geo-hero-grid">
+      <div class="tw-geo-hero-copy">
+        <h1 class="tw-geo-hero-title">HOA management in <em>Frederick County.</em></h1>
+        <p class="tw-geo-hero-lede">
+          Frederick has grown faster than most of our footprint, which puts an unusual share of its associations in the same phase at once &mdash; freshly turned over from a developer, or about to be. Family-owned since 1989, AAMC-accredited, with capped manager portfolios so yours is known rather than numbered.
+        </p>
+        <div class="tw-geo-hero-actions">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-lg">Request a proposal &rarr;</a>
+          <a href="#communities" class="tw-btn tw-btn-ghost">See where we manage &rarr;</a>
+        </div>
+        <div class="tw-geo-hero-stats">
+          <div><div class="tw-geo-hero-stat-num">450+</div><div class="tw-geo-hero-stat-label">Communities managed across six states</div></div>
+          <div><div class="tw-geo-hero-stat-num gold">AAMC&reg;</div><div class="tw-geo-hero-stat-label">CAI&rsquo;s highest company accreditation &middot; PCAM on staff</div></div>
+          <div><div class="tw-geo-hero-stat-num">1989</div><div class="tw-geo-hero-stat-label">Family-owned and operated &mdash; 35+ years in the Mid-Atlantic</div></div>
+        </div>
+      </div>
+      <aside class="tw-geo-hero-side">
+        <div class="tw-geo-hero-side-eyebrow">In Frederick County</div>
+        <h3>Where we manage</h3>
+        <svg viewBox="0 0 360 290" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Schematic map of Frederick County, Maryland">
+          <path d="M96 48 Q150 40 196 54 L246 92 Q272 150 256 210 L214 248 Q168 244 142 214 L92 160 Q66 104 96 48 Z" class="tw-geo-map-county served" style="cursor:default"><title>Frederick County</title></path>
+          <circle cx="150" cy="86" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Walkersville</title></circle>
+          <text x="158" y="84" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Walkersville</text>
+          <circle cx="112" cy="130" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Middletown</title></circle>
+          <text x="46" y="128" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Middletown</text>
+          <circle class="tw-geo-map-dot-pulse" cx="160" cy="132" r="8"/>
+          <circle cx="160" cy="132" r="6" fill="var(--tw-gold)" stroke="var(--tw-cream)" stroke-width="2"><title>Frederick</title></circle>
+          <text x="170" y="136" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="800" font-size="11">Frederick</text>
+          <circle cx="214" cy="118" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>New Market</title></circle>
+          <text x="222" y="114" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">New Market</text>
+          <circle cx="196" cy="178" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Urbana</title></circle>
+          <text x="204" y="182" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Urbana</text>
+          <circle cx="132" cy="200" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Brunswick</title></circle>
+          <text x="70" y="204" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Brunswick</text>
+        </svg>
+        <div class="tw-geo-map-legend">
+          <div class="tw-geo-map-legend-row"><span class="tw-geo-map-legend-swatch served"></span>Cities &amp; towns we serve</div>
+          <div class="tw-geo-map-legend-row"><span class="tw-geo-map-legend-swatch hq"></span>County seat &middot; Frederick</div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="tw-geo-section linen" style="padding:14px 0">
+    <div class="tw-container-wide" style="text-align:center">
+      <p style="margin:0;font-size:14px;color:var(--tw-fg-muted)">Managing a rental property in Frederick County? See <a href="/rental-management/maryland" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">Tidewater rental management</a> instead &mdash; this page is for HOA &amp; condo association boards.</p>
+    </div>
+  </div>
+
+  <section class="tw-geo-section cream">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">Where We Manage</div>
+        <h2 class="tw-section-title">Frederick County coverage, <em>town by town.</em></h2>
+        <p class="tw-section-lede">We cover the whole county &mdash; the fast-growing I-270 corridor, the city of Frederick, and the rural west. Each town carries its own association mix.</p>
+      </div>
+      <div class="tw-geo-neighbors">
+        {cities.map((ct) => (
+          <a href="/hoa-management/maryland" class="tw-geo-neighbor">
+            <div class="tw-geo-neighbor-name">{ct.name}</div>
+            <div class="tw-geo-neighbor-meta">{ct.meta}</div>
+            {ct.tag && <span class="tw-geo-neighbor-tag">{ct.tag}</span>}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">What&rsquo;s Different Here</div>
+        <h2 class="tw-section-title">A county still <em>taking delivery.</em></h2>
+        <p class="tw-section-lede">Frederick&rsquo;s growth pace shapes the work &mdash; a lot of boards are managing what a developer just handed them.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card gold">
+          <h3>Fresh out of developer control</h3>
+          <p>So many associations turned over at once that the common failure mode is shared: a board accepts turnover without a transition audit, then discovers two years later that common-area deficiencies it could have claimed on warranty are now its own reserve problem.</p>
+          <div class="tw-geo-law-foot">Urbana · the growth corridor</div>
+        </div>
+        <div class="tw-geo-law-card sage">
+          <h3>Rural-west utilities</h3>
+          <p>Outside the growth corridor the county turns rural, and associations there carry private roads, shared wells, and septic obligations that suburban boards never encounter.</p>
+          <div class="tw-geo-law-foot">Western county</div>
+        </div>
+        <div class="tw-geo-law-card">
+          <h3>Frederick historic district</h3>
+          <p>The city of Frederick adds a historic district, with the architectural review that comes with it &mdash; a second approval track for associations inside its bounds.</p>
+          <div class="tw-geo-law-foot">City of Frederick</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section cream" style="padding:64px 0">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">Regional Leadership</div>
+        <h2 class="tw-section-title" style="margin:10px 0 14px">A dedicated CAM, <em>backed by regional leadership.</em></h2>
+        <p class="tw-section-lede">Frederick is covered by our Baltimore &amp; DC Metro team, and the developer-management program is a direct fit for the county&rsquo;s wave of newly turned-over communities.</p>
+      </div>
+      <div class="tw-geo-manager">
+        <div class="tw-geo-manager-avatar">KC</div>
+        <div>
+          <div class="tw-geo-manager-eyebrow">Baltimore &amp; DC Metro Regional Director</div>
+          <div class="tw-geo-manager-name">Kate Cornell</div>
+          <p class="tw-geo-manager-role">
+            Kate oversees the direction and professional development of the Community Association Management team across the Owings Mills and Silver Spring offices, and co-leads the developer management program &mdash; the team that runs developer-controlled communities through to homeowner turnover, which is exactly Frederick&rsquo;s live issue. Manager portfolios here are capped at 8&ndash;12 communities, so your board works with a dedicated CAM, not a rotating pool. <strong>15+ years</strong> in the industry.
+          </p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:200px">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-block">Request a proposal &rarr;</a>
+          <a href="tel:+14435480191" class="tw-btn tw-btn-outline tw-btn-block">(443) 548-0191</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="communities" class="tw-geo-section mist">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">What We Manage</div>
+        <h2 class="tw-section-title">The kinds of communities we run <em>across Frederick County.</em></h2>
+        <p class="tw-section-lede">Board references available on request &mdash; we&rsquo;d rather you talk to a comparable Frederick board than read about us.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card"><h3>Newly turned-over HOAs</h3><p>Urbana and corridor communities fresh from developer control, where transition audits and warranty claims come first.</p></div>
+        <div class="tw-geo-law-card"><h3>City &amp; historic-district condos</h3><p>Frederick city associations carrying historic-district review alongside normal governance.</p></div>
+        <div class="tw-geo-law-card"><h3>Rural-west HOAs</h3><p>Middletown and western communities on private roads, shared wells, or septic, with the obligations those bring.</p></div>
+        <div class="tw-geo-law-card"><h3>Established single-family</h3><p>Mount Airy, Walkersville, and Brunswick communities where reserves and capital planning carry the budget.</p></div>
+      </div>
+      <div style="display:flex;justify-content:center;margin-top:32px;gap:14px;flex-wrap:wrap">
+        <a href="/testimonials" class="tw-btn tw-btn-outline">Read board reviews &rarr;</a>
+        <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Get board references &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">Services in Frederick County</div>
+        <h2 class="tw-section-title">Three service tiers, <em>same local team.</em></h2>
+        <p class="tw-section-lede">Pick the level your board needs &mdash; the manager, the response time, and the accreditation stay the same.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:48px">
+        <a href="/hoa-management" class="tw-geo-law-card" style="text-decoration:none"><h3>Full Service</h3><p>Financial and full property management: board-meeting attendance, neighborhood inspections, vendor management and on-site oversight, financial controls, and day-to-day operations &mdash; including HR for association employees.</p><div class="tw-geo-law-foot">Full-service details &rarr;</div></a>
+        <a href="/hoa-management#tiers" class="tw-geo-law-card gold" style="text-decoration:none"><h3>Flex Service</h3><p>Governance, legal affairs, risk management, maintenance coordination, contracting, and full financial management &mdash; with meetings, inspections, and on-site presence available &agrave; la carte at a set hourly rate.</p><div class="tw-geo-law-foot">Flex tier details &rarr;</div></a>
+        <a href="/hoa-management/hoa-financial-management" class="tw-geo-law-card sage" style="text-decoration:none"><h3>Financial Only</h3><p>Strictly financial for self-managed Frederick boards: budgets, reserves, assessment collection, accounts payable and receivable, GAAP-compliant bookkeeping, audit coordination, and resale certificates.</p><div class="tw-geo-law-foot">Financial-only tier &rarr;</div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-section tw-sol-faq-section">
+    <div class="tw-container-wide">
+      <div class="tw-sol-faq-grid">
+        <div class="tw-sol-faq-head">
+          <div class="tw-eyebrow">Frederick County FAQs</div>
+          <h2>The county-specific <em>questions</em> we get.</h2>
+          <p>For all-purpose HOA questions see our <a href="/faq" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">main FAQ hub</a>.</p>
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Ask your own question &rarr;</a>
+        </div>
+        <FaqAccordion items={countyFaqs} defaultOpen={0} />
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+  <Footer />
+</BaseLayout>
