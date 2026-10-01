@@ -6,7 +6,15 @@
 // | 'video') alongside the articles.
 import { ALL_POSTS } from './BlogPostsData.js';
 
-const stripTags = (s: string) => String(s).replace(/<[^>]+>/g, '');
+// Strip HTML tags AND decode the named entities the blog titles/deks use, so
+// text interpolation doesn't double-encode them (e.g. "&amp;" -> "&").
+const clean = (s: string) => String(s)
+  .replace(/<[^>]+>/g, '')
+  .replace(/&rsquo;/g, '’').replace(/&lsquo;/g, '‘')
+  .replace(/&ldquo;/g, '“').replace(/&rdquo;/g, '”')
+  .replace(/&mdash;/g, '—').replace(/&ndash;/g, '–')
+  .replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '…')
+  .replace(/&amp;/g, '&');
 const audFor = (catId?: string) => (catId === 'rental' ? ['Rental'] : ['HOA']);
 
 const items = [...ALL_POSTS]
@@ -14,8 +22,8 @@ const items = [...ALL_POSTS]
   .map((p) => ({
     type: 'article',
     time: `${p.readTime} min read`,
-    title: stripTags(p.title),
-    desc: p.dek,
+    title: clean(p.title),
+    desc: clean(p.dek),
     href: p.href,
     aud: audFor(p.category?.id),
   }));
