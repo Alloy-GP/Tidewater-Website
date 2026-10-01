@@ -247,10 +247,11 @@ const states = [
             </div>
             <p class="tw-sa-state-body">{s.body}</p>
             <div class="tw-sa-state-counties">
+              {/* Teal = has a live page (clickable). Muted = served, page not built yet. */}
               {s.countyList.map(c => (
                 c.href
                   ? <a href={c.href} class="tw-sa-state-county served" title={`${c.name} county page`}>{c.name}</a>
-                  : <span class={`tw-sa-state-county${c.served ? ' served' : ''}`}>{c.name}</span>
+                  : <span class="tw-sa-state-county">{c.name}</span>
               ))}
             </div>
             <a href={s.href} class="tw-sa-state-cta">
