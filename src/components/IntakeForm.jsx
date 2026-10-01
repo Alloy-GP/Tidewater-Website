@@ -235,7 +235,7 @@ export default function IntakeForm() {
       setSubmission({ id, first: contact.name.trim().split(' ')[0] });
       setStep('done');
     } catch (err) {
-      setSendError(err.message || 'Something went wrong. Please try again or call (443) 548-0191.');
+      setSendError(err.message || 'Something went wrong. Please try again or call (855) 876-5500.');
     } finally {
       setSending(false);
     }

@@ -1,0 +1,253 @@
+---
+// HOA Management — Carroll County, MD. Hand-built to the standard (tw-geo).
+// Lead: Kate Cornell (Baltimore & DC Metro). Self-canonical; rental cross-link
+// to the rental hub (no Carroll rental page). See docs/county-page-playbook.md.
+// Verified local context only; no invented per-county numbers.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Footer from '../../../components/Footer.astro';
+import CTA from '../../../components/CTA.astro';
+import FaqAccordion from '../../../components/FaqAccordion.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { serviceSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+
+const countyFaqs = [
+  { q: 'Do you work with small Carroll County associations?', a: 'Yes. Manager portfolios are capped at <strong>8&ndash;12 communities</strong>, so a smaller association gets the same attention as a large one rather than being the account nobody has time for. Our financial-only tier is built for boards that want professional books and reserve planning while continuing to run their own operations.' },
+  { q: 'What does HOA management cost in Carroll County?', a: 'We quote per association rather than publishing a rate card, because the work does not scale neatly with unit count &mdash; a small HOA still needs the same books, reserve study and covenant enforcement. <a href="/request-a-proposal">Request a proposal</a> for a line-item number, or start with the <a href="/hoa-management/hoa-financial-management">financial-only tier</a>.' },
+  { q: 'Our HOA owns its roads. Can you handle that?', a: 'Yes. Private-road reserve planning is the single most common gap we find in Carroll County. We get a pavement condition assessment, model the repave into a 20-year funding plan, and bring the board a per-unit number before it becomes a special assessment.' },
+  { q: 'Do you serve all of Carroll County?', a: 'Yes &mdash; Westminster, Eldersburg, Sykesville, Mount Airy, Hampstead, Taneytown, Manchester, and the rural north county. The county is covered out of our Owings Mills headquarters.' },
+  { q: 'How quickly can you take over our Carroll County community?', a: 'The notice period in your current management agreement sets the pace, not us. From there we work to a <strong>30/60/90-day</strong> plan covering records, bank accounts, vendor assignment and the first reporting cycle &mdash; see the <a href="/solutions/switching-hoa-management-company">full transition timeline</a>.' },
+];
+
+const canonical = SITE.url + '/hoa-management/maryland/carroll-county';
+
+const schemas = [
+  serviceSchema({
+    name: 'HOA Management Carroll County Maryland',
+    description: 'AAMC-accredited HOA and condo association management across Carroll County, Maryland — Westminster, Eldersburg, Sykesville, Mount Airy, and Hampstead.',
+    url: canonical,
+    areaServed: 'Carroll County, Maryland',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'HOA Management', url: SITE.url + '/hoa-management' },
+    { name: 'Maryland', url: SITE.url + '/hoa-management/maryland' },
+    { name: 'Carroll County', url: canonical },
+  ]),
+  faqSchema(countyFaqs),
+];
+
+const cities = [
+  { name: 'Westminster', meta: 'Town-center condo · historic single-family', tag: 'County seat' },
+  { name: 'Eldersburg',  meta: 'Townhome HOA · private roads · stormwater ponds', tag: 'Largest market' },
+  { name: 'Sykesville',  meta: 'Small-lot single-family · shared-amenity HOAs' },
+  { name: 'Mount Airy',  meta: 'Split-county · newer construction' },
+  { name: 'Hampstead',   meta: 'Small single-family HOAs · well & septic' },
+  { name: 'Taneytown',   meta: 'Rural HOA · minimal common area' },
+  { name: 'Manchester',  meta: 'Small association · volunteer-heavy boards' },
+];
+---
+<BaseLayout
+  title="HOA Management Carroll County Maryland — Tidewater"
+  description="HOA and condo management in Carroll County — Westminster, Eldersburg, Sykesville, Mount Airy, and Hampstead. AAMC-accredited, family-owned since 1989."
+  pageSchema={schemas}
+  pageStylesheet="styles-geo.css"
+>
+  <Topbar variant="default" />
+  <Header activeNav="mgmt" logoSrc="/assets/Tidewater-Management-Logo.svg" logoAlt="Tidewater Management" />
+  <Breadcrumb variant="management" crumbs={[
+    { label: 'HOA Management', href: '/hoa-management' },
+    { label: 'Maryland', href: '/hoa-management/maryland' },
+    { label: 'Carroll County' },
+  ]} />
+
+  <section class="tw-geo-hero">
+    <div class="tw-geo-hero-bg"></div>
+    <div class="tw-geo-hero-paper"></div>
+    <div class="tw-geo-hero-grid">
+      <div class="tw-geo-hero-copy">
+        <h1 class="tw-geo-hero-title">HOA management in <em>Carroll County.</em></h1>
+        <p class="tw-geo-hero-lede">
+          Westminster, Eldersburg, Sykesville, Mount Airy &mdash; Carroll County associations run smaller and newer than the rest of our footprint, and we staff for that rather than pretending it&rsquo;s Columbia. Family-owned since 1989, AAMC-accredited, with capped manager portfolios so yours is known rather than numbered.
+        </p>
+        <div class="tw-geo-hero-actions">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-lg">Request a proposal &rarr;</a>
+          <a href="#communities" class="tw-btn tw-btn-ghost">See where we manage &rarr;</a>
+        </div>
+        <div class="tw-geo-hero-stats">
+          <div><div class="tw-geo-hero-stat-num">450+</div><div class="tw-geo-hero-stat-label">Communities managed across six states</div></div>
+          <div><div class="tw-geo-hero-stat-num gold">AAMC&reg;</div><div class="tw-geo-hero-stat-label">CAI&rsquo;s highest company accreditation &middot; PCAM on staff</div></div>
+          <div><div class="tw-geo-hero-stat-num">1989</div><div class="tw-geo-hero-stat-label">Family-owned and operated &mdash; 35+ years in the Mid-Atlantic</div></div>
+        </div>
+      </div>
+      <aside class="tw-geo-hero-side">
+        <div class="tw-geo-hero-side-eyebrow">In Carroll County</div>
+        <h3>Where we manage</h3>
+        <svg viewBox="0 0 360 290" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Schematic map of Carroll County, Maryland">
+          <path d="M96 52 Q168 44 220 58 L256 96 Q262 150 240 200 L198 236 Q150 230 128 196 L98 150 Q78 100 96 52 Z" class="tw-geo-map-county served" style="cursor:default"><title>Carroll County</title></path>
+          <circle cx="120" cy="80" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Taneytown</title></circle>
+          <text x="56" y="78" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Taneytown</text>
+          <circle cx="210" cy="84" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Manchester</title></circle>
+          <text x="218" y="82" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Manchester</text>
+          <circle cx="214" cy="120" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Hampstead</title></circle>
+          <text x="222" y="124" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Hampstead</text>
+          <circle class="tw-geo-map-dot-pulse" cx="162" cy="130" r="8"/>
+          <circle cx="162" cy="130" r="6" fill="var(--tw-gold)" stroke="var(--tw-cream)" stroke-width="2"><title>Westminster</title></circle>
+          <text x="172" y="134" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="800" font-size="11">Westminster</text>
+          <circle cx="196" cy="186" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Eldersburg</title></circle>
+          <text x="204" y="190" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Eldersburg</text>
+          <circle cx="150" cy="198" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Sykesville</title></circle>
+          <text x="84" y="202" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Sykesville</text>
+          <circle cx="120" cy="182" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Mount Airy</title></circle>
+          <text x="46" y="180" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Mount Airy</text>
+        </svg>
+        <div class="tw-geo-map-legend">
+          <div class="tw-geo-map-legend-row"><span class="tw-geo-map-legend-swatch served"></span>Cities &amp; towns we serve</div>
+          <div class="tw-geo-map-legend-row"><span class="tw-geo-map-legend-swatch hq"></span>County seat &middot; Westminster</div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="tw-geo-section linen" style="padding:14px 0">
+    <div class="tw-container-wide" style="text-align:center">
+      <p style="margin:0;font-size:14px;color:var(--tw-fg-muted)">Managing a rental property in Carroll County? See <a href="/rental-management/maryland" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">Tidewater rental management</a> instead &mdash; this page is for HOA &amp; condo association boards.</p>
+    </div>
+  </div>
+
+  <section class="tw-geo-section cream">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">Where We Manage</div>
+        <h2 class="tw-section-title">Carroll County coverage, <em>town by town.</em></h2>
+        <p class="tw-section-lede">We cover the whole county &mdash; the Westminster town center, the Eldersburg/Sykesville private-road belt, and the rural north. Each town carries its own association mix.</p>
+      </div>
+      <div class="tw-geo-neighbors">
+        {cities.map((ct) => (
+          <a href="/hoa-management/maryland" class="tw-geo-neighbor">
+            <div class="tw-geo-neighbor-name">{ct.name}</div>
+            <div class="tw-geo-neighbor-meta">{ct.meta}</div>
+            {ct.tag && <span class="tw-geo-neighbor-tag">{ct.tag}</span>}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">What&rsquo;s Different Here</div>
+        <h2 class="tw-section-title">Small associations, <em>real obligations.</em></h2>
+        <p class="tw-section-lede">Smaller budgets leave less room for a surprise. These are the three that catch Carroll boards most.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card">
+          <h3>Roads the county won&rsquo;t take</h3>
+          <p>Many Eldersburg and Sykesville developments own their roads outright, so the association &mdash; not the county &mdash; pays to repave them. That belongs in a reserve study from day one rather than the year the cracks appear, because a smaller budget can&rsquo;t absorb it unplanned.</p>
+          <div class="tw-geo-law-foot">Private roads</div>
+        </div>
+        <div class="tw-geo-law-card gold">
+          <h3>Stormwater-pond obligations</h3>
+          <p>Newer Carroll developments commonly carry a stormwater facility with a <strong>recorded maintenance agreement</strong> and county inspection obligations. Missed maintenance becomes enforcement, and enforcement becomes a special assessment.</p>
+          <div class="tw-geo-law-foot">SWM facilities</div>
+        </div>
+        <div class="tw-geo-law-card sage">
+          <h3>The reserve rule applies anyway</h3>
+          <p>A smaller association still needs books that reconcile, a reserve plan the board can defend, and someone answering the phone. That&rsquo;s what the <strong>financial-only tier</strong> is &mdash; a standalone finance department for boards that keep running their own operations.</p>
+          <div class="tw-geo-law-foot">MD Code, Real Prop. &sect; 11B</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section cream" style="padding:64px 0">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">Regional Leadership</div>
+        <h2 class="tw-section-title" style="margin:10px 0 14px">A dedicated CAM, <em>backed by regional leadership.</em></h2>
+        <p class="tw-section-lede">Carroll is covered out of our Owings Mills headquarters, so even a small association&rsquo;s dedicated CAM has the regional director and full support team behind them.</p>
+      </div>
+      <div class="tw-geo-manager">
+        <div class="tw-geo-manager-avatar">KC</div>
+        <div>
+          <div class="tw-geo-manager-eyebrow">Baltimore &amp; DC Metro Regional Director</div>
+          <div class="tw-geo-manager-name">Kate Cornell</div>
+          <p class="tw-geo-manager-role">
+            Kate oversees the direction and professional development of the Community Association Management team across the Owings Mills and Silver Spring offices, and co-leads the developer management program. Manager portfolios here are capped at 8&ndash;12 communities, so a small Carroll board works with a dedicated CAM as its day-to-day point of contact, not a rotating pool. <strong>15+ years</strong> in the industry.
+          </p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:200px">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-block">Request a proposal &rarr;</a>
+          <a href="tel:+18558765500" class="tw-btn tw-btn-outline tw-btn-block">(855) 876-5500</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="communities" class="tw-geo-section mist">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">What We Manage</div>
+        <h2 class="tw-section-title">The kinds of communities we run <em>across Carroll County.</em></h2>
+        <p class="tw-section-lede">Board references available on request &mdash; we&rsquo;d rather you talk to a comparable Carroll board than read about us.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card"><h3>Private-road HOAs</h3><p>Eldersburg and Sykesville communities that own their roads, where pavement reserves carry the budget.</p></div>
+        <div class="tw-geo-law-card"><h3>Town-center condos</h3><p>Westminster condo and historic-district associations, including the municipal review that comes with the city limits.</p></div>
+        <div class="tw-geo-law-card"><h3>Rural well &amp; septic HOAs</h3><p>Hampstead, Manchester, and north-county associations with shared wells or community septic and MDE obligations.</p></div>
+        <div class="tw-geo-law-card"><h3>Self-managed &amp; financial-only boards</h3><p>Small associations that want CPA-led books, collections, and reserve planning while keeping operational control.</p></div>
+      </div>
+      <div style="display:flex;justify-content:center;margin-top:32px;gap:14px;flex-wrap:wrap">
+        <a href="/testimonials" class="tw-btn tw-btn-outline">Read board reviews &rarr;</a>
+        <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Get board references &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">Services in Carroll County</div>
+        <h2 class="tw-section-title">Three service tiers, <em>sized for smaller associations.</em></h2>
+        <p class="tw-section-lede">Many Carroll boards start on financial-only and move up &mdash; a legitimate path, not a downgrade. The manager, response time, and accreditation stay the same.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:48px">
+        <a href="/hoa-management/hoa-financial-management" class="tw-geo-law-card sage" style="text-decoration:none">
+          <h3>Financial Only</h3>
+          <p>Built for self-managed Carroll boards: budgets, reserves, assessment collection, accounts payable and receivable, GAAP-compliant bookkeeping, audit coordination, and resale certificates &mdash; the board keeps operational control.</p>
+          <div class="tw-geo-law-foot">Financial-only tier &rarr;</div>
+        </a>
+        <a href="/hoa-management" class="tw-geo-law-card" style="text-decoration:none">
+          <h3>Full Service</h3>
+          <p>Financial and full property management for single-family and townhome HOAs: board-meeting attendance, inspections, vendor management and on-site oversight, and day-to-day operations &mdash; including HR for association employees.</p>
+          <div class="tw-geo-law-foot">Full-service details &rarr;</div>
+        </a>
+        <a href="/hoa-management#tiers" class="tw-geo-law-card gold" style="text-decoration:none">
+          <h3>Flex Service</h3>
+          <p>Governance, legal affairs, risk management, maintenance coordination, contracting, and full financial management &mdash; with meetings, inspections, and on-site presence available &agrave; la carte at a set hourly rate.</p>
+          <div class="tw-geo-law-foot">Flex tier details &rarr;</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-section tw-sol-faq-section">
+    <div class="tw-container-wide">
+      <div class="tw-sol-faq-grid">
+        <div class="tw-sol-faq-head">
+          <div class="tw-eyebrow">Carroll County FAQs</div>
+          <h2>The county-specific <em>questions</em> we get.</h2>
+          <p>For all-purpose HOA questions see our <a href="/faq" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">main FAQ hub</a>.</p>
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Ask your own question &rarr;</a>
+        </div>
+        <FaqAccordion items={countyFaqs} defaultOpen={0} />
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+  <Footer />
+</BaseLayout>

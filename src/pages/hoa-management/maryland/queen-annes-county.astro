@@ -1,0 +1,241 @@
+---
+// HOA Management — Queen Anne's County, MD. Hand-built to the standard (tw-geo).
+// Lead: Don Gentry (Delmarva). Self-canonical; rental cross-link to the hub
+// (no QAC rental page). See docs/county-page-playbook.md. Verified local only.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Footer from '../../../components/Footer.astro';
+import CTA from '../../../components/CTA.astro';
+import FaqAccordion from '../../../components/FaqAccordion.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { serviceSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+
+const countyFaqs = [
+  { q: 'Do you manage waterfront and marina-adjacent associations?', a: 'Yes. The distinguishing work is capital planning &mdash; bulkheads, piers, ramps and shoreline each have their own replacement cycle, and they belong in a reserve study from the beginning rather than the year they fail.' },
+  { q: 'How many communities will our manager be handling?', a: 'Manager portfolios are capped at <strong>8&ndash;12 communities</strong> &mdash; a hard ceiling, so a Queen Anne&rsquo;s board gets a manager who knows its governing documents rather than one lost in an overloaded book.' },
+  { q: 'What happens after hours?', a: 'Our emergency line is answered by Tidewater community managers on a rotating on-call schedule, not a third-party answering service. Callback standard is 20 minutes, <strong>contractually guaranteed at 30</strong>.' },
+  { q: 'What does HOA management cost in Queen Anne&rsquo;s County?', a: 'We quote per association rather than publishing a rate card, because cost tracks community size, vendor count, meeting cadence and complexity. <a href="/request-a-proposal">Request a proposal</a> for a line-item number, or start with the <a href="/hoa-management/hoa-financial-management">financial-only tier</a>.' },
+  { q: 'How quickly can you take over our Queen Anne&rsquo;s community?', a: 'The notice period in your current management agreement sets the pace. From there we work to a <strong>30/60/90-day</strong> plan covering records, bank accounts, vendor assignment and the first reporting cycle &mdash; see the <a href="/solutions/switching-hoa-management-company">full transition timeline</a>.' },
+];
+
+const canonical = SITE.url + '/hoa-management/maryland/queen-annes-county';
+
+const schemas = [
+  serviceSchema({
+    name: 'HOA Management Queen Anne’s County Maryland',
+    description: 'AAMC-accredited HOA and condo association management across Queen Anne’s County, Maryland — Kent Island, Stevensville, Chester, Grasonville, and Centreville.',
+    url: canonical,
+    areaServed: 'Queen Anne’s County, Maryland',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'HOA Management', url: SITE.url + '/hoa-management' },
+    { name: 'Maryland', url: SITE.url + '/hoa-management/maryland' },
+    { name: 'Queen Anne’s County', url: canonical },
+  ]),
+  faqSchema(countyFaqs),
+];
+
+const cities = [
+  { name: 'Stevensville', meta: 'Condo · townhome · Kent Island, bridge-adjacent' },
+  { name: 'Chester',      meta: 'Single-family · condo · Kent Island' },
+  { name: 'Grasonville',  meta: 'Waterfront association · marina communities' },
+  { name: 'Centreville',  meta: 'Single-family HOA · inland', tag: 'County seat' },
+  { name: 'Queenstown',   meta: 'Single-family HOA · Route 50 corridor' },
+  { name: 'Church Hill',  meta: 'Small association · north county' },
+];
+---
+<BaseLayout
+  title="HOA Management Queen Anne’s County Maryland — Tidewater"
+  description="HOA and condo association management in Queen Anne’s County — Kent Island, Stevensville, Chester, Grasonville, and Centreville. AAMC-accredited, family-owned since 1989."
+  pageSchema={schemas}
+  pageStylesheet="styles-geo.css"
+>
+  <Topbar variant="default" />
+  <Header activeNav="mgmt" logoSrc="/assets/Tidewater-Management-Logo.svg" logoAlt="Tidewater Management" />
+  <Breadcrumb variant="management" crumbs={[
+    { label: 'HOA Management', href: '/hoa-management' },
+    { label: 'Maryland', href: '/hoa-management/maryland' },
+    { label: 'Queen Anne’s County' },
+  ]} />
+
+  <section class="tw-geo-hero">
+    <div class="tw-geo-hero-bg"></div>
+    <div class="tw-geo-hero-paper"></div>
+    <div class="tw-geo-hero-grid">
+      <div class="tw-geo-hero-copy">
+        <h1 class="tw-geo-hero-title">HOA management in <em>Queen Anne&rsquo;s County.</em></h1>
+        <p class="tw-geo-hero-lede">
+          Queen Anne&rsquo;s is the first county across the Bay Bridge, and Kent Island associations carry a mix of year-round commuters and second-home owners that few other markets do. Family-owned since 1989, AAMC-accredited, with capped manager portfolios so yours is known rather than numbered.
+        </p>
+        <div class="tw-geo-hero-actions">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-lg">Request a proposal &rarr;</a>
+          <a href="#communities" class="tw-btn tw-btn-ghost">See where we manage &rarr;</a>
+        </div>
+        <div class="tw-geo-hero-stats">
+          <div><div class="tw-geo-hero-stat-num">450+</div><div class="tw-geo-hero-stat-label">Communities managed across six states</div></div>
+          <div><div class="tw-geo-hero-stat-num gold">AAMC&reg;</div><div class="tw-geo-hero-stat-label">CAI&rsquo;s highest company accreditation &middot; PCAM on staff</div></div>
+          <div><div class="tw-geo-hero-stat-num">1989</div><div class="tw-geo-hero-stat-label">Family-owned and operated &mdash; 35+ years in the Mid-Atlantic</div></div>
+        </div>
+      </div>
+      <aside class="tw-geo-hero-side">
+        <div class="tw-geo-hero-side-eyebrow">In Queen Anne&rsquo;s</div>
+        <h3>Where we manage</h3>
+        <svg viewBox="0 0 360 290" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Schematic map of Queen Anne's County, Maryland">
+          <!-- Bay / Kent Island water on the west edge -->
+          <path d="M40 90 Q56 150 46 210 L78 206 Q92 150 84 100 Z" fill="rgba(58,146,166,0.15)"/>
+          <path d="M96 70 Q160 56 220 72 L256 112 Q264 156 236 198 L190 232 Q150 226 128 192 L100 150 Q82 108 96 70 Z" class="tw-geo-map-county served" style="cursor:default"><title>Queen Anne's County</title></path>
+          <!-- Kent Island cluster (W) -->
+          <circle cx="104" cy="120" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Stevensville</title></circle>
+          <text x="40" y="118" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Stevensville</text>
+          <circle cx="118" cy="150" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Chester</title></circle>
+          <text x="66" y="166" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Chester</text>
+          <circle cx="146" cy="176" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Grasonville</title></circle>
+          <text x="154" y="180" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Grasonville</text>
+          <circle cx="166" cy="114" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Queenstown</title></circle>
+          <text x="174" y="110" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Queenstown</text>
+          <!-- Centreville (county seat, gold, inland) -->
+          <circle class="tw-geo-map-dot-pulse" cx="196" cy="150" r="8"/>
+          <circle cx="196" cy="150" r="6" fill="var(--tw-gold)" stroke="var(--tw-cream)" stroke-width="2"><title>Centreville</title></circle>
+          <text x="206" y="154" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="800" font-size="11">Centreville</text>
+          <circle cx="210" cy="104" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Church Hill</title></circle>
+          <text x="218" y="100" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Church Hill</text>
+        </svg>
+        <div class="tw-geo-map-legend">
+          <div class="tw-geo-map-legend-row"><span class="tw-geo-map-legend-swatch served"></span>Cities &amp; towns we serve</div>
+          <div class="tw-geo-map-legend-row"><span class="tw-geo-map-legend-swatch hq"></span>County seat &middot; Centreville</div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="tw-geo-section linen" style="padding:14px 0">
+    <div class="tw-container-wide" style="text-align:center">
+      <p style="margin:0;font-size:14px;color:var(--tw-fg-muted)">Managing a rental property in Queen Anne&rsquo;s County? See <a href="/rental-management/maryland" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">Tidewater rental management</a> instead &mdash; this page is for HOA &amp; condo association boards.</p>
+    </div>
+  </div>
+
+  <section class="tw-geo-section cream">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">Where We Manage</div>
+        <h2 class="tw-section-title">Queen Anne&rsquo;s coverage, <em>town by town.</em></h2>
+        <p class="tw-section-lede">We cover the whole county &mdash; the Kent Island bridge communities, the marina waterfront, and the inland farming towns. Each carries its own association mix.</p>
+      </div>
+      <div class="tw-geo-neighbors">
+        {cities.map((ct) => (
+          <a href="/hoa-management/maryland" class="tw-geo-neighbor">
+            <div class="tw-geo-neighbor-name">{ct.name}</div>
+            <div class="tw-geo-neighbor-meta">{ct.meta}</div>
+            {ct.tag && <span class="tw-geo-neighbor-tag">{ct.tag}</span>}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">What&rsquo;s Different Here</div>
+        <h2 class="tw-section-title">First stop across <em>the Bay Bridge.</em></h2>
+        <p class="tw-section-lede">Kent Island anchors the county&rsquo;s associations, with an ownership mix and a waterfront exposure that shape every budget.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card gold">
+          <h3>Two constituencies, one budget</h3>
+          <p>Kent Island mixes year-round households commuting west over the bridge with second-home owners present seasonally. A board is serving two groups with different priorities, and the budget conversation is where that shows up.</p>
+          <div class="tw-geo-law-foot">Kent Island</div>
+        </div>
+        <div class="tw-geo-law-card">
+          <h3>Waterfront capital items</h3>
+          <p>Much of the stock is water-adjacent, which brings the capital items that shape every Eastern Shore association &mdash; bulkheads, piers, ramps and shoreline, each with its own replacement cycle and none of them optional.</p>
+          <div class="tw-geo-law-foot">Grasonville &amp; the shore</div>
+        </div>
+        <div class="tw-geo-law-card sage">
+          <h3>Inland roads &amp; stormwater</h3>
+          <p>Centreville and the farming communities run smaller single-family HOAs where private roads and stormwater obligations are the recurring line items instead.</p>
+          <div class="tw-geo-law-foot">Inland county</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section cream" style="padding:64px 0">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">Regional Leadership</div>
+        <h2 class="tw-section-title" style="margin:10px 0 14px">Your Delmarva director, <em>backing the local team.</em></h2>
+        <p class="tw-section-lede">Queen Anne&rsquo;s is part of our Delmarva portfolio, so your board&rsquo;s dedicated CAM works with a regional director who runs Eastern Shore and Delaware communities day to day.</p>
+      </div>
+      <div class="tw-geo-manager">
+        <div class="tw-geo-manager-avatar">DG</div>
+        <div>
+          <div class="tw-geo-manager-eyebrow">Delmarva Regional Director</div>
+          <div class="tw-geo-manager-name">Don Gentry <span>CMCA&reg;, AMS&reg;, PCAM&reg;</span></div>
+          <p class="tw-geo-manager-role">
+            Don oversees the Eastern Shore, Ocean City and Delaware portfolio &mdash; <strong>20+ years</strong> across customer service and real estate, with a background as a hotel general manager, building engineer and government contract specialist, and a Community Association Portfolio Manager since 2006. Manager portfolios are capped at 8&ndash;12 communities, so your board works with a dedicated CAM, not a rotating pool.
+          </p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:200px">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-block">Request a proposal &rarr;</a>
+          <a href="tel:+18558765500" class="tw-btn tw-btn-outline tw-btn-block">(855) 876-5500</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="communities" class="tw-geo-section mist">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">What We Manage</div>
+        <h2 class="tw-section-title">The kinds of communities we run <em>across Queen Anne&rsquo;s.</em></h2>
+        <p class="tw-section-lede">Board references available on request &mdash; we&rsquo;d rather you talk to a comparable Queen Anne&rsquo;s board than read about us.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card"><h3>Kent Island condos &amp; townhomes</h3><p>Stevensville and Chester associations serving a commuter-and-second-home ownership mix.</p></div>
+        <div class="tw-geo-law-card"><h3>Waterfront &amp; marina communities</h3><p>Grasonville and shoreline associations with bulkheads, piers, and ramps to plan and reserve for.</p></div>
+        <div class="tw-geo-law-card"><h3>Inland single-family HOAs</h3><p>Centreville, Queenstown, and Church Hill communities where private roads and stormwater carry the budget.</p></div>
+        <div class="tw-geo-law-card"><h3>Financial-only boards</h3><p>Smaller self-managed associations that want CPA-led books and audit support without full-service overhead.</p></div>
+      </div>
+      <div style="display:flex;justify-content:center;margin-top:32px;gap:14px;flex-wrap:wrap">
+        <a href="/testimonials" class="tw-btn tw-btn-outline">Read board reviews &rarr;</a>
+        <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Get board references &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">Services in Queen Anne&rsquo;s County</div>
+        <h2 class="tw-section-title">Three service tiers, <em>same local team.</em></h2>
+        <p class="tw-section-lede">Pick the level your board needs &mdash; the manager, the response time, and the accreditation stay the same.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:48px">
+        <a href="/hoa-management" class="tw-geo-law-card" style="text-decoration:none"><h3>Full Service</h3><p>Financial and full property management: board-meeting attendance, neighborhood inspections, vendor management and on-site oversight, financial controls, and day-to-day operations &mdash; including HR for association employees.</p><div class="tw-geo-law-foot">Full-service details &rarr;</div></a>
+        <a href="/hoa-management#tiers" class="tw-geo-law-card gold" style="text-decoration:none"><h3>Flex Service</h3><p>Governance, legal affairs, risk management, maintenance coordination, contracting, and full financial management &mdash; with meetings, inspections, and on-site presence available &agrave; la carte at a set hourly rate.</p><div class="tw-geo-law-foot">Flex tier details &rarr;</div></a>
+        <a href="/hoa-management/hoa-financial-management" class="tw-geo-law-card sage" style="text-decoration:none"><h3>Financial Only</h3><p>Strictly financial for self-managed Queen Anne&rsquo;s boards: budgets, reserves, assessment collection, accounts payable and receivable, GAAP-compliant bookkeeping, audit coordination, and resale certificates.</p><div class="tw-geo-law-foot">Financial-only tier &rarr;</div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-section tw-sol-faq-section">
+    <div class="tw-container-wide">
+      <div class="tw-sol-faq-grid">
+        <div class="tw-sol-faq-head">
+          <div class="tw-eyebrow">Queen Anne&rsquo;s County FAQs</div>
+          <h2>The county-specific <em>questions</em> we get.</h2>
+          <p>For all-purpose HOA questions see our <a href="/faq" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">main FAQ hub</a>.</p>
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Ask your own question &rarr;</a>
+        </div>
+        <FaqAccordion items={countyFaqs} defaultOpen={0} />
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+  <Footer />
+</BaseLayout>

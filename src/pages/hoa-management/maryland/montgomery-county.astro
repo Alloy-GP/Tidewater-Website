@@ -1,0 +1,306 @@
+---
+// HOA Management — Montgomery County, MD. Hand-built to the Howard/Baltimore
+// standard (tw-geo). Board audience. HOA page owns "montgomery county hoa
+// management" / "hoa management montgomery county". Self-canonical. Wrong-
+// audience cross-link to the rental county page. See docs/county-page-playbook.md.
+//
+// SOURCING: portfolio-level + brief-confirmed facts only (450+ six states,
+// AAMC®, family-owned since 1989, 30-min callback, Columbia Pike office in the
+// county, Kate Cornell as Baltimore & DC Metro Regional Director — no post-
+// nominals per the brief). Local context (the CCOC, high-rise condo stock,
+// enforcement documentation) is publicly verifiable. No invented per-county
+// counts/tenure/SLAs/assessments.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Footer from '../../../components/Footer.astro';
+import CTA from '../../../components/CTA.astro';
+import FaqAccordion from '../../../components/FaqAccordion.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { serviceSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+
+const countyFaqs = [
+  { q: 'What is the CCOC and does it apply to us?', a: 'The <strong>Commission on Common Ownership Communities</strong> is a Montgomery County body that hears disputes between owners and their associations &mdash; a layer no other Maryland county has. If your association is in the county, it applies, and it is the reason enforcement documentation matters more here than elsewhere.' },
+  { q: 'How many communities will our manager be handling?', a: 'Manager portfolios are capped at <strong>8&ndash;12 communities</strong> &mdash; a hard ceiling, so a Montgomery board gets a manager who knows its governing documents rather than one lost in an overloaded book.' },
+  { q: 'What happens after hours?', a: 'Our emergency line is answered by Tidewater community managers on a rotating on-call schedule, not a third-party answering service. Callback standard is 20 minutes, <strong>contractually guaranteed at 30</strong>.' },
+  { q: 'What does HOA management cost in Montgomery County?', a: 'We quote per association rather than publishing a rate card, because cost tracks community size, vendor count, meeting cadence and complexity. <a href="/request-a-proposal">Request a proposal</a> for a line-item number, or start with the <a href="/hoa-management/hoa-financial-management">financial-only tier</a>.' },
+  { q: 'How quickly can you take over our Montgomery County community?', a: 'The notice period in your current management agreement sets the pace. From there we work to a <strong>30/60/90-day</strong> plan covering records, bank accounts, vendor assignment and the first reporting cycle &mdash; see the <a href="/solutions/switching-hoa-management-company">full transition timeline</a>.' },
+];
+
+const canonical = SITE.url + '/hoa-management/maryland/montgomery-county';
+
+const schemas = [
+  serviceSchema({
+    name: 'HOA Management Montgomery County Maryland',
+    description: 'AAMC-accredited HOA and condo association management across Montgomery County, Maryland — Rockville, Silver Spring, Bethesda, Gaithersburg, and Germantown.',
+    url: canonical,
+    areaServed: 'Montgomery County, Maryland',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'HOA Management', url: SITE.url + '/hoa-management' },
+    { name: 'Maryland', url: SITE.url + '/hoa-management/maryland' },
+    { name: 'Montgomery County', url: canonical },
+  ]),
+  faqSchema(countyFaqs),
+];
+
+const cities = [
+  { name: 'Rockville',     meta: 'Condo · single-family · mixed stock', tag: 'County seat' },
+  { name: 'Silver Spring', meta: 'High-rise condo · townhome · transit-adjacent', tag: 'Our Columbia Pike office' },
+  { name: 'Bethesda',      meta: 'High-rise condo · established single-family' },
+  { name: 'Gaithersburg',  meta: 'Master-planned HOA · larger communities' },
+  { name: 'Germantown',    meta: 'Townhome HOA · upcounty new build' },
+  { name: 'Chevy Chase',   meta: 'Single-family · condo · close-in' },
+  { name: 'Wheaton',       meta: 'Condo · townhome · transit corridor' },
+  { name: 'Olney',         meta: 'Single-family HOA · upcounty' },
+];
+---
+<BaseLayout
+  title="HOA Management Montgomery County Maryland — Tidewater"
+  description="HOA and condo management in Montgomery County — Rockville, Silver Spring, Bethesda, and Gaithersburg. CCOC-aware, AAMC-accredited, with a local Silver Spring office."
+  pageSchema={schemas}
+  pageStylesheet="styles-geo.css"
+>
+  <Topbar variant="default" />
+  <Header activeNav="mgmt" logoSrc="/assets/Tidewater-Management-Logo.svg" logoAlt="Tidewater Management" />
+  <Breadcrumb variant="management" crumbs={[
+    { label: 'HOA Management', href: '/hoa-management' },
+    { label: 'Maryland', href: '/hoa-management/maryland' },
+    { label: 'Montgomery County' },
+  ]} />
+
+  <!-- Hero -->
+  <section class="tw-geo-hero">
+    <div class="tw-geo-hero-bg"></div>
+    <div class="tw-geo-hero-paper"></div>
+    <div class="tw-geo-hero-grid">
+      <div class="tw-geo-hero-copy">
+        <h1 class="tw-geo-hero-title">
+          HOA management in <em>Montgomery County.</em>
+        </h1>
+        <p class="tw-geo-hero-lede">
+          Montgomery is the one Maryland county with its own commission overseeing common-ownership communities &mdash; so a board here is regulated twice, and the second layer is the one managers miss. Our DC Metro team works out of the Columbia Pike office in Silver Spring. Family-owned since 1989, AAMC-accredited, with capped manager portfolios so yours is known rather than numbered.
+        </p>
+        <div class="tw-geo-hero-actions">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-lg">Request a proposal &rarr;</a>
+          <a href="#communities" class="tw-btn tw-btn-ghost">See where we manage &rarr;</a>
+        </div>
+        <div class="tw-geo-hero-stats">
+          <div>
+            <div class="tw-geo-hero-stat-num">450+</div>
+            <div class="tw-geo-hero-stat-label">Communities managed across six states</div>
+          </div>
+          <div>
+            <div class="tw-geo-hero-stat-num gold">AAMC&reg;</div>
+            <div class="tw-geo-hero-stat-label">CAI&rsquo;s highest company accreditation &middot; PCAM on staff</div>
+          </div>
+          <div>
+            <div class="tw-geo-hero-stat-num">1989</div>
+            <div class="tw-geo-hero-stat-label">Family-owned and operated &mdash; with a local Silver Spring office</div>
+          </div>
+        </div>
+      </div>
+      <aside class="tw-geo-hero-side">
+        <div class="tw-geo-hero-side-eyebrow">In Montgomery County</div>
+        <h3>Where we manage</h3>
+        <!-- Stylized Montgomery County schematic (not to scale; narrows toward DC in the SE) -->
+        <svg viewBox="0 0 360 290" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Schematic map of Montgomery County, Maryland">
+          <path d="M58 92 Q82 56 150 56 L232 74 Q300 104 300 150 Q298 206 250 230 L212 236 Q176 232 150 206 L92 168 Q54 132 58 92 Z" class="tw-geo-map-county served" style="cursor:default"><title>Montgomery County</title></path>
+          <!-- Germantown (NW up-county) -->
+          <circle cx="98" cy="92" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Germantown</title></circle>
+          <text x="40" y="88" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Germantown</text>
+          <!-- Gaithersburg (NW) -->
+          <circle cx="128" cy="120" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Gaithersburg</title></circle>
+          <text x="66" y="130" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Gaithersburg</text>
+          <!-- Olney (N-central) -->
+          <circle cx="190" cy="98" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Olney</title></circle>
+          <text x="200" y="102" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Olney</text>
+          <!-- Rockville (county seat, gold) -->
+          <circle class="tw-geo-map-dot-pulse" cx="176" cy="150" r="8"/>
+          <circle cx="176" cy="150" r="6" fill="var(--tw-gold)" stroke="var(--tw-cream)" stroke-width="2"><title>Rockville</title></circle>
+          <text x="186" y="154" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="800" font-size="11">Rockville</text>
+          <!-- Wheaton (SE-central) -->
+          <circle cx="226" cy="178" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Wheaton</title></circle>
+          <text x="236" y="182" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Wheaton</text>
+          <!-- Silver Spring (SE, DC-adjacent) -->
+          <circle cx="244" cy="214" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Silver Spring</title></circle>
+          <text x="196" y="228" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Silver Spring</text>
+          <!-- Bethesda (S) -->
+          <circle cx="196" cy="206" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Bethesda</title></circle>
+          <text x="140" y="210" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Bethesda</text>
+        </svg>
+        <div class="tw-geo-map-legend">
+          <div class="tw-geo-map-legend-row">
+            <span class="tw-geo-map-legend-swatch served"></span>
+            Cities &amp; towns we serve
+          </div>
+          <div class="tw-geo-map-legend-row">
+            <span class="tw-geo-map-legend-swatch hq"></span>
+            County seat &middot; Rockville
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Wrong-audience catch: rental -->
+  <div class="tw-geo-section linen" style="padding:14px 0">
+    <div class="tw-container-wide" style="text-align:center">
+      <p style="margin:0;font-size:14px;color:var(--tw-fg-muted)">Managing a rental property in Montgomery County? See <a href="/rental-management/maryland/montgomery-county" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">Montgomery County rental management</a> instead &mdash; this page is for HOA &amp; condo association boards.</p>
+    </div>
+  </div>
+
+  <!-- Coverage areas / cities served -->
+  <section class="tw-geo-section cream">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">Where We Manage</div>
+        <h2 class="tw-section-title">Montgomery County coverage, <em>town by town.</em></h2>
+        <p class="tw-section-lede">We cover the whole county &mdash; from Bethesda and Silver Spring high-rises to the Gaithersburg and Germantown master-planned HOAs upcounty. Each town carries its own association mix.</p>
+      </div>
+      <div class="tw-geo-neighbors">
+        {cities.map((ct) => (
+          <a href="/hoa-management/maryland" class="tw-geo-neighbor">
+            <div class="tw-geo-neighbor-name">{ct.name}</div>
+            <div class="tw-geo-neighbor-meta">{ct.meta}</div>
+            {ct.tag && <span class="tw-geo-neighbor-tag">{ct.tag}</span>}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What's different here -->
+  <section class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">What&rsquo;s Different Here</div>
+        <h2 class="tw-section-title">The county with <em>a second regulator.</em></h2>
+        <p class="tw-section-lede">Montgomery boards answer under Maryland law and to a county commission no other jurisdiction has &mdash; and that changes how a board should operate.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card gold">
+          <h3>The CCOC</h3>
+          <p>The <strong>Commission on Common Ownership Communities</strong> hears disputes between owners and their associations &mdash; a layer no other Maryland county has. A board here is answerable under the state statute and to the CCOC, and the dispute path runs differently as a result.</p>
+          <div class="tw-geo-law-foot">Montgomery County</div>
+        </div>
+        <div class="tw-geo-law-card">
+          <h3>Enforcement that holds up</h3>
+          <p>Because an enforcement action can end up in front of the Commission, Montgomery puts a premium on documentation and consistency &mdash; a process that looks even-handed on paper because it was even-handed in practice.</p>
+          <div class="tw-geo-law-foot">Covenant enforcement</div>
+        </div>
+        <div class="tw-geo-law-card sage">
+          <h3>High-rise condo stock</h3>
+          <p>Bethesda, Silver Spring, and Rockville carry mid- and high-rise condominiums &mdash; master-policy insurance, reserve studies, and life-safety compliance that single-family HOAs never touch.</p>
+          <div class="tw-geo-law-foot">Bethesda · Silver Spring · Rockville</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local manager card -->
+  <section class="tw-geo-section cream" style="padding:64px 0">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">Regional Leadership</div>
+        <h2 class="tw-section-title" style="margin:10px 0 14px">A dedicated CAM, <em>backed by regional leadership.</em></h2>
+        <p class="tw-section-lede">Our DC Metro team works out of the Columbia Pike office in Silver Spring, so a Montgomery board&rsquo;s dedicated CAM has the regional director and support team close at hand.</p>
+      </div>
+      <div class="tw-geo-manager">
+        <div class="tw-geo-manager-avatar">KC</div>
+        <div>
+          <div class="tw-geo-manager-eyebrow">Baltimore &amp; DC Metro Regional Director</div>
+          <div class="tw-geo-manager-name">Kate Cornell</div>
+          <p class="tw-geo-manager-role">
+            Kate oversees the direction and professional development of the Community Association Management team across the Owings Mills and Silver Spring offices, and co-leads the developer management program. Manager portfolios here are capped at 8&ndash;12 communities, so your board works with a dedicated CAM as its day-to-day point of contact, not a rotating pool. <strong>15+ years</strong> in the industry.
+          </p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:200px">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-block">Request a proposal &rarr;</a>
+          <a href="tel:+18558765500" class="tw-btn tw-btn-outline tw-btn-block">(855) 876-5500</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What we manage -->
+  <section id="communities" class="tw-geo-section mist">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">What We Manage</div>
+        <h2 class="tw-section-title">The kinds of communities we run <em>across Montgomery County.</em></h2>
+        <p class="tw-section-lede">Board references available on request &mdash; we&rsquo;d rather you talk to a comparable Montgomery County board than read about us.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card">
+          <h3>High-rise &amp; mid-rise condos</h3>
+          <p>Bethesda, Silver Spring, and Rockville buildings with master-policy insurance, reserve studies, and life-safety systems to manage.</p>
+        </div>
+        <div class="tw-geo-law-card">
+          <h3>Master-planned HOAs</h3>
+          <p>Larger planned communities in Gaithersburg and Germantown, with the amenity and vendor programs that scale brings.</p>
+        </div>
+        <div class="tw-geo-law-card">
+          <h3>Established close-in associations</h3>
+          <p>Mature single-family and condo communities in Chevy Chase and inner Bethesda where reserves and capital planning carry the budget.</p>
+        </div>
+        <div class="tw-geo-law-card">
+          <h3>Transit-corridor communities</h3>
+          <p>Condo and townhome associations along the Wheaton and Silver Spring transit corridors, often with higher rental-tenant ratios.</p>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center;margin-top:32px;gap:14px;flex-wrap:wrap">
+        <a href="/testimonials" class="tw-btn tw-btn-outline">Read board reviews &rarr;</a>
+        <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Get board references &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service callouts -->
+  <section class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">Services in Montgomery County</div>
+        <h2 class="tw-section-title">Three service tiers, <em>same local team.</em></h2>
+        <p class="tw-section-lede">Pick the level your board needs &mdash; the manager, the response time, and the accreditation stay the same.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:48px">
+        <a href="/hoa-management" class="tw-geo-law-card" style="text-decoration:none">
+          <h3>Full Service</h3>
+          <p>Financial and full property management for single-family, townhome, and condo associations: board-meeting attendance, neighborhood inspections, vendor management and on-site oversight, financial controls, and day-to-day operations &mdash; including HR for association employees.</p>
+          <div class="tw-geo-law-foot">Full-service details &rarr;</div>
+        </a>
+        <a href="/hoa-management#tiers" class="tw-geo-law-card gold" style="text-decoration:none">
+          <h3>Flex Service</h3>
+          <p>Governance, legal affairs, risk management, maintenance coordination, contracting, and full financial management &mdash; with meetings, inspections, and on-site presence available &agrave; la carte at a set hourly rate. Built for boards that want budget precision without constant on-site involvement.</p>
+          <div class="tw-geo-law-foot">Flex tier details &rarr;</div>
+        </a>
+        <a href="/hoa-management/hoa-financial-management" class="tw-geo-law-card sage" style="text-decoration:none">
+          <h3>Financial Only</h3>
+          <p>Strictly financial for self-managed Montgomery County boards: budgets, reserves, assessment collection, accounts payable and receivable, GAAP-compliant bookkeeping, audit coordination, and resale-certificate preparation.</p>
+          <div class="tw-geo-law-foot">Financial-only tier &rarr;</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ section -->
+  <section class="tw-section tw-sol-faq-section">
+    <div class="tw-container-wide">
+      <div class="tw-sol-faq-grid">
+        <div class="tw-sol-faq-head">
+          <div class="tw-eyebrow">Montgomery County FAQs</div>
+          <h2>The county-specific <em>questions</em> we get.</h2>
+          <p>For all-purpose HOA questions see our <a href="/faq" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">main FAQ hub</a>.</p>
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Ask your own question &rarr;</a>
+        </div>
+        <FaqAccordion items={countyFaqs} defaultOpen={0} />
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+  <Footer />
+</BaseLayout>

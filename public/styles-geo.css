@@ -558,3 +558,14 @@
     -webkit-overflow-scrolling: touch;
   }
 }
+
+/* Inline links inside law / context cards — match site convention (teal),
+   consistent with .tw-blog-article p a. Previously fell back to browser blue. */
+.tw-geo-law-card a {
+  color: var(--tw-teal-500);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  font-weight: 500;
+}
+.tw-geo-law-card a:hover { color: var(--tw-teal-700); }

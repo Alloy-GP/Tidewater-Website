@@ -199,7 +199,7 @@ function RentalGeoManager({ geo }) {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minWidth: 200 }}>
             <a href="/request-a-proposal" className="tw-btn tw-btn-primary tw-btn-block">Email {geo.manager.name.split(' ')[0]} →</a>
-            <a href="tel:+14435480191" className="tw-btn tw-btn-outline tw-btn-block">(443) 548-0191</a>
+            <a href="tel:+18558765500" className="tw-btn tw-btn-outline tw-btn-block">(855) 876-5500</a>
           </div>
         </div>
       </div>
@@ -928,6 +928,226 @@ export const GEO_DATA_LEWES = {
     {
       q: "What\'s your management fee?",
       a: ' Long-term rentals are typically flat 8.5% of monthly rent collected. Seasonal/weekly vacation rental management uses a different fee model.',
+    },
+  ],
+};
+
+export const GEO_DATA_REHOBOTH = {
+  name: 'Rehoboth Beach',
+  fullName: 'Rehoboth Beach',
+  url: '/rental-management/delaware/rehoboth-beach',
+  scope: 'city',
+  state: { name: 'Delaware', href: '/rental-management/delaware', urlPath: 'delaware' },
+  heroTitle: 'Rental property management in <em>Rehoboth Beach, Delaware.</em>',
+  heroLede: 'Rehoboth is Delaware\'s busiest resort market — boardwalk and downtown condos, the North Shores and Henlopen Acres single-family corridor, and Dewey Beach just south. Tidewater\'s Delaware office on John J Williams Highway sits minutes north, so a local team manages Rehoboth rentals, both year-round long-term and summer-season.',
+  heroStats: [],
+  mapHeading: 'Where we manage',
+  mapHqLabel: 'DE office · minutes north',
+  mapViewBox: '0 0 360 290',
+  mapOutline: 'M40 40 L250 40 Q264 110 252 160 Q246 220 250 258 L40 258 Z',
+  mapWaterPath: 'M250 40 Q262 110 252 160 Q246 220 250 258 L360 258 L360 40 Z',
+  mapCities: [
+    { name: 'Downtown Rehoboth', x: 210, y: 120, hq: true },
+    { name: 'North Shores',     x: 190, y: 70 },
+    { name: 'Henlopen Acres',   x: 215, y: 92 },
+    { name: 'Silver Lake',      x: 205, y: 150 },
+    { name: 'Dewey Beach',      x: 215, y: 200 },
+    { name: 'Rehoboth Y&CC',    x: 120, y: 150 },
+  ],
+  factsEyebrow: 'By the Numbers',
+  factsTitle: 'The Rehoboth rental market, <em>in brief.</em>',
+  factsLede: 'The densest resort market on the Delaware coast — condo-heavy downtown, single-family in the surrounding neighborhoods, and the strongest weekly vacation demand of any Sussex town from May through September.',
+  facts: [
+    { label: 'Property mix', val: 'Condo + cottage', sub: 'Downtown dense, single-family inland' },
+    { label: 'Tax advantage', val: 'No DE sales tax', sub: 'Owners are often surprised by this' },
+  ],
+  neighborsEyebrow: 'Where We Manage',
+  neighborsTitle: 'Rehoboth submarkets, <em>by section.</em>',
+  neighborsLede: 'From the boardwalk and downtown cottages to North Shores, Henlopen Acres, and the Dewey Beach corridor.',
+  neighbors: [
+    { name: 'Downtown Rehoboth', meta: 'condo · cottage', tag: 'Coastal' },
+    { name: 'North Shores',      meta: 'single-family',       tag: '' },
+    { name: 'Henlopen Acres',    meta: 'single-family',       tag: '' },
+    { name: 'Silver Lake',       meta: 'mixed',               tag: '' },
+    { name: 'Dewey Beach',       meta: 'condo',               tag: 'Coastal' },
+    { name: 'Rehoboth Yacht & CC', meta: 'single-family',     tag: 'Inland' },
+  ],
+  manager: {
+    name: 'Don Gentry',
+    creds: 'CMCA, AMS, PCAM',
+    initials: 'DG',
+    bio: '<strong>20+ years</strong> in the Delmarva real estate market. Delmarva Regional Director overseeing Delaware and Ocean City operations from our Route 1 office in the Lewes–Rehoboth corridor.',
+  },
+  schemaDesc: 'Rental property management in Rehoboth Beach, Delaware — condo, cottage, and single-family rentals across downtown Rehoboth, North Shores, Henlopen Acres, Silver Lake, and the Dewey Beach corridor.',
+  faqs: [
+    {
+      q: "How is Delaware\'s rental landscape different from Maryland\'s?",
+      a: [
+        '<strong>Delaware is meaningfully friendlier to landlords than Maryland.</strong> Faster eviction timelines, no statewide rent control, and no state sales tax.',
+        'Rehoboth is the exception to watch: as an incorporated city it has its own rental licensing and short-term-rental rules on top of state law. We handle the registration and keep the property compliant.',
+      ],
+    },
+    {
+      q: 'Do you manage long-term, seasonal, or weekly rentals?',
+      a: 'All three. Downtown Rehoboth and Dewey skew to summer-season and weekly vacation rentals; North Shores and the inland neighborhoods carry more year-round long-term leases. We’ll be straight about which scope fits your property.',
+    },
+    {
+      q: 'Do you handle the city rental license and coastal HOA rules?',
+      a: 'Yes. The City of Rehoboth Beach requires a rental license, and many condo and community associations add rental caps, minimum lease terms, and architectural review. We track the city rules and each association’s rule book for the properties we manage.',
+    },
+    {
+      q: 'What about hurricane / coastal storm coverage?',
+      a: 'Pre-season inspections, storm-prep coordination, post-storm damage walks, and insurance-claim documentation are part of the package — Don Gentry has 20+ years of Delmarva coastal experience.',
+    },
+    {
+      q: "What\'s your management fee?",
+      a: 'Long-term rentals are typically a flat 8.5% of monthly rent collected. Seasonal and weekly vacation-rental management uses a different fee model — we’ll quote it against your property.',
+    },
+  ],
+};
+
+export const GEO_DATA_BETHANY = {
+  name: 'Bethany Beach',
+  fullName: 'Bethany Beach',
+  url: '/rental-management/delaware/bethany-beach',
+  scope: 'city',
+  state: { name: 'Delaware', href: '/rental-management/delaware', urlPath: 'delaware' },
+  heroTitle: 'Rental property management in <em>Bethany Beach, Delaware.</em>',
+  heroLede: 'Bethany — one of Delaware\'s "Quiet Resorts" — is family-oriented and condo-heavy, anchored by Sea Colony and backed by Bethany West, South Bethany, and inland Ocean View. We manage Bethany-area rentals from our Delaware office up the coast, tuned to a market that runs on summer families and second-home owners.',
+  heroStats: [],
+  mapHeading: 'Where we manage',
+  mapHqLabel: 'DE office · up the coast',
+  mapViewBox: '0 0 360 290',
+  mapOutline: 'M40 40 L250 40 Q264 110 252 160 Q246 220 250 258 L40 258 Z',
+  mapWaterPath: 'M250 40 Q262 110 252 160 Q246 220 250 258 L360 258 L360 40 Z',
+  mapCities: [
+    { name: 'Downtown Bethany', x: 210, y: 120, hq: true },
+    { name: 'Sea Colony',       x: 218, y: 165 },
+    { name: 'Bethany West',     x: 150, y: 120 },
+    { name: 'South Bethany',    x: 214, y: 205 },
+    { name: 'Ocean View',       x: 95,  y: 150 },
+    { name: 'Millville',        x: 110, y: 95 },
+  ],
+  factsEyebrow: 'By the Numbers',
+  factsTitle: 'The Bethany rental market, <em>in brief.</em>',
+  factsLede: 'Quieter and more family-driven than Rehoboth, and heavily shaped by Sea Colony — the large oceanfront-and-bayside resort community that sets the tone for the local condo market.',
+  facts: [
+    { label: 'Anchor community', val: 'Sea Colony', sub: 'Large resort condo community' },
+    { label: 'Tax advantage', val: 'No DE sales tax', sub: 'Owners are often surprised by this' },
+  ],
+  neighborsEyebrow: 'Where We Manage',
+  neighborsTitle: 'Bethany submarkets, <em>by section.</em>',
+  neighborsLede: 'From downtown Bethany and Sea Colony to Bethany West, South Bethany, and inland Ocean View.',
+  neighbors: [
+    { name: 'Downtown Bethany', meta: 'condo · cottage', tag: 'Coastal' },
+    { name: 'Sea Colony',       meta: 'resort condo',       tag: 'Coastal' },
+    { name: 'Bethany West',     meta: 'townhome',           tag: '' },
+    { name: 'South Bethany',    meta: 'single-family · condo', tag: 'Coastal' },
+    { name: 'Ocean View',       meta: 'single-family',      tag: 'Inland' },
+    { name: 'Millville',        meta: 'single-family',      tag: 'Inland' },
+  ],
+  manager: {
+    name: 'Don Gentry',
+    creds: 'CMCA, AMS, PCAM',
+    initials: 'DG',
+    bio: '<strong>20+ years</strong> in the Delmarva real estate market. Delmarva Regional Director overseeing Delaware and Ocean City operations from our Route 1 office in the Lewes–Rehoboth corridor.',
+  },
+  schemaDesc: 'Rental property management in Bethany Beach, Delaware — resort condo, townhome, and single-family rentals across downtown Bethany, Sea Colony, Bethany West, South Bethany, and Ocean View.',
+  faqs: [
+    {
+      q: "How is Delaware\'s rental landscape different from Maryland\'s?",
+      a: [
+        '<strong>Delaware is meaningfully friendlier to landlords than Maryland.</strong> Faster eviction timelines, no statewide rent control, no state sales tax, and no county rental license across most of Sussex.',
+        'The rules that matter here come from the communities, not the state — Sea Colony and the other associations set rental caps, minimum lease terms, and architectural review. We track each association’s rule book for the properties we manage.',
+      ],
+    },
+    {
+      q: 'Do you manage long-term, seasonal, or weekly rentals?',
+      a: 'All three, though Bethany skews family-seasonal — Saturday-to-Saturday summer rentals are the backbone, with year-round long-term leases inland in Ocean View and Millville.',
+    },
+    {
+      q: 'Do you manage inside Sea Colony?',
+      a: 'Sea Colony is its own managed resort community with association rules that govern leasing, amenities access, and short-term rentals. We manage individual owner units inside communities like it, working within each association’s rule book rather than around it.',
+    },
+    {
+      q: 'What about hurricane / coastal storm coverage?',
+      a: 'Pre-season inspections, storm-prep coordination, post-storm damage walks, and insurance-claim documentation are part of the package — Don Gentry has 20+ years of Delmarva coastal experience.',
+    },
+    {
+      q: "What\'s your management fee?",
+      a: 'Long-term rentals are typically a flat 8.5% of monthly rent collected. Seasonal and weekly vacation-rental management uses a different fee model — we’ll quote it against your property.',
+    },
+  ],
+};
+
+export const GEO_DATA_FENWICK = {
+  name: 'Fenwick Island',
+  fullName: 'Fenwick Island',
+  url: '/rental-management/delaware/fenwick-island',
+  scope: 'city',
+  state: { name: 'Delaware', href: '/rental-management/delaware', urlPath: 'delaware' },
+  heroTitle: 'Rental property management in <em>Fenwick Island, Delaware.</em>',
+  heroLede: 'Fenwick is Delaware\'s southernmost beach town, sitting right on the Ocean City, Maryland line — quieter single-family and condo rentals on the ocean and bay sides, plus the Bayside resort community and inland Selbyville. We cover it from two directions: our Delaware office to the north and our Ocean City office minutes south.',
+  heroStats: [],
+  mapHeading: 'Where we manage',
+  mapHqLabel: 'Two offices · N and S',
+  mapViewBox: '0 0 360 290',
+  mapOutline: 'M40 40 L250 40 Q264 110 252 160 Q246 220 250 258 L40 258 Z',
+  mapWaterPath: 'M250 40 Q262 110 252 160 Q246 220 250 258 L360 258 L360 40 Z',
+  mapCities: [
+    { name: 'Fenwick Island', x: 212, y: 120, hq: true },
+    { name: 'Bayside',        x: 150, y: 150 },
+    { name: 'Selbyville',     x: 90,  y: 150 },
+    { name: 'Route 54',       x: 150, y: 185 },
+    { name: 'South Bethany',  x: 214, y: 70 },
+  ],
+  factsEyebrow: 'By the Numbers',
+  factsTitle: 'The Fenwick rental market, <em>in brief.</em>',
+  factsLede: 'Small, quiet, and defined by its position on the state line — Delaware tax advantages a block from Ocean City, with a mix of ocean-block condos, bay-side single-family, and the inland Bayside and Route 54 communities.',
+  facts: [
+    { label: 'On the line', val: 'OC-adjacent', sub: 'Delaware side of the MD border' },
+    { label: 'Tax advantage', val: 'No DE sales tax', sub: 'A block from taxed Maryland' },
+  ],
+  neighborsEyebrow: 'Where We Manage',
+  neighborsTitle: 'Fenwick-area submarkets, <em>by section.</em>',
+  neighborsLede: 'From the ocean-block and bay-side town itself to the Bayside resort community, the Route 54 corridor, and inland Selbyville.',
+  neighbors: [
+    { name: 'Fenwick Island', meta: 'ocean + bay side', tag: 'Coastal' },
+    { name: 'Bayside',        meta: 'resort community', tag: '' },
+    { name: 'Selbyville',     meta: 'single-family',    tag: 'Inland' },
+    { name: 'Route 54',       meta: 'mixed',            tag: '' },
+    { name: 'South Bethany',  meta: 'single-family · condo', tag: 'Coastal' },
+  ],
+  manager: {
+    name: 'Don Gentry',
+    creds: 'CMCA, AMS, PCAM',
+    initials: 'DG',
+    bio: '<strong>20+ years</strong> in the Delmarva real estate market. Delmarva Regional Director overseeing Delaware and Ocean City operations — both offices that serve the Fenwick corridor.',
+  },
+  schemaDesc: 'Rental property management in Fenwick Island, Delaware — ocean and bay-side condo and single-family rentals across Fenwick Island, the Bayside community, the Route 54 corridor, and Selbyville.',
+  faqs: [
+    {
+      q: 'Fenwick is right on the Maryland line. Which rules apply?',
+      a: [
+        'The Delaware ones, which is usually good news for owners: <strong>no state sales tax, no statewide rent control, and faster eviction timelines than Maryland</strong> — a block from Ocean City, where Maryland rules and taxes apply.',
+        'Community associations still set their own leasing rules (rental caps, minimum terms, architectural review), and we track those per property.',
+      ],
+    },
+    {
+      q: 'Do you manage long-term, seasonal, or weekly rentals?',
+      a: 'All three. Fenwick runs on summer weekly and seasonal rentals on the ocean and bay blocks, with year-round long-term leases inland toward Selbyville and the Route 54 corridor.',
+    },
+    {
+      q: 'Can you cover both the Delaware and Ocean City sides?',
+      a: 'Yes — Fenwick is the one market we serve from two offices. The Delaware office handles the Fenwick side, and our Ocean City office is minutes south if an owner has property on both sides of the line.',
+    },
+    {
+      q: 'What about hurricane / coastal storm coverage?',
+      a: 'Pre-season inspections, storm-prep coordination, post-storm damage walks, and insurance-claim documentation are part of the package — Don Gentry has 20+ years of Delmarva coastal experience.',
+    },
+    {
+      q: "What\'s your management fee?",
+      a: 'Long-term rentals are typically a flat 8.5% of monthly rent collected. Seasonal and weekly vacation-rental management uses a different fee model — we’ll quote it against your property.',
     },
   ],
 };

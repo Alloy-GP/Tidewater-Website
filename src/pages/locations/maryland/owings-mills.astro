@@ -1,0 +1,163 @@
+---
+// Office / location page — Owings Mills, MD (HEADQUARTERS). NEUTRAL (both verticals).
+// Per docs office-location spec: NAP-matched GBP anchor that forks to HOA vs
+// rental. One authoritative location entity for this address.
+//
+// NAP (Master Brief, full/confirmed): 3600 Crondall Lane, Suite 100,
+// Owings Mills, MD 21117. Phone is the shared company line per client.
+// Team: Kate Cornell — Baltimore & DC Metro Regional Director (no post-nominals
+// per the brief — do not add credentials).
+//
+// GAPS TO FILL (do not invent): office hours, geo lat/lng, GBP URL (sameAs +
+// "view on Google"), office photo. HOA fork -> Baltimore County (exists,
+// data-driven); rental fork -> Baltimore County rental (exists).
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import CTA from '../../../components/CTA.astro';
+import { breadcrumbSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+
+const canonical = SITE.url + '/locations/maryland/owings-mills';
+const office = {
+  name: 'Tidewater Property Management — Headquarters',
+  street: '3600 Crondall Lane, Suite 100',
+  city: 'Owings Mills', region: 'MD', postal: '21117',
+  phone: '(855) 876-5500', phoneHref: 'tel:+18558765500',
+};
+const mapsQuery = encodeURIComponent('Tidewater Property Management, 3600 Crondall Lane, Suite 100, Owings Mills, MD 21117');
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': canonical + '#office',
+    name: office.name,
+    url: canonical,
+    telephone: '+1-855-876-5500',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: office.street,
+      addressLocality: office.city,
+      addressRegion: office.region,
+      postalCode: office.postal,
+      addressCountry: 'US',
+    },
+    areaServed: ['Owings Mills, MD', 'Baltimore County, MD', 'Baltimore, MD', 'Baltimore metro'],
+    openingHoursSpecification: [
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'], opens: '08:00', closes: '16:30' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '08:00', closes: '15:30' },
+    ],
+    // TODO(client): add geo {lat,lng} and sameAs [GBP URL]
+  },
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'Service Areas', url: SITE.url + '/service-areas' },
+    { name: 'Owings Mills Office', url: canonical },
+  ]),
+];
+---
+<BaseLayout
+  title="Tidewater Property Management — Owings Mills, MD (Headquarters)"
+  description="Tidewater's Owings Mills headquarters at 3600 Crondall Lane — HOA, condo, and rental property management across Baltimore County and the Baltimore metro. Call (855) 876-5500."
+  ogType="website"
+  pageSchema={schemas}
+  pageStylesheet="styles-geo.css"
+>
+  <Topbar variant="default" />
+  <Header />
+  <Breadcrumb crumbs={[
+    { label: 'Service Areas', href: '/service-areas' },
+    { label: 'Owings Mills Office' },
+  ]} />
+
+  <section class="tw-geo-hero">
+    <div class="tw-geo-hero-bg"></div>
+    <div class="tw-geo-hero-paper"></div>
+    <div class="tw-geo-hero-grid">
+      <div class="tw-geo-hero-copy">
+        <h1 class="tw-geo-hero-title">
+          Owings Mills property management: <em>HOA, condo &amp; rental.</em>
+        </h1>
+        <p class="tw-geo-hero-lede">
+          Tidewater&rsquo;s headquarters at 3600 Crondall Lane serves Baltimore County and the greater Baltimore metro &mdash; community associations and rental owners alike. Tell us which you are and we&rsquo;ll point you to the right team.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section cream" style="padding:40px 0">
+    <div class="tw-container-wide">
+      <div class="tw-geo-law-grid">
+        <a href="/hoa-management/maryland/baltimore-county" class="tw-geo-law-card" style="text-decoration:none">
+          <h3>Manage a community association? &rarr;</h3>
+          <p>HOA and condo association management for Baltimore County boards &mdash; AAMC-accredited, financials, vendor and reserve oversight, run from our Owings Mills headquarters.</p>
+          <div class="tw-geo-law-foot">Baltimore County HOA management</div>
+        </a>
+        <a href="/rental-management/maryland/baltimore-county" class="tw-geo-law-card gold" style="text-decoration:none">
+          <h3>Own a rental property? &rarr;</h3>
+          <p>Full-service rental management for Baltimore County condos, townhomes, and single-family homes &mdash; one flat fee, leasing through maintenance.</p>
+          <div class="tw-geo-law-foot">Baltimore County rental management</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section linen" style="padding:56px 0">
+    <div class="tw-container-wide">
+      <div class="tw-geo-hero-grid" style="gap:36px;align-items:start">
+        <div class="tw-geo-hero-copy" style="max-width:none">
+          <div class="tw-eyebrow">Our Headquarters</div>
+          <h2 class="tw-section-title" style="margin:10px 0 18px">Visit or call <em>Tidewater HQ.</em></h2>
+          <address style="font-style:normal;font-family:var(--tw-font-body);font-size:16px;line-height:1.7;color:var(--tw-fg)">
+            <strong>{office.name}</strong><br/>
+            {office.street}<br/>
+            {office.city}, {office.region} {office.postal}<br/>
+            <a href={office.phoneHref} style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">{office.phone}</a><br/>
+            <span style="color:var(--tw-fg-muted)">Office hours: Mon&ndash;Thu 8am&ndash;4:30pm &middot; Fri 8am&ndash;3:30pm &middot; closed weekends</span>
+          </address>
+          <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
+            <a href={office.phoneHref} class="tw-btn tw-btn-primary">Call HQ &rarr;</a>
+            <a href="/request-a-proposal" class="tw-btn tw-btn-outline">Request a proposal &rarr;</a>
+          </div>
+        </div>
+        <div>
+          <iframe
+            title="Map to Tidewater Property Management headquarters, Owings Mills"
+            src={`https://www.google.com/maps?q=${mapsQuery}&output=embed`}
+            width="100%" height="320" style="border:0;border-radius:12px"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-geo-section cream" style="padding:56px 0">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">Baltimore &amp; DC Metro Leadership</div>
+        <h2 class="tw-section-title" style="margin:10px 0 14px">The team that runs <em>the home office.</em></h2>
+        <p class="tw-section-lede">Owings Mills is Tidewater&rsquo;s headquarters and the base for the Community Association Management team serving the Baltimore and DC metro.</p>
+      </div>
+      <div class="tw-geo-manager">
+        <div class="tw-geo-manager-avatar">KC</div>
+        <div>
+          <div class="tw-geo-manager-eyebrow">Baltimore &amp; DC Metro Regional Director</div>
+          <div class="tw-geo-manager-name">Kate Cornell</div>
+          <p class="tw-geo-manager-role">
+            Kate oversees the direction and professional development of the Community Association Management team across the Owings Mills and Silver Spring offices, and co-leads the developer management program. <strong>15+ years</strong> in the industry, backing the local team that handles day-to-day board and owner contact.
+          </p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:200px">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-block">Request a proposal &rarr;</a>
+          <a href={office.phoneHref} class="tw-btn tw-btn-outline tw-btn-block">{office.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+  <Footer />
+</BaseLayout>
