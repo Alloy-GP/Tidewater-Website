@@ -4,6 +4,7 @@ import Topbar from '../../components/Topbar.astro';
 import Header from '../../components/Header.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import Footer from '../../components/Footer.astro';
+import Disclaimer from '../../components/Disclaimer.astro';
 import { articleSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
 import { SITE } from '../../config/site';
 
@@ -352,6 +353,7 @@ const pageSchema = [
             <span class="tw-blog-tag">HOA budgeting</span>
             <span class="tw-blog-tag">Homeowner resources</span>
           </div>
+          <Disclaimer type="financial" />
         </article>
 
         <div class="tw-blog-author-bio">
