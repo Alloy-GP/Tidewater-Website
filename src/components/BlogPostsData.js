@@ -16,7 +16,7 @@ export const ALL_POSTS = [
     author: 'Joe Jordan',
     tone: '',
     coverImage: '/assets/hoa-insurance.jpg',
-    coverAlt: 'Two homeowners looking up at a large tree limb fallen across the roof of a brick home after a storm',
+    coverAlt: 'Homeowners inspecting a large tree limb that has fallen onto the roof of their brick home after a storm, the kind of property damage that leads to an HOA insurance claim',
   },
   {
     slug: 'hoa-fees',
