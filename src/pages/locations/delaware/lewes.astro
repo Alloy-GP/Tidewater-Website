@@ -26,7 +26,7 @@ const office = {
   name: 'Tidewater Property Management — Lewes',
   street: '20375 John J Williams Hwy',
   city: 'Lewes', region: 'DE', postal: '19958',
-  phone: '(443) 548-0191', phoneHref: 'tel:+14435480191',
+  phone: '(855) 876-5500', phoneHref: 'tel:+18558765500',
 };
 const mapsQuery = encodeURIComponent('Tidewater Property Management, 20375 John J Williams Hwy, Lewes, DE 19958');
 
@@ -37,7 +37,7 @@ const schemas = [
     '@id': canonical + '#office',
     name: office.name,
     url: canonical,
-    telephone: '+1-443-548-0191',
+    telephone: '+1-855-876-5500',
     address: {
       '@type': 'PostalAddress',
       streetAddress: office.street,
@@ -47,7 +47,11 @@ const schemas = [
       addressCountry: 'US',
     },
     areaServed: ['Lewes, DE', 'Rehoboth Beach, DE', 'Milton, DE', 'Sussex County, DE'],
-    // TODO(client): confirm ZIP; add geo {lat,lng}, openingHoursSpecification, sameAs [GBP URL]
+    openingHoursSpecification: [
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'], opens: '08:00', closes: '16:30' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '08:00', closes: '15:30' },
+    ],
+    // ZIP 19958 confirmed via GBP. TODO(client): add geo {lat,lng} and sameAs [GBP URL]
   },
   breadcrumbSchema([
     { name: 'Home', url: SITE.url + '/' },
@@ -58,7 +62,7 @@ const schemas = [
 ---
 <BaseLayout
   title="Tidewater Property Management — Lewes, DE Office"
-  description="Tidewater's Lewes office on John J Williams Hwy — HOA, condo, and rental property management for Lewes, Rehoboth Beach, Milton, and Sussex County. Call (443) 548-0191."
+  description="Tidewater's Lewes office on John J Williams Hwy — HOA, condo, and rental property management for Lewes, Rehoboth Beach, Milton, and Sussex County. Call (855) 876-5500."
   ogType="website"
   pageSchema={schemas}
   pageStylesheet="styles-geo.css"
@@ -113,7 +117,7 @@ const schemas = [
             {office.street}<br/>
             {office.city}, {office.region} {office.postal}<br/>
             <a href={office.phoneHref} style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">{office.phone}</a><br/>
-            <span style="color:var(--tw-fg-muted)">Office hours: call ahead &mdash; {office.phone}</span>
+            <span style="color:var(--tw-fg-muted)">Office hours: Mon&ndash;Thu 8am&ndash;4:30pm &middot; Fri 8am&ndash;3:30pm &middot; closed weekends</span>
           </address>
           <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
             <a href={office.phoneHref} class="tw-btn tw-btn-primary">Call the office &rarr;</a>

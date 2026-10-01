@@ -25,7 +25,7 @@ const office = {
   name: 'Tidewater Property Management — Headquarters',
   street: '3600 Crondall Lane, Suite 100',
   city: 'Owings Mills', region: 'MD', postal: '21117',
-  phone: '(443) 548-0191', phoneHref: 'tel:+14435480191',
+  phone: '(855) 876-5500', phoneHref: 'tel:+18558765500',
 };
 const mapsQuery = encodeURIComponent('Tidewater Property Management, 3600 Crondall Lane, Suite 100, Owings Mills, MD 21117');
 
@@ -36,7 +36,7 @@ const schemas = [
     '@id': canonical + '#office',
     name: office.name,
     url: canonical,
-    telephone: '+1-443-548-0191',
+    telephone: '+1-855-876-5500',
     address: {
       '@type': 'PostalAddress',
       streetAddress: office.street,
@@ -46,7 +46,11 @@ const schemas = [
       addressCountry: 'US',
     },
     areaServed: ['Owings Mills, MD', 'Baltimore County, MD', 'Baltimore, MD', 'Baltimore metro'],
-    // TODO(client): add geo {lat,lng}, openingHoursSpecification, sameAs [GBP URL]
+    openingHoursSpecification: [
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'], opens: '08:00', closes: '16:30' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '08:00', closes: '15:30' },
+    ],
+    // TODO(client): add geo {lat,lng} and sameAs [GBP URL]
   },
   breadcrumbSchema([
     { name: 'Home', url: SITE.url + '/' },
@@ -57,7 +61,7 @@ const schemas = [
 ---
 <BaseLayout
   title="Tidewater Property Management — Owings Mills, MD (Headquarters)"
-  description="Tidewater's Owings Mills headquarters at 3600 Crondall Lane — HOA, condo, and rental property management across Baltimore County and the Baltimore metro. Call (443) 548-0191."
+  description="Tidewater's Owings Mills headquarters at 3600 Crondall Lane — HOA, condo, and rental property management across Baltimore County and the Baltimore metro. Call (855) 876-5500."
   ogType="website"
   pageSchema={schemas}
   pageStylesheet="styles-geo.css"
@@ -112,7 +116,7 @@ const schemas = [
             {office.street}<br/>
             {office.city}, {office.region} {office.postal}<br/>
             <a href={office.phoneHref} style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">{office.phone}</a><br/>
-            <span style="color:var(--tw-fg-muted)">Office hours: call ahead &mdash; {office.phone}</span>
+            <span style="color:var(--tw-fg-muted)">Office hours: Mon&ndash;Thu 8am&ndash;4:30pm &middot; Fri 8am&ndash;3:30pm &middot; closed weekends</span>
           </address>
           <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
             <a href={office.phoneHref} class="tw-btn tw-btn-primary">Call HQ &rarr;</a>
