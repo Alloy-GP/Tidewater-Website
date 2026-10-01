@@ -17,6 +17,7 @@ const ALL_CATEGORIES = [
   { id: 'rental',    label: 'Rental Management' },
   { id: 'governance',label: 'Board Governance' },
   { id: 'finances',  label: 'HOA Finances' },
+  { id: 'insurance', label: 'Insurance & Risk Management' },
   { id: 'solutions', label: 'Solutions' },
 ];
 
@@ -47,8 +48,8 @@ function BlogIndexHero({ showSearch, query, onQuery, onSubmit }) {
         )}
 
         <div className="tw-bi-hero-stats">
-          <span><strong>7</strong> posts &amp; growing</span>
-          <span><strong>5</strong> categories</span>
+          <span><strong>{ALL_POSTS.length}</strong> posts &amp; growing</span>
+          <span><strong>{new Set(ALL_POSTS.map(p => p.category.id)).size}</strong> categories</span>
           <span><strong>4,200+</strong> board members subscribed</span>
         </div>
       </div>
