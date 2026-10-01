@@ -1,0 +1,454 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Topbar from '../../components/Topbar.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Footer from '../../components/Footer.astro';
+import Disclaimer from '../../components/Disclaimer.astro';
+import { articleSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+import { SITE } from '../../config/site';
+
+const pageUrl = `${SITE.url}/blog/hoa-special-assessment`;
+const headline = 'HOA Special Assessments: Why They Happen and How to Avoid Surprises';
+const description = 'What triggers an HOA special assessment, how Maryland boards can plan around one, and how strong reserves keep your community from sudden bills.';
+
+const post = {
+  title: 'HOA special assessments: <em>why they happen</em> (and how to avoid surprises).',
+  dek: 'A special assessment is almost always a planning gap that opened years earlier. Here is what triggers an HOA special assessment, what Maryland’s 15% rule and reserve funding law actually require of a board, and the habits that prevent the next one.',
+  category: { id: 'finances', label: 'HOA Finances', tone: '' },
+  author: {
+    name: 'Jessica Ogle',
+    creds: 'CMCA®',
+    initials: 'JO',
+    role: 'Director of Association Financial Management, Tidewater',
+    bio: 'Jessica leads Tidewater&rsquo;s association financial management team, with 20+ years in the company&rsquo;s accounting department, backed by an MBA/CPA Controller. That tenure means the finance function is run by someone who has worked through virtually every scenario a community association can hit financially.',
+    email: 'info@tidewaterproperty.com',
+  },
+  date: 'October 1, 2026',
+  dateIso: '2026-10-01',
+  readTime: 10,
+};
+
+const toc = [
+  { id: 'what-is',     label: 'What it is' },
+  { id: 'why',         label: 'Why they happen' },
+  { id: 'maryland',    label: 'Maryland rules' },
+  { id: 'avoiding',    label: 'Avoiding them' },
+  { id: 'options',     label: 'Loan vs. assessment' },
+  { id: 'communicate', label: 'Telling owners' },
+  { id: 'faq',         label: 'FAQ' },
+  { id: 'bottom-line', label: 'Bottom line' },
+];
+
+const related = [
+  {
+    tone: '', category: 'HOA Finances',
+    title: 'What are HOA fees? What they cover, why they change, and what happens if you don\'t pay.',
+    dek: 'An HOA fee covers insurance, upkeep, and the reserves that pay for future repairs — but who decides the amount, and why does it keep going up?',
+    date: 'August 4, 2026', readTime: 8, href: '/blog/hoa-fees',
+    coverImage: '/assets/hoa-fees.jpg',
+    coverAlt: 'Well-maintained townhome community common area managed under an HOA budget',
+  },
+  {
+    tone: '', category: 'Board Governance',
+    title: 'HOA board member responsibilities & fiduciary duty, explained.',
+    dek: 'The fiduciary duties that attach to every seat, what each officer position involves, and where the board\'s job ends and delegation begins.',
+    date: 'August 3, 2026', readTime: 7, href: '/blog/hoa-board-responsibilities',
+    coverImage: '/assets/hoa-board-responsibilities.jpg',
+    coverAlt: "HOA board member reviewing the association's governing-documents binder at her kitchen table",
+  },
+  {
+    tone: '', category: 'HOA Management',
+    title: 'What is a community association manager? Roles, responsibilities, and what your board should expect.',
+    dek: 'How the CAM role works alongside the board, what credentials matter, and how to evaluate whether your management company is meeting the standard.',
+    date: 'May 15, 2026', readTime: 9, href: '/blog/what-is-a-community-association-manager',
+    coverImage: '/assets/what-is-a-community-association-manager.jpg',
+    coverAlt: 'Community association manager shaking hands with HOA board members outside a community clubhouse',
+  },
+];
+
+const pageSchema = [
+  articleSchema({
+    headline,
+    description,
+    url: pageUrl,
+    datePublished: '2026-10-01',
+    image: `${SITE.url}/assets/hoa-special-assessment.jpg`,
+    about: ['HOA special assessment', 'HOA reserves', 'reserve study', 'Maryland HOA law', 'HOA budget', 'HOA loan'],
+  }),
+  faqSchema([
+    {
+      q: 'Can an HOA board levy a special assessment without an owner vote in Maryland?',
+      a: "It depends on the governing documents. Non-emergency spending that raises the year's assessments more than 15% above the adopted budget requires a budget amendment adopted at a special meeting, on at least 10 days' notice to owners. The statute does not say who votes at that meeting, and many declarations answer it with their own owner-approval requirement, so confirm with counsel before assuming the board can act alone.",
+    },
+    {
+      q: 'What is the maximum special assessment an HOA can charge?',
+      a: "Maryland's HOA and Condominium Acts set no dollar maximum for an HOA special assessment in these sections. The 15% threshold controls the approval process, not the amount. Some governing documents do set limits, so start with the declaration and bylaws.",
+    },
+    {
+      q: 'Does homeowners insurance cover an HOA special assessment?',
+      a: 'Sometimes. Some owner policies include loss assessment coverage, which may respond when an assessment stems from a covered loss, but it generally will not cover deferred maintenance or planned improvements. Coverage is policy-specific, so owners should confirm theirs with a licensed agent. Tidewater is not an insurance agent or broker.',
+    },
+    {
+      q: 'Can homeowners dispute an HOA special assessment?',
+      a: 'Owners can review association records, attend the meeting and raise concerns. In practice, challenges usually hinge on whether the board followed its documents and state law, so boards that document their reasoning rarely face a successful one. Following the statute does not end the inquiry if the declaration required a different vote or allocation.',
+    },
+    {
+      q: 'How are special assessments usually paid?',
+      a: "An HOA special assessment is billed either as one lump sum or in installments set by the board's resolution. Installments ease the burden on owners and reduce new delinquencies, and a written schedule with clear due dates prevents most collection problems.",
+    },
+  ]),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'Articles & Guides', url: SITE.url + '/blog' },
+    { name: headline, url: pageUrl },
+  ]),
+];
+---
+
+<BaseLayout
+  title="HOA Special Assessments: Why They Happen & How to Avoid Surprises"
+  description={description}
+  ogType="article"
+  ogImageAlt="HOA Special Assessments: Why They Happen and How to Avoid Surprises — a Tidewater guide for boards"
+  pageSchema={pageSchema}
+  pageStylesheet="styles-blog.css"
+>
+  <Topbar variant="homeowner" />
+  <Header activeNav="blog" />
+  <Breadcrumb crumbs={[
+    { label: 'Articles & Guides', href: '/blog' },
+    { label: 'HOA Special Assessments' },
+  ]} />
+
+  <div class="tw-blog-progress" id="tw-blog-progress"></div>
+
+  <section class="tw-blog-hero">
+    <div class="tw-blog-hero-inner">
+      <span class={`tw-blog-category ${post.category.tone}`}>{post.category.label}</span>
+      <h1 class="tw-blog-title" set:html={post.title}></h1>
+      <p class="tw-blog-dek">{post.dek}</p>
+      <div class="tw-blog-meta">
+        <div class="tw-blog-meta-author">
+          <div class="tw-blog-meta-avatar">{post.author.initials}</div>
+          <div>
+            <div class="tw-blog-meta-name">{post.author.name}</div>
+            <div class="tw-blog-meta-role">{post.author.role}</div>
+          </div>
+        </div>
+        <div class="tw-blog-meta-divider"></div>
+        <div class="tw-blog-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> {post.date}</div>
+        <div class="tw-blog-meta-divider"></div>
+        <div class="tw-blog-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> {post.readTime} min read</div>
+        <div class="tw-blog-share">
+          <button type="button" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg></button>
+          <button type="button" data-share="x" title="Share on X" aria-label="Share on X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></button>
+          <button type="button" data-share="email" title="Share by email" aria-label="Share by email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></button>
+          <button type="button" data-share="copy" title="Copy link" aria-label="Copy link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tw-blog-cover">
+    <div class="tw-blog-cover-inner">
+      <img
+        src="/assets/hoa-special-assessment.jpg"
+        alt="Roofing crew replacing the flat roof on a brick garden-style condominium building on a clear autumn day, a planned capital project funded through association reserves"
+        width="1400"
+        height="763"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <div class="tw-blog-cover-paper"></div>
+    </div>
+  </div>
+
+  <div class="tw-blog-body-wrap">
+    <div class="tw-blog-layout">
+      <aside class="tw-blog-toc">
+        <div class="tw-blog-toc-label">In this article</div>
+        <ul class="tw-blog-toc-list">
+          {toc.map(it => <li><a href={`#${it.id}`} set:html={it.label}></a></li>)}
+        </ul>
+      </aside>
+      <div>
+        <article class="tw-blog-article">
+
+          <p>
+            The engineer&rsquo;s report comes back in October. The roof has two winters left, the bid runs into six figures, and the reserve fund holds a fraction of it. Then somebody says the words nobody wants to hear: HOA special assessment.
+          </p>
+
+          <p>
+            It is rarely a failure of judgment by the people in the room; it is usually a planning gap that opened years earlier. Here is why HOA special assessments happen, what Maryland requires before a board levies one, the options when reserves fall short, and the habits that prevent the next one.
+          </p>
+
+          <h2 id="what-is">What Is an HOA Special Assessment?</h2>
+
+          <p>
+            An HOA special assessment is a one-time charge to owners, separate from regular assessments, covering a cost the operating budget and reserves cannot absorb. Regular assessments are budgeted and recurring; a special assessment is the exception, approved for one purpose.
+          </p>
+
+          <p>
+            A board can bill it as a lump sum or in installments, depending on its resolution and what the governing documents allow. <strong>The governing documents, not the board&rsquo;s preference, set the outer limits on how an assessment gets approved and collected.</strong> <a href="/condo-management">Condominium councils</a> work from the same concept under the Condominium Act.
+          </p>
+
+          <h2 id="why">Why HOA Special Assessments Happen</h2>
+
+          <p>
+            Most HOA special assessments trace back to reserves that never kept pace with what the community costs to repair and replace. The immediate trigger is usually one of these:
+          </p>
+
+          <ul>
+            <li>Underfunded reserves, or a reserve study old enough to be fiction</li>
+            <li>Emergency repairs after a storm, water intrusion or structural failure</li>
+            <li>An insurance deductible or coverage gap following a loss</li>
+            <li>Delinquencies deep enough to create a cash shortfall</li>
+            <li>A capital improvement the community wants or a regulator requires</li>
+            <li>New compliance costs nobody budgeted for</li>
+          </ul>
+
+          <p>
+            <strong>Nearly every item on that list is foreseeable with the right planning cadence.</strong> Even the regulatory ones. When Maryland&rsquo;s energy benchmarking rules threatened new costs for 100+ Tidewater-managed communities, the Quality Assurance team worked with CAI, state regulators and legislators to win exemptions covering two-thirds of them.
+          </p>
+
+          <h2 id="maryland">HOA Special Assessment Rules in Maryland</h2>
+
+          <p>
+            Maryland does not cap HOA special assessments or prohibit them. State law controls the approval process when spending outruns the adopted budget, and how much must go into reserves each year. Both rules reach associations responsible under their declaration for maintaining and repairing common areas, so an HOA with no common-area duty may sit outside them. Confirm specifics against your governing documents with association counsel.
+          </p>
+
+          <div class="tw-blog-callout">
+            <div class="tw-blog-callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+            <div class="tw-blog-callout-content">
+              <h4>Maryland at a glance</h4>
+              <ul>
+                <li><strong>The 15% threshold:</strong> non-emergency spending that raises the current year&rsquo;s assessments more than 15% above the adopted budget requires a budget amendment adopted at a special meeting, on at least 10 days&rsquo; notice to owners.</li>
+                <li><strong>What counts:</strong> the trigger is the expenditure and the increase it causes, not the label. A mid-year dues increase or a project billed through regular assessments can cross the same line.</li>
+                <li><strong>Emergency exception:</strong> the threshold does not apply to conditions threatening health or safety, or risking significant damage to the development.</li>
+                <li><strong>Reserves:</strong> funded at the amount the most recent reserve study recommends, deposited by the last day of the fiscal year.</li>
+                <li><strong>Documents may be stricter</strong> than the statute.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>The 15% Threshold (Maryland&rsquo;s HOA Special Assessment Limit)</h3>
+
+          <p>
+            The rule sits at <a href="https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=grp&amp;section=11B-112.2" target="_blank" rel="noopener">Md. Code, Real Property &sect; 11B-112.2(f)</a>, with the condominium parallel at <a href="https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=grp&amp;section=11-109.2" target="_blank" rel="noopener">&sect; 11-109.2</a>. The HOA text allows written notice or notice by electronic transmission; condominium councils should confirm the current notice method with counsel rather than assume email suffices.
+          </p>
+
+          <p>
+            <strong>What boards call the HOA special assessment limit is not a dollar cap. It is a process trigger.</strong> Nothing stops a board from spending more; it takes a budget amendment adopted at a special meeting noticed to owners. The statute does not say who votes at that meeting, only that the amendment is adopted there. Whether owners vote or the board adopts it in front of them is usually answered by the declaration, so settle that with counsel before scheduling anything. The emergency exception sits in the same subsection, and a board relying on it should record the basis in the minutes.
+          </p>
+
+          <h3>Reserve Funding Follows the Reserve Study</h3>
+
+          <p>
+            Since Maryland&rsquo;s 2022 reserve study law, reserves in the annual budget must equal the amount recommended in the most recent reserve study or updated study, deposited by the last day of each fiscal year. Studies are updated at least every five years, and an association working from an initial study has five fiscal years to reach the recommended level under its funding plan. Reserves can be spent on something outside that plan only if the money is repaid to the reserve fund within five years.
+          </p>
+
+          <p>
+            Amendments in 2025 added the funding plan requirement and a narrow financial hardship provision. The governing body must find, by a two-thirds vote, that the association and its owners face a hardship limiting their ability to fund reserves. Even then, funding cannot drop below what the plan&rsquo;s priorities require: health and safety, structural integrity, and essential systems such as plumbing, sewer, heating, cooling and electrical. The deviation runs one fiscal year, a renewal takes a second two-thirds vote, owners get advance notice, the vote happens at a regular or special meeting, and the board must document its good-faith efforts to resume full funding and keep those records open to owners. <strong>That is a brief, documented pause, not an alternative to funding reserves.</strong> Tidewater insisted on fully funding reserves before the law required it, and <a href="https://www.caionline.org/advocacy/public-policies/reserve-study-and-funding/" target="_blank" rel="noopener">CAI&rsquo;s reserve funding policy</a> takes the same position.
+          </p>
+
+          <p>
+            <em>Where this applies:</em> Tidewater manages communities across Maryland, Washington DC, Virginia, Pennsylvania, Delaware and West Virginia. The planning principles in this guide apply in all of them. The statutory requirements do not, so boards outside Maryland should confirm their own state&rsquo;s rules with association counsel.
+          </p>
+
+          <h2 id="avoiding">Avoiding Special Assessments: How Boards Plan Ahead</h2>
+
+          <p>
+            The best protection against an HOA special assessment is a current reserve study, a budget that funds it, and a team that catches problems while they are still maintenance rather than capital.
+          </p>
+
+          <ol>
+            <li><strong>Keep the reserve study current and fund to it.</strong> A reserve study is only useful while its numbers reflect real construction costs. Tidewater folds reserve study coordination and capital improvement planning into every budget cycle as part of <a href="/hoa-management/hoa-financial-management">HOA financial management</a>.</li>
+            <li><strong>Budget conservatively and read the monthly numbers.</strong> Association accounting is in house, with reports on the first and real-time dashboards in CINC. For how dues and reserves fit together, start with our guide to <a href="/blog/hoa-fees">HOA fees</a>.</li>
+            <li><strong>Maintain proactively.</strong> A preventive maintenance calendar and regular inspections catch problems before they become capital emergencies, and CINC management plans auto-trigger action items ahead of scheduled work.</li>
+            <li><strong>Review insurance every year.</strong> Deductibles and coverage gaps are a common trigger. Tidewater&rsquo;s QA team tracks 1,000+ association policies at 99% compliance and coordinates annual broker reviews.</li>
+            <li><strong>Stay on top of delinquencies.</strong> Tidewater manages the delinquency process, from collection plans through attorney coordination, so boards never chase their own neighbors.</li>
+          </ol>
+
+          <p>
+            Boards keep every decision. <a href="/hoa-management">Full-service association management</a> handles the cadence underneath them.
+          </p>
+
+          <h2 id="options">HOA Loan vs Special Assessment: Options When Reserves Fall Short</h2>
+
+          <p>
+            When a project cannot wait and reserves cannot cover it, boards choose among an HOA special assessment billed as a lump sum, the same assessment spread into installments, an association loan repaid through regular assessments, or a combination.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>&nbsp;</th>
+                <th>Lump-sum assessment</th>
+                <th>Installment assessment</th>
+                <th>Association loan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Upfront cost to owners</strong></td>
+                <td>Highest; full share at once</td>
+                <td>Spread across set payments</td>
+                <td>Lowest; folded into assessments</td>
+              </tr>
+              <tr>
+                <td><strong>Total cost</strong></td>
+                <td>Lowest; no lender interest</td>
+                <td>Low; no lender interest</td>
+                <td>Higher; interest and fees</td>
+              </tr>
+              <tr>
+                <td><strong>Approval steps</strong></td>
+                <td>Board action under the documents; budget amendment at a noticed special meeting if over 15%</td>
+                <td>Same, plus a payment schedule</td>
+                <td>Documents and lender terms govern</td>
+              </tr>
+              <tr>
+                <td><strong>Speed to funding</strong></td>
+                <td>Fast, if owners can pay</td>
+                <td>Slower; funds arrive over time</td>
+                <td>Fast once closed; weeks to underwrite</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            <strong>There is no universally right answer, and the choice belongs to the board.</strong> Loan authority and owner approval depend on the governing documents, so bring counsel and the lender in early. Unpaid assessments can still accrue interest, late fees and collection costs, so the no-interest columns assume owners pay on time.
+          </p>
+
+          <h2 id="communicate">How to Communicate an HOA Special Assessment to Owners</h2>
+
+          <p>
+            Explain the why, the how much and the when before owners hear it secondhand. No special assessment HOA boards approve should reach the community as a rumor.
+          </p>
+
+          <ul>
+            <li>Share the reserve study and the bids behind it</li>
+            <li>Explain the options considered and why this one won</li>
+            <li>Put amounts, methods and deadlines in writing</li>
+            <li>Hold the discussion in an open meeting and take questions</li>
+            <li>Keep clean records of the vote, notice and reasoning</li>
+          </ul>
+
+          <p>
+            <strong>Disputes are rare when boards can show their work.</strong> Most challenges turn on process, not on whether owners liked the number.
+          </p>
+
+          <h2 id="faq">Frequently Asked Questions</h2>
+
+          <h3>Can an HOA board levy a special assessment without an owner vote in Maryland?</h3>
+          <p>
+            It depends on the governing documents. Non-emergency spending that raises the year&rsquo;s assessments more than 15% above the adopted budget requires a budget amendment adopted at a special meeting, on at least 10 days&rsquo; notice to owners. The statute does not say who votes at that meeting, and many declarations answer it with their own owner-approval requirement, so confirm with counsel before assuming the board can act alone.
+          </p>
+
+          <h3>What is the maximum special assessment an HOA can charge?</h3>
+          <p>
+            Maryland&rsquo;s HOA and Condominium Acts set no dollar maximum for an HOA special assessment in these sections. The 15% threshold controls the approval process, not the amount. Some governing documents do set limits, so start with the declaration and bylaws.
+          </p>
+
+          <h3>Does homeowners insurance cover an HOA special assessment?</h3>
+          <p>
+            Sometimes. Some owner policies include loss assessment coverage, which may respond when an assessment stems from a covered loss, but it generally will not cover deferred maintenance or planned improvements. Coverage is policy-specific, so owners should confirm theirs with a licensed agent. Tidewater is not an insurance agent or broker.
+          </p>
+
+          <h3>Can homeowners dispute an HOA special assessment?</h3>
+          <p>
+            Owners can review association records, attend the meeting and raise concerns. In practice, challenges usually hinge on whether the board followed its documents and state law, so boards that document their reasoning rarely face a successful one. Following the statute does not end the inquiry if the declaration required a different vote or allocation.
+          </p>
+
+          <h3>How are special assessments usually paid?</h3>
+          <p>
+            An HOA special assessment is billed either as one lump sum or in installments set by the board&rsquo;s resolution. Installments ease the burden on owners and reduce new delinquencies, and a written schedule with clear due dates prevents most collection problems.
+          </p>
+
+          <h2 id="bottom-line">The Assessment You Never Have to Levy</h2>
+
+          <p>
+            An HOA special assessment is usually a symptom, not a decision. Boards that keep the reserve study current, fund to it, budget conservatively and maintain ahead of failure rarely need one. The board keeps full authority; a hands-on team handles the cadence underneath it.
+          </p>
+
+          <p>
+            Since 1989, Tidewater has helped Mid-Atlantic boards plan ahead. Still family-owned.
+          </p>
+
+          <div class="tw-blog-cta">
+            <div class="tw-blog-cta-eyebrow">Association financial management</div>
+            <h3>Want next year&rsquo;s budget to work this hard?</h3>
+            <p>Request a proposal and see how Tidewater keeps the reserve study current, funds it in every budget cycle, and catches problems while they are still maintenance &mdash; while the board keeps every decision.</p>
+            <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-lg">Request your association management proposal &rarr;</a>
+          </div>
+
+          <div class="tw-blog-tags">
+            <span class="tw-blog-tags-label">Tagged</span>
+            <span class="tw-blog-tag">Special assessments</span>
+            <span class="tw-blog-tag">Reserve studies</span>
+            <span class="tw-blog-tag">Maryland HOA law</span>
+            <span class="tw-blog-tag">HOA budgets</span>
+            <span class="tw-blog-tag">Board education</span>
+          </div>
+          <Disclaimer type="legal" />
+        </article>
+
+        <div class="tw-blog-author-bio">
+          <div class="tw-blog-author-bio-avatar">{post.author.initials}</div>
+          <div>
+            <div class="tw-blog-author-bio-eyebrow">About the author</div>
+            <div class="tw-blog-author-bio-name">{post.author.name} <span>{post.author.creds}</span></div>
+            <div class="tw-blog-author-bio-role">{post.author.role}</div>
+            <p class="tw-blog-author-bio-blurb" set:html={post.author.bio}></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="tw-blog-related">
+    <div class="tw-blog-related-inner">
+      <div class="tw-blog-related-head">
+        <div class="tw-blog-related-eyebrow">Continue Reading</div>
+        <h2>More for your <em>board.</em></h2>
+      </div>
+      <div class="tw-blog-related-grid">
+        {related.map(p => (
+          <a href={p.href} class="tw-blog-related-card">
+            <div class={`tw-blog-related-card-img ${p.tone}`}>
+              {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || p.title} width="1400" height="763" loading="lazy" decoding="async" />}
+            </div>
+            <div class="tw-blog-related-card-body">
+              <div class={`tw-blog-related-card-cat ${p.tone}`}>{p.category}</div>
+              <h3>{p.title}</h3>
+              <p>{p.dek}</p>
+              <div class="tw-blog-related-card-meta">{p.date} &middot; {p.readTime} min read</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-blog-newsletter">
+    <div class="tw-blog-newsletter-inner">
+      <div class="tw-blog-newsletter-eyebrow">Tidewater Resources</div>
+      <h2>Get the <em>monthly board memo</em> in your inbox.</h2>
+      <p>One email a month. Practical board playbooks, Maryland HOA law updates, reserve and budget deep-dives. Written for working boards, not vendors. No fluff.</p>
+      <form class="tw-blog-newsletter-form">
+        <div class="tw-hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <input type="email" name="email" placeholder="board@yourcommunity.org" aria-label="Email address" required/>
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="tw-blog-newsletter-thanks" hidden style="font-family:var(--tw-font-heading);font-weight:700;font-size:15px;color:var(--tw-gold)">Thanks &mdash; first issue lands the first Tuesday of next month.</div>
+      <div class="tw-blog-newsletter-fine">Unsubscribe any time &middot; We never share your email &middot; 4,200+ board members subscribed</div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  import '../../scripts/blog-interactivity.js';
+</script>

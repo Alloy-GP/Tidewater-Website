@@ -6,6 +6,19 @@
 
 export const ALL_POSTS = [
   {
+    slug: 'hoa-special-assessment',
+    href: '/blog/hoa-special-assessment',
+    title: 'HOA special assessments: <em>why they happen</em> (and how to avoid surprises).',
+    dek: 'A special assessment is almost always a planning gap that opened years earlier. Here is what triggers an HOA special assessment, what Maryland&rsquo;s 15% rule and reserve funding law actually require, and the habits that prevent the next one.',
+    category: { id: 'finances', label: 'HOA Finances', tone: '' },
+    date: 'October 1, 2026', dateIso: '2026-10-01',
+    readTime: 10,
+    author: 'Jessica Ogle',
+    tone: '',
+    coverImage: '/assets/hoa-special-assessment.jpg',
+    coverAlt: 'Roofing crew replacing the flat roof on a brick garden-style condominium community, a planned capital project funded through association reserves',
+  },
+  {
     slug: 'hoa-insurance',
     href: '/blog/hoa-insurance',
     title: 'HOA &amp; condo insurance: <em>what your board must carry</em> (and common gaps).',

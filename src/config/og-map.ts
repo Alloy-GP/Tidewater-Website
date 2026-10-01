@@ -20,6 +20,7 @@ export const OG_BY_PATH: Record<string, string> = {
   '/blog/category/solutions': '/assets/og/blog-category-solutions.jpg',
   '/blog/hoa-board-responsibilities': '/assets/og/blog-hoa-board-responsibilities.jpg',
   '/blog/hoa-fees': '/assets/og/blog-hoa-fees.jpg',
+  '/blog/hoa-special-assessment': '/assets/og/blog-hoa-special-assessment.jpg',
   '/blog/hoa-insurance': '/assets/og/blog-hoa-insurance.jpg',
   '/blog/how-to-manage-a-rental-property': '/assets/og/blog-how-to-manage-a-rental-property.jpg',
   '/blog/how-to-switch-hoa-management-companies': '/assets/og/blog-how-to-switch-hoa-management-companies.jpg',
