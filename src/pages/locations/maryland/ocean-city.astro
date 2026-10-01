@@ -1,0 +1,167 @@
+---
+// Office / location page — Ocean City, MD. NEUTRAL (both verticals).
+// Per docs/office-location-page-spec: a physical-location anchor for the GBP,
+// not a demand page. It routes visitors into HOA vs rental via a two-path fork,
+// and is the ONE authoritative location entity for this address (NAP + schema).
+//
+// NAP (Master Brief): 8101 Coastal Hwy, Ste 5, Ocean City, MD 21842.
+// Phone is the shared company line per client (no per-office number known yet).
+// Team: Don Gentry, CMCA/AMS/PCAM — Delmarva Regional Director.
+//
+// GAPS TO FILL WHEN CLIENT PROVIDES (do not invent):
+//   - office hours (openingHours) — showing "call ahead" until confirmed
+//   - geo lat/lng for LocalBusiness.geo
+//   - GBP URL for schema sameAs + "View on Google" link
+//   - office photo
+//   - HOA fork currently points to the Maryland hub as interim — repoint to a
+//     Worcester County HOA page once that page is built (spec §4/§9).
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import CTA from '../../../components/CTA.astro';
+import { breadcrumbSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+
+const canonical = SITE.url + '/locations/maryland/ocean-city';
+const office = {
+  name: 'Tidewater Property Management — Ocean City',
+  street: '8101 Coastal Hwy, Ste 5',
+  city: 'Ocean City', region: 'MD', postal: '21842',
+  phone: '(443) 548-0191', phoneHref: 'tel:+14435480191',
+};
+const mapsQuery = encodeURIComponent('Tidewater Property Management, 8101 Coastal Hwy, Ocean City, MD 21842');
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': canonical + '#office',
+    name: office.name,
+    url: canonical,
+    telephone: '+1-443-548-0191',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: office.street,
+      addressLocality: office.city,
+      addressRegion: office.region,
+      postalCode: office.postal,
+      addressCountry: 'US',
+    },
+    areaServed: ['Ocean City, MD', 'West Ocean City, MD', 'Ocean Pines, MD', 'Berlin, MD', 'Worcester County, MD'],
+    // TODO(client): add geo {lat,lng}, openingHoursSpecification, and sameAs [GBP URL]
+  },
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'Service Areas', url: SITE.url + '/service-areas' },
+    { name: 'Ocean City Office', url: canonical },
+  ]),
+];
+---
+<BaseLayout
+  title="Tidewater Property Management — Ocean City, MD Office"
+  description="Tidewater's Ocean City office at 8101 Coastal Hwy — HOA, condo, and rental property management for the island, West OC, and the Ocean Pines / Berlin area. Call (443) 548-0191."
+  ogType="website"
+  pageSchema={schemas}
+  pageStylesheet="styles-geo.css"
+>
+  <Topbar variant="default" />
+  <Header />
+  <Breadcrumb crumbs={[
+    { label: 'Service Areas', href: '/service-areas' },
+    { label: 'Ocean City Office' },
+  ]} />
+
+  <!-- Hero (neutral — both verticals) -->
+  <section class="tw-geo-hero">
+    <div class="tw-geo-hero-bg"></div>
+    <div class="tw-geo-hero-paper"></div>
+    <div class="tw-geo-hero-grid">
+      <div class="tw-geo-hero-copy">
+        <h1 class="tw-geo-hero-title">
+          Ocean City property management: <em>HOA, condo &amp; rental.</em>
+        </h1>
+        <p class="tw-geo-hero-lede">
+          Our office at 8101 Coastal Hwy serves the island, West OC, and the Ocean Pines / Berlin shoulder market &mdash; community associations and rental owners alike. Tell us which you are and we&rsquo;ll point you to the right team.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Two-path fork (the router — keep high) -->
+  <section class="tw-geo-section cream" style="padding:40px 0">
+    <div class="tw-container-wide">
+      <div class="tw-geo-law-grid">
+        <a href="/hoa-management/maryland" class="tw-geo-law-card" style="text-decoration:none">
+          <h3>Manage a community association? &rarr;</h3>
+          <p>HOA and condo association management for Worcester County boards &mdash; AAMC-accredited, financials, vendor and reserve oversight, backed by our Delmarva regional team.</p>
+          <div class="tw-geo-law-foot">Ocean City &amp; Worcester County HOA management</div>
+        </a>
+        <a href="/rental-management/maryland/ocean-city" class="tw-geo-law-card gold" style="text-decoration:none">
+          <h3>Own a rental property? &rarr;</h3>
+          <p>Full-service rental management for condos and single-family homes on the barrier island and in West OC &mdash; one flat fee, leasing through maintenance.</p>
+          <div class="tw-geo-law-foot">Ocean City rental management</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Authoritative NAP + map (the one location entity for this address) -->
+  <section class="tw-geo-section linen" style="padding:56px 0">
+    <div class="tw-container-wide">
+      <div class="tw-geo-hero-grid" style="gap:36px;align-items:start">
+        <div class="tw-geo-hero-copy" style="max-width:none">
+          <div class="tw-eyebrow">Our Ocean City Office</div>
+          <h2 class="tw-section-title" style="margin:10px 0 18px">Visit or call the <em>Ocean City team.</em></h2>
+          <address style="font-style:normal;font-family:var(--tw-font-body);font-size:16px;line-height:1.7;color:var(--tw-fg)">
+            <strong>{office.name}</strong><br/>
+            {office.street}<br/>
+            {office.city}, {office.region} {office.postal}<br/>
+            <a href={office.phoneHref}>{office.phone}</a><br/>
+            <span style="color:var(--tw-fg-muted)">Office hours: call ahead &mdash; {office.phone}</span>
+          </address>
+          <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
+            <a href={office.phoneHref} class="tw-btn tw-btn-primary">Call the office &rarr;</a>
+            <a href="/request-a-proposal" class="tw-btn tw-btn-outline">Request a proposal &rarr;</a>
+          </div>
+        </div>
+        <div>
+          <iframe
+            title="Map to Tidewater Property Management, Ocean City"
+            src={`https://www.google.com/maps?q=${mapsQuery}&output=embed`}
+            width="100%" height="320" style="border:0;border-radius:12px"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Office substance: team + area served -->
+  <section class="tw-geo-section cream" style="padding:56px 0">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">Your Delmarva Team</div>
+        <h2 class="tw-section-title" style="margin:10px 0 14px">Local to the shore, <em>not run from afar.</em></h2>
+        <p class="tw-section-lede">The Ocean City office covers the barrier island, West OC, Ocean Pines, and Berlin, and anchors our wider Eastern Shore and coastal-Delaware coverage.</p>
+      </div>
+      <div class="tw-geo-manager">
+        <div class="tw-geo-manager-avatar">DG</div>
+        <div>
+          <div class="tw-geo-manager-eyebrow">Delmarva Regional Director</div>
+          <div class="tw-geo-manager-name">Don Gentry <span>CMCA&reg;, AMS&reg;, PCAM&reg;</span></div>
+          <p class="tw-geo-manager-role">
+            Don oversees the Eastern Shore, Ocean City, and Delaware portfolio &mdash; 20+ years across community association management and real estate. He backs the local Ocean City team that handles day-to-day board and owner contact.
+          </p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:200px">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-block">Request a proposal &rarr;</a>
+          <a href={office.phoneHref} class="tw-btn tw-btn-outline tw-btn-block">{office.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+  <Footer />
+</BaseLayout>
