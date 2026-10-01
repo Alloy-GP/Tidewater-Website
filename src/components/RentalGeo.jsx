@@ -199,7 +199,7 @@ function RentalGeoManager({ geo }) {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minWidth: 200 }}>
             <a href="/request-a-proposal" className="tw-btn tw-btn-primary tw-btn-block">Email {geo.manager.name.split(' ')[0]} →</a>
-            <a href="tel:+14435480191" className="tw-btn tw-btn-outline tw-btn-block">(443) 548-0191</a>
+            <a href="tel:+18558765500" className="tw-btn tw-btn-outline tw-btn-block">(855) 876-5500</a>
           </div>
         </div>
       </div>

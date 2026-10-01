@@ -50,7 +50,11 @@ const schemas = [
       addressCountry: 'US',
     },
     areaServed: ['Ocean City, MD', 'West Ocean City, MD', 'Ocean Pines, MD', 'Berlin, MD', 'Worcester County, MD'],
-    // TODO(client): add geo {lat,lng}, openingHoursSpecification, and sameAs [GBP URL]
+    openingHoursSpecification: [
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'], opens: '08:00', closes: '16:30' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '08:00', closes: '15:30' },
+    ],
+    // ZIP 21842 confirmed via GBP. TODO(client): add geo {lat,lng} and sameAs [GBP URL]
   },
   breadcrumbSchema([
     { name: 'Home', url: SITE.url + '/' },
@@ -119,7 +123,7 @@ const schemas = [
             {office.street}<br/>
             {office.city}, {office.region} {office.postal}<br/>
             <a href={office.phoneHref} style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">{office.phone}</a><br/>
-            <span style="color:var(--tw-fg-muted)">Office hours: call ahead &mdash; {office.phone}</span>
+            <span style="color:var(--tw-fg-muted)">Office hours: Mon&ndash;Thu 8am&ndash;4:30pm &middot; Fri 8am&ndash;3:30pm &middot; closed weekends</span>
           </address>
           <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
             <a href={office.phoneHref} class="tw-btn tw-btn-primary">Call the office &rarr;</a>

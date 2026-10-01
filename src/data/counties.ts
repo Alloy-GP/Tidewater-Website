@@ -120,7 +120,7 @@ export const COUNTIES: Record<string, County> = {
     manager: {
       initials: 'KC', name: 'Kate Cornell', creds: 'CMCA®', eyebrow: 'Baltimore &amp; DC Metro Regional Director',
       bio: 'Kate oversees the direction and professional development of the Community Association Management team out of the Owings Mills office, and co-leads the developer management program &mdash; the team that runs developer-controlled communities through to homeowner turnover. <strong>15+ years</strong> in the industry.',
-      phone: '(443) 548-0191', phoneHref: 'tel:+14435480191',
+      phone: '(855) 876-5500', phoneHref: 'tel:+18558765500',
     },
     faq: [
       { q: 'Do you work with small Carroll County associations?', a: 'Yes. Portfolios are capped at <strong>8–12 communities per manager</strong>, so a smaller association gets the same attention as a large one rather than being the account nobody has time for. Our financial-only tier is built for boards that want professional books and reserve planning while continuing to run their own operations.' },
