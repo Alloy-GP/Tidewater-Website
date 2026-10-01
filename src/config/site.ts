@@ -24,7 +24,7 @@ export const SITE = {
   org: {
     type:            'LocalBusiness' as const,
     logo:            'https://tidewaterproperty.com/assets/logo-main-white.svg',
-    telephone:       '+14435480191',
+    telephone:       '+18558765500',
     email:           'info@tidewaterproperty.com',
     addressLocality: 'Owings Mills',
     addressRegion:   'MD',

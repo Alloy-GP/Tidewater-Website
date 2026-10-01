@@ -1,0 +1,306 @@
+---
+// HOA Management — Prince George's County, MD. Hand-built to the standard
+// (tw-geo). Board audience. HOA page owns "prince georges county hoa
+// management" / "hoa management prince georges county". Self-canonical.
+// Wrong-audience cross-link to the rental county page. See
+// docs/county-page-playbook.md.
+//
+// SOURCING: portfolio-level + brief-confirmed facts only (450+ six states,
+// AAMC®, family-owned since 1989, 30-min callback, Kate Cornell as Baltimore &
+// DC Metro Regional Director — no post-nominals per the brief). Local context
+// (inside/outside-Beltway split, federal-workforce-era stock, high rental
+// ratios) is publicly verifiable. No invented per-county counts/tenure/SLAs.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Footer from '../../../components/Footer.astro';
+import CTA from '../../../components/CTA.astro';
+import FaqAccordion from '../../../components/FaqAccordion.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { serviceSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+
+const countyFaqs = [
+  { q: 'Do you handle associations with a lot of rental units?', a: 'Yes. A high tenant ratio changes communication and enforcement more than it changes the budget &mdash; notices have to reach owners who do not live on site, and enforcement has to run against the owner rather than the occupant. That is a process question, and one we set up during transition.' },
+  { q: 'How many communities will our manager be handling?', a: 'Manager portfolios are capped at <strong>8&ndash;12 communities</strong> &mdash; a hard ceiling, so a Prince George&rsquo;s board gets a manager who knows its governing documents rather than one lost in an overloaded book.' },
+  { q: 'What happens after hours?', a: 'Our emergency line is answered by Tidewater community managers on a rotating on-call schedule, not a third-party answering service. Callback standard is 20 minutes, <strong>contractually guaranteed at 30</strong>.' },
+  { q: 'What does HOA management cost in Prince George&rsquo;s County?', a: 'We quote per association rather than publishing a rate card, because cost tracks community size, vendor count, meeting cadence and complexity. <a href="/request-a-proposal">Request a proposal</a> for a line-item number, or start with the <a href="/hoa-management/hoa-financial-management">financial-only tier</a>.' },
+  { q: 'How quickly can you take over our Prince George&rsquo;s community?', a: 'The notice period in your current management agreement sets the pace. From there we work to a <strong>30/60/90-day</strong> plan covering records, bank accounts, vendor assignment and the first reporting cycle &mdash; see the <a href="/solutions/switching-hoa-management-company">full transition timeline</a>.' },
+];
+
+const canonical = SITE.url + '/hoa-management/maryland/prince-georges-county';
+
+const schemas = [
+  serviceSchema({
+    name: 'HOA Management Prince George’s County Maryland',
+    description: 'AAMC-accredited HOA and condo association management across Prince George’s County, Maryland — Bowie, Laurel, Upper Marlboro, Largo, Greenbelt, and Hyattsville.',
+    url: canonical,
+    areaServed: 'Prince George’s County, Maryland',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'HOA Management', url: SITE.url + '/hoa-management' },
+    { name: 'Maryland', url: SITE.url + '/hoa-management/maryland' },
+    { name: 'Prince George’s County', url: canonical },
+  ]),
+  faqSchema(countyFaqs),
+];
+
+const cities = [
+  { name: 'Bowie',          meta: 'Master-planned HOA · largest municipality', tag: 'Largest' },
+  { name: 'Laurel',         meta: 'Garden condo · townhome · Howard County line' },
+  { name: 'Upper Marlboro', meta: 'Single-family HOA · southern county', tag: 'County seat' },
+  { name: 'Largo',          meta: 'Condo · townhome · Metro-adjacent' },
+  { name: 'Greenbelt',      meta: 'Historic planned community · co-op · condo' },
+  { name: 'Hyattsville',    meta: 'Condo · townhome · inside the Beltway' },
+  { name: 'Accokeek',       meta: 'Single-family HOA · southern county' },
+  { name: 'Fort Washington',meta: 'Single-family · townhome · Potomac-adjacent' },
+];
+---
+<BaseLayout
+  title="HOA Management Prince George’s County Maryland — Tidewater"
+  description="HOA and condo management in Prince George’s County — Bowie, Laurel, Upper Marlboro, Largo, and Hyattsville. AAMC-accredited, family-owned since 1989."
+  pageSchema={schemas}
+  pageStylesheet="styles-geo.css"
+>
+  <Topbar variant="default" />
+  <Header activeNav="mgmt" logoSrc="/assets/Tidewater-Management-Logo.svg" logoAlt="Tidewater Management" />
+  <Breadcrumb variant="management" crumbs={[
+    { label: 'HOA Management', href: '/hoa-management' },
+    { label: 'Maryland', href: '/hoa-management/maryland' },
+    { label: 'Prince George’s County' },
+  ]} />
+
+  <!-- Hero -->
+  <section class="tw-geo-hero">
+    <div class="tw-geo-hero-bg"></div>
+    <div class="tw-geo-hero-paper"></div>
+    <div class="tw-geo-hero-grid">
+      <div class="tw-geo-hero-copy">
+        <h1 class="tw-geo-hero-title">
+          HOA management in <em>Prince George&rsquo;s County.</em>
+        </h1>
+        <p class="tw-geo-hero-lede">
+          Prince George&rsquo;s runs from inside the Capital Beltway out to farmland, and the association stock changes just as sharply &mdash; older garden condos built for the federal workforce near DC, newer master-planned communities out toward Bowie and Upper Marlboro. Family-owned since 1989, AAMC-accredited, with capped manager portfolios so yours is known rather than numbered.
+        </p>
+        <div class="tw-geo-hero-actions">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-lg">Request a proposal &rarr;</a>
+          <a href="#communities" class="tw-btn tw-btn-ghost">See where we manage &rarr;</a>
+        </div>
+        <div class="tw-geo-hero-stats">
+          <div>
+            <div class="tw-geo-hero-stat-num">450+</div>
+            <div class="tw-geo-hero-stat-label">Communities managed across six states</div>
+          </div>
+          <div>
+            <div class="tw-geo-hero-stat-num gold">AAMC&reg;</div>
+            <div class="tw-geo-hero-stat-label">CAI&rsquo;s highest company accreditation &middot; PCAM on staff</div>
+          </div>
+          <div>
+            <div class="tw-geo-hero-stat-num">1989</div>
+            <div class="tw-geo-hero-stat-label">Family-owned and operated &mdash; 35+ years in the Mid-Atlantic</div>
+          </div>
+        </div>
+      </div>
+      <aside class="tw-geo-hero-side">
+        <div class="tw-geo-hero-side-eyebrow">In Prince George&rsquo;s</div>
+        <h3>Where we manage</h3>
+        <!-- Stylized Prince George's County schematic (not to scale; DC on the NW, Potomac on the SW) -->
+        <svg viewBox="0 0 360 290" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Schematic map of Prince George's County, Maryland">
+          <path d="M96 60 Q140 48 180 58 L232 86 Q268 118 262 170 Q252 226 210 250 L150 236 Q120 206 108 168 L78 120 Q70 84 96 60 Z" class="tw-geo-map-county served" style="cursor:default"><title>Prince George's County</title></path>
+          <!-- Laurel (N, Howard line) -->
+          <circle cx="120" cy="74" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Laurel</title></circle>
+          <text x="128" y="72" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Laurel</text>
+          <!-- Greenbelt (N-central) -->
+          <circle cx="150" cy="104" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Greenbelt</title></circle>
+          <text x="158" y="108" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Greenbelt</text>
+          <!-- Hyattsville (W, inside Beltway) -->
+          <circle cx="104" cy="128" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Hyattsville</title></circle>
+          <text x="38" y="132" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Hyattsville</text>
+          <!-- Bowie (NE) -->
+          <circle cx="226" cy="100" r="5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Bowie</title></circle>
+          <text x="234" y="104" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Bowie</text>
+          <!-- Largo (central) -->
+          <circle cx="192" cy="150" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Largo</title></circle>
+          <text x="200" y="154" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Largo</text>
+          <!-- Upper Marlboro (county seat, gold) -->
+          <circle class="tw-geo-map-dot-pulse" cx="186" cy="192" r="8"/>
+          <circle cx="186" cy="192" r="6" fill="var(--tw-gold)" stroke="var(--tw-cream)" stroke-width="2"><title>Upper Marlboro</title></circle>
+          <text x="196" y="196" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="800" font-size="10.5">Upper Marlboro</text>
+          <!-- Fort Washington (SW) -->
+          <circle cx="128" cy="196" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Fort Washington</title></circle>
+          <text x="40" y="200" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Ft. Washington</text>
+        </svg>
+        <div class="tw-geo-map-legend">
+          <div class="tw-geo-map-legend-row">
+            <span class="tw-geo-map-legend-swatch served"></span>
+            Cities &amp; towns we serve
+          </div>
+          <div class="tw-geo-map-legend-row">
+            <span class="tw-geo-map-legend-swatch hq"></span>
+            County seat &middot; Upper Marlboro
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Wrong-audience catch: rental -->
+  <div class="tw-geo-section linen" style="padding:14px 0">
+    <div class="tw-container-wide" style="text-align:center">
+      <p style="margin:0;font-size:14px;color:var(--tw-fg-muted)">Managing a rental property in Prince George&rsquo;s County? See <a href="/rental-management/maryland/prince-georges-county" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">Prince George&rsquo;s County rental management</a> instead &mdash; this page is for HOA &amp; condo association boards.</p>
+    </div>
+  </div>
+
+  <!-- Coverage areas / cities served -->
+  <section class="tw-geo-section cream">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">Where We Manage</div>
+        <h2 class="tw-section-title">Prince George&rsquo;s coverage, <em>town by town.</em></h2>
+        <p class="tw-section-lede">We cover the whole county &mdash; the dense inside-Beltway communities, the Metro corridor, and the master-planned south. Each town carries its own association mix.</p>
+      </div>
+      <div class="tw-geo-neighbors">
+        {cities.map((ct) => (
+          <a href="/hoa-management/maryland" class="tw-geo-neighbor">
+            <div class="tw-geo-neighbor-name">{ct.name}</div>
+            <div class="tw-geo-neighbor-meta">{ct.meta}</div>
+            {ct.tag && <span class="tw-geo-neighbor-tag">{ct.tag}</span>}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What's different here -->
+  <section class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">What&rsquo;s Different Here</div>
+        <h2 class="tw-section-title">One county, <em>two housing markets.</em></h2>
+        <p class="tw-section-lede">The Capital Beltway splits Prince George&rsquo;s into two association worlds, and a board&rsquo;s priorities depend on which side it sits on.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card">
+          <h3>Inside the Beltway: reserves</h3>
+          <p>Older garden-style condos and townhome HOAs built for the federal workforce &mdash; now at the age where roofs, siding, and paving all come due within a few years of each other. Reserve planning is the whole job.</p>
+          <div class="tw-geo-law-foot">Hyattsville · inner county</div>
+        </div>
+        <div class="tw-geo-law-card gold">
+          <h3>Outside: developer transition</h3>
+          <p>Bowie, Upper Marlboro, and the southern county are newer master-planned communities, where the live issues are developer transition, turnover audits, and warranty claims rather than deferred maintenance.</p>
+          <div class="tw-geo-law-foot">Bowie · Upper Marlboro</div>
+        </div>
+        <div class="tw-geo-law-card sage">
+          <h3>High tenant-ratio associations</h3>
+          <p>Some associations carry a high proportion of rental-occupied units, which changes communication and enforcement &mdash; notices have to reach off-site owners, and rules run against the owner, not the occupant.</p>
+          <div class="tw-geo-law-foot">Communication &amp; enforcement</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local manager card -->
+  <section class="tw-geo-section cream" style="padding:64px 0">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">Regional Leadership</div>
+        <h2 class="tw-section-title" style="margin:10px 0 14px">A dedicated CAM, <em>backed by regional leadership.</em></h2>
+        <p class="tw-section-lede">Prince George&rsquo;s is covered by our Baltimore &amp; DC Metro team, so your board&rsquo;s dedicated CAM works alongside the regional director and the full support team.</p>
+      </div>
+      <div class="tw-geo-manager">
+        <div class="tw-geo-manager-avatar">KC</div>
+        <div>
+          <div class="tw-geo-manager-eyebrow">Baltimore &amp; DC Metro Regional Director</div>
+          <div class="tw-geo-manager-name">Kate Cornell</div>
+          <p class="tw-geo-manager-role">
+            Kate oversees the direction and professional development of the Community Association Management team across the Owings Mills and Silver Spring offices, and co-leads the developer management program &mdash; which fits the county&rsquo;s newer master-planned communities still in developer transition. Manager portfolios here are capped at 8&ndash;12 communities, so your board works with a dedicated CAM, not a rotating pool. <strong>15+ years</strong> in the industry.
+          </p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:200px">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-block">Request a proposal &rarr;</a>
+          <a href="tel:+18558765500" class="tw-btn tw-btn-outline tw-btn-block">(855) 876-5500</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What we manage -->
+  <section id="communities" class="tw-geo-section mist">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">What We Manage</div>
+        <h2 class="tw-section-title">The kinds of communities we run <em>across Prince George&rsquo;s.</em></h2>
+        <p class="tw-section-lede">Board references available on request &mdash; we&rsquo;d rather you talk to a comparable Prince George&rsquo;s board than read about us.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card">
+          <h3>Federal-era garden condos</h3>
+          <p>Inside-Beltway garden-style condominiums and townhome HOAs where reserve and capital planning carry the budget.</p>
+        </div>
+        <div class="tw-geo-law-card">
+          <h3>Master-planned HOAs</h3>
+          <p>Bowie and southern-county communities, including those still in developer transition with turnover and warranty work.</p>
+        </div>
+        <div class="tw-geo-law-card">
+          <h3>Metro-corridor associations</h3>
+          <p>Largo and Hyattsville condo and townhome associations near Metro, often with higher rental-tenant ratios.</p>
+        </div>
+        <div class="tw-geo-law-card">
+          <h3>Single-family HOAs</h3>
+          <p>Accokeek, Fort Washington, and Upper Marlboro communities across the southern and Potomac-adjacent county.</p>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center;margin-top:32px;gap:14px;flex-wrap:wrap">
+        <a href="/testimonials" class="tw-btn tw-btn-outline">Read board reviews &rarr;</a>
+        <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Get board references &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service callouts -->
+  <section class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">Services in Prince George&rsquo;s County</div>
+        <h2 class="tw-section-title">Three service tiers, <em>same local team.</em></h2>
+        <p class="tw-section-lede">Pick the level your board needs &mdash; the manager, the response time, and the accreditation stay the same.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:48px">
+        <a href="/hoa-management" class="tw-geo-law-card" style="text-decoration:none">
+          <h3>Full Service</h3>
+          <p>Financial and full property management for single-family, townhome, and condo associations: board-meeting attendance, neighborhood inspections, vendor management and on-site oversight, financial controls, and day-to-day operations &mdash; including HR for association employees.</p>
+          <div class="tw-geo-law-foot">Full-service details &rarr;</div>
+        </a>
+        <a href="/hoa-management#tiers" class="tw-geo-law-card gold" style="text-decoration:none">
+          <h3>Flex Service</h3>
+          <p>Governance, legal affairs, risk management, maintenance coordination, contracting, and full financial management &mdash; with meetings, inspections, and on-site presence available &agrave; la carte at a set hourly rate. Built for boards that want budget precision without constant on-site involvement.</p>
+          <div class="tw-geo-law-foot">Flex tier details &rarr;</div>
+        </a>
+        <a href="/hoa-management/hoa-financial-management" class="tw-geo-law-card sage" style="text-decoration:none">
+          <h3>Financial Only</h3>
+          <p>Strictly financial for self-managed Prince George&rsquo;s boards: budgets, reserves, assessment collection, accounts payable and receivable, GAAP-compliant bookkeeping, audit coordination, and resale-certificate preparation.</p>
+          <div class="tw-geo-law-foot">Financial-only tier &rarr;</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ section -->
+  <section class="tw-section tw-sol-faq-section">
+    <div class="tw-container-wide">
+      <div class="tw-sol-faq-grid">
+        <div class="tw-sol-faq-head">
+          <div class="tw-eyebrow">Prince George&rsquo;s County FAQs</div>
+          <h2>The county-specific <em>questions</em> we get.</h2>
+          <p>For all-purpose HOA questions see our <a href="/faq" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">main FAQ hub</a>.</p>
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Ask your own question &rarr;</a>
+        </div>
+        <FaqAccordion items={countyFaqs} defaultOpen={0} />
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+  <Footer />
+</BaseLayout>

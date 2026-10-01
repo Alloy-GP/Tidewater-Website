@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Header from '../../../components/Header.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import Footer from '../../../components/Footer.astro';
+import CTA from '../../../components/CTA.astro';
+import RentalGeo, { GEO_DATA_REHOBOTH as geo } from '../../../components/RentalGeo.jsx';
+import { breadcrumbSchema, serviceSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+
+const pageUrl = `${SITE.url}/rental-management/delaware/rehoboth-beach`;
+
+const schemas = [
+  serviceSchema({
+    name: 'Rental Property Management — Rehoboth Beach, Delaware',
+    description: geo.schemaDesc,
+    url: pageUrl,
+    areaServed: 'Rehoboth Beach, Delaware',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'Rental Management', url: SITE.url + '/rental-management' },
+    { name: 'Delaware', url: SITE.url + '/rental-management/delaware' },
+    { name: 'Rehoboth Beach', url: pageUrl },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Rehoboth Beach DE Rental Property Management | Tidewater"
+  description="Rental property management in Rehoboth Beach, Delaware — downtown, North Shores, Henlopen Acres, Dewey Beach. Year-round and seasonal coastal rentals. Flat fee."
+  ogType="website"
+  pageSchema={schemas}
+  pageStylesheet="styles-geo.css"
+>
+  <Topbar />
+  <Header activeNav="rental" logoSrc="/assets/Tidewater-Management-Logo.svg" logoAlt="Tidewater Management" />
+  <Breadcrumb variant="management" crumbs={[
+    { label: 'Rental Management', href: '/rental-management' },
+    { label: 'Delaware', href: '/rental-management/delaware' },
+    { label: 'Rehoboth Beach' },
+  ]} />
+  <RentalGeo geo={geo} client:load />
+  <CTA />
+  <Footer />
+</BaseLayout>

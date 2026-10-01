@@ -1,0 +1,312 @@
+---
+// HOA Management — Baltimore County, MD.
+// Hand-built county page to the Howard standard (tw-geo layout). Board
+// audience. HOA page owns "baltimore county hoa management" / "hoa management
+// baltimore county". Self-canonical. Wrong-audience cross-link to the rental
+// county page. See docs/county-page-playbook.md.
+//
+// SOURCING: portfolio-level + brief-confirmed facts only (450+ six states,
+// AAMC®, family-owned since 1989, 30-min callback, HQ at 3600 Crondall Lane
+// Owings Mills, Kate Cornell as Baltimore & DC Metro Regional Director — no
+// post-nominals per the brief). Local context (beltway-ring mature stock,
+// I-83 corridor, rural north-county wells/septic, HQ in-county) is publicly
+// verifiable. No invented per-county counts/tenure/SLAs/assessments.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Footer from '../../../components/Footer.astro';
+import CTA from '../../../components/CTA.astro';
+import FaqAccordion from '../../../components/FaqAccordion.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { serviceSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+
+const countyFaqs = [
+  { q: 'Is your office really in Baltimore County?', a: 'Yes &mdash; our headquarters is at 3600 Crondall Lane in Owings Mills, one of four insured office locations we operate. Baltimore County is the county we work from, not the one we drive to.' },
+  { q: 'How many communities will our manager be handling?', a: 'Manager portfolios are capped at <strong>8&ndash;12 communities</strong> &mdash; a hard ceiling, so a Baltimore County board gets a manager who knows its governing documents rather than one lost in an overloaded book.' },
+  { q: 'What happens after hours?', a: 'Our emergency line is answered by Tidewater community managers on a rotating on-call schedule, not a third-party answering service. Callback standard is 20 minutes, <strong>contractually guaranteed at 30</strong>.' },
+  { q: 'What does HOA management cost in Baltimore County?', a: 'We quote per association rather than publishing a rate card, because cost tracks community size, vendor count, meeting cadence and complexity. <a href="/request-a-proposal">Request a proposal</a> for a line-item number, or start with the <a href="/hoa-management/hoa-financial-management">financial-only tier</a>.' },
+  { q: 'How quickly can you take over our Baltimore County community?', a: 'The notice period in your current management agreement sets the pace. From there we work to a <strong>30/60/90-day</strong> plan covering records, bank accounts, vendor assignment and the first reporting cycle &mdash; see the <a href="/solutions/switching-hoa-management-company">full transition timeline</a>.' },
+];
+
+const canonical = SITE.url + '/hoa-management/maryland/baltimore-county';
+
+const schemas = [
+  serviceSchema({
+    name: 'HOA Management Baltimore County Maryland',
+    description: 'AAMC-accredited HOA and condo association management across Baltimore County, Maryland — Towson, Owings Mills, Pikesville, Cockeysville, Catonsville, and Essex.',
+    url: canonical,
+    areaServed: 'Baltimore County, Maryland',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'HOA Management', url: SITE.url + '/hoa-management' },
+    { name: 'Maryland', url: SITE.url + '/hoa-management/maryland' },
+    { name: 'Baltimore County', url: canonical },
+  ]),
+  faqSchema(countyFaqs),
+];
+
+const cities = [
+  { name: 'Towson',       meta: 'Condo · single-family · university-adjacent', tag: 'County seat' },
+  { name: 'Owings Mills', meta: 'Townhome · condo · our HQ corridor', tag: 'Headquarters' },
+  { name: 'Pikesville',   meta: 'Established single-family · mature infrastructure' },
+  { name: 'Catonsville',  meta: 'Single-family · townhome · older stock' },
+  { name: 'Cockeysville', meta: 'Townhome · condo · Hunt Valley corridor' },
+  { name: 'Timonium',     meta: 'Mixed · I-83 corridor' },
+  { name: 'White Marsh',  meta: 'Townhome HOA · east-county new build' },
+  { name: 'Perry Hall',   meta: 'Single-family HOA · northeast county' },
+  { name: 'Reisterstown', meta: 'Single-family · townhome · northwest county' },
+  { name: 'Essex',        meta: 'Mixed · small associations · waterfront adjacency' },
+];
+---
+<BaseLayout
+  title="HOA Management Baltimore County Maryland — Tidewater"
+  description="HOA and condo management in Baltimore County — Towson, Owings Mills, Pikesville, Cockeysville, and Catonsville. AAMC-accredited, headquartered in the county."
+  pageSchema={schemas}
+  pageStylesheet="styles-geo.css"
+>
+  <Topbar variant="default" />
+  <Header activeNav="mgmt" logoSrc="/assets/Tidewater-Management-Logo.svg" logoAlt="Tidewater Management" />
+  <Breadcrumb variant="management" crumbs={[
+    { label: 'HOA Management', href: '/hoa-management' },
+    { label: 'Maryland', href: '/hoa-management/maryland' },
+    { label: 'Baltimore County' },
+  ]} />
+
+  <!-- Hero -->
+  <section class="tw-geo-hero">
+    <div class="tw-geo-hero-bg"></div>
+    <div class="tw-geo-hero-paper"></div>
+    <div class="tw-geo-hero-grid">
+      <div class="tw-geo-hero-copy">
+        <h1 class="tw-geo-hero-title">
+          HOA management in <em>Baltimore County.</em>
+        </h1>
+        <p class="tw-geo-hero-lede">
+          Our headquarters sits in Owings Mills, which makes Baltimore County the one we&rsquo;re in every day rather than the one we drive to &mdash; from the mature communities ringing the city to the newer associations up the I-83 corridor. Family-owned since 1989, AAMC-accredited, with capped manager portfolios so yours is known rather than numbered.
+        </p>
+        <div class="tw-geo-hero-actions">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-lg">Request a proposal &rarr;</a>
+          <a href="#communities" class="tw-btn tw-btn-ghost">See where we manage &rarr;</a>
+        </div>
+        <div class="tw-geo-hero-stats">
+          <div>
+            <div class="tw-geo-hero-stat-num">450+</div>
+            <div class="tw-geo-hero-stat-label">Communities managed across six states</div>
+          </div>
+          <div>
+            <div class="tw-geo-hero-stat-num gold">AAMC&reg;</div>
+            <div class="tw-geo-hero-stat-label">CAI&rsquo;s highest company accreditation &middot; PCAM on staff</div>
+          </div>
+          <div>
+            <div class="tw-geo-hero-stat-num">HQ</div>
+            <div class="tw-geo-hero-stat-label">Headquartered in Owings Mills &mdash; inside the county we serve</div>
+          </div>
+        </div>
+      </div>
+      <aside class="tw-geo-hero-side">
+        <div class="tw-geo-hero-side-eyebrow">In Baltimore County</div>
+        <h3>Where we manage</h3>
+        <!-- Stylized Baltimore County schematic (not to scale; wraps around Baltimore City) -->
+        <svg viewBox="0 0 360 290" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Schematic map of Baltimore County, Maryland">
+          <path d="M70 92 Q92 56 150 52 L242 56 Q302 72 306 132 Q306 202 250 232 L140 236 Q80 222 64 162 Z" class="tw-geo-map-county served" style="cursor:default"><title>Baltimore County</title></path>
+          <!-- Baltimore City (separate jurisdiction, enclosed) -->
+          <circle cx="186" cy="156" r="34" fill="rgba(23,35,37,0.28)" stroke="rgba(254,252,248,0.35)" stroke-width="1"></circle>
+          <text x="186" y="159" text-anchor="middle" fill="rgba(254,252,248,0.7)" font-family="var(--tw-font-heading)" font-weight="600" font-size="8.5">Baltimore City</text>
+          <!-- Cockeysville / Hunt Valley (N) -->
+          <circle cx="214" cy="74" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Cockeysville / Hunt Valley</title></circle>
+          <text x="224" y="78" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Hunt Valley</text>
+          <!-- Towson (county seat, gold) -->
+          <circle class="tw-geo-map-dot-pulse" cx="192" cy="104" r="8"/>
+          <circle cx="192" cy="104" r="6" fill="var(--tw-gold)" stroke="var(--tw-cream)" stroke-width="2"><title>Towson</title></circle>
+          <text x="202" y="108" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="800" font-size="11">Towson</text>
+          <!-- Owings Mills (HQ) -->
+          <circle cx="104" cy="110" r="5.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Owings Mills (HQ)</title></circle>
+          <text x="40" y="100" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Owings Mills</text>
+          <!-- Pikesville -->
+          <circle cx="138" cy="132" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Pikesville</title></circle>
+          <text x="80" y="140" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Pikesville</text>
+          <!-- Catonsville (SW) -->
+          <circle cx="112" cy="198" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Catonsville</title></circle>
+          <text x="48" y="202" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Catonsville</text>
+          <!-- Perry Hall (NE) -->
+          <circle cx="262" cy="108" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Perry Hall</title></circle>
+          <text x="272" y="112" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Perry Hall</text>
+          <!-- Essex (SE) -->
+          <circle cx="258" cy="196" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Essex</title></circle>
+          <text x="268" y="200" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Essex</text>
+        </svg>
+        <div class="tw-geo-map-legend">
+          <div class="tw-geo-map-legend-row">
+            <span class="tw-geo-map-legend-swatch served"></span>
+            Cities &amp; towns we serve
+          </div>
+          <div class="tw-geo-map-legend-row">
+            <span class="tw-geo-map-legend-swatch hq"></span>
+            County seat &middot; Towson
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Wrong-audience catch: rental -->
+  <div class="tw-geo-section linen" style="padding:14px 0">
+    <div class="tw-container-wide" style="text-align:center">
+      <p style="margin:0;font-size:14px;color:var(--tw-fg-muted)">Managing a rental property in Baltimore County? See <a href="/rental-management/maryland/baltimore-county" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">Baltimore County rental management</a> instead &mdash; this page is for HOA &amp; condo association boards.</p>
+    </div>
+  </div>
+
+  <!-- Coverage areas / cities served -->
+  <section class="tw-geo-section cream">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">Where We Manage</div>
+        <h2 class="tw-section-title">Baltimore County coverage, <em>town by town.</em></h2>
+        <p class="tw-section-lede">We cover the whole county &mdash; the beltway ring, the I-83 corridor, the rural north, and the east-county line. Each town carries its own association mix.</p>
+      </div>
+      <div class="tw-geo-neighbors">
+        {cities.map((ct) => (
+          <a href="/hoa-management/maryland" class="tw-geo-neighbor">
+            <div class="tw-geo-neighbor-name">{ct.name}</div>
+            <div class="tw-geo-neighbor-meta">{ct.meta}</div>
+            {ct.tag && <span class="tw-geo-neighbor-tag">{ct.tag}</span>}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What's different here -->
+  <section class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">What&rsquo;s Different Here</div>
+        <h2 class="tw-section-title" style="margin:10px 0 14px">One county, <em>three different association markets.</em></h2>
+        <p class="tw-section-lede">Baltimore County wraps Baltimore City on three sides, and the association stock changes completely as you move through it.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card">
+          <h3>Beltway-ring reserves</h3>
+          <p>The older communities ringing the city &mdash; Towson, Pikesville, Catonsville &mdash; have mature tree canopy and infrastructure at the age where reserve planning stops being theoretical. We fold reserve-study coordination into every budget cycle.</p>
+          <div class="tw-geo-law-foot">Inner-beltway stock</div>
+        </div>
+        <div class="tw-geo-law-card gold">
+          <h3>The I-83 corridor</h3>
+          <p>North toward Hunt Valley and Cockeysville, associations skew newer and larger &mdash; bigger amenity sets, bigger budgets, and the vendor-management load that comes with them.</p>
+          <div class="tw-geo-law-foot">Hunt Valley &middot; Cockeysville</div>
+        </div>
+        <div class="tw-geo-law-card sage">
+          <h3>Rural north-county utilities</h3>
+          <p>North of the beltway the county turns rural fast. Associations there carry private roads, shared wells, and community septic &mdash; MDE-regulated obligations and a reserve line boards used to public utilities don&rsquo;t expect.</p>
+          <div class="tw-geo-law-foot">North county</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local manager card -->
+  <section class="tw-geo-section cream" style="padding:64px 0">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">Regional Leadership</div>
+        <h2 class="tw-section-title" style="margin:10px 0 14px">A dedicated CAM, <em>backed by regional leadership.</em></h2>
+        <p class="tw-section-lede">Baltimore County is home to our Owings Mills headquarters, so your board&rsquo;s dedicated CAM works alongside the regional director and the full support team day to day.</p>
+      </div>
+      <div class="tw-geo-manager">
+        <div class="tw-geo-manager-avatar">KC</div>
+        <div>
+          <div class="tw-geo-manager-eyebrow">Baltimore &amp; DC Metro Regional Director</div>
+          <div class="tw-geo-manager-name">Kate Cornell</div>
+          <p class="tw-geo-manager-role">
+            Kate oversees the direction and professional development of the Community Association Management team across the Owings Mills and Silver Spring offices, and co-leads the developer management program. Manager portfolios here are capped at 8&ndash;12 communities, so your board works with a dedicated CAM as its day-to-day point of contact, not a rotating pool. <strong>15+ years</strong> in the industry.
+          </p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:200px">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-block">Request a proposal &rarr;</a>
+          <a href="tel:+18558765500" class="tw-btn tw-btn-outline tw-btn-block">(855) 876-5500</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What we manage -->
+  <section id="communities" class="tw-geo-section mist">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">What We Manage</div>
+        <h2 class="tw-section-title">The kinds of communities we run <em>across Baltimore County.</em></h2>
+        <p class="tw-section-lede">Board references available on request &mdash; we&rsquo;d rather you talk to a comparable Baltimore County board than read about us.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card">
+          <h3>Mature beltway associations</h3>
+          <p>Established condo and single-family communities in Towson, Pikesville, and Catonsville where reserves and capital planning carry the budget.</p>
+        </div>
+        <div class="tw-geo-law-card">
+          <h3>I-83 corridor communities</h3>
+          <p>Newer, larger townhome and condo associations through Hunt Valley, Cockeysville, and Timonium, with amenity and vendor programs to match.</p>
+        </div>
+        <div class="tw-geo-law-card">
+          <h3>Rural north-county HOAs</h3>
+          <p>Communities on private roads, shared wells, or community septic, with MDE-regulated obligations most boards discover late.</p>
+        </div>
+        <div class="tw-geo-law-card">
+          <h3>East-county &amp; small associations</h3>
+          <p>Denser, mixed, and small-scale associations around White Marsh, Perry Hall, and Essex, including waterfront-adjacent stock.</p>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center;margin-top:32px;gap:14px;flex-wrap:wrap">
+        <a href="/testimonials" class="tw-btn tw-btn-outline">Read board reviews &rarr;</a>
+        <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Get board references &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service callouts -->
+  <section class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">Services in Baltimore County</div>
+        <h2 class="tw-section-title">Three service tiers, <em>same local team.</em></h2>
+        <p class="tw-section-lede">Pick the level your board needs &mdash; the manager, the response time, and the accreditation stay the same.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:48px">
+        <a href="/hoa-management" class="tw-geo-law-card" style="text-decoration:none">
+          <h3>Full Service</h3>
+          <p>Financial and full property management for single-family, townhome, and condo associations: board-meeting attendance, neighborhood inspections, vendor management and on-site oversight, financial controls, and day-to-day operations &mdash; including HR for association employees.</p>
+          <div class="tw-geo-law-foot">Full-service details &rarr;</div>
+        </a>
+        <a href="/hoa-management#tiers" class="tw-geo-law-card gold" style="text-decoration:none">
+          <h3>Flex Service</h3>
+          <p>Governance, legal affairs, risk management, maintenance coordination, contracting, and full financial management &mdash; with meetings, inspections, and on-site presence available &agrave; la carte at a set hourly rate. Built for boards that want budget precision without constant on-site involvement.</p>
+          <div class="tw-geo-law-foot">Flex tier details &rarr;</div>
+        </a>
+        <a href="/hoa-management/hoa-financial-management" class="tw-geo-law-card sage" style="text-decoration:none">
+          <h3>Financial Only</h3>
+          <p>Strictly financial for self-managed Baltimore County boards: budgets, reserves, assessment collection, accounts payable and receivable, GAAP-compliant bookkeeping, audit coordination, and resale-certificate preparation.</p>
+          <div class="tw-geo-law-foot">Financial-only tier &rarr;</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ section -->
+  <section class="tw-section tw-sol-faq-section">
+    <div class="tw-container-wide">
+      <div class="tw-sol-faq-grid">
+        <div class="tw-sol-faq-head">
+          <div class="tw-eyebrow">Baltimore County FAQs</div>
+          <h2>The county-specific <em>questions</em> we get.</h2>
+          <p>For all-purpose HOA questions see our <a href="/faq" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">main FAQ hub</a>.</p>
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Ask your own question &rarr;</a>
+        </div>
+        <FaqAccordion items={countyFaqs} defaultOpen={0} />
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+  <Footer />
+</BaseLayout>

@@ -71,7 +71,7 @@
     },
     {
       "source": "/association-management/maryland/howard-county",
-      "destination": "/hoa-management/maryland",
+      "destination": "/hoa-management/maryland/howard-county",
       "permanent": true
     },
     {
@@ -101,7 +101,7 @@
     },
     {
       "source": "/maryland/howard-county",
-      "destination": "/hoa-management/maryland",
+      "destination": "/hoa-management/maryland/howard-county",
       "permanent": true
     },
     {

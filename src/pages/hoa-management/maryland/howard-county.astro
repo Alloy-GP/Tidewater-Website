@@ -1,0 +1,316 @@
+---
+// HOA Management — Howard County, MD.
+// Hand-built county page, mirroring anne-arundel-county.astro (tw-geo layout).
+// Board audience, Columbia/Ellicott City focus. HOA page owns the queries
+// "howard county hoa management" / "hoa management howard county" /
+// "columbia md association management"; the generic "property management"
+// terms are deliberately NOT targeted here (they belong to the rental page +
+// GBP, per the one-owner-per-query anti-cannibalization rule). Self-canonical.
+//
+// SOURCING: every figure is portfolio-level and brief-confirmed (450+ across
+// six states, 8–12 per manager, AAMC®, family-owned since 1989, 30-min
+// after-hours callback, Kate Cornell as Baltimore & DC Metro Regional
+// Director). Per-county community counts, tenure, on-site SLAs, median
+// assessments, and named sample communities are deliberately ABSENT — the
+// master brief does not confirm them. Local context (Columbia's CA-layered
+// villages, Ellicott City's historic district + stormwater, Fulton/Clarksville
+// developer transition, well/septic west county) is publicly verifiable.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Footer from '../../../components/Footer.astro';
+import CTA from '../../../components/CTA.astro';
+import FaqAccordion from '../../../components/FaqAccordion.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { serviceSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+
+const countyFaqs = [
+  { q: 'How is HOA management different in Howard County than elsewhere in Maryland?', a: 'Three things: <strong>Columbia’s village structure</strong> layers a sub-association budget under the Columbia Association assessment, which no other Maryland market does at scale. <strong>Ellicott City’s historic district</strong> adds a county preservation review on top of normal architectural approval. And <strong>west-county new construction</strong> (Fulton, Clarksville) means a high share of associations still in developer transition, where warranty claims and turnover audits matter more than deferred maintenance.' },
+  { q: 'Do you serve all of Howard County?', a: 'Yes — Columbia, Ellicott City, Elkridge, Jessup, Savage, Laurel, Fulton, Clarksville, Glenelg, and the rural west county. Manager portfolios are capped so site visits are scheduled around your community rather than squeezed in.' },
+  { q: 'How quickly can you take over our Howard County community?', a: 'The controlling factor is the notice period in your current management agreement, not us. Once notice is served we work to a <strong>30/60/90-day</strong> transition plan covering records, bank accounts, vendor assignment and the first reporting cycle. See the <a href="/solutions/switching-hoa-management-company">full transition timeline</a>.' },
+  { q: 'What does HOA management cost in Howard County?', a: 'It depends on community size, vendor count, meeting cadence and complexity, so we quote per association rather than publishing a rate card. <a href="/request-a-proposal">Request a proposal</a> and you will get a line-item number for your community. Boards that want professional books without full service can start at our <a href="/hoa-management/hoa-financial-management">financial-only tier</a>.' },
+  { q: 'Can we speak with other Howard County boards first?', a: 'Always. We’ll connect you with 3–5 board presidents from comparable Howard County communities — same size, similar stage, similar issues. You call them, no script.' },
+  { q: 'Which office covers Howard County?', a: 'Our headquarters is in Owings Mills, and we also hold an office on Columbia Pike &mdash; four insured office locations in total across the region. Main line: <strong>(855) 876-5500</strong>, with a <strong>30-minute contractual callback guarantee</strong> after hours, answered by Tidewater managers rather than an answering service.' },
+];
+
+const canonical = SITE.url + '/hoa-management/maryland/howard-county';
+
+const schemas = [
+  serviceSchema({
+    name: 'HOA Management Howard County Maryland',
+    description: 'AAMC-accredited HOA and condo association management across Howard County, Maryland — Columbia, Ellicott City, Elkridge, Fulton, Clarksville, and Jessup.',
+    url: canonical,
+    areaServed: 'Howard County, Maryland',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'HOA Management', url: SITE.url + '/hoa-management' },
+    { name: 'Maryland', url: SITE.url + '/hoa-management/maryland' },
+    { name: 'Howard County', url: canonical },
+  ]),
+  faqSchema(countyFaqs),
+];
+
+// Coverage areas — focus descriptors only, no per-city community counts (unconfirmed).
+const cities = [
+  { name: 'Columbia',      meta: 'Village associations · CA-layered governance', tag: 'Largest market' },
+  { name: 'Ellicott City', meta: 'Historic-district review · stormwater reserves', tag: 'County seat' },
+  { name: 'Elkridge',      meta: 'Townhome HOAs · BWI corridor' },
+  { name: 'Fulton',        meta: 'New build · developer transition', tag: 'Growing' },
+  { name: 'Clarksville',   meta: 'Large-lot single-family · private roads' },
+  { name: 'Jessup',        meta: 'Townhome & garden condo' },
+  { name: 'Laurel',        meta: 'Garden-style condo · PG County line' },
+  { name: 'Savage',        meta: 'Historic mill district · small associations' },
+  { name: 'Glenelg',       meta: 'Rural HOA · well & septic' },
+];
+---
+<BaseLayout
+  title="HOA Management Howard County Maryland — Tidewater"
+  description="HOA and condo management in Howard County — Columbia, Ellicott City, Elkridge, Fulton, and Clarksville. AAMC-accredited, with a named regional manager."
+  pageSchema={schemas}
+  pageStylesheet="styles-geo.css"
+>
+  <Topbar variant="default" />
+  <Header activeNav="mgmt" logoSrc="/assets/Tidewater-Management-Logo.svg" logoAlt="Tidewater Management" />
+  <Breadcrumb variant="management" crumbs={[
+    { label: 'HOA Management', href: '/hoa-management' },
+    { label: 'Maryland', href: '/hoa-management/maryland' },
+    { label: 'Howard County' },
+  ]} />
+
+  <!-- Hero -->
+  <section class="tw-geo-hero">
+    <div class="tw-geo-hero-bg"></div>
+    <div class="tw-geo-hero-paper"></div>
+    <div class="tw-geo-hero-grid">
+      <div class="tw-geo-hero-copy">
+        <h1 class="tw-geo-hero-title">
+          HOA management in <em>Howard County.</em>
+        </h1>
+        <p class="tw-geo-hero-lede">
+          From Columbia&rsquo;s village associations to Ellicott City&rsquo;s historic-district condos to new Fulton and Clarksville developments &mdash; Howard County is four HOA markets, not one. Family-owned since 1989, AAMC-accredited, and run with capped manager portfolios so yours is known rather than numbered.
+        </p>
+        <div class="tw-geo-hero-actions">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-lg">Request a proposal &rarr;</a>
+          <a href="#communities" class="tw-btn tw-btn-ghost">See where we manage &rarr;</a>
+        </div>
+        <div class="tw-geo-hero-stats">
+          <div>
+            <div class="tw-geo-hero-stat-num">450+</div>
+            <div class="tw-geo-hero-stat-label">Communities managed across six states</div>
+          </div>
+          <div>
+            <div class="tw-geo-hero-stat-num gold">AAMC&reg;</div>
+            <div class="tw-geo-hero-stat-label">CAI&rsquo;s highest company accreditation &middot; PCAM on staff</div>
+          </div>
+          <div>
+            <div class="tw-geo-hero-stat-num">1989</div>
+            <div class="tw-geo-hero-stat-label">Family-owned and operated &mdash; 35+ years in the Mid-Atlantic</div>
+          </div>
+        </div>
+      </div>
+      <aside class="tw-geo-hero-side">
+        <div class="tw-geo-hero-side-eyebrow">In Howard County</div>
+        <h3>Where we manage</h3>
+        <!-- Stylized Howard County schematic (not to scale) -->
+        <svg viewBox="0 0 360 290" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Schematic map of Howard County, Maryland">
+          <!-- Patapsco / NE edge accent -->
+          <path d="M250 40 Q300 60 320 95 L330 70 L300 40 Z" fill="rgba(58,146,166,0.15)"/>
+          <!-- County shape (schematic wedge) -->
+          <path d="M55 120 L120 60 L210 45 L285 80 L310 140 L270 210 L190 245 L110 215 L60 170 Z" class="tw-geo-map-county served" style="cursor:default">
+            <title>Howard County</title>
+          </path>
+          <!-- Elkridge (NE) -->
+          <circle cx="270" cy="85" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Elkridge</title></circle>
+          <text x="280" y="89" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10" letter-spacing="0.02em">Elkridge</text>
+          <!-- Ellicott City (county seat, gold) -->
+          <circle class="tw-geo-map-dot-pulse" cx="225" cy="100" r="8"/>
+          <circle cx="225" cy="100" r="6" fill="var(--tw-gold)" stroke="var(--tw-cream)" stroke-width="2"><title>Ellicott City</title></circle>
+          <text x="235" y="104" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="800" font-size="11" letter-spacing="0.02em">Ellicott City</text>
+          <!-- Columbia (center, largest market) -->
+          <circle cx="175" cy="155" r="5.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Columbia</title></circle>
+          <text x="186" y="159" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10" letter-spacing="0.02em">Columbia</text>
+          <!-- Fulton (SE) -->
+          <circle cx="235" cy="200" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Fulton</title></circle>
+          <text x="245" y="204" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10" letter-spacing="0.02em">Fulton</text>
+          <!-- Clarksville (SW) -->
+          <circle cx="130" cy="185" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Clarksville</title></circle>
+          <text x="140" y="189" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10" letter-spacing="0.02em">Clarksville</text>
+          <!-- Glenelg (W) -->
+          <circle cx="85" cy="135" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Glenelg</title></circle>
+          <text x="95" y="139" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10" letter-spacing="0.02em">Glenelg</text>
+        </svg>
+        <div class="tw-geo-map-legend">
+          <div class="tw-geo-map-legend-row">
+            <span class="tw-geo-map-legend-swatch served"></span>
+            Cities &amp; towns we serve
+          </div>
+          <div class="tw-geo-map-legend-row">
+            <span class="tw-geo-map-legend-swatch hq"></span>
+            County seat &middot; Ellicott City
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Wrong-audience catch: rental -->
+  <div class="tw-geo-section linen" style="padding:14px 0">
+    <div class="tw-container-wide" style="text-align:center">
+      <p style="margin:0;font-size:14px;color:var(--tw-fg-muted)">Managing a rental property in Howard County? See <a href="/rental-management/maryland/howard-county" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">Howard County rental management</a> instead &mdash; this page is for HOA &amp; condo association boards.</p>
+    </div>
+  </div>
+
+  <!-- Coverage areas / cities served -->
+  <section class="tw-geo-section cream">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">Where We Manage</div>
+        <h2 class="tw-section-title">Howard County coverage, <em>town by town.</em></h2>
+        <p class="tw-section-lede">We cover the whole county. Each town has its own association mix &mdash; village sub-associations, historic-district condos, and new-build HOAs still in developer transition.</p>
+      </div>
+      <div class="tw-geo-neighbors">
+        {cities.map((ct) => (
+          <a href="/hoa-management/maryland" class="tw-geo-neighbor">
+            <div class="tw-geo-neighbor-name">{ct.name}</div>
+            <div class="tw-geo-neighbor-meta">{ct.meta}</div>
+            {ct.tag && <span class="tw-geo-neighbor-tag">{ct.tag}</span>}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What's different here (Howard-specific governance) -->
+  <section class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">What&rsquo;s Different Here</div>
+        <h2 class="tw-section-title" style="margin:10px 0 14px">Three Howard County rules <em>that change how a board operates.</em></h2>
+        <p class="tw-section-lede">County-specific obligations most management companies find out about after the deadline.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card">
+          <h3>Layered CA assessments</h3>
+          <p>Columbia village associations bill their own assessment <strong>on top of</strong> the Columbia Association annual charge. Budgets, delinquency, and lien priority all have to be modelled against both. We reconcile CA charges into every Columbia community&rsquo;s monthly statement.</p>
+          <div class="tw-geo-law-foot">Columbia Association</div>
+        </div>
+        <div class="tw-geo-law-card gold">
+          <h3>Architectural review overlay</h3>
+          <p>Associations inside the Ellicott City historic district route exterior changes through <strong>county Historic Preservation Commission review</strong> before ARC approval means anything. We track both calendars so owners aren&rsquo;t told yes twice.</p>
+          <div class="tw-geo-law-foot">Ellicott City Historic District</div>
+        </div>
+        <div class="tw-geo-law-card sage">
+          <h3>Reserve study cadence</h3>
+          <p>Maryland now requires associations to fund reserves against a reserve study &mdash; statewide law, not Howard-specific. We fold reserve-study coordination into every budget cycle rather than treating it as a separate project. More on how reserves are funded in our <a href="/blog/hoa-fees">guide to HOA fees and reserves</a>.</p>
+          <div class="tw-geo-law-foot"><a href="https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=grp&amp;section=11b-101" target="_blank" rel="noopener">MD Code, Real Prop. &sect; 11B</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local manager card -->
+  <section class="tw-geo-section cream" style="padding:64px 0">
+    <div class="tw-container-wide">
+      <div class="tw-section-head-left" style="max-width:760px;margin:0 0 12px">
+        <div class="tw-eyebrow">Regional Leadership</div>
+        <h2 class="tw-section-title" style="margin:10px 0 14px">A dedicated CAM, <em>backed by regional leadership.</em></h2>
+        <p class="tw-section-lede">Manager portfolios here are capped at 8&ndash;12 communities &mdash; a hard ceiling, so yours is never lost in an overloaded book. Your board works with a dedicated community association manager as its day-to-day point of contact, backed by the regional director below and a full support team (administration, client services, QA, and leadership).</p>
+      </div>
+      <div class="tw-geo-manager">
+        <div class="tw-geo-manager-avatar">KC</div>
+        <div>
+          <div class="tw-geo-manager-eyebrow">Baltimore &amp; DC Metro Regional Director</div>
+          <div class="tw-geo-manager-name">Kate Cornell</div>
+          <p class="tw-geo-manager-role">
+            Kate oversees the direction and professional development of the Community Association Management team across the Owings Mills and Silver Spring offices, and co-leads the developer management program &mdash; the team that runs developer-controlled communities through to homeowner turnover. That makes her a direct fit for Howard&rsquo;s Fulton and Clarksville new-build associations still in developer transition. <strong>15+ years</strong> in the industry.
+          </p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:200px">
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-block">Request a proposal &rarr;</a>
+          <a href="tel:+18558765500" class="tw-btn tw-btn-outline tw-btn-block">(855) 876-5500</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What we manage (community types — no fabricated specifics) -->
+  <section id="communities" class="tw-geo-section mist">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">What We Manage</div>
+        <h2 class="tw-section-title">The kinds of communities we run <em>across Howard County.</em></h2>
+        <p class="tw-section-lede">Board references available on request &mdash; we&rsquo;d rather you talk to a comparable Howard County board than read about us.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:40px">
+        <div class="tw-geo-law-card">
+          <h3>Village &amp; sub-associations</h3>
+          <p>Columbia village associations layered under the Columbia Association &mdash; dual-assessment budgeting, CA covenant jurisdiction, and mid-rise condo stock.</p>
+        </div>
+        <div class="tw-geo-law-card">
+          <h3>Historic-district condos</h3>
+          <p>Ellicott City associations carrying county preservation review and heavier post-flood stormwater reserve obligations than anywhere else in the county.</p>
+        </div>
+        <div class="tw-geo-law-card">
+          <h3>New-build HOAs in transition</h3>
+          <p>Fulton and Clarksville associations still in developer control &mdash; where the work is warranty claims and turnover audits, not deferred maintenance.</p>
+        </div>
+        <div class="tw-geo-law-card">
+          <h3>Townhome &amp; rural HOAs</h3>
+          <p>Elkridge and Jessup townhome communities near the BWI corridor, and west-county HOAs on shared wells or community septic with MDE-regulated obligations.</p>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center;margin-top:32px;gap:14px;flex-wrap:wrap">
+        <a href="/testimonials" class="tw-btn tw-btn-outline">Read board reviews &rarr;</a>
+        <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Get board references &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service callouts -->
+  <section class="tw-geo-section linen">
+    <div class="tw-container-wide">
+      <div class="tw-section-head" style="text-align:center;max-width:760px;margin:0 auto">
+        <div class="tw-eyebrow">Services in Howard County</div>
+        <h2 class="tw-section-title">Three service tiers, <em>same local team.</em></h2>
+        <p class="tw-section-lede">Pick the level your board needs &mdash; the manager, the response time, and the accreditation stay the same.</p>
+      </div>
+      <div class="tw-geo-law-grid" style="margin-top:48px">
+        <a href="/hoa-management" class="tw-geo-law-card" style="text-decoration:none">
+          <h3>Full Service</h3>
+          <p>Financial and full property management for single-family, townhome, and village associations: board-meeting attendance, neighborhood inspections, vendor management and on-site oversight, in-office processing, financial controls, and day-to-day operations &mdash; including HR for association employees.</p>
+          <div class="tw-geo-law-foot">Full-service details &rarr;</div>
+        </a>
+        <a href="/hoa-management#tiers" class="tw-geo-law-card gold" style="text-decoration:none">
+          <h3>Flex Service</h3>
+          <p>Governance, legal affairs, risk management, maintenance coordination, contracting, and full financial management &mdash; with meetings, inspections, and on-site presence available &agrave; la carte at a set hourly rate. Built for boards that want budget precision without constant on-site involvement.</p>
+          <div class="tw-geo-law-foot">Flex tier details &rarr;</div>
+        </a>
+        <a href="/hoa-management/hoa-financial-management" class="tw-geo-law-card sage" style="text-decoration:none">
+          <h3>Financial Only</h3>
+          <p>Strictly financial for self-managed Howard County boards: budgets, reserves, assessment collection, accounts payable and receivable, GAAP-compliant bookkeeping, audit coordination, and resale-certificate preparation.</p>
+          <div class="tw-geo-law-foot">Financial-only tier &rarr;</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ section -->
+  <section class="tw-section tw-sol-faq-section">
+    <div class="tw-container-wide">
+      <div class="tw-sol-faq-grid">
+        <div class="tw-sol-faq-head">
+          <div class="tw-eyebrow">Howard County FAQs</div>
+          <h2>The county-specific <em>questions</em> we get.</h2>
+          <p>For all-purpose HOA questions see our <a href="/faq" style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">main FAQ hub</a>.</p>
+          <a href="/request-a-proposal" class="tw-btn tw-btn-primary">Ask your own question &rarr;</a>
+        </div>
+        <FaqAccordion items={countyFaqs} defaultOpen={0} />
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+  <Footer />
+</BaseLayout>

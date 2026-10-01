@@ -37,10 +37,11 @@ img { max-width: 100%; display: block; }
 
 /* ============= Header / topbar ============= */
 .tw-topbar { background: var(--tw-dark); color: var(--tw-cream); font-family: var(--tw-font-body); font-size: 13px; }
-.tw-topbar-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; height: 36px; display: flex; align-items: center; justify-content: space-between; }
-.tw-topbar-left { display: flex; gap: 22px; color: #cfcdc6; }
+.tw-topbar-inner { max-width: 1320px; margin: 0 auto; padding: 6px 32px; min-height: 36px; display: flex; align-items: center; justify-content: space-between; gap: 22px; flex-wrap: wrap; }
+.tw-topbar-left { display: flex; align-items: center; gap: 22px; min-width: 0; flex-wrap: wrap; color: #cfcdc6; }
 .tw-topbar-left strong { color: var(--tw-cream); font-weight: 600; }
-.tw-topbar-right { display: flex; gap: 22px; }
+.tw-topbar-right { display: flex; align-items: center; gap: 22px; min-width: 0; flex-wrap: wrap; }
+.tw-topbar-left > *, .tw-topbar-right > * { white-space: nowrap; }
 .tw-topbar-right a { color: #cfcdc6; text-decoration: none; font-weight: 500; transition: color .15s; }
 .tw-topbar-right a:hover { color: var(--tw-gold); }
 .tw-topbar-right .tw-topbar-em { color: var(--tw-gold); }
@@ -1747,6 +1748,8 @@ img { max-width: 100%; display: block; }
 }
 .tw-sol-faq-a-inner p:last-child { margin-bottom: 0; }
 .tw-sol-faq-a-inner strong { color: var(--tw-dark); font-weight: 600; }
+.tw-sol-faq-a-inner a { color: var(--tw-teal-500); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; font-weight: 500; }
+.tw-sol-faq-a-inner a:hover { color: var(--tw-teal-700); }
 
 /* ===== Switch Story / Editorial Testimonial ===== */
 .tw-sol-story-section { background: var(--tw-dark); color: var(--tw-cream); }
@@ -3582,3 +3585,8 @@ img { max-width: 100%; display: block; }
   /* Prevent horizontal overflow on wide fixed elements */
   .tw-hero, .tw-section, .tw-trust-bar, .tw-footer { overflow-x: hidden; }
 }
+
+/* Service-areas: linkable county chips + CTA link (cards are now <div>, not <a>) */
+.tw-sa-state-cta { text-decoration: none; }
+a.tw-sa-state-county { text-decoration: none; cursor: pointer; transition: background .15s ease, color .15s ease; }
+a.tw-sa-state-county:hover { background: var(--tw-teal-100); color: var(--tw-teal-700); }

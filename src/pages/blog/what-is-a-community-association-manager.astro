@@ -88,7 +88,7 @@ const schemas = [
   faqSchema(faqItems),
   breadcrumbSchema([
     { name: 'Home', url: SITE.url + '/' },
-    { name: 'Blog', url: `${SITE.url}/blog` },
+    { name: 'Articles & Guides', url: `${SITE.url}/blog` },
     { name: 'What Is a Community Association Manager?', url: pageUrl },
   ]),
 ];
@@ -103,7 +103,7 @@ const schemas = [
   <Topbar variant="homeowner" />
   <Header activeNav="blog" />
   <Breadcrumb crumbs={[
-    { label: 'Blog', href: '/blog' },
+    { label: 'Articles & Guides', href: '/blog' },
     { label: 'What Is a Community Association Manager?' },
   ]} />
 
