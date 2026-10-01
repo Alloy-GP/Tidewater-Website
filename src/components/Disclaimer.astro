@@ -1,0 +1,44 @@
+---
+// Disclaimer.astro — fine-print callout for the foot of blog posts that touch
+// legal, financial/tax, or insurance topics. Reuses the .tw-blog-callout markup
+// (styled in public/styles-blog.css) with a muted .tw-blog-disclaimer modifier.
+//
+// Usage (inside <article>, placed last): <Disclaimer type="legal" />
+// To override the copy for a specific post, pass children:
+//   <Disclaimer type="financial">Custom sentence…</Disclaimer>
+
+interface Props {
+  type: 'legal' | 'financial' | 'insurance';
+}
+
+const { type } = Astro.props;
+
+const COPY: Record<Props['type'], { label: string; body: string }> = {
+  legal: {
+    label: 'Not legal advice.',
+    body: 'This article is general education, not legal advice for your community. For how your governing documents or state law apply to a specific situation, consult your association&rsquo;s attorney.',
+  },
+  financial: {
+    label: 'Not financial or tax advice.',
+    body: 'This article is general education, not financial, tax, or accounting advice. For decisions about your association&rsquo;s budget, reserves, or taxes, consult a CPA or a qualified reserve specialist.',
+  },
+  insurance: {
+    label: 'Not insurance advice.',
+    body: 'This article is general education, not insurance advice. Coverage needs vary by community and policy; consult a licensed insurance agent or broker before making coverage decisions.',
+  },
+};
+
+const { label, body } = COPY[type];
+const hasOverride = Astro.slots.has('default');
+---
+
+<aside class="tw-blog-callout tw-blog-disclaimer" role="note" aria-label="Disclaimer">
+  <div class="tw-blog-callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+  </div>
+  <div class="tw-blog-callout-content">
+    {hasOverride
+      ? <p><strong>{label}</strong> <slot /></p>
+      : <p><strong>{label}</strong> <Fragment set:html={body} /></p>}
+  </div>
+</aside>
