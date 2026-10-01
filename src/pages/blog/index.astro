@@ -14,13 +14,13 @@ const pageUrl = `${SITE.url}/blog`;
 const schemas = [
   breadcrumbSchema([
     { name: 'Home', url: SITE.url + '/' },
-    { name: 'Blog', url: pageUrl },
+    { name: 'Articles & Guides', url: pageUrl },
   ]),
 ];
 ---
 
 <BaseLayout
-  title="HOA Board Blog & Playbooks | Tidewater"
+  title="HOA Board Articles & Guides | Tidewater"
   description="HOA board playbooks for Maryland and the Mid-Atlantic. Reserve studies, switching management, governance mechanics, Maryland HOA law, and operational systems."
   ogType="website"
   pageSchema={schemas}
@@ -30,7 +30,7 @@ const schemas = [
   <Topbar variant="homeowner" />
   <Header activeNav="blog" />
   <Breadcrumb crumbs={[
-    { label: 'Blog' },
+    { label: 'Articles & Guides' },
   ]} />
   <BlogIndex client:load perPage={6} showSearch={true} showFeatured={true} showNewsletter={true} />
 
