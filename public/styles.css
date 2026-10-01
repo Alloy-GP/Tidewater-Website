@@ -1748,6 +1748,8 @@ img { max-width: 100%; display: block; }
 }
 .tw-sol-faq-a-inner p:last-child { margin-bottom: 0; }
 .tw-sol-faq-a-inner strong { color: var(--tw-dark); font-weight: 600; }
+.tw-sol-faq-a-inner a { color: var(--tw-teal-500); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; font-weight: 500; }
+.tw-sol-faq-a-inner a:hover { color: var(--tw-teal-700); }
 
 /* ===== Switch Story / Editorial Testimonial ===== */
 .tw-sol-story-section { background: var(--tw-dark); color: var(--tw-cream); }
