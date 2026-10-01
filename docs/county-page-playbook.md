@@ -87,3 +87,18 @@ title, territory, or credential.
 LocalBusiness/Service + AreaServed + BreadcrumbList + FAQPage, self-canonical.
 The `serviceSchema`/`breadcrumbSchema`/`faqSchema` helpers in `src/lib/schema.ts`
 already emit this — see Howard County for the pattern.
+
+## Pending / future wiring (don't block launch on these)
+
+- **Maryland HOA-law blog post (planned).** A dedicated Maryland-law post is
+  coming. Once it's live, add a link to it from the reserve-study / §11B
+  context on **every Maryland county page** (Howard + future MD counties).
+  Until then, those references point to `/hoa-management/maryland` and
+  `/blog/hoa-fees` as interim targets — fine to ship. County pages go to
+  production before the blog, so the link isn't required at launch.
+- **Per-county real numbers (community count, tenure, median assessment) and
+  the verified Google review average (≥4.5?).** Not in the brief — ask the
+  client when convenient; plug in only once confirmed. Do not invent.
+- **Hero trust stats** currently portfolio-level (450+ / AAMC® / 1989
+  family-owned). Swap in the Google rating as a 4th/replacement once the real
+  average is confirmed.
