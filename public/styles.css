@@ -3583,3 +3583,8 @@ img { max-width: 100%; display: block; }
   /* Prevent horizontal overflow on wide fixed elements */
   .tw-hero, .tw-section, .tw-trust-bar, .tw-footer { overflow-x: hidden; }
 }
+
+/* Service-areas: linkable county chips + CTA link (cards are now <div>, not <a>) */
+.tw-sa-state-cta { text-decoration: none; }
+a.tw-sa-state-county { text-decoration: none; cursor: pointer; transition: background .15s ease, color .15s ease; }
+a.tw-sa-state-county:hover { background: var(--tw-teal-100); color: var(--tw-teal-700); }

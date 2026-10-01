@@ -31,16 +31,20 @@ const states = [
     flag: 'Anchor · 35 yrs',
     anchor: true,
     communities: '450+',
-    counties: 11,
+    counties: 10,
     body: 'Our home state. HQ in Owings Mills since 1989. The deepest portfolio in our region — from Annapolis waterfront to Howard County master-planned to Eastern Shore condo associations.',
     countyList: [
-      { name: 'Anne Arundel', served: true },
-      { name: 'Baltimore Co.', served: true },
-      { name: 'Howard', served: true },
-      { name: 'Montgomery', served: true },
-      { name: "Prince George\'s", served: true },
-      { name: 'Frederick', served: true },
-      { name: 'Carroll' }, { name: 'Harford' }, { name: 'Talbot' }, { name: 'Dorchester' }, { name: 'Wicomico' },
+      { name: 'Anne Arundel', href: '/hoa-management/maryland/anne-arundel-county' },
+      { name: 'Baltimore Co.', href: '/hoa-management/maryland/baltimore-county' },
+      { name: 'Howard', href: '/hoa-management/maryland/howard-county' },
+      { name: 'Montgomery', href: '/hoa-management/maryland/montgomery-county' },
+      { name: "Prince George\'s", href: '/hoa-management/maryland/prince-georges-county' },
+      { name: 'Frederick', href: '/hoa-management/maryland/frederick-county' },
+      { name: 'Carroll', href: '/hoa-management/maryland/carroll-county' },
+      { name: 'Cecil', href: '/hoa-management/maryland/cecil-county' },
+      { name: 'Kent', href: '/hoa-management/maryland/kent-county' },
+      { name: "Queen Anne\'s", href: '/hoa-management/maryland/queen-annes-county' },
+      { name: 'Harford', served: true }, { name: 'Talbot', served: true }, { name: 'Worcester', served: true },
     ],
     href: '/hoa-management/maryland',
     cta: 'View Maryland hub',
@@ -229,7 +233,7 @@ const states = [
       </div>
       <div class="tw-sa-states">
         {states.map(s => (
-          <a href={s.href} class={`tw-sa-state${s.anchor ? ' is-anchor' : ''}${s.coming ? ' coming' : ''}`}>
+          <div class={`tw-sa-state${s.anchor ? ' is-anchor' : ''}${s.coming ? ' coming' : ''}`}>
             {s.flag && <span class="tw-sa-state-flag">{s.flag}</span>}
             <div class="tw-sa-state-head">
               <h3 class="tw-sa-state-name">{s.name}</h3>
@@ -244,13 +248,15 @@ const states = [
             <p class="tw-sa-state-body">{s.body}</p>
             <div class="tw-sa-state-counties">
               {s.countyList.map(c => (
-                <span class={`tw-sa-state-county${c.served ? ' served' : ''}`}>{c.name}</span>
+                c.href
+                  ? <a href={c.href} class="tw-sa-state-county served" title={`${c.name} county page`}>{c.name}</a>
+                  : <span class={`tw-sa-state-county${c.served ? ' served' : ''}`}>{c.name}</span>
               ))}
             </div>
-            <div class="tw-sa-state-cta">
+            <a href={s.href} class="tw-sa-state-cta">
               {s.cta} <span class="tw-sa-state-cta-arrow">→</span>
-            </div>
-          </a>
+            </a>
+          </div>
         ))}
       </div>
     </div>
