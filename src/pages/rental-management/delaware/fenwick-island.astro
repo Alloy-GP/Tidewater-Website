@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Topbar from '../../../components/Topbar.astro';
+import Header from '../../../components/Header.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import Footer from '../../../components/Footer.astro';
+import CTA from '../../../components/CTA.astro';
+import RentalGeo, { GEO_DATA_FENWICK as geo } from '../../../components/RentalGeo.jsx';
+import { breadcrumbSchema, serviceSchema } from '../../../lib/schema';
+import { SITE } from '../../../config/site';
+
+const pageUrl = `${SITE.url}/rental-management/delaware/fenwick-island`;
+
+const schemas = [
+  serviceSchema({
+    name: 'Rental Property Management — Fenwick Island, Delaware',
+    description: geo.schemaDesc,
+    url: pageUrl,
+    areaServed: 'Fenwick Island, Delaware',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'Rental Management', url: SITE.url + '/rental-management' },
+    { name: 'Delaware', url: SITE.url + '/rental-management/delaware' },
+    { name: 'Fenwick Island', url: pageUrl },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Fenwick Island DE Rental Property Management | Tidewater"
+  description="Rental property management in Fenwick Island, Delaware — on the Ocean City, MD line. Ocean and bay-side condo and single-family rentals, Bayside, Selbyville. Flat fee."
+  ogType="website"
+  pageSchema={schemas}
+  pageStylesheet="styles-geo.css"
+>
+  <Topbar />
+  <Header activeNav="rental" logoSrc="/assets/Tidewater-Management-Logo.svg" logoAlt="Tidewater Management" />
+  <Breadcrumb variant="management" crumbs={[
+    { label: 'Rental Management', href: '/rental-management' },
+    { label: 'Delaware', href: '/rental-management/delaware' },
+    { label: 'Fenwick Island' },
+  ]} />
+  <RentalGeo geo={geo} client:load />
+  <CTA />
+  <Footer />
+</BaseLayout>

@@ -128,31 +128,27 @@ function RentalDelawareCities() {
     },
     {
       slug: 'rehoboth', name: 'Rehoboth Beach',
-      meta: 'Adjacent market',
-      body: 'Boardwalk and downtown Rehoboth rentals. Heavy summer-season demand; some year-round long-term in surrounding neighborhoods.',
-      cities: ['Downtown Rehoboth', 'North Shores', 'Pines'],
-      href: '#',
+      meta: 'Resort market',
+      featured: true,
+      body: 'Boardwalk and downtown Rehoboth rentals. Heavy summer-season demand; year-round long-term in North Shores, Henlopen Acres, and the inland neighborhoods.',
+      cities: ['Downtown Rehoboth', 'North Shores', 'Dewey Beach'],
+      href: '/rental-management/delaware/rehoboth-beach',
     },
     {
       slug: 'bethany', name: 'Bethany Beach',
-      meta: 'Coastal community',
-      body: 'Family-oriented coastal community south of Rehoboth. Single-family, condo, and townhome inventory.',
-      cities: ['Bethany Beach', 'South Bethany', 'Sea Colony'],
-      href: '#',
+      meta: 'The Quiet Resorts',
+      featured: true,
+      body: 'Family-oriented coastal community south of Rehoboth, anchored by Sea Colony. Single-family, condo, and townhome inventory.',
+      cities: ['Downtown Bethany', 'Sea Colony', 'South Bethany'],
+      href: '/rental-management/delaware/bethany-beach',
     },
     {
       slug: 'fenwick', name: 'Fenwick Island',
-      meta: 'Coastal community',
-      body: "Delaware\'s southernmost beach community, adjoining Ocean City, MD. Mixed inventory.",
-      cities: ['Fenwick Island', 'Selbyville'],
-      href: '#',
-    },
-    {
-      slug: 'inland', name: 'Sussex Inland',
-      meta: 'Year-round market',
-      body: 'Milton, Millsboro, Long Neck, Frankford, Dagsboro. Year-round single-family rental market for the workforce supporting the coastal economy.',
-      cities: ['Milton', 'Millsboro', 'Long Neck', 'Frankford'],
-      href: '#',
+      meta: 'On the MD line',
+      featured: true,
+      body: "Delaware\'s southernmost beach community, adjoining Ocean City, MD. Ocean and bay-side rentals, served from two offices.",
+      cities: ['Fenwick Island', 'Bayside', 'Selbyville'],
+      href: '/rental-management/delaware/fenwick-island',
     },
   ];
   return (
@@ -161,7 +157,7 @@ function RentalDelawareCities() {
         <div className="tw-section-head" style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto' }}>
           <div className="tw-eyebrow">By Area</div>
           <h2 className="tw-section-title">Delaware rental management, <em>by where your property is.</em></h2>
-          <p className="tw-section-lede">Lewes is our anchor; the rest of the Sussex coastal corridor is in active service rotation. We&rsquo;ll be honest on the first call about which areas we can serve well today.</p>
+          <p className="tw-section-lede">We manage rentals the length of the Sussex coast &mdash; Lewes, Rehoboth Beach, Bethany Beach, and Fenwick Island &mdash; each with its own page, plus the inland communities that support them.</p>
         </div>
         <div className="tw-geo-counties">
           {cities.map((c, i) => (
