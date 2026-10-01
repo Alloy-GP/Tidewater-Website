@@ -17,8 +17,11 @@ const clean = (s: string) => String(s)
   .replace(/&amp;/g, '&');
 const audFor = (catId?: string) => (catId === 'rental' ? ['Rental'] : ['HOA']);
 
+// Highlights only — the hub curates a handful; the full archive lives at /blog.
+const HIGHLIGHT_COUNT = 6;
 const items = [...ALL_POSTS]
   .sort((a, b) => String(b.dateIso || '').localeCompare(String(a.dateIso || '')))
+  .slice(0, HIGHLIGHT_COUNT)
   .map((p) => ({
     type: 'article',
     time: `${p.readTime} min read`,
@@ -41,7 +44,7 @@ const audClass = (a: string) => {
     <div class="tw-section-head-left">
       <div class="tw-eyebrow">The Library</div>
       <h2 class="tw-section-title">Written by managers, <em>not marketing.</em></h2>
-      <p class="tw-section-lede">Practical articles and guides from Tidewater&rsquo;s managers &mdash; free to read, no gate, no sales call. Downloadable checklists and templates are on the way.</p>
+      <p class="tw-section-lede">A few highlights from the library &mdash; practical articles and guides from Tidewater&rsquo;s managers, free to read, no gate. Downloadable checklists and templates are on the way.</p>
     </div>
 
     <div class="tw-rlib-grid">
@@ -63,6 +66,10 @@ const audClass = (a: string) => {
           </div>
         </a>
       ))}
+    </div>
+
+    <div style="text-align:center;margin-top:36px">
+      <a href="/blog" class="tw-btn tw-btn-outline">See all articles &amp; guides &rarr;</a>
     </div>
   </div>
 </section>
