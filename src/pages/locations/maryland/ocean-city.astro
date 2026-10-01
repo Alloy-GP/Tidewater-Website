@@ -118,7 +118,7 @@ const schemas = [
             <strong>{office.name}</strong><br/>
             {office.street}<br/>
             {office.city}, {office.region} {office.postal}<br/>
-            <a href={office.phoneHref}>{office.phone}</a><br/>
+            <a href={office.phoneHref} style="color:var(--tw-teal-500);text-decoration:underline;text-underline-offset:3px">{office.phone}</a><br/>
             <span style="color:var(--tw-fg-muted)">Office hours: call ahead &mdash; {office.phone}</span>
           </address>
           <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
