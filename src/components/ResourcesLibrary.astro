@@ -1,15 +1,24 @@
 ---
-const all = [
-  { type: 'guide',     time: '32 min read', title: 'Reserve funding for HOA boards: a Maryland-first guide', desc: 'How fully-funded reserves protect property values, why Tidewater insisted on them before the law required it, and a worksheet for boards starting late.', aud: ['HOA'] },
-  { type: 'checklist', time: 'Print PDF', title: 'Spring property inspection checklist', desc: '23-point exterior walk: gutters, weep holes, siding seal, irrigation, mulch beds, ADA-curbs, lighting. Used by Tidewater managers every spring.', aud: ['HOA','Maintenance'] },
-  { type: 'article',   time: '8 min read', title: 'Deploying overseas? Why Tidewater is built for military landlords', desc: 'PCS orders, AppFolio portal, 3-6 month inspections, paying owner bills from rental funds. A guide for owners about to leave the country.', aud: ['Rental'] },
-  { type: 'guide',     time: '18 min read', title: 'Maryland rental licensing, county by county', desc: 'Twelve jurisdictions, twelve sets of rules. Licensing thresholds, lead-paint registration, and the inspection cadence each county actually enforces.', aud: ['Rental'] },
-  { type: 'video',     time: '6 min video', title: 'How to read your monthly HOA management report', desc: 'A walkthrough of the Tidewater monthly financial packet: variance lines, AR aging, reserves, and what to flag at the next board meeting.', aud: ['HOA'] },
-  { type: 'checklist', time: 'Print PDF', title: 'Year-end landlord financial checklist', desc: 'Schedule E categories, depreciation reset, AppFolio export sequence, and the 1099 timing window for vendors and contractors.', aud: ['Rental'] },
-  { type: 'article',   time: '7 min read', title: "The all-inclusive fee: what competitors don\'t advertise", desc: 'Property visits. Maintenance coordination. Inspection charges. Lease renewals. The four line items low-fee operators add back — and what they cost in year one.', aud: ['Rental','Investor'] },
-  { type: 'guide',     time: '14 min read', title: 'Choosing between Full Service, Flex, and Financial-Only', desc: "Tidewater\'s three management tiers, mapped to community size, board capacity, and budget. A decision tree for boards.", aud: ['HOA'] },
-  { type: 'article',   time: '5 min read', title: "The exit playbook: selling a rental you\'ve managed for years", desc: 'Tenant coordination, condition baseline, capex log, market timing. How Tidewater Realty handles the handoff from managed-rental to listed-property.', aud: ['Rental','Investor'] },
-];
+// The Library — real articles & guides, pulled from the shared blog data
+// (ALL_POSTS). No placeholders: every card links to a published article.
+// Built to grow: when downloadable checklists, templates, and webinars become
+// real, add them here as additional item types (type: 'checklist' | 'download'
+// | 'video') alongside the articles.
+import { ALL_POSTS } from './BlogPostsData.js';
+
+const stripTags = (s: string) => String(s).replace(/<[^>]+>/g, '');
+const audFor = (catId?: string) => (catId === 'rental' ? ['Rental'] : ['HOA']);
+
+const items = [...ALL_POSTS]
+  .sort((a, b) => String(b.dateIso || '').localeCompare(String(a.dateIso || '')))
+  .map((p) => ({
+    type: 'article',
+    time: `${p.readTime} min read`,
+    title: stripTags(p.title),
+    desc: p.dek,
+    href: p.href,
+    aud: audFor(p.category?.id),
+  }));
 
 const audClass = (a: string) => {
   if (a === 'HOA') return 'tw-rseason-pub-aud hoa';
@@ -24,12 +33,12 @@ const audClass = (a: string) => {
     <div class="tw-section-head-left">
       <div class="tw-eyebrow">The Library</div>
       <h2 class="tw-section-title">Written by managers, <em>not marketing.</em></h2>
-      <p class="tw-section-lede">Filter by audience. Everything below is free and downloadable &mdash; no gate, no sales call.</p>
+      <p class="tw-section-lede">Practical articles and guides from Tidewater&rsquo;s managers &mdash; free to read, no gate, no sales call. Downloadable checklists and templates are on the way.</p>
     </div>
 
     <div class="tw-rlib-grid">
-      {all.map(r => (
-        <article class="tw-rlib-card">
+      {items.map((r) => (
+        <a href={r.href} class="tw-rlib-card" style="text-decoration:none;color:inherit">
           <div class="tw-rlib-card-meta">
             <span class={`tw-rlib-card-type ${r.type}`}>{r.type}</span>
             <span class="tw-rlib-card-time">{r.time}</span>
@@ -38,13 +47,13 @@ const audClass = (a: string) => {
           <p class="tw-rlib-card-desc">{r.desc}</p>
           <div class="tw-rlib-card-foot">
             <div class="tw-rlib-card-aud">
-              {r.aud.map(a => (
+              {r.aud.map((a) => (
                 <span class={audClass(a)} style="padding:3px 8px;font-size:10px">{a}</span>
               ))}
             </div>
-            <span class="tw-rlib-card-link">Open &rarr;</span>
+            <span class="tw-rlib-card-link">Read &rarr;</span>
           </div>
-        </article>
+        </a>
       ))}
     </div>
   </div>
