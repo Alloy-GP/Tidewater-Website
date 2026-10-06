@@ -1,0 +1,474 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Topbar from '../../components/Topbar.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Footer from '../../components/Footer.astro';
+import Disclaimer from '../../components/Disclaimer.astro';
+import { articleSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+import { SITE } from '../../config/site';
+
+const pageUrl = `${SITE.url}/blog/hoa-reserve-study`;
+const headline = 'HOA Reserve Study Guide: What It Is and When You Need One';
+const description = 'What an HOA reserve study covers, how much your board should have in reserves, and what Maryland law now requires, plus a reserve-readiness checklist.';
+
+const post = {
+  title: 'HOA reserve study guide: <em>what it is</em> (and when you need one).',
+  dek: 'An HOA reserve study turns “are our reserves okay?” into a number. Here is what the study covers, how percent funded works, what reserves can and cannot pay for, and what Maryland now requires of your board, including the five-year ramp and the borrowing rule.',
+  category: { id: 'finances', label: 'HOA Finances', tone: '' },
+  author: {
+    name: 'Jessica Ogle',
+    creds: 'CMCA®',
+    initials: 'JO',
+    role: 'Director of Association Financial Management, Tidewater',
+    bio: 'Jessica leads Tidewater&rsquo;s association financial management team, with 20+ years in the company&rsquo;s accounting department, backed by an MBA/CPA Controller. That tenure means the finance function is run by someone who has worked through virtually every scenario a community association can hit financially.',
+    email: 'info@tidewaterproperty.com',
+  },
+  date: 'September 29, 2026',
+  dateIso: '2026-09-29',
+  readTime: 11,
+};
+
+const toc = [
+  { id: 'what-is',    label: 'What it is' },
+  { id: 'uses',       label: 'What reserves pay for' },
+  { id: 'how-much',   label: 'How much to hold' },
+  { id: 'maryland',   label: 'Maryland requirements' },
+  { id: 'health',     label: '5-question health check' },
+  { id: 'tidewater',  label: 'How Tidewater helps' },
+  { id: 'faq',        label: 'FAQ' },
+  { id: 'bottom-line',label: 'Bottom line' },
+];
+
+const related = [
+  {
+    tone: '', category: 'HOA Finances',
+    title: 'What are HOA fees? What they cover, why they change, and what happens if you don\'t pay.',
+    dek: 'An HOA fee covers insurance, upkeep, and the reserves that pay for future repairs — but who decides the amount, and why does it keep going up?',
+    date: 'August 4, 2026', readTime: 8, href: '/blog/hoa-fees',
+    coverImage: '/assets/hoa-fees.jpg',
+    coverAlt: 'Well-maintained townhome community common area managed under an HOA budget',
+  },
+  {
+    tone: '', category: 'Board Governance',
+    title: 'HOA board member responsibilities & fiduciary duty, explained.',
+    dek: 'The fiduciary duties that attach to every seat, what each officer position involves, and where the board\'s job ends and delegation begins.',
+    date: 'August 3, 2026', readTime: 7, href: '/blog/hoa-board-responsibilities',
+    coverImage: '/assets/hoa-board-responsibilities.jpg',
+    coverAlt: "HOA board member reviewing the association's governing-documents binder at her kitchen table",
+  },
+  {
+    tone: '', category: 'Board Governance',
+    title: 'What is a quorum? Definition, requirements, and why it matters for your board.',
+    dek: 'How quorum works for board and annual meetings, what happens when it is not met, and how proxy voting affects the count.',
+    date: 'May 14, 2026', readTime: 8, href: '/blog/what-is-quorum-and-why-is-it-important',
+    coverImage: '/assets/quorum-community-manager.jpg',
+    coverAlt: 'Tidewater community association manager walking through a planned neighborhood in Maryland during a site inspection',
+  },
+];
+
+const pageSchema = [
+  articleSchema({
+    headline,
+    description,
+    url: pageUrl,
+    datePublished: '2026-09-29',
+    image: `${SITE.url}/assets/hoa-reserve-study.jpg`,
+    about: ['HOA reserve study', 'HOA reserve fund', 'percent funded', 'reserve funding plan', 'Maryland HOA reserve requirements', 'underfunded HOA reserves'],
+  }),
+  faqSchema([
+    {
+      q: 'How often does an HOA need a reserve study?',
+      a: 'In Maryland, an HOA reserve study must be updated at least every five years. Update sooner after a major capital project or a sharp swing in construction costs, since an outdated study stops reflecting what replacement costs.',
+    },
+    {
+      q: 'How much does an HOA reserve study cost?',
+      a: 'HOA reserve study cost depends on community size, component count, and whether it is a full study or an update. Updates cost less, and a community with elevators and a pool costs more to assess than one with asphalt and a sign. Against a six-figure surprise assessment it is a cheap line item. Get current quotes rather than a published figure.',
+    },
+    {
+      q: 'Can a board borrow from the HOA reserve fund in Maryland?',
+      a: 'Reserves may be used outside the funding plan only if repaid to the reserve fund within five years. Governing documents can add conditions. Record the decision, amount and repayment schedule in the minutes, and confirm the approach with counsel.',
+    },
+    {
+      q: "What happens if our HOA's reserves are underfunded?",
+      a: 'The cost does not disappear. It arrives as a special assessment, a loan, or a steep dues increase when a component fails. Underfunded HOA reserves are common, and the fix is unglamorous: a current HOA reserve study, a funding plan, and a budget that follows it.',
+    },
+    {
+      q: 'Does Maryland require an HOA to get a reserve study and fund it?',
+      a: 'Yes, for most associations. If your HOA maintains common areas and those components total at least $10,000 in initial purchase and installation cost, you need an HOA reserve study, updated at least every five years, and your budget must fund reserves at the level the study recommends. A funding plan, a five-year ramp after an initial study, and a limited hardship deferral all apply.',
+    },
+    {
+      q: 'Is a reserve study different for a condominium?',
+      a: 'The funding mechanics run in parallel, but the statutes are not interchangeable. Maryland condominiums work from the Condominium Act, principally §§ 11-109.2 and 11-109.4, and the coverage tests differ from the HOA ones described here. A condominium board working from Title 11B is reading the wrong statute; confirm your thresholds with counsel.',
+    },
+  ]),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url + '/' },
+    { name: 'Articles & Guides', url: SITE.url + '/blog' },
+    { name: headline, url: pageUrl },
+  ]),
+];
+---
+
+<BaseLayout
+  title="HOA Reserve Study Guide: What It Is & When You Need One"
+  description={description}
+  ogType="article"
+  ogImageAlt="HOA Reserve Study Guide: What It Is and When You Need One — a Tidewater guide for boards"
+  pageSchema={pageSchema}
+  pageStylesheet="styles-blog.css"
+>
+  <Topbar variant="homeowner" />
+  <Header activeNav="blog" />
+  <Breadcrumb crumbs={[
+    { label: 'Articles & Guides', href: '/blog' },
+    { label: 'HOA Reserve Study' },
+  ]} />
+
+  <div class="tw-blog-progress" id="tw-blog-progress"></div>
+
+  <section class="tw-blog-hero">
+    <div class="tw-blog-hero-inner">
+      <span class={`tw-blog-category ${post.category.tone}`}>{post.category.label}</span>
+      <h1 class="tw-blog-title" set:html={post.title}></h1>
+      <p class="tw-blog-dek">{post.dek}</p>
+      <div class="tw-blog-meta">
+        <div class="tw-blog-meta-author">
+          <div class="tw-blog-meta-avatar">{post.author.initials}</div>
+          <div>
+            <div class="tw-blog-meta-name">{post.author.name}</div>
+            <div class="tw-blog-meta-role">{post.author.role}</div>
+          </div>
+        </div>
+        <div class="tw-blog-meta-divider"></div>
+        <div class="tw-blog-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> {post.date}</div>
+        <div class="tw-blog-meta-divider"></div>
+        <div class="tw-blog-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> {post.readTime} min read</div>
+        <div class="tw-blog-share">
+          <button type="button" data-share="linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg></button>
+          <button type="button" data-share="x" title="Share on X" aria-label="Share on X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></button>
+          <button type="button" data-share="email" title="Share by email" aria-label="Share by email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></button>
+          <button type="button" data-share="copy" title="Copy link" aria-label="Copy link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tw-blog-cover">
+    <div class="tw-blog-cover-inner">
+      <img
+        src="/assets/hoa-reserve-study.jpg"
+        alt="Reserve study binder on a community room table before an HOA board budget meeting"
+        width="1400"
+        height="763"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <div class="tw-blog-cover-paper"></div>
+    </div>
+  </div>
+
+  <div class="tw-blog-body-wrap">
+    <div class="tw-blog-layout">
+      <aside class="tw-blog-toc">
+        <div class="tw-blog-toc-label">In this article</div>
+        <ul class="tw-blog-toc-list">
+          {toc.map(it => <li><a href={`#${it.id}`} set:html={it.label}></a></li>)}
+        </ul>
+      </aside>
+      <div>
+        <article class="tw-blog-article">
+
+          <p>
+            It is October, the draft budget is on the table, and a homeowner asks the question every treasurer dreads: why are dues going up, and are the reserves okay?
+          </p>
+
+          <p>
+            An HOA reserve study turns that guess into a number. This guide covers what the study is and the fund it plans for, how to tell whether your reserves are healthy, what reserves can pay for, and what Maryland now requires. None of it is a crisis; all of it is planning you can do before the next component fails.
+          </p>
+
+          <h2 id="what-is">What Is a Reserve Study?</h2>
+
+          <p>
+            An HOA reserve study is a professional assessment of a community&rsquo;s major common components, paired with a long-range plan to fund their repair and replacement. It answers two questions: what do we own, and what will it cost to replace on schedule?
+          </p>
+
+          <div class="tw-blog-callout">
+            <div class="tw-blog-callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+            <div class="tw-blog-callout-content">
+              <h4>The two halves of an HOA reserve study</h4>
+              <ul>
+                <li><strong>The physical analysis.</strong> A component inventory of everything the association must repair and replace, with each item&rsquo;s condition, remaining useful life and replacement cost.</li>
+                <li><strong>The financial analysis.</strong> The current balance, projected costs and timing, and a funding plan showing what to contribute each year.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Reserve Fund vs. Operating Fund</h3>
+
+          <p>
+            Boards conflate these constantly. The HOA reserve study is the plan; the HOA reserve fund is the money set aside to carry it out, held separately from the operating fund.
+          </p>
+
+          <table>
+            <thead>
+              <tr><th>&nbsp;</th><th>Operating fund</th><th>Reserve fund</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Purpose</strong></td><td>Day-to-day operations</td><td>Major repair and replacement</td></tr>
+              <tr><td><strong>Typical expenses</strong></td><td>Landscaping, utilities, insurance, management</td><td>Roofs, paving, siding, elevators, pools</td></tr>
+              <tr><td><strong>How funded</strong></td><td>Regular assessments</td><td>A budgeted annual contribution</td></tr>
+              <tr><td><strong>When it&rsquo;s spent</strong></td><td>This fiscal year</td><td>Often 20 to 30 years</td></tr>
+            </tbody>
+          </table>
+
+          <p>
+            Maryland condominiums have parallel reserve provisions in Title 11, but the statutes are not interchangeable and the coverage tests differ.
+          </p>
+
+          <h3>Percent Funded: The Number Boards Should Know</h3>
+
+          <p>
+            Percent funded is the reserve balance divided by the fully funded balance. It measures reserve strength better than a raw dollar figure, because a community with $400,000 saved may be in excellent shape or badly behind depending on what it owns and how old it is. <strong>It is the industry&rsquo;s standard strength measure, and a weak number shows up in buyer and lender scrutiny even though lenders apply their own separate tests.</strong>
+          </p>
+
+          <h2 id="uses">What Can HOA Reserve Funds Be Used For?</h2>
+
+          <p>
+            Reserve funds pay for the planned repair and replacement of the components identified in the HOA reserve study. They are not a cushion for operating shortfalls or routine upkeep.
+          </p>
+
+          <p>
+            Typical components include roofs, asphalt, siding, fencing, pool systems, elevators, common-area HVAC and lighting. What usually does not qualify: landscaping contracts, utilities, insurance premiums, management fees and routine repairs. Your documents and funding plan set the boundary, and Maryland adds a repayment rule for money used outside it.
+          </p>
+
+          <h2 id="how-much">How Much Should an HOA Have in Reserves?</h2>
+
+          <p>
+            There is no universal dollar figure. The right amount is what your community&rsquo;s HOA reserve study recommends, tracked as percent funded rather than a target balance.
+          </p>
+
+          <h3>Percent Funded, Explained</h3>
+
+          <p>
+            Current reserve balance divided by fully funded balance. If reserves hold $40,000 and the fully funded balance is $100,000, you are 40% funded. Illustrative numbers; your HOA reserve study produces the real ones.
+          </p>
+
+          <div class="tw-blog-callout">
+            <div class="tw-blog-callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+            <div class="tw-blog-callout-content">
+              <h4>What the ranges mean</h4>
+              <ul>
+                <li><strong>0 to 30% funded:</strong> weak</li>
+                <li><strong>30 to 70% funded:</strong> fair</li>
+                <li><strong>Above 70% funded:</strong> strong</li>
+              </ul>
+              <p>Ranges per <a href="https://www.reservestudy.com/resources/article/three-quarters-of-association-governed-communities-are-underfunded/" target="_blank" rel="noopener">Association Reserves</a>, which reviewed more than 100,000 studies its own firm prepared between 1986 and 2025 and found 74% of those associations below 70% funded, its threshold for underfunded. Industry benchmarks, not Maryland law.</p>
+            </div>
+          </div>
+
+          <p>
+            If your community sits in the weak or fair range, you have company. Underfunded HOA reserves are the national norm, not a sign of a uniquely troubled board.
+          </p>
+
+          <h3>The HOA Reserves Rule of Thumb, and Why It Is Not Enough</h3>
+
+          <p>
+            You will hear that an association should put roughly 10% of its budget toward reserves. That traces to lender thresholds, not a professional standard. <strong>Two communities with identical budgets can need wildly different contributions depending on what they own and how old it is.</strong> A fifty-year-old community with elevators and a pool is not the same animal as a newer townhome community with an entrance sign and some asphalt. The HOA reserve study sets the number, which is also <a href="https://www.caionline.org/advocacy/public-policies/reserve-study-and-funding/" target="_blank" rel="noopener">CAI&rsquo;s position</a>.
+          </p>
+
+          <h2 id="maryland">Maryland HOA Reserve Requirements</h2>
+
+          <p>
+            Since Maryland&rsquo;s 2022 law, an HOA reserve study and the funding behind it are a legal duty for most associations, not just good practice. <a href="https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=grp&amp;section=11b-112.3" target="_blank" rel="noopener">&sect; 11B-112.3</a> requires the study; &sect; 11B-112.2(d) requires the budget to fund it. It is one piece of the broader body of Maryland HOA law that governs your board.
+          </p>
+
+          <div class="tw-blog-callout">
+            <div class="tw-blog-callout-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="tw-blog-callout-content">
+              <h4>Maryland at a glance <span style="font-weight:400;color:var(--tw-fg-muted)">(last reviewed October 2026)</span></h4>
+              <ul>
+                <li><strong>Who it covers:</strong> associations responsible under their declaration for maintaining and repairing common areas, where the total initial purchase and installation cost of those components is at least $10,000. An association that issues bonds to meet capital expenditures is excluded.</li>
+                <li><strong>The HOA reserve study:</strong> required, then updated at least every five years, and prepared by a qualified person (see below).</li>
+                <li><strong>The funding:</strong> the annual budget funds reserves at the amount the most recent study recommends, deposited by the last day of the fiscal year.</li>
+                <li><strong>After an initial study:</strong> five fiscal years to reach the recommended annual funding level, under the funding plan.</li>
+                <li><strong>Owner access:</strong> any lot owner may inspect and copy the study; the board reviews it when preparing the proposed budget and summarizes it for owners with that budget.</li>
+                <li><strong>Condominiums:</strong> parallel provisions sit in Title 11.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Funding Plans and the Five-Year Ramp</h3>
+
+          <p>
+            The 2025 amendments (HB 292, Chapter 519) require a funding plan, developed in consultation with a qualified reserve professional, using one of the statute&rsquo;s methods: the component method, cash flow, baseline, threshold cash flow, or another GAAP-consistent method. Baseline keeps the balance above zero, threshold keeps it above a set floor, and the component method is the full-funding approach that targets 100%.
+          </p>
+
+          <p>
+            An association working from its first HOA reserve study gets five fiscal years to reach the recommended annual funding level. That window was three years before 2025, and several guides still show the old figure.
+          </p>
+
+          <p>
+            Maryland also controls who may do the work. The study must be prepared by someone who has prepared at least 30 reserve studies in the prior three calendar years, or participated in that many at a firm that prepares them, or holds a Maryland architect or engineer license, or carries CAI&rsquo;s Reserve Specialist or APRA&rsquo;s Professional Reserve Analyst designation. <strong>A general contractor who knows your buildings well does not qualify.</strong>
+          </p>
+
+          <h3>Hardship Deferrals and Borrowing From Reserves</h3>
+
+          <p>
+            Two pressure valves exist, both narrower than boards hope. The governing body may determine by a two-thirds vote that the association and its owners face a financial hardship limiting their ability to fund reserves, allowing reasonable deviation for one fiscal year, renewable by another two-thirds vote. Even then, funding cannot fall below the plan&rsquo;s priorities: health and safety, structural integrity, and essential systems such as plumbing, sewer, heating, cooling and electrical. Owners get advance notice, the vote happens at a meeting, and the board documents good-faith efforts and keeps those records open.
+          </p>
+
+          <p>
+            Separately, reserves may be spent on something outside the funding plan only if the money is repaid to the reserve fund within five years. <strong>Borrowing from reserves in Maryland is a loan with a statutory deadline, not a transfer.</strong>
+          </p>
+
+          <h2 id="health">A Reserve Health Check: 5 Questions for Your Next Board Meeting</h2>
+
+          <p>
+            Five questions tell a board most of what it needs to know about its HOA reserve study and its reserve position.
+          </p>
+
+          <ol>
+            <li><strong>When was our last HOA reserve study, and when is the update due?</strong> Maryland expects one every five years.</li>
+            <li><strong>What is our percent funded today?</strong> If nobody can answer, that is the finding.</li>
+            <li><strong>Which funding method does our plan use?</strong> Baseline and full funding produce very different numbers.</li>
+            <li><strong>Is this year&rsquo;s contribution on track with the plan?</strong> Compare it to the study&rsquo;s recommendation, not to last year&rsquo;s number, and confirm the board reviewed the study while preparing the budget.</li>
+            <li><strong>Have we used reserves outside the plan, and what is the repayment schedule?</strong> The five-year clock runs whether anyone wrote it down or not.</li>
+          </ol>
+
+          <p>
+            When reserves fall short, the gap shows up as a bill &mdash; a special assessment, a loan, or a sharp dues increase. Keeping these five questions on the budget-season agenda is how a board sees it coming.
+          </p>
+
+          <h2 id="tidewater">How Tidewater Helps Boards Plan Reserves</h2>
+
+          <p>
+            Tidewater builds reserve planning into every budget cycle. HOA reserve study coordination and capital improvement planning are part of the annual budget process, not a separate project.
+          </p>
+
+          <p>
+            Association accounting is in house and never outsourced, covering reserve transfers, bank and CD management, and GAAP-compliant reporting. It is led by Jessica Ogle, CMCA, Director of Association Financial Management, with more than 20 years at the company, alongside Controller Rick Bowling, MBA, CPA. Boards get reports by the 15th of each month and real-time visibility through the CINC portal. Tidewater holds AAMC&reg; accreditation and insisted on fully funding reserves before Maryland law required it.
+          </p>
+
+          <p>
+            <strong>The board adopts the budget and the funding plan.</strong> Tidewater advises, coordinates the study and keeps the numbers in front of you. <a href="/hoa-management/hoa-financial-management">Association management with in-house accounting</a> makes that workable.
+          </p>
+
+          <h2 id="faq">Frequently Asked Questions</h2>
+
+          <h3>How often does an HOA need a reserve study?</h3>
+          <p>
+            In Maryland, an HOA reserve study must be updated at least every five years. Update sooner after a major capital project or a sharp swing in construction costs, since an outdated study stops reflecting what replacement costs.
+          </p>
+
+          <h3>How much does an HOA reserve study cost?</h3>
+          <p>
+            HOA reserve study cost depends on community size, component count, and whether it is a full study or an update. Updates cost less, and a community with elevators and a pool costs more to assess than one with asphalt and a sign. Against a six-figure surprise assessment it is a cheap line item. Get current quotes rather than a published figure.
+          </p>
+
+          <h3>Can a board borrow from the HOA reserve fund in Maryland?</h3>
+          <p>
+            Reserves may be used outside the funding plan only if repaid to the reserve fund within five years. Governing documents can add conditions. Record the decision, amount and repayment schedule in the minutes, and confirm the approach with counsel.
+          </p>
+
+          <h3>What happens if our HOA&rsquo;s reserves are underfunded?</h3>
+          <p>
+            The cost does not disappear. It arrives as a special assessment, a loan, or a steep dues increase when a component fails. Underfunded HOA reserves are common, and the fix is unglamorous: a current HOA reserve study, a funding plan, and a budget that follows it.
+          </p>
+
+          <h3>Does Maryland require an HOA to get a reserve study and fund it?</h3>
+          <p>
+            Yes, for most associations. If your HOA maintains common areas and those components total at least $10,000 in initial purchase and installation cost, you need an HOA reserve study, updated at least every five years, and your budget must fund reserves at the level the study recommends. A funding plan, a five-year ramp after an initial study, and a limited hardship deferral all apply.
+          </p>
+
+          <h3>Is a reserve study different for a condominium?</h3>
+          <p>
+            The funding mechanics run in parallel, but the statutes are not interchangeable. Maryland condominiums work from the Condominium Act, principally &sect;&sect; 11-109.2 and 11-109.4, and the coverage tests differ from the HOA ones described here. A <a href="/condo-management">condominium</a> board working from Title 11B is reading the wrong statute; confirm your thresholds with counsel.
+          </p>
+
+          <h2 id="bottom-line">Reserves Are a Planning Problem, Not a Crisis</h2>
+
+          <p>
+            Healthy reserves come from three things: a current HOA reserve study, a funding plan the board actually adopted, and a budget that follows it. Maryland expects all three, and communities already doing it barely noticed the change.
+          </p>
+
+          <p>
+            Keep the five health-check questions on the agenda before your next budget meeting, and work from your documents with your counsel and reserve professional on the specifics.
+          </p>
+
+          <div class="tw-blog-cta">
+            <div class="tw-blog-cta-eyebrow">Association financial management</div>
+            <h3>Want reserve planning built into every budget cycle instead of remembered every few years?</h3>
+            <p>Request a proposal and see how Tidewater coordinates the study, builds the funding plan into every budget, and keeps percent funded in front of the board &mdash; while the board adopts the budget and the plan.</p>
+            <a href="/request-a-proposal" class="tw-btn tw-btn-primary tw-btn-lg">Request your association management proposal &rarr;</a>
+          </div>
+
+          <div class="tw-blog-tags">
+            <span class="tw-blog-tags-label">Tagged</span>
+            <span class="tw-blog-tag">Reserve study</span>
+            <span class="tw-blog-tag">HOA reserves</span>
+            <span class="tw-blog-tag">Reserve funding</span>
+            <span class="tw-blog-tag">Maryland HOA law</span>
+            <span class="tw-blog-tag">Budget season</span>
+          </div>
+          <Disclaimer type="financial" />
+        </article>
+
+        <div class="tw-blog-author-bio">
+          <div class="tw-blog-author-bio-avatar">{post.author.initials}</div>
+          <div>
+            <div class="tw-blog-author-bio-eyebrow">About the author</div>
+            <div class="tw-blog-author-bio-name">{post.author.name} <span>{post.author.creds}</span></div>
+            <div class="tw-blog-author-bio-role">{post.author.role}</div>
+            <p class="tw-blog-author-bio-blurb" set:html={post.author.bio}></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="tw-blog-related">
+    <div class="tw-blog-related-inner">
+      <div class="tw-blog-related-head">
+        <div class="tw-blog-related-eyebrow">Continue Reading</div>
+        <h2>More for your <em>board.</em></h2>
+      </div>
+      <div class="tw-blog-related-grid">
+        {related.map(p => (
+          <a href={p.href} class="tw-blog-related-card">
+            <div class={`tw-blog-related-card-img ${p.tone}`}>
+              {p.coverImage && <img src={p.coverImage} alt={p.coverAlt || p.title} width="1400" height="763" loading="lazy" decoding="async" />}
+            </div>
+            <div class="tw-blog-related-card-body">
+              <div class={`tw-blog-related-card-cat ${p.tone}`}>{p.category}</div>
+              <h3>{p.title}</h3>
+              <p>{p.dek}</p>
+              <div class="tw-blog-related-card-meta">{p.date} &middot; {p.readTime} min read</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="tw-blog-newsletter">
+    <div class="tw-blog-newsletter-inner">
+      <div class="tw-blog-newsletter-eyebrow">Tidewater Resources</div>
+      <h2>Get the <em>monthly board memo</em> in your inbox.</h2>
+      <p>One email a month. Practical board playbooks, Maryland HOA law updates, reserve and budget deep-dives. Written for working boards, not vendors. No fluff.</p>
+      <form class="tw-blog-newsletter-form">
+        <div class="tw-hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <input type="email" name="email" placeholder="board@yourcommunity.org" aria-label="Email address" required/>
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="tw-blog-newsletter-thanks" hidden style="font-family:var(--tw-font-heading);font-weight:700;font-size:15px;color:var(--tw-gold)">Thanks &mdash; first issue lands the first Tuesday of next month.</div>
+      <div class="tw-blog-newsletter-fine">Unsubscribe any time &middot; We never share your email &middot; 4,200+ board members subscribed</div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  import '../../scripts/blog-interactivity.js';
+</script>
