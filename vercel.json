@@ -2,7 +2,6 @@
   "buildCommand": "npm run build",
   "installCommand": "npm install",
   "cleanUrls": true,
-  "trailingSlash": false,
   "redirects": [
     {
       "source": "/privacypolicy",
@@ -2517,6 +2516,11 @@
     {
       "source": "/wp-json",
       "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/:path(.+)/",
+      "destination": "/:path",
       "permanent": true
     }
   ],
