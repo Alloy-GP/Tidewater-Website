@@ -2,7 +2,6 @@
   "buildCommand": "npm run build",
   "installCommand": "npm install",
   "cleanUrls": true,
-  "trailingSlash": false,
   "redirects": [
     {
       "source": "/privacypolicy",
@@ -512,6 +511,36 @@
     {
       "source": "/property-management/",
       "destination": "/rental-management",
+      "permanent": true
+    },
+    {
+      "source": "/property-management-landing",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/property-management-landing/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/full-service-property-management",
+      "destination": "/maintenance-services",
+      "permanent": true
+    },
+    {
+      "source": "/full-service-property-management/",
+      "destination": "/maintenance-services",
+      "permanent": true
+    },
+    {
+      "source": "/property",
+      "destination": "/rental-listings",
+      "permanent": true
+    },
+    {
+      "source": "/property/",
+      "destination": "/rental-listings",
       "permanent": true
     },
     {
@@ -1146,12 +1175,12 @@
     },
     {
       "source": "/service-area/bethesda-md",
-      "destination": "/hoa-management/maryland",
+      "destination": "/hoa-management/maryland/montgomery-county",
       "permanent": true
     },
     {
       "source": "/service-area/bethesda-md/",
-      "destination": "/hoa-management/maryland",
+      "destination": "/hoa-management/maryland/montgomery-county",
       "permanent": true
     },
     {
@@ -1172,6 +1201,126 @@
     {
       "source": "/service-area/owings-mills-md/",
       "destination": "/hoa-management",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/property-services/laurel-md",
+      "destination": "/hoa-management/maryland/prince-georges-county",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/property-services/laurel-md/",
+      "destination": "/hoa-management/maryland/prince-georges-county",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/property-services/westminster-md",
+      "destination": "/hoa-management/maryland/carroll-county",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/property-services/westminster-md/",
+      "destination": "/hoa-management/maryland/carroll-county",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/property-services/bethesda-md",
+      "destination": "/hoa-management/maryland/montgomery-county",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/property-services/bethesda-md/",
+      "destination": "/hoa-management/maryland/montgomery-county",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/glyndon-md",
+      "destination": "/hoa-management/maryland/baltimore-county",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/glyndon-md/",
+      "destination": "/hoa-management/maryland/baltimore-county",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/arlington-va",
+      "destination": "/hoa-management/virginia",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/arlington-va/",
+      "destination": "/hoa-management/virginia",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/millersville-pa",
+      "destination": "/hoa-management/pennsylvania",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/millersville-pa/",
+      "destination": "/hoa-management/pennsylvania",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/harrisburg-pa",
+      "destination": "/hoa-management/pennsylvania",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/harrisburg-pa/",
+      "destination": "/hoa-management/pennsylvania",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/new-castle-de",
+      "destination": "/rental-management/delaware",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/new-castle-de/",
+      "destination": "/rental-management/delaware",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/rental-services/howard-county-md",
+      "destination": "/rental-management/maryland/howard-county",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/rental-services/howard-county-md/",
+      "destination": "/rental-management/maryland/howard-county",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/rental-services/anne-arundel-county-md",
+      "destination": "/rental-management/maryland/anne-arundel-county",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/rental-services/anne-arundel-county-md/",
+      "destination": "/rental-management/maryland/anne-arundel-county",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/sales/silver-spring-md",
+      "destination": "/rental-management/maryland/silver-spring",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/sales/silver-spring-md/",
+      "destination": "/rental-management/maryland/silver-spring",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/sales/pikesville-md",
+      "destination": "/real-estate",
+      "permanent": true
+    },
+    {
+      "source": "/service-area/sales/pikesville-md/",
+      "destination": "/real-estate",
       "permanent": true
     },
     {
@@ -1366,12 +1515,12 @@
     },
     {
       "source": "/blog/choose-hoa-management-company",
-      "destination": "/blog",
+      "destination": "/solutions/switching-hoa-management-company",
       "permanent": true
     },
     {
       "source": "/blog/choose-hoa-management-company/",
-      "destination": "/blog",
+      "destination": "/solutions/switching-hoa-management-company",
       "permanent": true
     },
     {
@@ -1506,12 +1655,12 @@
     },
     {
       "source": "/blog/how-do-lockbox-services-work",
-      "destination": "/blog",
+      "destination": "/hoa-management/hoa-financial-management",
       "permanent": true
     },
     {
       "source": "/blog/how-do-lockbox-services-work/",
-      "destination": "/blog",
+      "destination": "/hoa-management/hoa-financial-management",
       "permanent": true
     },
     {
@@ -1676,12 +1825,12 @@
     },
     {
       "source": "/blog/our-management-fees-are-too-highor-are",
-      "destination": "/blog",
+      "destination": "/solutions/self-managed-hoa-transition",
       "permanent": true
     },
     {
       "source": "/blog/our-management-fees-are-too-highor-are/",
-      "destination": "/blog",
+      "destination": "/solutions/self-managed-hoa-transition",
       "permanent": true
     },
     {
@@ -2035,6 +2184,26 @@
       "permanent": true
     },
     {
+      "source": "/blog/what-is-quorum-and-why-is-quorum-important",
+      "destination": "/blog/what-is-quorum-and-why-is-it-important",
+      "permanent": true
+    },
+    {
+      "source": "/blog/what-is-quorum-and-why-is-quorum-important/",
+      "destination": "/blog/what-is-quorum-and-why-is-it-important",
+      "permanent": true
+    },
+    {
+      "source": "/blog/category/tidewater-property-management",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/category/tidewater-property-management/",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
       "source": "/blog/page/:page",
       "destination": "/blog",
       "permanent": true
@@ -2347,6 +2516,11 @@
     {
       "source": "/wp-json",
       "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/:path(.+)/",
+      "destination": "/:path",
       "permanent": true
     }
   ],
