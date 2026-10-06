@@ -9,7 +9,7 @@ export const ALL_POSTS = [
     slug: 'hoa-reserve-study',
     href: '/blog/hoa-reserve-study',
     title: 'HOA reserve study guide: <em>what it is</em> (and when you need one).',
-    dek: 'An HOA reserve study turns &ldquo;are our reserves okay?&rdquo; into a number. What the study covers, how percent funded works, what reserves can and cannot pay for, and what Maryland now requires &mdash; the five-year ramp and the borrowing rule included.',
+    dek: 'An HOA reserve study turns “are our reserves okay?” into a number. What the study covers, how percent funded works, what reserves can and cannot pay for, and what Maryland now requires — the five-year ramp and the borrowing rule included.',
     category: { id: 'finances', label: 'HOA Finances', tone: '' },
     date: 'September 29, 2026', dateIso: '2026-09-29',
     readTime: 11,
