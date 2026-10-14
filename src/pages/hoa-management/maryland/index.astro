@@ -7,6 +7,8 @@ import CTA from '../../../components/CTA.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import { serviceSchema, breadcrumbSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
+import LocationMap from '../../../components/LocationMap.astro';
+import { MARYLAND_HUB_MAP } from '../../../data/location-maps';
 
 const schemas = [
   serviceSchema({
@@ -68,43 +70,7 @@ const schemas = [
       <aside class="tw-geo-hero-side">
         <div class="tw-geo-hero-side-eyebrow">Where we are</div>
         <h3>14 counties + Baltimore City</h3>
-        <!-- Maryland SVG Map -->
-        <svg viewBox="0 0 450 320" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Map of Maryland counties served by Tidewater">
-          <!-- Chesapeake bay subtle abstract shape -->
-          <path d="M325 115 Q335 155 335 195 Q330 220 320 240 Q330 200 325 175 Q320 145 325 115 Z" fill="rgba(58,146,166,0.15)"/>
-          <!-- Western Maryland -->
-          <path d="M20 60 L60 50 L80 65 L70 90 L25 88 Z" class="tw-geo-map-county"><title>Garrett County</title></path>
-          <path d="M80 65 L120 60 L130 85 L70 90 Z" class="tw-geo-map-county"><title>Allegany County</title></path>
-          <path d="M120 60 L165 55 L180 80 L130 85 Z" class="tw-geo-map-county"><title>Washington County</title></path>
-          <path d="M165 55 L210 50 L230 95 L180 90 L180 80 Z" class="tw-geo-map-county served"><title>Frederick County · served by Tidewater</title></path>
-          <!-- Central -->
-          <path d="M210 50 L255 50 L260 88 L230 95 Z" class="tw-geo-map-county served"><title>Carroll County · served by Tidewater</title></path>
-          <path d="M255 50 L305 55 L320 95 L290 105 L260 88 Z" class="tw-geo-map-county served"><title>Baltimore County · served by Tidewater</title></path>
-          <path d="M305 55 L355 60 L355 95 L320 95 Z" class="tw-geo-map-county served"><title>Harford County · served by Tidewater</title></path>
-          <path d="M355 60 L395 70 L385 100 L355 95 Z" class="tw-geo-map-county served"><title>Cecil County · served by Tidewater</title></path>
-          <path d="M230 95 L260 88 L290 105 L275 130 L235 130 Z" class="tw-geo-map-county served"><title>Howard County · served by Tidewater</title></path>
-          <path d="M290 105 L320 95 L325 115 L300 118 Z" class="tw-geo-map-county served"><title>Baltimore City · served by Tidewater</title></path>
-          <path d="M180 90 L235 130 L210 165 L165 155 Z" class="tw-geo-map-county served"><title>Montgomery County · served by Tidewater</title></path>
-          <path d="M210 165 L275 145 L290 195 L230 200 Z" class="tw-geo-map-county served"><title>Prince George\'s County · served by Tidewater</title></path>
-          <path d="M275 130 L325 115 L335 175 L290 195 L275 145 Z" class="tw-geo-map-county served is-highlight"><title>Anne Arundel County · served by Tidewater</title></path>
-          <!-- Southern MD -->
-          <path d="M290 195 L320 200 L315 245 L280 240 Z" class="tw-geo-map-county"><title>Calvert County</title></path>
-          <path d="M230 200 L290 195 L280 240 L235 240 Z" class="tw-geo-map-county"><title>Charles County</title></path>
-          <path d="M280 240 L315 245 L305 290 L260 280 L235 240 Z" class="tw-geo-map-county"><title>St. Mary\'s County</title></path>
-          <!-- Eastern Shore -->
-          <path d="M355 95 L385 100 L380 130 L350 125 Z" class="tw-geo-map-county served"><title>Kent County · served by Tidewater</title></path>
-          <path d="M350 125 L380 130 L375 160 L345 155 Z" class="tw-geo-map-county served"><title>Queen Anne&apos;s County · served by Tidewater</title></path>
-          <path d="M345 155 L375 160 L370 190 L340 185 Z" class="tw-geo-map-county"><title>Caroline County</title></path>
-          <path d="M335 175 L345 155 L370 190 L340 200 Z" class="tw-geo-map-county served"><title>Talbot County · served by Tidewater</title></path>
-          <path d="M340 185 L370 190 L380 235 L335 230 Z" class="tw-geo-map-county served"><title>Dorchester County · served by Tidewater</title></path>
-          <path d="M380 235 L405 240 L400 265 L370 260 L335 230 Z" class="tw-geo-map-county served"><title>Wicomico County · served by Tidewater</title></path>
-          <path d="M370 260 L400 265 L395 295 L365 290 Z" class="tw-geo-map-county"><title>Somerset County</title></path>
-          <path d="M405 240 L430 250 L425 295 L395 295 L400 265 Z" class="tw-geo-map-county"><title>Worcester County</title></path>
-          <!-- HQ marker — Owings Mills -->
-          <circle class="tw-geo-map-dot-pulse" cx="285" cy="80" r="6"/>
-          <circle class="tw-geo-map-dot" cx="285" cy="80" r="5"/>
-          <text x="295" y="78" fill="var(--tw-gold)" font-family="var(--tw-font-heading)" font-weight="800" font-size="9" letter-spacing="0.06em">HQ</text>
-        </svg>
+        <LocationMap theme="dark" {...MARYLAND_HUB_MAP} ariaLabel="Map of the Maryland counties served by Tidewater" height={320} />
         <div class="tw-geo-map-legend">
           <div class="tw-geo-map-legend-row">
             <span class="tw-geo-map-legend-swatch served"></span>

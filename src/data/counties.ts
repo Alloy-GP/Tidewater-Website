@@ -30,6 +30,8 @@
 // Optional keys omitted -> that section self-hides.
 // ─────────────────────────────────────────────────────────────
 
+import type { LocationMapConfig } from '../lib/location-map';
+
 export interface CityEntry { name: string; slug: string; focus: string; note: string; tag?: string; hasPage: boolean; }
 export interface County {
   name: string; shortName: string; state: string; stateAbbr: string; slug: string;
@@ -45,7 +47,8 @@ export interface County {
   resources?: { eyebrow: string; title: string; lede: string; groups: { label: string; items: { name: string; org: string; use: string; href: string }[] }[]; cityNotes?: { city: string; note: string }[] };
   faq: { q: string; a: string }[];
   nearby?: { name: string; slug: string; note: string }[];
-  map?: { query: string; zoom: number; caption: string };
+  /** Hero map: pins (see src/data/location-maps.ts for the helpers) + the figcaption line. */
+  map?: LocationMapConfig & { caption: string };
 }
 
 export const COUNTIES: Record<string, County> = {

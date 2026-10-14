@@ -10,7 +10,6 @@
 //
 // GAPS TO FILL WHEN CLIENT PROVIDES (do not invent):
 //   - office hours (openingHours) — showing "call ahead" until confirmed
-//   - geo lat/lng for LocalBusiness.geo
 //   - GBP URL for schema sameAs + "View on Google" link
 //   - office photo
 //   - HOA fork currently points to the Maryland hub as interim — repoint to a
@@ -23,6 +22,8 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import CTA from '../../../components/CTA.astro';
 import { breadcrumbSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
+import LocationMap from '../../../components/LocationMap.astro';
+import { OFFICE_MAPS, OFFICE_GEO } from '../../../data/location-maps';
 
 const canonical = SITE.url + '/locations/maryland/ocean-city';
 const office = {
@@ -31,7 +32,6 @@ const office = {
   city: 'Ocean City', region: 'MD', postal: '21842',
   phone: '(855) 876-5500', phoneHref: 'tel:+18558765500',
 };
-const mapsQuery = encodeURIComponent('Tidewater Property Management, 8101 Coastal Hwy, Ocean City, MD 21842');
 
 const schemas = [
   {
@@ -49,12 +49,13 @@ const schemas = [
       postalCode: office.postal,
       addressCountry: 'US',
     },
+    geo: { '@type': 'GeoCoordinates', ...OFFICE_GEO['ocean-city'] },
     areaServed: ['Ocean City, MD', 'West Ocean City, MD', 'Ocean Pines, MD', 'Berlin, MD', 'Worcester County, MD'],
     openingHoursSpecification: [
       { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'], opens: '08:00', closes: '16:30' },
       { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '08:00', closes: '15:30' },
     ],
-    // ZIP 21842 confirmed via GBP. TODO(client): add geo {lat,lng} and sameAs [GBP URL]
+    // ZIP 21842 confirmed via GBP. geo from src/data/geo-places.ts. TODO(client): sameAs [GBP URL]
   },
   breadcrumbSchema([
     { name: 'Home', url: SITE.url + '/' },
@@ -131,11 +132,12 @@ const schemas = [
           </div>
         </div>
         <div>
-          <iframe
-            title="Map to Tidewater Property Management, Ocean City"
-            src={`https://www.google.com/maps?q=${mapsQuery}&output=embed`}
-            width="100%" height="320" style="border:0;border-radius:12px"
-            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <LocationMap {...OFFICE_MAPS['ocean-city']} ariaLabel="Map of Tidewater's Ocean City office and the Worcester County communities it serves" height={360} />
+          <ul class="tw-lmap-key">
+            <li><span class="sw office"></span>Our office</li>
+            <li><span class="sw served"></span>Communities we serve nearby</li>
+            <li class="hint">Click the map to enable scroll zoom</li>
+          </ul>
         </div>
       </div>
     </div>

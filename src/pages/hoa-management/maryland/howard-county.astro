@@ -24,6 +24,8 @@ import FaqAccordion from '../../../components/FaqAccordion.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import { serviceSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
+import LocationMap from '../../../components/LocationMap.astro';
+import { COUNTY_MAPS } from '../../../data/location-maps';
 
 const countyFaqs = [
   { q: 'How is HOA management different in Howard County than elsewhere in Maryland?', a: 'Three things: <strong>Columbia’s village structure</strong> layers a sub-association budget under the Columbia Association assessment, which no other Maryland market does at scale. <strong>Ellicott City’s historic district</strong> adds a county preservation review on top of normal architectural approval. And <strong>west-county new construction</strong> (Fulton, Clarksville) means a high share of associations still in developer transition, where warranty claims and turnover audits matter more than deferred maintenance.' },
@@ -113,34 +115,7 @@ const cities = [
       <aside class="tw-geo-hero-side">
         <div class="tw-geo-hero-side-eyebrow">In Howard County</div>
         <h3>Where we manage</h3>
-        <!-- Stylized Howard County schematic (not to scale) -->
-        <svg viewBox="0 0 360 290" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Schematic map of Howard County, Maryland">
-          <!-- Patapsco / NE edge accent -->
-          <path d="M250 40 Q300 60 320 95 L330 70 L300 40 Z" fill="rgba(58,146,166,0.15)"/>
-          <!-- County shape (schematic wedge) -->
-          <path d="M55 120 L120 60 L210 45 L285 80 L310 140 L270 210 L190 245 L110 215 L60 170 Z" class="tw-geo-map-county served" style="cursor:default">
-            <title>Howard County</title>
-          </path>
-          <!-- Elkridge (NE) -->
-          <circle cx="270" cy="85" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Elkridge</title></circle>
-          <text x="280" y="89" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10" letter-spacing="0.02em">Elkridge</text>
-          <!-- Ellicott City (county seat, gold) -->
-          <circle class="tw-geo-map-dot-pulse" cx="225" cy="100" r="8"/>
-          <circle cx="225" cy="100" r="6" fill="var(--tw-gold)" stroke="var(--tw-cream)" stroke-width="2"><title>Ellicott City</title></circle>
-          <text x="235" y="104" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="800" font-size="11" letter-spacing="0.02em">Ellicott City</text>
-          <!-- Columbia (center, largest market) -->
-          <circle cx="175" cy="155" r="5.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Columbia</title></circle>
-          <text x="186" y="159" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10" letter-spacing="0.02em">Columbia</text>
-          <!-- Fulton (SE) -->
-          <circle cx="235" cy="200" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Fulton</title></circle>
-          <text x="245" y="204" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10" letter-spacing="0.02em">Fulton</text>
-          <!-- Clarksville (SW) -->
-          <circle cx="130" cy="185" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Clarksville</title></circle>
-          <text x="140" y="189" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10" letter-spacing="0.02em">Clarksville</text>
-          <!-- Glenelg (W) -->
-          <circle cx="85" cy="135" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Glenelg</title></circle>
-          <text x="95" y="139" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10" letter-spacing="0.02em">Glenelg</text>
-        </svg>
+        <LocationMap theme="dark" {...COUNTY_MAPS['howard-county']} ariaLabel="Map of Howard County, Maryland" height={300} />
         <div class="tw-geo-map-legend">
           <div class="tw-geo-map-legend-row">
             <span class="tw-geo-map-legend-swatch served"></span>
