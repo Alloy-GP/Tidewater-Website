@@ -1,5 +1,6 @@
 ---
 import MobileMenu from './MobileMenu.jsx';
+import SiteSearch from './SiteSearch.jsx';
 interface Props {
   activeNav?: string | null;
   logoSrc?: string;
@@ -214,6 +215,12 @@ const currentPath = Astro.url.pathname;
         </div>
       </div>
 
+      <!-- Site search: opens the full-width search panel (SiteSearch.jsx). Also "/" or Cmd/Ctrl+K. -->
+      <div class="tw-nav-item tw-nav-item-search">
+        <button type="button" class="tw-nav-search" id="tw-nav-search" aria-label="Search the site" aria-haspopup="dialog" aria-expanded="false" title="Search (press /)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        </button>
+      </div>
     </nav>
 
     <div class="tw-header-actions">
@@ -250,6 +257,9 @@ const currentPath = Astro.url.pathname;
 
 <!-- Mobile drill-down menu (opens via the header hamburger) -->
 <MobileMenu client:idle currentPath={currentPath} logoSrc={logoSrc} logoAlt={logoAlt} />
+
+<!-- Full-width site search (opens from the nav search icon, "/" or Cmd/Ctrl+K) -->
+<SiteSearch client:idle />
 
 <script>
   // Megamenu — desktop hover with close delay to bridge the CSS gap
@@ -296,6 +306,13 @@ const currentPath = Astro.url.pathname;
       }
     });
   }
+
+  // Site search: the nav icon opens the search island (SiteSearch.jsx). The flag
+  // covers a click that lands before the island has hydrated.
+  document.getElementById('tw-nav-search')?.addEventListener('click', () => {
+    (window as any).__twSearchPending = true;
+    window.dispatchEvent(new CustomEvent('tw-open-search'));
+  });
 
   // Mobile menu: the hamburger opens the drill-down menu island (MobileMenu.jsx)
   const toggle = document.getElementById('tw-mobile-toggle');
