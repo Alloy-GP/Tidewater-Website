@@ -4,8 +4,9 @@
 // Regional Director: Don Gentry, CMCA AMS PCAM.
 
 import { useState } from 'react';
+import LocationMap from './LocationMap.jsx';
 
-function RentalDelawareHero() {
+function RentalDelawareHero({ map }) {
   return (
     <section className="tw-geo-hero">
       <div className="tw-geo-hero-bg"></div>
@@ -32,7 +33,7 @@ function RentalDelawareHero() {
         <aside className="tw-geo-hero-side">
           <div className="tw-geo-hero-side-eyebrow">Where we manage</div>
           <h3>Sussex County coastal corridor</h3>
-          <RentalDelawareMap />
+          <LocationMap theme="dark" {...map} ariaLabel="Map of the coastal Delaware areas where Tidewater manages rentals" height={320} />
           <div className="tw-geo-map-legend">
             <div className="tw-geo-map-legend-row">
               <span className="tw-geo-map-legend-swatch served"></span>
@@ -46,29 +47,6 @@ function RentalDelawareHero() {
         </aside>
       </div>
     </section>
-  );
-}
-
-function RentalDelawareMap() {
-  const regions = [
-    { id: 'new-castle', served: false, d: 'M180 25 L290 25 L300 110 L185 115 Z' },
-    { id: 'kent',       served: false, d: 'M185 115 L300 110 L310 175 L195 180 Z' },
-    { id: 'sussex',     served: true,  d: 'M195 180 L310 175 L335 245 L320 285 L210 280 L165 230 Z' },
-  ];
-  return (
-    <svg viewBox="0 0 360 310" className="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Map of Delaware with Sussex County coastal corridor highlighted">
-      <path d="M310 175 Q330 215 335 245 L360 245 L360 25 L300 25 L290 110 L300 175 Z" fill="rgba(58,146,166,0.15)"/>
-      <path d="M165 230 L120 250 L100 290 L210 280 Z" fill="rgba(58,146,166,0.05)"/>
-      {regions.map(r => (
-        <path key={r.id} d={r.d} className={`tw-geo-map-county ${r.served ? 'served' : ''}`} />
-      ))}
-      <circle className="tw-geo-map-dot-pulse" cx="300" cy="235" r="6"/>
-      <circle cx="300" cy="235" r="5" fill="var(--tw-gold)" stroke="var(--tw-cream)" strokeWidth="2"/>
-      <text x="220" y="238" fill="var(--tw-gold)" fontFamily="var(--tw-font-heading)" fontWeight="800" fontSize="10" letterSpacing="0.04em">LEWES</text>
-      <text x="200" y="60"  fill="rgba(254,252,248,0.55)" fontFamily="var(--tw-font-heading)" fontWeight="700" fontSize="9" letterSpacing="0.06em">NEW CASTLE</text>
-      <text x="220" y="150" fill="rgba(254,252,248,0.55)" fontFamily="var(--tw-font-heading)" fontWeight="700" fontSize="9" letterSpacing="0.06em">KENT</text>
-      <text x="240" y="220" fill="rgba(254,252,248,0.85)" fontFamily="var(--tw-font-heading)" fontWeight="800" fontSize="11" letterSpacing="0.04em">SUSSEX</text>
-    </svg>
   );
 }
 
@@ -243,10 +221,11 @@ function RentalDelawareAudiences() {
   );
 }
 
-export default function RentalDelaware() {
+// `map` = RENTAL_DELAWARE_MAP (src/data/location-maps.ts), passed from the page.
+export default function RentalDelaware({ map }) {
   return (
     <>
-      <RentalDelawareHero />
+      <RentalDelawareHero map={map} />
       <RentalDelawareCities />
       <RentalDelawareWhy />
       <RentalDelawareAudiences />

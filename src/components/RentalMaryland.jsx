@@ -2,6 +2,8 @@
 // Audience: deployed military, out-of-state investors, accidental landlords, first-time owners.
 // Stack: AppFolio. Flat 8.5% fee.
 
+import LocationMap from './LocationMap.jsx';
+
 const CheckSmIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ width: 18, height: 18 }}>
     <polyline points="20 6 9 17 4 12" />
@@ -9,52 +11,9 @@ const CheckSmIcon = () => (
 );
 
 // ─────────────────────────────────────────────────────────────
-// Maryland county SVG map
-// ─────────────────────────────────────────────────────────────
-function RentalMarylandMap() {
-  const counties = [
-    { id: 'garrett',       served: false, d: 'M20 60 L60 50 L80 65 L70 90 L25 88 Z' },
-    { id: 'allegany',      served: false, d: 'M80 65 L120 60 L130 85 L70 90 Z' },
-    { id: 'washington',    served: false, d: 'M120 60 L165 55 L180 80 L130 85 Z' },
-    { id: 'frederick',     served: true,  d: 'M165 55 L210 50 L230 95 L180 90 L180 80 Z' },
-    { id: 'carroll',       served: true,  d: 'M210 50 L255 50 L260 88 L230 95 Z' },
-    { id: 'baltimore-co',  served: true,  d: 'M255 50 L305 55 L320 95 L290 105 L260 88 Z' },
-    { id: 'harford',       served: true,  d: 'M305 55 L355 60 L355 95 L320 95 Z' },
-    { id: 'cecil',         served: false, d: 'M355 60 L395 70 L385 100 L355 95 Z' },
-    { id: 'howard',        served: true,  d: 'M230 95 L260 88 L290 105 L275 130 L235 130 Z' },
-    { id: 'baltimore-city',served: true,  d: 'M290 105 L320 95 L325 115 L300 118 Z' },
-    { id: 'montgomery',    served: true,  d: 'M180 90 L235 130 L210 165 L165 155 Z' },
-    { id: 'pg',            served: true,  d: 'M210 165 L275 145 L290 195 L230 200 Z' },
-    { id: 'aa',            served: true, highlight: true, d: 'M275 130 L325 115 L335 175 L290 195 L275 145 Z' },
-    { id: 'calvert',       served: false, d: 'M290 195 L320 200 L315 245 L280 240 Z' },
-    { id: 'charles',       served: false, d: 'M230 200 L290 195 L280 240 L235 240 Z' },
-    { id: 'stmarys',       served: false, d: 'M280 240 L315 245 L305 290 L260 280 L235 240 Z' },
-    { id: 'kent',          served: false, d: 'M355 95 L385 100 L380 130 L350 125 Z' },
-    { id: 'queen-annes',   served: false, d: 'M350 125 L380 130 L375 160 L345 155 Z' },
-    { id: 'caroline',      served: false, d: 'M345 155 L375 160 L370 190 L340 185 Z' },
-    { id: 'talbot',        served: true,  d: 'M335 175 L345 155 L370 190 L340 200 Z' },
-    { id: 'dorchester',    served: false, d: 'M340 185 L370 190 L380 235 L335 230 Z' },
-    { id: 'wicomico',      served: false, d: 'M380 235 L405 240 L400 265 L370 260 L335 230 Z' },
-    { id: 'somerset',      served: false, d: 'M370 260 L400 265 L395 295 L365 290 Z' },
-    { id: 'worcester',     served: false, d: 'M405 240 L430 250 L425 295 L395 295 L400 265 Z' },
-  ];
-  return (
-    <svg viewBox="0 0 450 320" className="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Map of Maryland counties served by Tidewater Rental Management">
-      <path d="M325 115 Q335 155 335 195 Q330 220 320 240 Q330 200 325 175 Q320 145 325 115 Z" fill="rgba(58,146,166,0.15)" />
-      {counties.map(c => (
-        <path key={c.id} d={c.d} className={`tw-geo-map-county ${c.served ? 'served' : ''} ${c.highlight ? 'is-highlight' : ''}`} />
-      ))}
-      <circle className="tw-geo-map-dot-pulse" cx="285" cy="80" r="6" />
-      <circle className="tw-geo-map-dot" cx="285" cy="80" r="5" fill="var(--tw-gold)" />
-      <text x="295" y="78" fill="var(--tw-gold)" fontFamily="var(--tw-font-heading)" fontWeight="800" fontSize="9" letterSpacing="0.06em">HQ</text>
-    </svg>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────
 // Hero
 // ─────────────────────────────────────────────────────────────
-function RentalMarylandHero() {
+function RentalMarylandHero({ map }) {
   return (
     <section className="tw-geo-hero">
       <div className="tw-geo-hero-bg"></div>
@@ -89,7 +48,7 @@ function RentalMarylandHero() {
         <aside className="tw-geo-hero-side">
           <div className="tw-geo-hero-side-eyebrow">Where we manage</div>
           <h3>10 counties + Baltimore City</h3>
-          <RentalMarylandMap />
+          <LocationMap theme="dark" {...map} ariaLabel="Map of the Maryland counties where Tidewater manages rentals" height={320} />
           <div className="tw-geo-map-legend">
             <div className="tw-geo-map-legend-row">
               <span className="tw-geo-map-legend-swatch served"></span>
@@ -372,10 +331,11 @@ function RentalMarylandLaw() {
 // ─────────────────────────────────────────────────────────────
 // Page composer
 // ─────────────────────────────────────────────────────────────
-export default function RentalMaryland() {
+// `map` = RENTAL_MARYLAND_MAP (src/data/location-maps.ts), passed from the page.
+export default function RentalMaryland({ map }) {
   return (
     <>
-      <RentalMarylandHero />
+      <RentalMarylandHero map={map} />
       <RentalMarylandCounties />
       <RentalMarylandAudiences />
       <RentalMarylandFee />

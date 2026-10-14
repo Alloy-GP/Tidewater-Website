@@ -12,6 +12,8 @@ import FaqAccordion from '../../../components/FaqAccordion.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import { serviceSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
+import LocationMap from '../../../components/LocationMap.astro';
+import { COUNTY_MAPS } from '../../../data/location-maps';
 
 const countyFaqs = [
   { q: 'Do you work with small Carroll County associations?', a: 'Yes. Manager portfolios are capped at <strong>8&ndash;12 communities</strong>, so a smaller association gets the same attention as a large one rather than being the account nobody has time for. Our financial-only tier is built for boards that want professional books and reserve planning while continuing to run their own operations.' },
@@ -85,24 +87,7 @@ const cities = [
       <aside class="tw-geo-hero-side">
         <div class="tw-geo-hero-side-eyebrow">In Carroll County</div>
         <h3>Where we manage</h3>
-        <svg viewBox="0 0 360 290" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Schematic map of Carroll County, Maryland">
-          <path d="M96 52 Q168 44 220 58 L256 96 Q262 150 240 200 L198 236 Q150 230 128 196 L98 150 Q78 100 96 52 Z" class="tw-geo-map-county served" style="cursor:default"><title>Carroll County</title></path>
-          <circle cx="120" cy="80" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Taneytown</title></circle>
-          <text x="56" y="78" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Taneytown</text>
-          <circle cx="210" cy="84" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Manchester</title></circle>
-          <text x="218" y="82" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Manchester</text>
-          <circle cx="214" cy="120" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Hampstead</title></circle>
-          <text x="222" y="124" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Hampstead</text>
-          <circle class="tw-geo-map-dot-pulse" cx="162" cy="130" r="8"/>
-          <circle cx="162" cy="130" r="6" fill="var(--tw-gold)" stroke="var(--tw-cream)" stroke-width="2"><title>Westminster</title></circle>
-          <text x="172" y="134" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="800" font-size="11">Westminster</text>
-          <circle cx="196" cy="186" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Eldersburg</title></circle>
-          <text x="204" y="190" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Eldersburg</text>
-          <circle cx="150" cy="198" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Sykesville</title></circle>
-          <text x="84" y="202" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Sykesville</text>
-          <circle cx="120" cy="182" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Mount Airy</title></circle>
-          <text x="46" y="180" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Mount Airy</text>
-        </svg>
+        <LocationMap theme="dark" {...COUNTY_MAPS['carroll-county']} ariaLabel="Map of Carroll County, Maryland" height={300} />
         <div class="tw-geo-map-legend">
           <div class="tw-geo-map-legend-row"><span class="tw-geo-map-legend-swatch served"></span>Cities &amp; towns we serve</div>
           <div class="tw-geo-map-legend-row"><span class="tw-geo-map-legend-swatch hq"></span>County seat &middot; Westminster</div>

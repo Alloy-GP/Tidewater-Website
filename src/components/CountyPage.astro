@@ -3,6 +3,7 @@
 // Ported from the county-template handoff. Static, no framework deps.
 // Reuses .tw-geo-* (styles-geo.css) + .tw-cty-* (styles-county-template.css).
 import FaqAccordion from './FaqAccordion.astro';
+import LocationMap from './LocationMap.astro';
 import type { County } from '../data/counties';
 
 interface Props { county: County; }
@@ -19,7 +20,8 @@ const cityHref    = (slug: string) => `/${svc}/${st}/${c.slug}/${slug}`;
 const nearbyHref  = (slug: string) => `/${svc}/${st}/${slug}`;
 const layout = c.layout ?? 'editorial';
 
-const mapsKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
+// Hero map: MapLibre on MapTiler tiles (LocationMap.astro); pins + caption come from county.map.
+const mapCfg = c.map ? (({ caption, ...rest }) => rest)(c.map) : null;
 
 // ── JSON-LD: Service (LocalBusiness provider, nested) + Breadcrumb + FAQPage ──
 const strip = (s: string) => String(s).replace(/<[^>]+>/g, '');
@@ -72,19 +74,7 @@ const schemas = [
       <h3>Where we manage</h3>
       {c.map ? (
         <figure class="tw-cty-map">
-          <div class="tw-cty-map-frame">
-            {mapsKey ? (
-              <>
-                <div id="cty-map" style="position:absolute;inset:0;width:100%;height:100%"></div>
-                {/* fallback shown by JS only if the Maps API fails to initialize */}
-                <iframe id="cty-map-fallback" hidden src={`https://www.google.com/maps?q=${encodeURIComponent(c.map.query)}&z=${c.map.zoom}&output=embed`}
-                  title={`Map of ${c.name}, ${c.state}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-              </>
-            ) : (
-              <iframe src={`https://www.google.com/maps?q=${encodeURIComponent(c.map.query)}&z=${c.map.zoom}&output=embed`}
-                title={`Map of ${c.name}, ${c.state}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-            )}
-          </div>
+          <LocationMap theme="dark" {...mapCfg} ariaLabel={`Map of ${c.name}, ${c.state}`} height={300} />
           <figcaption>
             <span class="pin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
             {c.map.caption}
@@ -315,59 +305,3 @@ const schemas = [
 )}
 
 {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
-
-{/* Maps JavaScript API — brand-styled map, only when a key is configured.
-   Without the key, the hero renders the tinted iframe fallback above. */}
-{mapsKey && c.map && (
-  <script is:inline define:vars={{ key: mapsKey, query: c.map.query, zoom: c.map.zoom }}>
-    (function () {
-      var STYLE = [
-        { elementType: 'geometry', stylers: [{ color: '#eef0ea' }] },
-        { elementType: 'labels.text.fill', stylers: [{ color: '#5c5751' }] },
-        { elementType: 'labels.text.stroke', stylers: [{ color: '#fefcf8' }] },
-        { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#cfe3e6' }] },
-        { featureType: 'landscape', elementType: 'geometry', stylers: [{ color: '#f1eee9' }] },
-        { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#e2ddd4' }] },
-        { featureType: 'road', elementType: 'labels', stylers: [{ visibility: 'simplified' }] },
-        { featureType: 'poi', stylers: [{ visibility: 'off' }] },
-        { featureType: 'transit', stylers: [{ visibility: 'off' }] },
-        { featureType: 'administrative', elementType: 'geometry.stroke', stylers: [{ color: '#3a92a6' }] },
-      ];
-      var ok = false;
-      function fail() {
-        if (ok) return;
-        var d = document.getElementById('cty-map'); var fb = document.getElementById('cty-map-fallback');
-        if (d) d.style.display = 'none';
-        if (fb) fb.hidden = false;
-      }
-      window.gm_authFailure = fail;               // bad/blocked API key
-      setTimeout(function () { if (!ok) fail(); }, 5000); // API never loaded
-      function init() {
-        var el = document.getElementById('cty-map');
-        if (!el || !window.google) { fail(); return; }
-        ok = true;
-        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        var map = new google.maps.Map(el, {
-          zoom: zoom, center: { lat: 39.29, lng: -76.6 }, styles: STYLE,
-          disableDefaultUI: true, zoomControl: true, gestureHandling: 'cooperative',
-        });
-        // Center on the county, drop a gold county marker. City markers per
-        // cities.list can be added once each city has lat/lng in the data.
-        new google.maps.Geocoder().geocode({ address: query }, function (res, status) {
-          if (status === 'OK' && res[0]) {
-            map.setCenter(res[0].geometry.location);
-            if (res[0].geometry.viewport) map.fitBounds(res[0].geometry.viewport);
-            new google.maps.Marker({ position: res[0].geometry.location, map: map, title: query,
-              icon: { path: google.maps.SymbolPath.CIRCLE, scale: 7, fillColor: '#BFAC5F', fillOpacity: 1, strokeColor: '#fefcf8', strokeWeight: 2 } });
-          }
-        });
-      }
-      window.__ctyMapInit = init;
-      if (!document.getElementById('gmaps-js')) {
-        var s = document.createElement('script'); s.id = 'gmaps-js'; s.async = true;
-        s.src = 'https://maps.googleapis.com/maps/api/js?key=' + key + '&callback=__ctyMapInit&loading=async';
-        document.head.appendChild(s);
-      } else if (window.google) { init(); }
-    })();
-  </script>
-)}

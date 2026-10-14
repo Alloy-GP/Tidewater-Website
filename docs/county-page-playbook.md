@@ -102,3 +102,14 @@ already emit this — see Howard County for the pattern.
 - **Hero trust stats** currently portfolio-level (450+ / AAMC® / 1989
   family-owned). Swap in the Google rating as a 4th/replacement once the real
   average is confirmed.
+
+## Hero map
+
+The "Where we manage" panel in the hero is a live map (`LocationMap.astro`,
+MapLibre on MapTiler tiles), not a hand-drawn SVG. Pins come from
+`src/data/location-maps.ts` → `COUNTY_MAPS[slug]`; coordinates from the
+generated `src/data/geo-places.ts`. To add a county: geocode its towns with
+`scripts/geocode-places.py`, add a `COUNTY_MAPS` entry whose pins match the
+page's `cities` list (the county seat as `seat`), and drop in
+`<LocationMap theme="dark" {...COUNTY_MAPS['x-county']} ariaLabel="Map of X County, Maryland" height={300} />`.
+Full reference: `docs/maps.md`.

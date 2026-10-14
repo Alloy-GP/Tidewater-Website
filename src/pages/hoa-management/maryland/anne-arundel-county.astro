@@ -20,6 +20,8 @@ import FaqAccordion from '../../../components/FaqAccordion.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import { serviceSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
+import LocationMap from '../../../components/LocationMap.astro';
+import { COUNTY_MAPS } from '../../../data/location-maps';
 
 const countyFaqs = [
   { q: 'How is HOA management different in Anne Arundel County?', a: 'Three things stand out: a high concentration of <strong>waterfront condo associations</strong> around Annapolis, Edgewater, and Mayo, where master-policy insurance and dock, pier, and bulkhead upkeep add complexity most counties never see; <strong>Annapolis historic-district</strong> associations that route exterior changes through city preservation review; and <strong>master-planned communities</strong> in Crofton and Odenton layered with sub-associations.' },
@@ -111,34 +113,7 @@ const cities = [
       <aside class="tw-geo-hero-side">
         <div class="tw-geo-hero-side-eyebrow">In Anne Arundel</div>
         <h3>Where we manage</h3>
-        <!-- Anne Arundel county SVG map (schematic) -->
-        <svg viewBox="0 0 360 290" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Map of Anne Arundel County">
-          <!-- Chesapeake / waterfront on the right edge -->
-          <path d="M295 85 Q320 130 320 180 Q315 220 305 240 L360 240 L360 50 L320 50 Z" fill="rgba(58,146,166,0.15)"/>
-          <!-- County shape -->
-          <path d="M40 50 L160 40 L240 55 L295 85 L320 145 L305 215 L260 250 L195 245 L130 220 L75 195 L45 135 Z" class="tw-geo-map-county served" style="cursor:default">
-            <title>Anne Arundel County</title>
-          </path>
-          <!-- Glen Burnie -->
-          <circle cx="130" cy="70" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Glen Burnie</title></circle>
-          <text x="140" y="74" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10" letter-spacing="0.02em">Glen Burnie</text>
-          <!-- Pasadena -->
-          <circle cx="210" cy="80" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Pasadena</title></circle>
-          <text x="220" y="84" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10" letter-spacing="0.02em">Pasadena</text>
-          <!-- Severna Park -->
-          <circle cx="240" cy="130" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Severna Park</title></circle>
-          <text x="250" y="134" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10" letter-spacing="0.02em">Severna Park</text>
-          <!-- Annapolis (county seat) -->
-          <circle class="tw-geo-map-dot-pulse" cx="270" cy="200" r="8"/>
-          <circle cx="270" cy="200" r="6" fill="var(--tw-gold)" stroke="var(--tw-cream)" stroke-width="2"><title>Annapolis</title></circle>
-          <text x="280" y="204" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="800" font-size="11" letter-spacing="0.02em">Annapolis</text>
-          <!-- Crofton -->
-          <circle cx="100" cy="170" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Crofton</title></circle>
-          <text x="110" y="174" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10" letter-spacing="0.02em">Crofton</text>
-          <!-- Odenton -->
-          <circle cx="80" cy="110" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Odenton</title></circle>
-          <text x="90" y="114" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10" letter-spacing="0.02em">Odenton</text>
-        </svg>
+        <LocationMap theme="dark" {...COUNTY_MAPS['anne-arundel-county']} ariaLabel="Map of Anne Arundel County, Maryland" height={300} />
         <div class="tw-geo-map-legend">
           <div class="tw-geo-map-legend-row">
             <span class="tw-geo-map-legend-swatch served"></span>

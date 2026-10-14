@@ -8,6 +8,7 @@ import CTA from '../../../components/CTA.astro';
 import RentalGeo, { GEO_DATA_REHOBOTH as geo } from '../../../components/RentalGeo.jsx';
 import { breadcrumbSchema, serviceSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
+import { RENTAL_MAPS } from '../../../data/location-maps';
 
 const pageUrl = `${SITE.url}/rental-management/delaware/rehoboth-beach`;
 
@@ -41,7 +42,7 @@ const schemas = [
     { label: 'Delaware', href: '/rental-management/delaware' },
     { label: 'Rehoboth Beach' },
   ]} />
-  <RentalGeo geo={geo} client:load />
+  <RentalGeo geo={geo} map={RENTAL_MAPS['rehoboth']} client:load />
   <CTA />
   <Footer />
 </BaseLayout>
