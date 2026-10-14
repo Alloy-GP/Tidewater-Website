@@ -2,6 +2,7 @@
 // Recreated from the design handoff (drill-down · regular density · Dark Tide accent).
 // Opened by the header hamburger via a `tw-open-menu` window event.
 import { useState, useEffect, useMemo } from 'react';
+import { searchIndex } from '../lib/site-search';
 
 // ── Icons (Lucide-style, 2px stroke) ──────────────────────────────
 const I = {
@@ -92,6 +93,9 @@ export default function MobileMenu({ currentPath = '', logoSrc = '/assets/logo-m
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(null);
   const [q, setQ] = useState('');
+  // Full site index (/search-index.json), fetched the first time the menu
+  // opens. Until it arrives, search falls back to the nav leaves above.
+  const [index, setIndex] = useState(null);
   const searching = q.trim().length > 0;
   const LEAVES = useMemo(allLeaves, []);
   const here = norm(currentPath);
@@ -116,6 +120,9 @@ export default function MobileMenu({ currentPath = '', logoSrc = '/assets/logo-m
   // lock background scroll while open; reset drill/search on close
   useEffect(() => {
     document.body.classList.toggle('tw-menu-open', open);
+    if (open && !index) {
+      fetch('/search-index.json').then((r) => (r.ok ? r.json() : [])).then(setIndex).catch(() => {});
+    }
     if (!open) { setActive(null); setQ(''); }
     const onKey = (e) => { if (e.key === 'Escape') setOpen(false); };
     if (open) window.addEventListener('keydown', onKey);
@@ -123,7 +130,9 @@ export default function MobileMenu({ currentPath = '', logoSrc = '/assets/logo-m
   }, [open]);
 
   const close = () => setOpen(false);
-  const results = searching ? LEAVES.filter((l) => l.label.toLowerCase().includes(q.trim().toLowerCase())) : [];
+  const results = !searching ? []
+    : index ? searchIndex(index, q, 10).map((h) => ({ label: h.t, href: h.h, crumb: h.c || h.s }))
+    : LEAVES.filter((l) => l.label.toLowerCase().includes(q.trim().toLowerCase()));
 
   return (
     <div className={'tw-mm-overlay' + (open ? ' is-open' : '')} aria-hidden={!open}>

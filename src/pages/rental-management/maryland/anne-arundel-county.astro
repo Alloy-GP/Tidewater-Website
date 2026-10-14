@@ -8,6 +8,7 @@ import CTA from '../../../components/CTA.astro';
 import RentalGeo, { GEO_DATA_ANNE_ARUNDEL as geo } from '../../../components/RentalGeo.jsx';
 import { breadcrumbSchema, serviceSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
+import { RENTAL_MAPS } from '../../../data/location-maps';
 
 const pageUrl = `${SITE.url}/rental-management/maryland/anne-arundel-county`;
 
@@ -41,7 +42,7 @@ const schemas = [
     { label: 'Maryland', href: '/rental-management/maryland' },
     { label: 'Anne Arundel County' },
   ]} />
-  <RentalGeo geo={geo} client:load />
+  <RentalGeo geo={geo} map={RENTAL_MAPS['anne-arundel']} client:load />
   <CTA />
   <Footer />
 </BaseLayout>
