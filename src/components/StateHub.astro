@@ -5,11 +5,15 @@
 import FaqAccordion from './FaqAccordion.astro';
 import { TRUST_STATS, type StateHub } from '../data/states';
 import { SITE } from '../config/site';
+import LocationMap from './LocationMap.astro';
+import { STATE_MAPS } from '../data/location-maps';
 
 interface Props { state: StateHub; }
 const { state: st } = Astro.props;
 
 const url = `${SITE.url}/hoa-management/${st.slug}`;
+const map = STATE_MAPS[st.slug];
+const hasOffice = !!map?.pins.some((p) => p.kind === 'office');
 const strip = (s: string) => String(s).replace(/<[^>]+>/g, '');
 
 const provider = {
@@ -79,6 +83,17 @@ export { pageSchema };
       ))}
     </div>
    </div>
+   {map && (
+    <aside class="tw-geo-hero-side">
+      <div class="tw-geo-hero-side-eyebrow">Where we work</div>
+      <h3>{st.name} coverage</h3>
+      <LocationMap theme="dark" {...map} ariaLabel={`Map of the ${st.name} areas served by Tidewater`} height={300} />
+      <div class="tw-geo-map-legend">
+        <div class="tw-geo-map-legend-row"><span class="tw-geo-map-legend-swatch served"></span>Areas we serve</div>
+        {hasOffice && <div class="tw-geo-map-legend-row"><span class="tw-geo-map-legend-swatch hq"></span>Tidewater office</div>}
+      </div>
+    </aside>
+   )}
   </div>
 </section>
 

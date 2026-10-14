@@ -1,9 +1,10 @@
 // Rental Geo — shared component for /rental-management/maryland/<county-or-city>/
-// Two pages: Anne Arundel County and Silver Spring.
-// Pass GEO_DATA_ANNE_ARUNDEL or GEO_DATA_SILVER_SPRING as the `geo` prop.
+// One page per GEO_DATA_* export below; pass it as `geo` and the matching
+// RENTAL_MAPS entry (src/data/location-maps.ts) as `map`.
 
 import { useState } from 'react';
 import FaqAccordion from './FaqAccordion.jsx';
+import LocationMap from './LocationMap.jsx';
 
 const RGIcons = {
   shield: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>,
@@ -12,41 +13,9 @@ const RGIcons = {
 };
 
 // ─────────────────────────────────────────────────────────────
-// SVG locator map
-// ─────────────────────────────────────────────────────────────
-function RentalGeoMap({ cities, viewBox, outline, waterPath }) {
-  return (
-    <svg viewBox={viewBox} className="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Locator map">
-      {waterPath && <path d={waterPath} fill="rgba(58,146,166,0.15)" />}
-      <path d={outline} className="tw-geo-map-county served" style={{ cursor: 'default' }} />
-      {cities.map((c, i) => (
-        <g key={i}>
-          {c.hq && <circle className="tw-geo-map-dot-pulse" cx={c.x} cy={c.y} r="8" />}
-          <circle
-            cx={c.x} cy={c.y} r={c.hq ? 6 : 4.5}
-            fill={c.hq ? 'var(--tw-gold)' : 'var(--tw-teal)'}
-            stroke="var(--tw-cream)" strokeWidth={c.hq ? 2 : 1.5}
-          >
-            <title>{c.name}</title>
-          </circle>
-          <text
-            x={c.x + 10} y={c.y + 4}
-            fill="rgba(254,252,248,0.85)"
-            fontFamily="var(--tw-font-heading)"
-            fontWeight={c.hq ? 800 : 600}
-            fontSize={c.hq ? 11 : 10}
-            letterSpacing="0.02em"
-          >{c.name}</text>
-        </g>
-      ))}
-    </svg>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────
 // Hero
 // ─────────────────────────────────────────────────────────────
-function RentalGeoHero({ geo }) {
+function RentalGeoHero({ geo, map }) {
   return (
     <section className="tw-geo-hero">
       <div className="tw-geo-hero-bg"></div>
@@ -71,12 +40,7 @@ function RentalGeoHero({ geo }) {
         <aside className="tw-geo-hero-side">
           <div className="tw-geo-hero-side-eyebrow">Where we manage</div>
           <h3>{geo.mapHeading}</h3>
-          <RentalGeoMap
-            cities={geo.mapCities}
-            viewBox={geo.mapViewBox}
-            outline={geo.mapOutline}
-            waterPath={geo.mapWaterPath}
-          />
+          <LocationMap theme="dark" {...map} ariaLabel={`Map of ${geo.fullName}`} height={300} />
           <div className="tw-geo-map-legend">
             <div className="tw-geo-map-legend-row">
               <span className="tw-geo-map-legend-swatch served"></span>
@@ -231,10 +195,12 @@ function RentalGeoFaq({ geo }) {
 // ─────────────────────────────────────────────────────────────
 // Page composer
 // ─────────────────────────────────────────────────────────────
-export default function RentalGeo({ geo }) {
+// `map` is the page's LocationMap config (src/data/location-maps.ts → RENTAL_MAPS),
+// passed from the .astro page so this island doesn't bundle every county's pins.
+export default function RentalGeo({ geo, map }) {
   return (
     <>
-      <RentalGeoHero geo={geo} />
+      <RentalGeoHero geo={geo} map={map} />
       <RentalGeoNeighbors geo={geo} />
       <RentalGeoFacts geo={geo} />
       <RentalGeoManager geo={geo} />
@@ -261,17 +227,6 @@ export const GEO_DATA_ANNE_ARUNDEL = {
   ],
   mapHeading: 'Where we manage',
   mapHqLabel: 'County seat · Annapolis',
-  mapViewBox: '0 0 360 290',
-  mapOutline: 'M40 50 L160 40 L240 55 L295 85 L320 145 L305 215 L260 250 L195 245 L130 220 L75 195 L45 135 Z',
-  mapWaterPath: 'M295 85 Q320 130 320 180 Q315 220 305 240 L360 240 L360 50 L320 50 Z',
-  mapCities: [
-    { name: 'Glen Burnie',  x: 130, y:  70 },
-    { name: 'Pasadena',     x: 210, y:  80 },
-    { name: 'Severna Park', x: 240, y: 130 },
-    { name: 'Annapolis',    x: 270, y: 200, hq: true },
-    { name: 'Crofton',      x: 100, y: 170 },
-    { name: 'Odenton',      x:  80, y: 110 },
-  ],
   factsEyebrow: 'By the Numbers',
   factsTitle: 'The Anne Arundel rental market, <em>in data.</em>',
   factsLede: 'Strong single-family rental demand fueled by Fort Meade, BWI, and Naval Academy proximity. Tight supply, quick lease turnarounds.',
@@ -349,17 +304,6 @@ export const GEO_DATA_SILVER_SPRING = {
   ],
   mapHeading: 'Silver Spring submarkets',
   mapHqLabel: 'Downtown · Metro hub',
-  mapViewBox: '0 0 360 290',
-  mapOutline: 'M50 60 L260 50 L310 100 L320 180 L290 240 L180 255 L70 235 L40 170 Z',
-  mapWaterPath: '',
-  mapCities: [
-    { name: 'Downtown',         x: 180, y: 130, hq: true },
-    { name: 'Four Corners',     x: 250, y: 100 },
-    { name: 'Forest Glen',      x: 110, y:  95 },
-    { name: 'Wheaton border',   x:  90, y: 175 },
-    { name: 'Takoma Park edge', x: 235, y: 200 },
-    { name: 'Aspen Hill',       x: 145, y:  75 },
-  ],
   factsEyebrow: 'By the Numbers',
   factsTitle: 'The Silver Spring rental market, <em>in data.</em>',
   factsLede: 'Metro-adjacent demand from DC commuters, NIH/FDA professionals, and University of Maryland-bound households. Tighter inventory than the county average.',
@@ -432,18 +376,6 @@ export const GEO_DATA_BALTIMORE_COUNTY = {
   ],
   mapHeading: 'Where we manage',
   mapHqLabel: 'Headquarters · Owings Mills',
-  mapViewBox: '0 0 360 290',
-  mapOutline: 'M30 50 L260 40 L325 75 L335 165 L295 215 L235 220 L235 145 L130 145 L130 215 L60 215 L25 165 Z',
-  mapWaterPath: 'M335 165 Q345 200 340 240 L360 240 L360 165 Z',
-  mapCities: [
-    { name: 'Owings Mills', x: 110, y: 85, hq: true },
-    { name: 'Towson',       x: 200, y: 95 },
-    { name: 'Cockeysville', x: 175, y: 60 },
-    { name: 'Pikesville',   x: 145, y: 110 },
-    { name: 'Catonsville',  x: 75,  y: 195 },
-    { name: 'White Marsh',  x: 280, y: 130 },
-    { name: 'Dundalk',      x: 270, y: 195 },
-  ],
   factsEyebrow: 'By the Numbers',
   factsTitle: 'The Baltimore County rental market, <em>in data.</em>',
   factsLede: 'Diverse rental demand — graduate students near Towson University & Johns Hopkins, Hunt Valley corporate corridor, and the I-83/I-695 commuter rings. Strong year-round occupancy.',
@@ -521,17 +453,6 @@ export const GEO_DATA_HOWARD_COUNTY = {
   ],
   mapHeading: 'Where we manage',
   mapHqLabel: 'County seat · Ellicott City',
-  mapViewBox: '0 0 360 290',
-  mapOutline: 'M40 80 L150 40 L290 50 L320 130 L275 225 L150 250 L60 215 L20 145 Z',
-  mapWaterPath: '',
-  mapCities: [
-    { name: 'Ellicott City', x: 240, y: 85,  hq: true },
-    { name: 'Columbia',      x: 175, y: 145 },
-    { name: 'Elkridge',      x: 270, y: 145 },
-    { name: 'Clarksville',   x: 130, y: 180 },
-    { name: 'Fulton',        x: 100, y: 215 },
-    { name: 'Glenwood',      x: 85,  y: 115 },
-  ],
   factsEyebrow: 'By the Numbers',
   factsTitle: 'The Howard County rental market, <em>in data.</em>',
   factsLede: 'Strong rental demand from corporate transferees (NSA, Verizon, GEICO at Route 32), Johns Hopkins APL, and Columbia\'s built-in pull as a planned community. Higher median rents than Baltimore or PG counties.',
@@ -604,18 +525,6 @@ export const GEO_DATA_MONTGOMERY_COUNTY = {
   ],
   mapHeading: 'Where we manage',
   mapHqLabel: 'County seat · Rockville',
-  mapViewBox: '0 0 360 290',
-  mapOutline: 'M40 50 L180 25 L320 90 L325 175 L260 245 L130 260 L45 215 L20 130 Z',
-  mapWaterPath: '',
-  mapCities: [
-    { name: 'Rockville',     x: 195, y: 110, hq: true },
-    { name: 'Bethesda',      x: 250, y: 200 },
-    { name: 'Gaithersburg',  x: 135, y: 80 },
-    { name: 'Germantown',    x: 85,  y: 70 },
-    { name: 'Silver Spring', x: 280, y: 175 },
-    { name: 'Wheaton',       x: 240, y: 155 },
-    { name: 'Potomac',       x: 165, y: 175 },
-  ],
   factsEyebrow: 'By the Numbers',
   factsTitle: 'The Montgomery County rental market, <em>in data.</em>',
   factsLede: 'Federal workforce, biotech (NIH, FDA, NIST), and DC commuter demand make this Maryland\'s tightest rental submarket. Median rents run 20–30% above the state average.',
@@ -690,18 +599,6 @@ export const GEO_DATA_PRINCE_GEORGES_COUNTY = {
   ],
   mapHeading: 'Where we manage',
   mapHqLabel: 'County seat · Upper Marlboro',
-  mapViewBox: '0 0 360 290',
-  mapOutline: 'M40 35 L220 30 L280 75 L260 165 L210 235 L100 265 L45 240 L25 165 Z',
-  mapWaterPath: '',
-  mapCities: [
-    { name: 'Bowie',          x: 200, y: 95 },
-    { name: 'Largo',          x: 165, y: 145 },
-    { name: 'Greenbelt',      x: 100, y: 70 },
-    { name: 'Hyattsville',    x: 75,  y: 95 },
-    { name: 'College Park',   x: 90,  y: 50 },
-    { name: 'Laurel',         x: 130, y: 35 },
-    { name: 'Upper Marlboro', x: 175, y: 200, hq: true },
-  ],
   factsEyebrow: 'By the Numbers',
   factsTitle: "The Prince George\'s County rental market, <em>in data.</em>",
   factsLede: 'Federal-workforce demand from NASA Goddard, the Census Bureau, the IRS, and University of Maryland faculty & staff. Townhome and garden-condo heavy, with single-family pockets in Bowie and Fort Washington.',
@@ -775,18 +672,6 @@ export const GEO_DATA_OCEAN_CITY = {
   ],
   mapHeading: 'Where we manage',
   mapHqLabel: 'OC office · 8101 Coastal Hwy',
-  mapViewBox: '0 0 360 290',
-  mapOutline: 'M155 25 L210 25 L215 80 L210 145 L205 210 L195 260 L160 268 L145 230 L142 165 L148 95 Z',
-  mapWaterPath: 'M215 25 L360 25 L360 268 L195 268 L205 210 L210 145 L215 80 Z',
-  mapCities: [
-    { name: 'Uptown / 145th', x: 178, y: 55 },
-    { name: 'North OC',       x: 178, y: 100 },
-    { name: 'Midtown',        x: 178, y: 145 },
-    { name: 'Downtown OC',    x: 178, y: 195, hq: true },
-    { name: 'West OC',        x: 85,  y: 195 },
-    { name: 'Ocean Pines',    x: 55,  y: 145 },
-    { name: 'Berlin',         x: 60,  y: 235 },
-  ],
   factsEyebrow: 'By the Numbers',
   factsTitle: 'The Ocean City rental market, <em>in data.</em>',
   factsLede: 'Highly seasonal demand: Memorial Day to Labor Day is peak, with shoulder-season demand from weekenders and remote workers. Condo-dominant, with single-family in West OC and Ocean Pines.',
@@ -864,17 +749,6 @@ export const GEO_DATA_LEWES = {
   ],
   mapHeading: 'Where we manage',
   mapHqLabel: 'DE office · John J Williams Hwy',
-  mapViewBox: '0 0 360 290',
-  mapOutline: 'M40 100 L120 65 L210 80 L255 130 L235 200 L165 240 L80 220 L25 165 Z',
-  mapWaterPath: 'M255 130 L360 130 L360 25 L120 25 L120 65 L210 80 Z',
-  mapCities: [
-    { name: 'Old Town Lewes', x: 145, y: 130, hq: true },
-    { name: 'Cape Henlopen',  x: 215, y: 115 },
-    { name: 'Pilottown',      x: 110, y: 110 },
-    { name: 'Henlopen Acres', x: 195, y: 175 },
-    { name: 'Long Neck',      x: 70,  y: 185 },
-    { name: 'Milton',         x: 60,  y: 130 },
-  ],
   factsEyebrow: 'By the Numbers',
   factsTitle: 'The Lewes rental market, <em>in data.</em>',
   factsLede: 'Second-home and resort-community heavy. Year-round tenant base is smaller than coastal Maryland but tighter; seasonal demand from May to September drives weekly + monthly leases.',
@@ -943,17 +817,6 @@ export const GEO_DATA_REHOBOTH = {
   heroStats: [],
   mapHeading: 'Where we manage',
   mapHqLabel: 'DE office · minutes north',
-  mapViewBox: '0 0 360 290',
-  mapOutline: 'M40 40 L250 40 Q264 110 252 160 Q246 220 250 258 L40 258 Z',
-  mapWaterPath: 'M250 40 Q262 110 252 160 Q246 220 250 258 L360 258 L360 40 Z',
-  mapCities: [
-    { name: 'Downtown Rehoboth', x: 210, y: 120, hq: true },
-    { name: 'North Shores',     x: 190, y: 70 },
-    { name: 'Henlopen Acres',   x: 215, y: 92 },
-    { name: 'Silver Lake',      x: 205, y: 150 },
-    { name: 'Dewey Beach',      x: 215, y: 200 },
-    { name: 'Rehoboth Y&CC',    x: 120, y: 150 },
-  ],
   factsEyebrow: 'By the Numbers',
   factsTitle: 'The Rehoboth rental market, <em>in brief.</em>',
   factsLede: 'The densest resort market on the Delaware coast — condo-heavy downtown, single-family in the surrounding neighborhoods, and the strongest weekly vacation demand of any Sussex town from May through September.',
@@ -1017,17 +880,6 @@ export const GEO_DATA_BETHANY = {
   heroStats: [],
   mapHeading: 'Where we manage',
   mapHqLabel: 'DE office · up the coast',
-  mapViewBox: '0 0 360 290',
-  mapOutline: 'M40 40 L250 40 Q264 110 252 160 Q246 220 250 258 L40 258 Z',
-  mapWaterPath: 'M250 40 Q262 110 252 160 Q246 220 250 258 L360 258 L360 40 Z',
-  mapCities: [
-    { name: 'Downtown Bethany', x: 210, y: 120, hq: true },
-    { name: 'Sea Colony',       x: 218, y: 165 },
-    { name: 'Bethany West',     x: 150, y: 120 },
-    { name: 'South Bethany',    x: 214, y: 205 },
-    { name: 'Ocean View',       x: 95,  y: 150 },
-    { name: 'Millville',        x: 110, y: 95 },
-  ],
   factsEyebrow: 'By the Numbers',
   factsTitle: 'The Bethany rental market, <em>in brief.</em>',
   factsLede: 'Quieter and more family-driven than Rehoboth, and heavily shaped by Sea Colony — the large oceanfront-and-bayside resort community that sets the tone for the local condo market.',
@@ -1091,16 +943,6 @@ export const GEO_DATA_FENWICK = {
   heroStats: [],
   mapHeading: 'Where we manage',
   mapHqLabel: 'Two offices · N and S',
-  mapViewBox: '0 0 360 290',
-  mapOutline: 'M40 40 L250 40 Q264 110 252 160 Q246 220 250 258 L40 258 Z',
-  mapWaterPath: 'M250 40 Q262 110 252 160 Q246 220 250 258 L360 258 L360 40 Z',
-  mapCities: [
-    { name: 'Fenwick Island', x: 212, y: 120, hq: true },
-    { name: 'Bayside',        x: 150, y: 150 },
-    { name: 'Selbyville',     x: 90,  y: 150 },
-    { name: 'Route 54',       x: 150, y: 185 },
-    { name: 'South Bethany',  x: 214, y: 70 },
-  ],
   factsEyebrow: 'By the Numbers',
   factsTitle: 'The Fenwick rental market, <em>in brief.</em>',
   factsLede: 'Small, quiet, and defined by its position on the state line — Delaware tax advantages a block from Ocean City, with a mix of ocean-block condos, bay-side single-family, and the inland Bayside and Route 54 communities.',

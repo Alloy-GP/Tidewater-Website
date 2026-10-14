@@ -20,6 +20,8 @@ import FaqAccordion from '../../../components/FaqAccordion.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import { serviceSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
+import LocationMap from '../../../components/LocationMap.astro';
+import { COUNTY_MAPS } from '../../../data/location-maps';
 
 const countyFaqs = [
   { q: 'Is your office really in Baltimore County?', a: 'Yes &mdash; our headquarters is at 3600 Crondall Lane in Owings Mills, one of four insured office locations we operate. Baltimore County is the county we work from, not the one we drive to.' },
@@ -108,35 +110,7 @@ const cities = [
       <aside class="tw-geo-hero-side">
         <div class="tw-geo-hero-side-eyebrow">In Baltimore County</div>
         <h3>Where we manage</h3>
-        <!-- Stylized Baltimore County schematic (not to scale; wraps around Baltimore City) -->
-        <svg viewBox="0 0 360 290" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Schematic map of Baltimore County, Maryland">
-          <path d="M70 92 Q92 56 150 52 L242 56 Q302 72 306 132 Q306 202 250 232 L140 236 Q80 222 64 162 Z" class="tw-geo-map-county served" style="cursor:default"><title>Baltimore County</title></path>
-          <!-- Baltimore City (separate jurisdiction, enclosed) -->
-          <circle cx="186" cy="156" r="34" fill="rgba(23,35,37,0.28)" stroke="rgba(254,252,248,0.35)" stroke-width="1"></circle>
-          <text x="186" y="159" text-anchor="middle" fill="rgba(254,252,248,0.7)" font-family="var(--tw-font-heading)" font-weight="600" font-size="8.5">Baltimore City</text>
-          <!-- Cockeysville / Hunt Valley (N) -->
-          <circle cx="214" cy="74" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Cockeysville / Hunt Valley</title></circle>
-          <text x="224" y="78" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Hunt Valley</text>
-          <!-- Towson (county seat, gold) -->
-          <circle class="tw-geo-map-dot-pulse" cx="192" cy="104" r="8"/>
-          <circle cx="192" cy="104" r="6" fill="var(--tw-gold)" stroke="var(--tw-cream)" stroke-width="2"><title>Towson</title></circle>
-          <text x="202" y="108" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="800" font-size="11">Towson</text>
-          <!-- Owings Mills (HQ) -->
-          <circle cx="104" cy="110" r="5.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Owings Mills (HQ)</title></circle>
-          <text x="40" y="100" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Owings Mills</text>
-          <!-- Pikesville -->
-          <circle cx="138" cy="132" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Pikesville</title></circle>
-          <text x="80" y="140" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Pikesville</text>
-          <!-- Catonsville (SW) -->
-          <circle cx="112" cy="198" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Catonsville</title></circle>
-          <text x="48" y="202" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Catonsville</text>
-          <!-- Perry Hall (NE) -->
-          <circle cx="262" cy="108" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Perry Hall</title></circle>
-          <text x="272" y="112" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Perry Hall</text>
-          <!-- Essex (SE) -->
-          <circle cx="258" cy="196" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Essex</title></circle>
-          <text x="268" y="200" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Essex</text>
-        </svg>
+        <LocationMap theme="dark" {...COUNTY_MAPS['baltimore-county']} ariaLabel="Map of Baltimore County, Maryland" height={300} />
         <div class="tw-geo-map-legend">
           <div class="tw-geo-map-legend-row">
             <span class="tw-geo-map-legend-swatch served"></span>

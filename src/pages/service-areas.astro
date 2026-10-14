@@ -7,6 +7,8 @@ import CTA from '../components/CTA.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { serviceSchema, breadcrumbSchema } from '../lib/schema';
 import { SITE } from '../config/site';
+import LocationMap from '../components/LocationMap.astro';
+import { SERVICE_AREA_MAP } from '../data/location-maps';
 
 const pageUrl = `${SITE.url}/service-areas/`;
 const pageDesc = "HOA and condo management across Maryland, DC, Virginia, Delaware, Pennsylvania, and West Virginia. AAMC-accredited regional managers. Family-owned since 1989.";
@@ -182,41 +184,15 @@ const states = [
       <aside class="tw-geo-hero-side">
         <div class="tw-geo-hero-side-eyebrow">The Region</div>
         <h3>Mid-Atlantic, six states</h3>
-        <!-- Stylized Mid-Atlantic map -->
-        <svg viewBox="0 0 420 320" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Mid-Atlantic region map">
-          <!-- Atlantic ocean hint -->
-          <path d="M380 60 Q400 150 395 240 L420 240 L420 60 Z" fill="rgba(58,146,166,0.10)"/>
-          <!-- Pennsylvania -->
-          <path d="M30 30 L380 30 L380 110 L30 110 Z" class="tw-geo-map-county served"><title>Pennsylvania · served</title></path>
-          <text x="200" y="78" class="tw-sa-region-state-label">PENNSYLVANIA</text>
-          <!-- West Virginia -->
-          <path d="M30 110 L160 110 L155 215 L40 200 Z" class="tw-geo-map-county served"><title>West Virginia · served</title></path>
-          <text x="95" y="165" class="tw-sa-region-state-label">WV</text>
-          <!-- Maryland — highlighted -->
-          <path d="M160 110 L350 110 L355 180 L320 195 L260 175 L160 180 Z" class="tw-geo-map-county served is-highlight"><title>Maryland · served · HQ</title></path>
-          <text x="240" y="148" class="tw-sa-region-state-label" style="fill:var(--tw-dark)">MARYLAND</text>
-          <!-- DC -->
-          <path d="M200 180 L240 178 L235 200 L205 200 Z" class="tw-geo-map-county served"><title>Washington, DC · served</title></path>
-          <text x="220" y="195" class="tw-sa-region-state-label" style="font-size:9px">DC</text>
-          <!-- Delaware -->
-          <path d="M350 110 L380 110 L380 200 L355 200 L355 180 Z" class="tw-geo-map-county served"><title>Delaware · served</title></path>
-          <text x="365" y="155" class="tw-sa-region-state-label" style="font-size:10px">DE</text>
-          <!-- Virginia -->
-          <path d="M155 215 L260 200 L355 200 L365 270 L150 285 Z" class="tw-geo-map-county served"><title>Virginia · served</title></path>
-          <text x="255" y="248" class="tw-sa-region-state-label">VIRGINIA</text>
-          <!-- HQ marker -->
-          <circle class="tw-geo-map-dot-pulse" cx="245" cy="142" r="6"/>
-          <circle class="tw-geo-map-dot" cx="245" cy="142" r="5"/>
-          <text x="255" y="140" fill="var(--tw-gold)" font-family="var(--tw-font-heading)" font-weight="800" font-size="9" letter-spacing="0.06em">HQ</text>
-        </svg>
+        <LocationMap theme="dark" {...SERVICE_AREA_MAP} ariaLabel="Map of the six-state Mid-Atlantic region Tidewater serves, with its three offices" height={340} />
         <div class="tw-geo-map-legend">
           <div class="tw-geo-map-legend-row">
             <span class="tw-geo-map-legend-swatch served"></span>
-            States we serve
+            Markets we serve &middot; click a pin for its page
           </div>
           <div class="tw-geo-map-legend-row">
             <span class="tw-geo-map-legend-swatch hq"></span>
-            HQ &middot; Owings Mills, MD
+            Our offices &middot; Owings Mills HQ, Ocean City, Lewes
           </div>
         </div>
       </aside>

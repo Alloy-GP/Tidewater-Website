@@ -12,6 +12,8 @@ import FaqAccordion from '../../../components/FaqAccordion.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import { serviceSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
+import LocationMap from '../../../components/LocationMap.astro';
+import { COUNTY_MAPS } from '../../../data/location-maps';
 
 const countyFaqs = [
   { q: 'Our community just came out of developer control. What should we do first?', a: 'A transition audit, before anything else. It establishes what the developer actually handed over &mdash; records, reserves, common-area condition &mdash; while warranty claims are still open. Skipping it is the single most expensive mistake a newly turned-over board makes.' },
@@ -85,22 +87,7 @@ const cities = [
       <aside class="tw-geo-hero-side">
         <div class="tw-geo-hero-side-eyebrow">In Frederick County</div>
         <h3>Where we manage</h3>
-        <svg viewBox="0 0 360 290" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Schematic map of Frederick County, Maryland">
-          <path d="M96 48 Q150 40 196 54 L246 92 Q272 150 256 210 L214 248 Q168 244 142 214 L92 160 Q66 104 96 48 Z" class="tw-geo-map-county served" style="cursor:default"><title>Frederick County</title></path>
-          <circle cx="150" cy="86" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Walkersville</title></circle>
-          <text x="158" y="84" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Walkersville</text>
-          <circle cx="112" cy="130" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Middletown</title></circle>
-          <text x="46" y="128" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Middletown</text>
-          <circle class="tw-geo-map-dot-pulse" cx="160" cy="132" r="8"/>
-          <circle cx="160" cy="132" r="6" fill="var(--tw-gold)" stroke="var(--tw-cream)" stroke-width="2"><title>Frederick</title></circle>
-          <text x="170" y="136" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="800" font-size="11">Frederick</text>
-          <circle cx="214" cy="118" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>New Market</title></circle>
-          <text x="222" y="114" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">New Market</text>
-          <circle cx="196" cy="178" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Urbana</title></circle>
-          <text x="204" y="182" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Urbana</text>
-          <circle cx="132" cy="200" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Brunswick</title></circle>
-          <text x="70" y="204" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Brunswick</text>
-        </svg>
+        <LocationMap theme="dark" {...COUNTY_MAPS['frederick-county']} ariaLabel="Map of Frederick County, Maryland" height={300} />
         <div class="tw-geo-map-legend">
           <div class="tw-geo-map-legend-row"><span class="tw-geo-map-legend-swatch served"></span>Cities &amp; towns we serve</div>
           <div class="tw-geo-map-legend-row"><span class="tw-geo-map-legend-swatch hq"></span>County seat &middot; Frederick</div>

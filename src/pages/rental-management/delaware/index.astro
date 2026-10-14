@@ -6,6 +6,7 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import Footer from '../../../components/Footer.astro';
 import CTA from '../../../components/CTA.astro';
 import RentalDelaware from '../../../components/RentalDelaware.jsx';
+import { RENTAL_DELAWARE_MAP } from '../../../data/location-maps';
 import { breadcrumbSchema, serviceSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
 
@@ -39,7 +40,7 @@ const schemas = [
     { label: 'Rental Management', href: '/rental-management' },
     { label: 'Delaware' },
   ]} />
-  <RentalDelaware client:load />
+  <RentalDelaware map={RENTAL_DELAWARE_MAP} client:load />
   <CTA />
   <Footer />
 </BaseLayout>

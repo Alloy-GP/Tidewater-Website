@@ -1,0 +1,50 @@
+---
+// Location map (Astro). MapLibre GL + MapTiler vector tiles with the brand
+// style from src/data/map-style-{light,dark}.json — the AGP starter's map
+// stack, taking per-page pins so county, state, office and hub pages each get
+// their own map. Engine: src/lib/location-map.ts. Pins: src/data/location-maps.ts.
+//
+//   <LocationMap theme="dark" pins={COUNTY_MAPS['howard-county'].pins}
+//                ariaLabel="Map of Howard County, Maryland" height={300} />
+//
+// The React version for the rental islands is LocationMap.jsx; keep the two in
+// step. Without PUBLIC_MAPTILER_KEY the map falls back to keyless OpenStreetMap
+// tiles (retoned by CSS) and warns in the console.
+import 'maplibre-gl/dist/maplibre-gl.css';
+import '../styles/location-map.css';
+import type { LocationMapConfig } from '../lib/location-map';
+
+interface Props extends LocationMapConfig {
+  /** Accessible name for the map region, e.g. "Map of Howard County, Maryland". */
+  ariaLabel: string;
+  /** Height in px on desktop; mobile clamps smaller via CSS. */
+  height?: number;
+  class?: string;
+}
+const { ariaLabel, height, class: cls = '', ...cfg } = Astro.props;
+const theme = cfg.theme ?? 'dark';
+const offices = cfg.pins.filter((p) => p.kind === 'office');
+const places = cfg.pins.filter((p) => p.kind !== 'office').map((p) => p.name);
+---
+<div
+  class={`tw-lmap tw-lmap-${theme} ${cls}`.trim()}
+  data-location-map
+  data-config={JSON.stringify(cfg)}
+  style={height ? `--tw-lmap-h:${height}px` : undefined}
+  role="application"
+  aria-label={ariaLabel}
+>
+  <noscript>
+    <div class="tw-lmap-noscript">
+      {offices.map((o) => (
+        <p><strong>{o.name}</strong>{o.address && <><br />{o.address}</>}</p>
+      ))}
+      {places.length > 0 && <p>Serving {places.join(', ')}.</p>}
+    </div>
+  </noscript>
+</div>
+
+<script>
+  import { observeLocationMaps } from '../lib/location-map';
+  observeLocationMaps();
+</script>

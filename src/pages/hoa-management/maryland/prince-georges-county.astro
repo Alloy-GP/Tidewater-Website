@@ -19,6 +19,8 @@ import FaqAccordion from '../../../components/FaqAccordion.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import { serviceSchema, breadcrumbSchema, faqSchema } from '../../../lib/schema';
 import { SITE } from '../../../config/site';
+import LocationMap from '../../../components/LocationMap.astro';
+import { COUNTY_MAPS } from '../../../data/location-maps';
 
 const countyFaqs = [
   { q: 'Do you handle associations with a lot of rental units?', a: 'Yes. A high tenant ratio changes communication and enforcement more than it changes the budget &mdash; notices have to reach owners who do not live on site, and enforcement has to run against the owner rather than the occupant. That is a process question, and one we set up during transition.' },
@@ -105,32 +107,7 @@ const cities = [
       <aside class="tw-geo-hero-side">
         <div class="tw-geo-hero-side-eyebrow">In Prince George&rsquo;s</div>
         <h3>Where we manage</h3>
-        <!-- Stylized Prince George's County schematic (not to scale; DC on the NW, Potomac on the SW) -->
-        <svg viewBox="0 0 360 290" class="tw-geo-map" xmlns="http://www.w3.org/2000/svg" aria-label="Schematic map of Prince George's County, Maryland">
-          <path d="M96 60 Q140 48 180 58 L232 86 Q268 118 262 170 Q252 226 210 250 L150 236 Q120 206 108 168 L78 120 Q70 84 96 60 Z" class="tw-geo-map-county served" style="cursor:default"><title>Prince George's County</title></path>
-          <!-- Laurel (N, Howard line) -->
-          <circle cx="120" cy="74" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Laurel</title></circle>
-          <text x="128" y="72" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Laurel</text>
-          <!-- Greenbelt (N-central) -->
-          <circle cx="150" cy="104" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Greenbelt</title></circle>
-          <text x="158" y="108" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Greenbelt</text>
-          <!-- Hyattsville (W, inside Beltway) -->
-          <circle cx="104" cy="128" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Hyattsville</title></circle>
-          <text x="38" y="132" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Hyattsville</text>
-          <!-- Bowie (NE) -->
-          <circle cx="226" cy="100" r="5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Bowie</title></circle>
-          <text x="234" y="104" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Bowie</text>
-          <!-- Largo (central) -->
-          <circle cx="192" cy="150" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Largo</title></circle>
-          <text x="200" y="154" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Largo</text>
-          <!-- Upper Marlboro (county seat, gold) -->
-          <circle class="tw-geo-map-dot-pulse" cx="186" cy="192" r="8"/>
-          <circle cx="186" cy="192" r="6" fill="var(--tw-gold)" stroke="var(--tw-cream)" stroke-width="2"><title>Upper Marlboro</title></circle>
-          <text x="196" y="196" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="800" font-size="10.5">Upper Marlboro</text>
-          <!-- Fort Washington (SW) -->
-          <circle cx="128" cy="196" r="4.5" fill="var(--tw-teal)" stroke="var(--tw-cream)" stroke-width="1.5"><title>Fort Washington</title></circle>
-          <text x="40" y="200" fill="rgba(254,252,248,0.85)" font-family="var(--tw-font-heading)" font-weight="600" font-size="10">Ft. Washington</text>
-        </svg>
+        <LocationMap theme="dark" {...COUNTY_MAPS['prince-georges-county']} ariaLabel="Map of Prince George's County, Maryland" height={300} />
         <div class="tw-geo-map-legend">
           <div class="tw-geo-map-legend-row">
             <span class="tw-geo-map-legend-swatch served"></span>
