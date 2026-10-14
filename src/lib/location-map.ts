@@ -106,6 +106,7 @@ export async function mountLocationMap(el: HTMLElement, cfg: LocationMapConfig):
     console.warn('[LocationMap] PUBLIC_MAPTILER_KEY is not set — falling back to keyless OpenStreetMap tiles. Set the key in Vercel before launch.');
     style = OSM_FALLBACK;
   }
+  let onOsm = !brandStyle;
 
   const first = pins[0];
   const map = new maplibregl.Map({
@@ -121,6 +122,18 @@ export async function mountLocationMap(el: HTMLElement, cfg: LocationMapConfig):
     fadeDuration: still ? 0 : 300,
   });
   (el as any).__twMap = map;
+  // The key is origin-restricted in MapTiler Cloud. If this page's origin is
+  // not on the key's allow-list (a preview URL, a new domain), MapTiler answers
+  // 401/403 and the map would stay blank — swap to the keyless fallback instead
+  // of showing nothing. The DOM markers survive the style change.
+  map.on('error', (ev: any) => {
+    const status = ev?.error?.status;
+    if (onOsm || (status !== 401 && status !== 403)) return;
+    onOsm = true;
+    el.classList.add('is-osm');
+    console.warn(`[LocationMap] MapTiler rejected this origin (${status}) — add ${location.origin} to the key's Allowed HTTP Origins. Falling back to OpenStreetMap tiles.`);
+    map.setStyle(OSM_FALLBACK as any);
+  });
   map.touchZoomRotate.disableRotation();
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
   map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
