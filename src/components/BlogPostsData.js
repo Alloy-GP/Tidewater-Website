@@ -6,6 +6,32 @@
 
 export const ALL_POSTS = [
   {
+    slug: 'hoa-special-assessment',
+    href: '/blog/hoa-special-assessment',
+    title: 'HOA special assessments: <em>why they happen</em> (and how to avoid surprises).',
+    dek: 'A special assessment is almost always a planning gap that opened years earlier. Here is what triggers an HOA special assessment, what Maryland’s 15% rule and reserve funding law actually require, and the habits that prevent the next one.',
+    category: { id: 'finances', label: 'HOA Finances', tone: '' },
+    date: 'October 1, 2026', dateIso: '2026-10-01',
+    readTime: 10,
+    author: 'Jessica Ogle',
+    tone: '',
+    coverImage: '/assets/hoa-special-assessment.jpg',
+    coverAlt: 'Roofing crew replacing the flat roof on a brick garden-style condominium community, a planned capital project funded through association reserves',
+  },
+  {
+    slug: 'hoa-insurance',
+    href: '/blog/hoa-insurance',
+    title: 'HOA &amp; condo insurance: <em>what your board must carry</em> (and common gaps).',
+    dek: 'Most boards learn how HOA insurance works during a claim, the worst time to find out. What your association must carry, how master policies split responsibility with owners, what Maryland law requires now and in 2027, and the gaps that cause uncovered losses.',
+    category: { id: 'insurance', label: 'Insurance & Risk Management', tone: '' },
+    date: 'September 30, 2026', dateIso: '2026-09-30',
+    readTime: 10,
+    author: 'Joe Jordan',
+    tone: '',
+    coverImage: '/assets/hoa-insurance.jpg',
+    coverAlt: 'Homeowners inspecting a large tree limb that has fallen onto the roof of their brick home after a storm, the kind of property damage that leads to an HOA insurance claim',
+  },
+  {
     slug: 'hoa-reserve-study',
     href: '/blog/hoa-reserve-study',
     title: 'HOA reserve study guide: <em>what it is</em> (and when you need one).',
