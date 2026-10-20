@@ -35,7 +35,7 @@ export const ALL_POSTS = [
     slug: 'hoa-insurance',
     href: '/blog/hoa-insurance',
     title: 'HOA &amp; condo insurance: <em>what your board must carry</em> (and common gaps).',
-    dek: 'Most boards learn how HOA insurance works during a claim — the worst time to find out. What your association must carry, how master policies split responsibility with owners, what Maryland law requires now and in 2027, and the gaps that cause uncovered losses.',
+    dek: 'Most boards learn how HOA insurance works during a claim, the worst time to find out. What your association must carry, how master policies split responsibility with owners, what Maryland law requires now and in 2027, and the gaps that cause uncovered losses.',
     category: { id: 'insurance', label: 'Insurance & Risk Management', tone: '' },
     date: 'September 30, 2026', dateIso: '2026-09-30',
     readTime: 10,
