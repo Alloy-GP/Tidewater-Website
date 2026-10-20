@@ -1,1 +1,0 @@
-- [Review widget lifecycle](review-widget-lifecycle.md) — drop pages from the stg review widget once they're live on production

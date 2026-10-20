@@ -17,3 +17,6 @@ node_modules/
 
 # Vercel build output (never commit — Vercel builds fresh)
 .vercel/
+
+# Agent session/memory data (must not live in the repo)
+.claude/projects/
