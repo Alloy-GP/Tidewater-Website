@@ -11,7 +11,7 @@ export const ALL_POSTS = [
     title: 'Maryland HOA law: <em>the Homeowners Association Act</em> and board duties.',
     dek: 'Maryland HOA law starts with Title 11B, the Homeowners Association Act. The practitioner’s translation: what the Act requires your board to do, which rules will not hold up, whether your association registers anywhere, and where county rules add a layer.',
     category: { id: 'governance', label: 'Board Governance', tone: '' },
-    date: 'October 1, 2026', dateIso: '2026-10-01',
+    date: 'October 27, 2026', dateIso: '2026-10-27',
     readTime: 9,
     author: 'Gail Windisch',
     tone: '',
