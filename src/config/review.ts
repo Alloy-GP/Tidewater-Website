@@ -19,5 +19,5 @@ export interface ReviewItem {
 }
 
 export const REVIEW_ITEMS: ReviewItem[] = [
-  { label: 'Maryland HOA Law (blog post)', path: '/blog/maryland-hoa-law', review: true },
+  // No items in review. The widget hides itself when nothing has review:true.
 ];
