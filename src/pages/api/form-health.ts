@@ -19,8 +19,8 @@
 // src/lib/resend-probe.ts is shared and should not be edited per client.
 
 import type { APIRoute } from 'astro';
-import { EMAIL_CONFIG } from '~/lib/email.config';
-import { probeResendSend } from '~/lib/resend-probe';
+import { EMAIL_CONFIG } from '../../lib/email.config';
+import { probeResendSend } from '../../lib/resend-probe';
 
 export const prerender = false;
 
