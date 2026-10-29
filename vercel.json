@@ -1,4 +1,7 @@
 {
+  "crons": [
+    { "path": "/api/form-health", "schedule": "0 13 * * *" }
+  ],
   "buildCommand": "npm run build",
   "installCommand": "npm install",
   "cleanUrls": true,
